@@ -1,0 +1,165 @@
+section.contact-us {
+  animation: none !important;
+  padding-bottom: 50px;
+  padding-top: 32px;
+}
+.card {
+  border: none;
+  border: 1px solid transparent;
+
+  a {
+    font-size: 16px;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  &.help {
+    a {
+      border-radius: 6px;
+      padding: 13px;
+      margin-top: 20px;
+      width: 60%;
+      img {
+        width: 17px;
+        margin-right: 15px;
+      }
+    }
+  }
+
+
+}
+.shareArticle {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+}
+
+.shareSocial {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 30px;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
+
+  .socialTitle {
+    margin: 0 15px 0 0;
+    font-size: 20px;
+
+    @media (max-width: 767px) {
+      margin-bottom: 15px;
+      text-align: center;
+    }
+  }
+
+  .socialList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    justify-content: center;
+
+    li {
+      a {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        background-color: #1a1a1a;
+        color: #fff;
+        font-size: 20px;
+        transition: all 0.3s ease;
+
+        i {
+          transition: transform 0.35s;
+        }
+
+        &:hover {
+          background-color: #ffffff;
+          color: #fffdfd;
+
+          i {
+            transform: scale(1.3);
+            -webkit-transform: scale(1.3);
+            -moz-transform: scale(1.3);
+            -ms-transform: scale(1.3);
+            -o-transform: scale(1.3);
+}
+        }
+      }
+
+      &:nth-child(1) a { background-color: #3b5998; }   // Facebook
+      &:nth-child(2) a { background-color: #1da1f2; }   // Twitter
+      &:nth-child(3) a { background-color: #bd081c; }   // Pinterest
+      &:nth-child(4) a { background-color: #7a7a7a; }   // Email
+      &:nth-child(5) a { background-color: #25D366; }   // WhatsApp
+    }
+  }
+}
+
+.form {
+  background: #ffffff;
+  padding: 40px;
+
+  label {
+    color: #222222;
+    font-size: 16px;
+    margin-bottom: 10px !important;
+    margin-top: 20px !important;
+    font-weight: 600;
+  }
+  input,
+  textarea {
+    border: none !important;
+    background: #f6f6f6 !important;
+    border-radius: 12px;
+    padding: 18px;
+    color: #94959b;
+    &::placeholder {
+      color: #94959b;
+    }
+  }
+  ngx-mat-intl-tel-input {
+    &.cdk-mouse-focused {
+      .ngx-mat-tel-input-container {
+        &::before {
+          opacity: 0;
+        }
+      }
+    }
+    .ngx-mat-tel-input-container {
+      button {
+        opacity: 1 !important;
+      }
+      position: relative;
+      &::before {
+        content: " Mobile number";
+        color: #94959b;
+        position: absolute;
+        top: 30px;
+        left: 90px;
+        transform: translateY(-50%);
+        font-size: 16px;
+        z-index: 1;
+      }
+    }
+  }
+
+  // in mobile
+  @media only screen and (max-width: 767px) {
+    padding: 30px;
+    label {
+      font-size: 14px;
+      margin-top: 10px !important;
+    }
+   
+  }
+}
+

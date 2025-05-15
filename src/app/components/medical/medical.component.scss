@@ -1,0 +1,171 @@
+section.medical-history-2{
+    .card{
+      border: none;
+      background: #FFFFFF;
+      box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.03);
+      border-radius: 8px;
+      padding: 6px;
+  
+  
+      .clinic,.item{
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        img{
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          margin-right: 10px;
+        }
+        h6{
+          margin: 0;
+        }
+        // im mobile view
+        @media (max-width: 767px){
+          margin-bottom: 10px;
+        }
+      }
+      .item{
+        h6{
+          color: #98A2B3;
+        }
+        img{
+          width: 35px;
+          height: 35px;
+        }
+        // &.examinationType{
+        //   .item-image{
+        //     width: 35px;
+        //     height: 35px;
+        //     border-radius: 50%;
+        //     background: #E8E8FD;
+        //     padding: 3px;
+        //     text-align: center;
+        //     img{
+        //       width: 100%;
+        //       height: 100%;
+        //       margin: 0;
+        //       // transform: scale(0.4);
+        //       position: relative;
+        //       left: 3px;
+        //     }
+        //   }
+        // }
+      }
+    }
+      // input disabled
+    input:disabled, textarea:disabled{
+      background: #E8E8FD;
+      cursor: not-allowed;
+    }
+    .btn-danger{
+      background: #FDE3E1 !important;
+  
+    }
+    button.addRx{
+      border: none;
+      padding: 10px 40px !important;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #FFFFFF;
+    }
+    section.form{
+      h3{
+        margin-top: 30px;
+        margin-bottom: 10px;
+        font-size: 21px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.8);
+  
+      }
+      .form-group{
+        label{
+          font-size: 16px;
+          line-height: 150%;
+          color: rgba(0, 0, 0, 0.6);
+          margin-bottom: 10px;
+        }
+        input,textarea{
+          background: #FFFFFF;
+          box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.03);
+          border-radius: 6px;
+          border: none;
+          padding: 15px 20px;
+          margin-right: 10px;
+        }
+        button{
+          // background: #2B2979;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 4px;
+          font-size: 15px;
+          font-weight: 500;
+          color: #FFFFFF;
+          // margin-left: 10px;
+        }
+      }
+    }
+    .upload-area{
+      background: #E8E8FD;
+      border-radius: 6px;
+      padding: 40px 20px;
+      text-align: center;
+      cursor: pointer;
+      p{
+        color: #2B2979;
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+    // .border-primary{
+    //   border: 1px solid #2B2979;
+    // }
+    // .descriptions{
+    //   background-color: #E8E8FD;
+    //   padding: 20px 10px;
+    //   border-radius: 6px;
+    //   margin-top: 20px;
+    //   margin-bottom: 10px;
+    //   .card{
+    //     background-color: #ffffff28;
+    //     border: none;
+    //     h6{
+    //       margin: 0;
+    //       font-size: 16px;
+    //       font-weight: 500;
+    //       color: #000000;
+    //     }
+    //     p{
+    //       margin: 0;
+    //       font-size: 14px;
+    //       font-weight: 400;
+    //       color: #000000;
+    //     }
+    //   }
+    // }
+    .card.files{
+      li{
+        padding: 10px 0;
+        // border-bottom not :last-child
+        &:not(:last-child){
+          border-bottom: 1px solid #E8E8FD;
+        }
+      }
+      .link{
+     // three dots if the file name is too long
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      a{
+        text-decoration: none;
+        color: #000;
+        display: block;
+  
+  
+      }
+    }
+  }
+  

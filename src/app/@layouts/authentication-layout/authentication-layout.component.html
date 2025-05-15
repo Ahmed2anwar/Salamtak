@@ -1,0 +1,92 @@
+<section id="authentication-layout">
+  <div class="row w-100">
+    <div class="col-md-6 col-lg-4 col-xl-3 info-article">
+      <object
+        class="shape shape-top"
+        type="image/svg+xml"
+        data="assets/shapes/auth-article-shape-top.svg"
+      ></object>
+      <article>
+        <div class="change-language">
+          <a
+            routerLinkActive="active"
+            (click)="collapse()"
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            aria-label="change-language"
+          >
+            <img src="assets/icons/language.svg" />
+            <!-- change-language -->
+            {{ selectedLanguage.name }}
+            <mat-menu #menu="matMenu" class="change-language">
+              @for(language of languages; track null) {
+              <button
+                mat-menu-item
+                (click)="setLanguage(language)"
+                class="p-1"
+                [disabled]="language == selectedLanguage"
+              >
+                <img
+                  class="flag"
+                  width="30px"
+                  height="30px"
+                  src="{{ language.flag }}"
+                />
+                <span>&nbsp; {{ language.name }}</span>
+              </button>
+              }
+            </mat-menu>
+          </a>
+        </div>
+
+        <div class="logo-container">
+          <a
+            href="javascript:void(0)"
+            [routerLink]="['/' + lang + '/home']"
+            aria-label="logo-container"
+          >
+            <img class="w-100" src="assets/Salamtak.png" alt="logo" />
+          </a>
+        </div>
+        <div class="reviews" dir="ltr">
+          <owl-carousel-o [options]="reviewsOwlOptions">
+            @for(item of [].constructor(5); track null){
+            <ng-template carouselSlide>
+              <p class="review-text">
+                <br />
+                {{ "authentication.authentication-layout.out" | transloco }}
+                <br />
+                {{ "authentication.authentication-layout.las" | transloco }}
+                <br /><br /><br /><br />
+                <span style="text-align: center">{{
+                  "authentication.authentication-layout.lay" | transloco
+                }}</span>
+              </p>
+            </ng-template>
+            }
+          </owl-carousel-o>
+        </div>
+      </article>
+
+      <span class="animated-shape-bottom"></span>
+    </div>
+    <div class="col-md-6 col-lg-8 col-xl-9 content">
+      <div class="help">
+        <a
+          href="javascript:void(0)"
+          data-bs-toggle="modal"
+          data-bs-target="#myModalHelp"
+          mat-icon-button
+          aria-label="help"
+        >
+          <img src="assets/icons/auth-help.svg" />
+          {{ "authentication.authentication-layout.help" | transloco }}
+        </a>
+      </div>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</section>
+

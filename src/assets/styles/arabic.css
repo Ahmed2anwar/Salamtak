@@ -1,0 +1,211 @@
+html[dir="rtl"] body app-header nav.sticky .user .user-name {
+  color: #000;
+}
+
+html[dir="rtl"] body app-header .collapse.show .user .user-name {
+  color: #000;
+}
+
+html[dir="rtl"] body app-header .navbar .user .user-name {
+  color: #fff;
+}
+
+html[dir="rtl"] body app-header .navbar .user .notification {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+html[dir="rtl"] body app-header .navbar .user .user-img {
+  margin-left: 0;
+  margin-right: 10px;
+}
+
+html[dir="rtl"] body app-header .navbar .hamburger {
+  left: 20px;
+}
+
+html[dir="rtl"] body app-home section.main h1 {
+  text-align: right;
+}
+
+html[dir="rtl"] body app-home section.trusted h1 {
+  text-align: right;
+}
+
+html[dir="rtl"] body app-home section.top-specialties .card .card-footer {
+  text-align: right;
+}
+
+html[dir="rtl"] body app-search-form h4 {
+  text-align: right;
+}
+
+html[dir="rtl"] body app-search-form .search-form form .main > div:nth-child(1) mat-select {
+  border-radius: 0 10px 10px 0 !important;
+}
+
+html[dir="rtl"] body app-search-form .search-form form .main > div button {
+  border-radius: 10px 0 0 10px !important;
+}
+
+html[dir="rtl"] body app-search-form .search-form form .main > div mat-select, html[dir="rtl"] body app-search-form .search-form form .main > div input {
+  font-size: 13px;
+}
+
+html[dir="rtl"] body app-search-form .search-form * {
+  font-family: "Alexandria", sans-serif;
+}
+
+html[dir="rtl"] body .main-card-app .filter-tools .text-end {
+  text-align: end !important;
+}
+
+html[dir="rtl"] body .main-card-app .cards .card .info {
+  margin-left: 0;
+  margin-right: 15px;
+}
+
+html[dir="rtl"] body .main-card-app .cards .card .work-data img {
+  margin-right: 0;
+  margin-left: 7px;
+}
+
+html[dir="rtl"] body .main-card-app .cards .card .work-data .answer p {
+  text-align: left;
+}
+
+html[dir="rtl"] body .main-card-app .filters-menu accordion-group .accordion-toggle[aria-expanded=true]:before, html[dir="rtl"] body .main-card-app .filters-menu accordion-group .accordion-toggle[aria-expanded=false]:before {
+  right: auto;
+  left: 14px;
+}
+
+html[dir="rtl"] body app-doctor-profile .card.info .user .image img {
+  margin-right: 0;
+  margin-left: 15px;
+}
+
+html[dir="rtl"] body app-doctor-profile .card.clinic .image {
+  margin-right: 0  !important;
+  margin-left: 10px;
+}
+
+html[dir="rtl"] body app-doctor-profile .card.clinic .rows img {
+  margin-right: 0;
+  margin-left: 7px;
+}
+
+html[dir="rtl"] body app-doctor-profile .card.clinic .answer span {
+  text-align: left;
+  display: block;
+}
+
+html[dir="rtl"] body app-book-form .card.booking .card-body .info .d-flex p span {
+  float: left;
+}
+
+html[dir="rtl"] body app-book-form .card.booking .card-body .info .d-flex img {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+html[dir="rtl"] body app-profile .md-stepper-horizontal {
+  direction: ltr;
+  transform: scaleX(-1);
+}
+
+html[dir="rtl"] body app-profile .md-stepper-horizontal .md-step-title {
+  transform: scaleX(-1);
+}
+
+html[dir="rtl"] body app-profile .form-group, html[dir="rtl"] body app-profile .mdc-button__label, html[dir="rtl"] body app-profile button, html[dir="rtl"] body app-profile p {
+  font-family: "Alexandria", sans-serif !important;
+}
+
+html[dir="rtl"] body app-profile .form-group *, html[dir="rtl"] body app-profile .mdc-button__label *, html[dir="rtl"] body app-profile button *, html[dir="rtl"] body app-profile p * {
+  font-size: 13px;
+  text-align: right;
+}
+
+html[dir="rtl"] body app-profile .errors-area p {
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+html[dir="rtl"] body app-profile .card a img.icon {
+  left: 5px;
+  right: auto;
+}
+
+html[dir="rtl"] body section.auth .was-validated .form-control:invalid, html[dir="rtl"] body section.auth .form-control.is-invalid {
+  background-position: left calc(0.375em + 0.1875rem) center !important;
+}
+
+html[dir="rtl"] .userDropdown button img {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+html[dir="rtl"] .mat-mdc-menu-content span, html[dir="rtl"] .mat-mdc-menu-content .mat-mdc-menu-item span {
+  font-family: "Alexandria", sans-serif;
+  font-size: 13px;
+}
+
+html[dir="rtl"] mat-select, html[dir="rtl"] mat-option, html[dir="rtl"] .mat-mdc-select-panel form input {
+  font-size: 13px;
+  font-family: "Alexandria", sans-serif;
+}
+
+html[dir="rtl"] ng-multiselect-dropdown .multiselect-item-checkbox, html[dir="rtl"] ng-multiselect-dropdown .selected-item {
+  text-align: right !important;
+}
+
+html[dir="rtl"] ng-multiselect-dropdown .dropdown-multiselect__caret {
+  left: 0 !important;
+  right: auto !important;
+}
+
+html[dir="rtl"] ng-multiselect-dropdown.specialty .dropdown-btn {
+  border-radius: 0 10px 10px 0 !important;
+}
+
+html[dir="rtl"] .breadcrumb {
+  width: 100%;
+  direction: rtl;
+  text-align: right;
+  display: flex;
+  justify-content: flex-start;
+}
+
+html[dir="rtl"] .breadcrumb .breadcrumb-item::before {
+  padding-left: 10px;
+  float: right;
+}
+
+html[dir="rtl"] section#authentication-layout .help {
+  right: auto !important;
+  left: 20px;
+}
+
+html[dir="rtl"] section.auth .password-area .visibility {
+  right: auto;
+  left: 15px;
+}
+
+html[dir="rtl"] section.auth .col-6 .form-check {
+  display: flex;
+  justify-content: flex-start;
+}
+
+html[dir="rtl"] section.auth .col-6 .form-check label {
+  padding-right: 36px;
+}
+
+html[dir="rtl"] .multiselect-dropdown .dropdown-btn .selected-item-container .selected-item a {
+  left: 36px;
+  right: auto;
+}
+
+html[dir="rtl"] section.my-schedule section.main-card-app .card .user .info .dots {
+  right: auto;
+  left: 10px;
+}

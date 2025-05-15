@@ -1,0 +1,59 @@
+// style for auth pages
+// style for home page in main section form
+
+.cdk-overlay-pane{
+  min-width: 70px;
+  // left: auto !important;
+  // right: auto !important;
+  .mat-mdc-menu-panel,.mat-mdc-select-panel{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    max-height: 370px;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 11px;
+    button{
+      padding: 10px 20px;
+      font-size: 14px;
+      line-height: 16px;
+      color: #000000;
+      border-radius: 6px;
+      &:not(:last-child){
+        padding-bottom: 10px;
+      }
+      &:hover{
+        background: #D5D4E4;
+      }
+    }
+    form{
+      border: none;
+      position: relative;
+      input{
+              background: #FFFFFF;
+        box-shadow: none;
+        border-radius: 6px;
+        border: 1px solid #E5E5E5 !important;
+        padding: 10px 20px;
+        margin-bottom: 10px !important;
+        padding-left: 40px;
+        &:focus{
+          border-color: #E5E5E5;
+          box-shadow: none;
+          outline: 0 none;
+        }
+      }
+      ::before {
+        content: url('/assets/icons/Search.svg');
+        width: 20px;
+        height: 20px;
+        filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+        position: absolute;
+        top: 25px;
+        left: 25px;
+      }
+
+    }
+  }
+
+}
+

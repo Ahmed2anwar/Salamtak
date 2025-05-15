@@ -1,0 +1,407 @@
+<nav class="navbar navbar-expand-lg sticky-top " >
+  <div class="container">
+    <a
+      [routerLink]="['home' | route]"
+      class="navbar-brand"
+      href="javascript:void(0)"
+      aria-label="navbar-brand"
+    >
+      <img
+        src="assets/large-logo2-color.svg"
+        alt="logo"
+        class="logo logo-light"
+      />
+      <img
+        src="assets/large-logo2-color.svg"
+        alt="logo"
+        class="logo logo-dark"
+      />
+    </a>
+    <button
+      (click)="collapse()"
+      class="navbar-toggler"
+      [ngClass]="{ collapsed: isCollapsed }"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <div class="header__menu">
+        <a
+          id="header__button"
+          class="hamburger"
+          href="javascript:void(0)"
+          aria-label="hamburger"
+          [ngClass]="{ 'hamburger--open': isCollapsed }"
+        >
+          <div class="hamburger__inner"></div>
+        </a>
+      </div>
+    </button>
+    <div
+      class="collapse navbar-collapse"
+      [ngClass]="{ show: isCollapsed }"
+      id="navbarSupportedContent"
+    >
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            [routerLink]="['home' | route]"
+            routerLinkActive="active"
+            (click)="collapse()"
+            class="nav-link"
+            aria-current="page"
+            href="javascript:void(0)"
+            aria-label="navbar"
+          >
+            {{ "header.links.home" | transloco }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="['find-a-doctor' | route]"
+            routerLinkActive="active"
+            (click)="collapse()"
+            class="nav-link"
+            href="javascript:void(0)"
+            aria-label="navbar"
+          >
+            {{ "header.links.find-a-doctor" | transloco }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="['SalamtakGate' | route]"
+            routerLinkActive="active"
+            (click)="collapse()"
+            class="nav-link"
+            href="javascript:void(0)"
+            aria-label="navbar"
+          >
+            {{ "header.links.blogs" | transloco }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="['about' | route]"
+            routerLinkActive="active"
+            (click)="collapse()"
+            class="nav-link"
+            href="javascript:void(0)"
+            aria-label="navbar"
+          >
+            {{ "header.links.about" | transloco }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="['contact-us' | route]"
+            routerLinkActive="active"
+            (click)="collapse()"
+            class="nav-link"
+            href="javascript:void(0)"
+            aria-label="navbar"
+          >
+            {{ "header.links.contact" | transloco }}
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="user != null">
+          <div class="notification">
+            <mat-icon class="notification-icon" (click)="toggleDropdown()"
+              >notifications</mat-icon
+            >
+
+            <span *ngIf="!isDropdownOpen && unreadCount > 0" class="badge">{{
+              unreadCount
+            }}</span>
+
+            <div *ngIf="isDropdownOpen" class="dropdown-menu">
+              <div class="dropdown-header">
+                <span>Notifications</span>
+                <button mat-icon-button (click)="toggleDropdown()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+              <ul class="list-group">
+                <li
+                  *ngFor="let response of doctorResponses"
+                  [ngClass]="{
+                    'new-notification': response.IsNotified,
+                    'read-notification': !response.IsNotified
+                  }"
+                  class="list-group-item"
+                >
+                  <strong>{{ response.DoctorName }}:</strong>
+                  {{ response.ResponseText }}
+                  <br />
+                  <small>{{ response.CreatedAt | date : "short" }}</small>
+                </li>
+              </ul>
+              <p *ngIf="doctorResponses.length === 0" class="no-notifications">
+                No new notifications.
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+      @if(!user || user.ProfileStatus == 0){
+      <form class="d-flex" role="search">
+        <ul class="navbar-nav me-auto"></ul>
+        <li class="btn btn-lang">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-globe pe-2"></i>
+
+            <a
+              routerLinkActive="active"
+              (click)="collapse()"
+              href="javascript:void(0)"
+              class="nav-link"
+              [matMenuTriggerFor]="menu"
+              aria-label="change-language"
+            >
+              {{ selectedLanguage.name }}
+              <mat-menu #menu="matMenu" class="change-language">
+                @for(language of languages; track null) {
+                <button
+                  mat-menu-item
+                  (click)="setLanguage(language.code)"
+                  class="p-1"
+                  [attr.aria-label]="'Switch language to ' + language.name"
+                  [disabled]="language.code === selectedLanguage.code"
+                >
+                  <img
+                    class="flag rounded-circle"
+                    width="30"
+                    height="30"
+                    [src]="language.flag"
+                    [alt]="'Flag of ' + language.name"
+                  />
+                  <span class="ps-2">{{ language.name }}</span>
+                </button>
+                }
+              </mat-menu>
+            </a>
+          </div>
+        </li>
+
+        <button (click)="login()" class="btn btn-login" type="button">
+
+          {{ "header.buttons.login" | transloco }}
+        </button>
+      </form>
+      } @if(user && user.ProfileStatus != 0){
+      <div class="user">
+        <div class="notification"></div>
+        <mat-menu #menu="matMenu" class="userDropdown">
+          <button
+            mat-menu-item
+            [routerLink]="[('profile' | route) + ('personal-info' | route)]"
+            style="color: #8088a4"
+          >
+            <img src="assets/icons/user-edit.svg" />
+            {{ "header.drop-down.edit-profile" | transloco }}
+          </button>
+
+          <button
+            style="color: #8088a4"
+            mat-menu-item
+            [routerLink]="['receipt' | route]"
+            style="color: #8088a4"
+          >
+            <img src="assets/icons/invo.svg" />
+            {{ "header.drop-down.my-invoices" | transloco }}
+          </button>
+          <button
+            style="color: #8088a4"
+            mat-menu-item
+            [routerLink]="['my-schedule' | route]"
+          >
+            <img src="assets/icons/calendar (1).svg" />
+            {{ "header.drop-down.my-schedule" | transloco }}
+          </button>
+          <button
+            style="color: #8088a4"
+            mat-menu-item
+            [routerLink]="['change-password' | route]"
+          >
+            <img src="assets/icons/pass.svg" />
+            {{ "header.drop-down.change-password" | transloco }}
+          </button>
+          <button
+            style="color: #8088a4"
+            mat-menu-item
+            (click)="changeLanguage()"
+          >
+            <img src="assets/icons/Language2.svg" />
+            {{ "header.drop-down.language" | transloco }}
+          </button>
+
+          <button
+            data-bs-toggle="modal"
+            data-bs-target="#myModalHelp"
+            aria-label="help"
+            type="button"
+            class="btn btn-primary"
+            style="color: #8088a4"
+            mat-menu-item
+          >
+            <img src="assets/icons/auth-help.svg" />
+            <span class="">
+              {{ "authentication.authentication-layout.help" | transloco }}
+            </span>
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#myModalAuth"
+            style="color: #8088a4"
+            mat-menu-item
+          >
+            <img src="assets/icons/logout.svg" />
+            <span class="" style="color: #ff3b30">
+              {{ "header.drop-down.sign-out" | transloco }}
+            </span>
+          </button>
+        </mat-menu>
+        <a [matMenuTriggerFor]="menu" href="javascript:void(0)">
+          <span class="user-name">
+            {{
+              translocoService.getActiveLang() == "en"
+                ? user.Name?.split(" ")[0]
+                : user.NameAR
+                ? user.NameAR.split(" ")[0]
+                : user.Name?.split(" ")[0]
+            }}
+            <img
+              src="assets/icons/three-dots.svg"
+              alt=""
+              class="d-inline-block m-1"
+            />
+
+          </span>
+          <img class="user-img" src="../../../assets/user.svg" alt="user" />
+          <i class="fa-solid fa-chevron-down px-2 text-muted"></i
+        ></a>
+      </div>
+      }
+    </div>
+  </div>
+</nav>
+
+<div
+  class="modal fade"
+  id="myModalAuth"
+  tabindex="-1"
+  aria-labelledby="myModalAuthLabel"
+  aria-hidden="true"
+  data-bs-toggle="modal"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content position-relative border-0">
+      <button
+        type="button"
+        class="btn-close position-absolute m-2"
+        data-bs-dismiss="modal"
+        style="cursor: pointer; top: 10px; right: 10px"
+        aria-label="Close"
+      ></button>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <div class="sign-out">
+              <img
+                src="../../../assets/icons/signout.png"
+                class="img-fluid mt-3"
+                alt="Sign out"
+              />
+              <h5 class="my-3 fw-bold">Sign Out</h5>
+              <p class="my-2 text-muted">Are you sure you want to sign out?</p>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <button
+                (click)="signOut()"
+                type="button"
+                class="btn px-4 mx-2 py-3 rounded-3 w-100"
+                style="
+                  background-color: transparent;
+                  border: 1px solid #ff3b30;
+                  color: #ff3b30;
+                "
+                data-bs-dismiss="modal"
+              >
+                Yes
+              </button>
+
+              <button
+                type="button"
+                class="btn px-4 py-3 mx-2 rounded-3 w-100"
+                style="background-color: #ff3b30; color: #ffffff"
+                data-bs-dismiss="modal"
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="myModalHelp"
+  tabindex="-1"
+  aria-labelledby="myModalHelpLabel"
+  aria-hidden="true"
+  data-bs-toggle="modal"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content position-relative border-0">
+      <button
+        type="button"
+        class="btn-close position-absolute m-2"
+        data-bs-dismiss="modal"
+        style="cursor: pointer; top: 10px; right: 10px"
+        aria-label="Close"
+      ></button>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <div class="sign-out">
+              <img
+                src="../../../assets/icons/contact-us.png"
+                class="img-fluid mt-3"
+                alt="Sign out"
+              />
+              <h5 class="my-3 fw-bold">Salamtak Support</h5>
+              <p class="my-2" style="color: #8088a4">
+                Our support team is ready to assist you. Reach out for help,
+                inquiries, or feedback at any time.
+              </p>
+            </div>
+
+            <div class="d-flex justify-content-center mt-4">
+              <a href="" class="text-whhite w-100">
+                <a
+                  href="tel:{{ phone }}"
+                  class="btn py-3 btn-primary w-100 rounded-3  "
+                  style="font-size: 19px"
+                >
+
+                  {{ phone }}
+                </a>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

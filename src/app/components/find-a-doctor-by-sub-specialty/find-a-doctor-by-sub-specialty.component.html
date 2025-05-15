@@ -1,0 +1,573 @@
+<section class="listing-layout">
+    <div class="main-div show" >
+      <div class="container">
+        <div class="form">
+          <app-search-form ></app-search-form>
+        </div>
+      </div>
+    </div>
+
+    <section class="list main-card-app">
+      <div class="container">
+        <!-- {{subSpecialityId | json}} -->
+
+        <nav class="breadcrumb" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">
+              <!-- Salamtak -->
+              {{ 'app-name' | transloco }}
+            </a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)"
+                [routerLink]="['find-a-doctor' | route ]"
+              >
+              <!-- find-a-doctor -->
+              <!-- Dentist in Egypt -->
+              {{ 'find-a-doctor.breadcrumb.find-a-doctor' | transloco }}
+            </a></li>
+            <!-- <li class="breadcrumb-item"><a href="javascript:void(0)">
+              {{ 'find-a-doctor.breadcrumb.dentist-in-egypt' | transloco }}
+            </a></li> -->
+            <!-- @if(speciality){
+              <li class="breadcrumb-item"><a href="javascript:void(0)"
+                  [routerLink]="[('find-a-doctor'  | route ),speciality]"
+                >
+                {{replaceDashWithSpace(speciality)}}
+              </a></li>
+            }
+            @if(city){
+              <li class="breadcrumb-item"><a href="javascript:void(0)"
+                  [routerLink]="[('find-a-doctor'  | route ),speciality,city]"
+
+                >
+                {{replaceDashWithSpace(city)}}
+              </a></li>
+            }
+            @if(area){
+              <li class="breadcrumb-item"><a href="javascript:void(0)">
+                {{replaceDashWithSpace(area)}}
+              </a></li>
+            } -->
+
+
+            @if(subSpeciality){
+              <li class="breadcrumb-item"><a href="javascript:void(0)">
+                {{replaceDashWithSpace(subSpeciality)}}
+              </a></li>
+            }
+
+
+
+            <!-- <li class="breadcrumb-item active" aria-current="page">Alexandria</li> -->
+          </ol>
+        </nav>
+
+        <div>
+          <div class="row">
+            <div class="col-lg-2 filters-menu" [ngClass]="{'small-screen': isSmallScreen}">
+              <div class="head" (click)="isSmallScreen && toggleDropdown()">
+                <h5>
+                  <mat-icon style="color: white; width: 30px;">filter_alt </mat-icon>
+                  <!-- Filters -->
+                  {{ 'find-a-doctor.filters-menu.title' | transloco }}
+                </h5>
+                <mat-icon class="image small-screen-only">keyboard_arrow_down</mat-icon>
+              </div>
+              <accordion  *ngIf="isDropdownOpen || !isSmallScreen">
+                <!-- Gender -->
+                <accordion-group
+                [heading]= "'find-a-doctor.filters-menu.gender.title' | transloco"
+                 [isOpen]="params['gender'] ? true : false">
+                  <div>
+
+                    @for(gender of genders; track null){
+                      <div class="form-check"
+                      >
+                      <!-- (change)="selectGender($event,gender.id)" -->
+                      <!-- setFilter -->
+                        <input class="form-check-input" type="radio" name="genders" id="gender-{{$index}}" value="{{gender.id}}"
+                        (change)="setFilter($event,'gender',gender.id,gender.name)"
+                        [checked]="params['gender'] == gender.name"
+                        >
+                        <label class="form-check-label text-capitalize" for="gender-{{$index}}">
+                          <!-- {{gender.name }} -->
+                          {{'find-a-doctor.filters-menu.gender.' + gender.name  | transloco}}
+                        </label>
+                      </div>
+                    }
+                  </div>
+                </accordion-group>
+                <!-- Seiority -->
+                <accordion-group
+                 [heading] = "'find-a-doctor.filters-menu.seiority.title' | transloco"
+                 [isOpen]="params['title'] ? true : false"
+                 >
+                  <div>
+
+
+                    @for (level of seniorityLevels; track null){
+                      <div class="form-check" >
+                        <!-- (change)="selectSeiority($event,level['Id'])" -->
+                        <input class="form-check-input" type="radio" name="seniorityLevels" id="seniorityLevels-{{$index}}" value="{{level['Id']}}"
+                        (change)="setFilter($event,'title',level.Id,level.Name)"
+
+                        >
+                        <label class="form-check-label text-capitalize" for="seniorityLevels-{{$index}}">
+                          {{level['Name']}}
+                        </label>
+                      </div>
+                    }
+
+
+
+                  </div>
+                </accordion-group>
+                <!--speciality!-->
+               <accordion-group
+                [heading] = "'search-form.specialty.label' | transloco"
+                [isOpen]="(speciality && !subSpeciality) ? true : false">
+                 <div class="scrollable-dropdown">
+                  @for (level of specialists; track null){
+                    <div class="form-check" >
+                      <input class="form-check-input" type="radio" name="specialists" id="specialists-{{$index}}" value="{{level['Id']}}"
+                      [checked]="level['Name'] == replaceDashWithSpace(speciality2)"
+
+
+                      (change)="goToSpecialist($event,level['Id'],level['Name']);getSubSpecialist(level['Id'])"
+                      >
+                      <label class="form-check-label text-capitalize" for="specialists-{{$index}}">
+                        {{level['Name']}}
+                      </label>
+                    </div>
+                  }
+
+                 </div>
+               </accordion-group>
+               <!-- subSpecialist-->
+                <accordion-group
+                [heading]= "'find-a-doctor.filters-menu.subspeciality.title' | transloco"
+                 [isOpen]="subSpeciality ? true : false">
+                  <div class="scrollable-dropdown">
+                    @for (level of subSpecialists; track null){
+                      <div class="form-check" >
+                        <input class="form-check-input" type="radio" name="subSpecialists" id="subSpecialists-{{$index}}" value="{{level['Id']}}"
+                        [checked]="(translocoService.getActiveLang() == 'ar' ? level['NameAr'] : level['Name']) == replaceDashWithSpace(subSpeciality)"
+                        (change)="setFilter($event,'subSpeciality',level.Id,(translocoService.getActiveLang() == 'ar' ? level['NameAr'] : level['Name']),level )"
+                        >
+                        <label class="form-check-label text-capitalize" for="subSpecialists-{{$index}}">
+                          <!-- {{level['Name']}} -->
+                           {{translocoService.getActiveLang() == 'ar' ? level['NameAr'] : level['Name']}}
+                        </label>
+                      </div>
+                    }
+
+                  </div>
+                </accordion-group>
+
+               <!-- service-->
+                <accordion-group
+                [heading]= "'find-a-doctor.filters-menu.date.title' | transloco"
+                [isOpen]="params['service'] ? true : false">
+
+                  <p>
+                    <!-- Choose Date -->
+                    {{ 'find-a-doctor.filters-menu.date.description' | transloco }}
+                  </p>
+                  <mat-form-field appearance="fill" class="w-100">
+                    <!-- (change)="setFilter('speciality',level.Id,level.Name)" -->
+
+                    <input matInput [matDatepicker]="dp3" disabled [min]="minDate" [value]="todayDate" (dateChange)="dateChange($event)">
+                    <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+                    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                  </mat-form-field>
+                </accordion-group>
+
+                <accordion-group
+                [heading]= "'find-a-doctor.filters-menu.service.title' | transloco"
+                 [isOpen]="false">
+                  <div>
+
+                    @for (service of services; track null){
+                      <!-- (change)="selectService($event,service['Id'])" -->
+                      <div class="form-check" >
+                        <input class="form-check-input" type="radio" name="services" id="service-{{$index}}" value="{{service['Id']}}"
+                        (change)="setFilter($event,'service',service.Id,service.Name)"
+
+                        >
+                        <label class="form-check-label text-capitalize" for="service-{{$index}}">
+                          {{service['Name']}}
+                        </label>
+                      </div>
+                    }
+
+                  </div>
+                </accordion-group>
+
+                <accordion-group
+                 [heading] = "'find-a-doctor.filters-menu.price.title' | transloco"
+                  [isOpen]="params['price'] ? true : false">
+                  <p>
+                    <!-- Price Range -->
+                    {{ 'find-a-doctor.filters-menu.price.description' | transloco }}
+                  </p>
+                  <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>
+                      <span>
+                    {{ 'find-a-doctor.filters-menu.price.from' | transloco }}
+
+                      </span>
+                    </mat-label>
+                    <input matInput [(ngModel)]="FeesFrom" type="number" min="0"
+                    >
+                  </mat-form-field>
+                  <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>
+                      <span>
+                        {{ 'find-a-doctor.filters-menu.price.to' | transloco }}
+
+                      </span>
+                    </mat-label>
+                    <input matInput [(ngModel)]="FeesTo" type="number" min="0"
+                    >
+                  </mat-form-field>
+
+                  <div>
+                    <!-- (click)="selectPrice(FeesFrom,FeesTo)" -->
+                    <button class="btn btn-primary w-100"
+                    (click)="setFilter($event,'price','',FeesFrom + ',' + FeesTo)"
+                    >
+                      {{ 'find-a-doctor.filters-menu.apply' | transloco }}
+
+                    </button>
+                  </div>
+
+                </accordion-group>
+
+              </accordion>
+
+            </div>
+            <div class="col-lg-10 " id="list" >
+
+              <div class="filter-tools">
+                <div class="row">
+                  <div class="col-auto pl-0">
+                    <h4>
+                      <!-- All Doctors -->
+                      {{ 'find-a-doctor.doctors-list.title' | transloco }}
+
+                      <!-- @if(doctors.length > 0){
+                        <span>
+                          ({{pagination.TotalCount}})
+                        </span>
+                      } -->
+
+                    </h4>
+                  </div>
+                  <div class="col text-end pr-0">
+                    <!-- [matMenuTriggerFor]="menu" href="javascript:void(0)" -->
+                    <!-- <a href="javascript:void(0);">
+                      Sorting
+                      {{ 'find-a-doctor.doctors-list.sorting.title' | transloco }}
+                    </a> -->
+
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item>
+                        <mat-icon>assignment_ind</mat-icon>
+                        <!-- <span>
+                          Most Popular
+                          {{ 'find-a-doctor.doctors-list.sorting.most-popular' | transloco }}
+                        </span> -->
+                      </button>
+                      <button mat-menu-item>
+                        <mat-icon>stars</mat-icon>
+                        <span>
+                          <!-- Reviews -->
+                          {{ 'find-a-doctor.doctors-list.sorting.reviews' | transloco }}
+                        </span>
+                      </button>
+                      <button mat-menu-item>
+                        <mat-icon>access_time</mat-icon>
+                        <span>
+                          <!-- Wating Time -->
+                          {{ 'find-a-doctor.doctors-list.sorting.wating-time' | transloco }}
+                        </span>
+                      </button>
+                      <button mat-menu-item>
+                        <mat-icon>attach_money</mat-icon>
+                        <span>
+                          <!-- Fees -->
+                          {{ 'find-a-doctor.doctors-list.sorting.fees' | transloco }}
+                        </span>
+                      </button>
+                    </mat-menu>
+
+                    <!-- <input type="search" disabled
+                    [placeholder]= "'find-a-doctor.doctors-list.most-popular-placeholder' | transloco"
+                 > -->
+                  </div>
+                </div>
+              </div>
+              <div class="cards" >
+                <!-- {{doctors | json}} -->
+                <!-- no-results -->
+                <!-- *** {{doctors.length }}******* -->
+                @if(!loading && doctors.length == 0){
+                  <div class="no-results" >
+                    <div class="card">
+                      <div class="card-body">
+                        <img src="assets/icons/no-results.svg" alt="no-results">
+                        <h5>
+                          <!-- No Results -->
+                          {{ 'find-a-doctor.doctors-list.no-results.title' | transloco }}
+                        </h5>
+                        <p>
+                          <!-- There are no doctors that match your search -->
+                          {{ 'find-a-doctor.doctors-list.no-results.description' | transloco }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                }
+
+                <!--{{loading}} -->
+                @if(doctors.length  > 0 ){
+
+                  <div
+                  infiniteScroll
+                  [infiniteScrollDistance]="2"
+                  [infiniteScrollThrottle]="50"
+                  (scrolled)="onScroll()"
+                  >
+
+                  <div class="row"
+
+                  >
+                    @for(doctor of doctors; track null){
+                      <div class="col-lg-6 mb-4"
+                      >
+
+                        <div class="card"
+                        [routerLink]="[('doctor'  | route ), doctor['DoctorId'], replaceSpaceWithDash(doctor['DoctorName'])]"
+
+
+
+                        [queryParams]="{
+                          ClinicId:doctor['ClinicId'],
+                          Specialist:replaceSpaceWithDash(doctor['SpecialistName']),
+                          AvalibleDate:doctor['AvalibleDate']}
+                          ">
+                          <div class="card-body">
+                            <div class="user">
+                              <div class="image">
+                                  <!-- [viewerOptions]="doctorViewerOptions" -->
+                                  <img ngxViewer
+                                   src="{{storageUrl}}/{{doctor.Image}}" alt="">
+                                  <!-- <img src="assets/fake-images-for-test/Ellipse 4824.png" alt=""> -->
+                              </div>
+                              <div class="info">
+                                <h5 class="name">
+                                  <!-- Dr. -->
+                                  {{ 'find-a-doctor.doctors-list.cards.dr' | transloco }}
+
+                                  <!-- {{doctor.DoctorName}} -->
+                                  {{doctor?.NickName? doctor?.NickName : doctor.DoctorName }}
+                                  <!-- {{doctor.DoctorName}} -->
+                                  <!-- Dr. Mohamed Farag Abdullatif -->
+                                </h5>
+                                <p class="job">
+
+                                  {{doctor.SpecialistName}}
+                                  <span>({{doctor.SeniortyLevelName}})</span>
+                                  <!-- Genecology and Infertility  RateCount-->
+                                </p>
+                                <div class="rate">
+                                  <img src="assets/icons/Star2.svg" >
+                                  <img src="assets/icons/Star2.svg" >
+                                  <img src="assets/icons/Star2.svg" >
+                                  <img src="assets/icons/Star2.svg" >
+                                  <img src="assets/icons/Star2.svg" >
+
+                                  <b></b> &nbsp;<span class="">({{doctor.RateCount}}
+
+                                    <!-- Reviews -->
+                                    {{ 'find-a-doctor.doctors-list.cards.reviews' | transloco }}
+                                    )</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="work-data">
+                              <div class="row">
+                                <div class="frist-col col-5">
+                                  <img src="assets/icons/Sub-specialization.svg" alt="">
+                                  <span>
+                                    <!-- Sub-specialization -->
+                                    {{ 'find-a-doctor.doctors-list.cards.sub-specialization' | transloco }}
+                                  </span>
+                                </div>
+                                <div class="col-6 answer">
+                                  <p
+                                    (click)="$event.stopPropagation()"
+                                    >
+                                    <!-- (click)="goToSubSpecial(subspecialist.Name, subspecialist.Id,doctor.SpecialistName)" -->
+                                    @for( subspecialist of doctor.Sub_SpecialistList ;let last = $last; track null){
+                                        <!-- target="_blank" -->
+                                        <!-- (click)="goToSubSpecial(subspecialist,)" -->
+                                        <a href="{{getSubSpecialtyLink(subspecialist,doctor)}}"
+
+
+
+                                        class="text-decoration-none"
+
+  style="cursor: pointer;"
+                                        title="{{subspecialist.Name}}" >
+                                       <b>{{subspecialist.Name}}</b>
+                                      </a>
+                                      {{last ? '' : ', '}}
+                                      }
+
+
+                                  </p>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="frist-col col-3">
+                                  <img src="assets/icons/Address.svg" alt="">
+                                  <span>
+                                    <!-- Address -->
+                                    {{ 'find-a-doctor.doctors-list.cards.address' | transloco }}
+                                  </span>
+                                </div>
+                                <div class="col-8 answer">
+                                 <p >
+                                  <!-- <p title="{{doctor?.clinicDto.Address? doctor?.clinicDto.Address : 'Unknown' }}" -->
+                                  <span  >
+                                    {{doctor?.clinicDto.AreaName? doctor?.clinicDto.AreaName : 'Unknown' }} ({{doctor?.clinicDto.SubAreaName? doctor?.clinicDto.SubAreaName : 'Unknown'}})
+                                  </span>
+                                 </p>
+                                </div>
+                              </div>
+                                                          <!-- Waiting Time -->
+
+                              <!-- <div class="row">
+                                <div class="col-6">
+                                  <img src="assets/icons/Waiting-Time.svg" alt="">
+                                  <span>
+                                    {{ 'find-a-doctor.doctors-list.cards.waiting-time' | transloco }}
+                                  </span>
+                                </div>
+                                <div class="col-6 answer">
+                                  <span>
+                                    {{doctor.WaitingTime}} Min.
+                                  </span>
+                                </div>
+                              </div> -->
+                              <div class="row">
+                                <div class="frist-col col-3">
+                                  <img src="assets/icons/Fees.svg" alt="">
+                                  <span>
+                                    <!-- Fees -->
+                                    {{ 'find-a-doctor.doctors-list.cards.fees' | transloco }}
+                                  </span>
+                                </div>
+                                <div class="col-7 answer">
+                                  <span>
+                                    {{doctor.FeesFrom }} LE
+                                    <!-- - {{doctor.FeesTo}} LE -->
+                                    <!-- 200 LE -->
+                                  </span>
+                                </div>
+                              </div>
+                              <!-- Call -->
+                              <div class="row">
+                                <div class="col">
+                                  <img src="assets/icons/call.jpeg" style="width: 24; height: 24px; border-radius: 50%;" alt="">
+                                  <span>
+                                    <!-- Call -->
+                                    {{ 'find-a-doctor.doctors-list.cards.call' | transloco }} &nbsp; <a style="text-decoration: none;" href="tel:17143">{{ 'find-a-doctor.doctors-list.cards.hotline' | transloco }}</a>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+
+                              <button (click)="bookFor($event,doctor)" class="btn book btn-primary w-100">
+                                <!-- Book Now -->
+                                {{ 'find-a-doctor.doctors-list.cards.book-now' | transloco }}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                  </div>
+                }
+
+                @if(loading && doctors.length != 0){
+                  <div class="text-center">
+                    <div class="spinner-border text-light" role="status">
+                      <span class="sr-only"></span>
+                    </div>
+                  </div>
+                }
+
+                  <!-- {{doctors.length}} -->
+                @if(loading && doctors.length == 0){
+                  <div class="row">
+                    @for(item of [].constructor(4); track null){
+                    <div class="col-lg-6">
+
+                      <div class="ph-item" >
+                        <div class="ph-col-12">
+                            <div class="ph-picture"></div>
+                            <div class="ph-row">
+                                <div class="ph-col-6 big"></div>
+                                <div class="ph-col-4 empty big"></div>
+                                <div class="ph-col-2 big"></div>
+                                <div class="ph-col-4"></div>
+                                <div class="ph-col-8 empty"></div>
+                                <div class="ph-col-6"></div>
+                                <div class="ph-col-6 empty"></div>
+                                <div class="ph-col-12"></div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    }
+
+
+                  </div>
+
+                }
+
+                <!-- pagination -->
+                @if(doctors.length != 0 ){
+                  <div class="mt-4 mb-4 text-center">
+                    <!-- (click)="filter(filterObject.MaxResultCount,filterObject?.SkipCount + 10)" -->
+                    <button class="btn btn-primary btn-lg  p-3"
+                    (click)="pagination.SkipCount = pagination.SkipCount + 10;doctorsSearch()"
+
+                    >
+                      &nbsp;
+                      {{ 'find-a-doctor.doctors-list.load-more' | transloco }}
+                      &nbsp;
+                    </button>
+                  </div>
+                }
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </section>
+
+
+
+
+
+
+

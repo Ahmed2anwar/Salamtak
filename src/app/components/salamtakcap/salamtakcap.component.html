@@ -1,0 +1,178 @@
+<section class="blogs mt-5 pt-5">
+  <div class="container">
+    <nav class="breadcrumb"style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0)">
+            {{ "app-name" | transloco }}
+          </a>
+        </li>
+        <li class="breadcrumb-item">
+          <a
+          [routerLink]="['/en/SalamtakGate']" >
+
+            {{ "blogs.title" | transloco }}
+          </a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0)"
+            >
+            {{ "blogs.cap" | transloco }}
+          </a>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="cards">
+      <h2 class="fw-medium pb-3">
+        {{ "blogs.all-articles" | transloco }}
+      </h2>
+      <div>
+        <div class="row">
+          <div class="col-md-6  mb-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="img">
+                  <iframe
+                    width="100%"
+                    height="315"
+                    src="https://www.youtube.com/embed/7IEiYPryXYs?si=jwYJ9btBj2dcCgEh"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="texts my-2">
+                    <h6 >
+                      .كبسولة سلامتك مع الدكتور/حامد عبد الغني وهو يتحدث عن
+                      حساسية الصدر
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6  mb-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="img">
+                  <!-- Use iframe instead of img for static video content -->
+                  <iframe
+                    width="100%"
+                    height="315"
+                    src="https://www.youtube.com/embed/cN_6AiWR9DM?si=2h_VZbmdHtsMsklu"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="texts my-2">
+                    <h6>
+                      .كبسولة سلامتك مع الدكتور/ وحيد لطفي، يتحدث عن الحساسية
+                      الجلدية
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6  mb-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="img">
+                  <!-- Use iframe instead of img for static video content -->
+                  <iframe
+                    width="100%"
+                    height="315"
+                    src="https://www.youtube.com/embed/jD7Qaem_zyU?si=A6TEi6TzxsTPJWGe"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="texts my-2">
+                    <h6>
+                      كبسولة سلامتك مع الدكتور/ وحيد لطفي، يتحدث عن الأمراض
+                      الجلدية المناعية.
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6  mb-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="img">
+                  <!-- Use iframe instead of img for static video content -->
+                  <iframe
+                    width="100%"
+                    height="315"
+                    src="https://www.youtube.com/embed/nFs1UBfDEjI?si=64M0UUtVVG36pyqK"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="texts my-2">
+                    <h6>كبسولة سلامتك مع الدكتورة/ رانيا رشاد</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6  mb-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="img">
+                  <!-- Use iframe instead of img for static video content -->
+                  <iframe
+                    width="100%"
+                    height="315"
+                    src="https://www.youtube.com/embed/zN_itN7_qEM?si=rCfUbTxFOa02NbJp"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="texts my-2">
+                    <h6>
+                      كبسولة سلامتك مع الدكتور/ وحيد لطفي يتحدث عن تأخر الانجاب.
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6  mb-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="img">
+                  <!-- Use iframe instead of img for static video content -->
+                  <iframe
+                    width="100%"
+                    height="315"
+                    src="https://www.youtube.com/embed/UuUn9hKJiR4?si=Bl51gIB06rDupFyp"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="texts my-2">
+                    <h6>
+                      كبسولة سلامتك_الثلث البولي عند النساء _دكتور/أحمد صبحي
+                      الفيل
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @if (blogs.length == 0){
+  <div class="no-results">
+    <div class="card" style="align-items: center">
+      <div class="card-body">
+        <img src="assets/icons/no-results.svg" alt="no-results" />
+        <h5>
+          {{ "find-a-doctor.doctors-list.no-results.title" | transloco }}
+        </h5>
+        <p>
+          {{ "find-a-doctor.doctors-list.no-results.description" | transloco }}
+        </p>
+      </div>
+    </div>
+  </div>
+  }
+</section>

@@ -1,0 +1,20 @@
+section.medical-services{
+  padding-top: 0px;
+  padding-bottom: 50px;
+}
+section.medical-services .container .data{
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width:768px) {
+    section.medical-services .container .data{
+    flex-direction:column;
+  }
+}
+
+.data .info{
+  margin: 20px;
+  border-radius: 15px;
+  border:2px solid gray
+}

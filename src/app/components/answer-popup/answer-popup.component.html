@@ -1,0 +1,21 @@
+<h1 mat-dialog-title class="head text-center">{{ 'questions-answers.answers.details' | transloco }}</h1>
+<div class="container">
+  <div *ngFor="let item of Answer" class="row justify-content-center mb-3">
+    <div class="col-12 col-6">
+      <div class="card">
+        <div class="card-body">
+          <div mat-dialog-content>
+            <p><strong>{{ 'questions-answers.answers.date' | transloco }}:</strong> {{ item.AnswerDate | date:'short' }}</p>
+            <p><strong>{{ 'questions-answers.answers.doc-name' | transloco }}:</strong> {{ item.DoctorName }}</p>
+            <!-- <p class="question"><strong>{{ 'questions-answers.card.question' | transloco }}:</strong> {{ item.Question }}</p> -->
+            <p><strong>{{ 'questions-answers.answers.ans' | transloco }}:</strong>  {{ item.Answer }} </p>
+          </div>
+          <div mat-dialog-actions class="d-flex justify-content-center">
+            <button mat-button class="btn btn-secondary me-2" (click)="onNoClick()">{{ 'questions-answers.answers.close' | transloco }}</button>
+            <button mat-button class="btn btn-primary" (click)="bookAppointment(item.DoctorID)">{{ 'questions-answers.answers.book' | transloco }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

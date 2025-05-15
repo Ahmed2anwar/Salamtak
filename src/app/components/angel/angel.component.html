@@ -1,0 +1,50 @@
+
+<section class="blogs">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">
+           {{'app-name' | transloco}}
+        </a></li>
+        <li class="breadcrumb-item"><a href="javascript:void(0)">
+          {{'blogs.title' | transloco}}
+        </a></li>
+        <li class="breadcrumb-item"><a href="javascript:void(0)">
+          {{'blogs.angel' | transloco}}
+        </a></li>
+      </ol>
+    </nav>
+
+    <div class="text-center mb-5 head">
+      <h1>
+        {{'blogs.angel' | transloco}}
+      </h1>
+      <p>
+        {{'blogs.angel-title' | transloco}}
+      </p>
+    </div>
+  </div>
+</section>
+<section class="medical-services">
+  <div class="container">
+    <div class="data">
+      <div class="info" (click)="goto()">
+       <div style="text-align:center;" >
+          <img src="assets/icons/SalmtakGate.png" width="200px" style="cursor: pointer;" >
+          <p>
+            {{'blogs.emergency' | transloco}}
+          </p>
+        </div>
+      </div>
+      <div class="info" (click)="openAllQuestions()">
+        <div  style="text-align: center; ">
+          <img src="assets/icons/SalmtakGate.png" width="200px" style="cursor: pointer;" >
+          <p>
+            {{'blogs.faq' | transloco}}
+          </p>
+        </div>
+      </div>
+   </div>
+  </div>
+
+</section>

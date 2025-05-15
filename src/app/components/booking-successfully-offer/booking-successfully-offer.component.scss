@@ -1,0 +1,93 @@
+section {
+  background-color: #F3F3FF;
+  padding: 50px 0;
+}
+
+.card {
+  background: #fff;
+  border-radius: 6px;
+  border: none;
+}
+
+.card-body {
+  width: 100%;
+  padding: 20px;
+}
+
+.wallpaper img {
+  width: 80%;
+  max-width: 100%; /* Make sure it doesn't exceed container width */
+}
+
+.items {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #767676;
+}
+
+.reservation-details .row {
+  padding: 15px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.actions button {
+  padding: 15px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  background-color: #2b2979;
+  border-radius: 15px;
+  width: 100%;
+}
+
+.form-select {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+.mat-select-value-text {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.mat-select-value-text span.mat-option {
+  white-space: normal !important;
+}
+.mat-select-value-text  {
+  white-space: normal !important;
+}
+.mat-select {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+@media (max-width: 991px) {
+  .card-body {
+    width: 100%;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 991px) {
+  .booking-successfully .card-body {
+    padding: 20px;
+  }
+  .booking-successfully .form-select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .booking-successfully .card-body {
+    width: 100%;
+    text-align: left;
+  }
+  .booking-successfully .wallpaper img {
+    width: 100%;
+  }
+}

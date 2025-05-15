@@ -1,0 +1,363 @@
+<!--
+    "my-schedule": {
+    "title": "جدول",
+    "upcoming": {
+      "title": "القادمة",
+      "sub-title": "كل المواعيد القادمة"
+    },
+    "medical-history": {
+      "title": "تاريخ طبى",
+      "sub-title": "تاريخ طبى"
+    },
+    "canceled": {
+      "title": "ألغيت",
+      "sub-title": "موعد ملغى"
+    },
+    "Edit-Appointment":  "تعديل الموعد",
+    "View-Map":  "عرض الخريطة",
+    "Help":  "مساعدة",
+    "Cancel-Appointment": "إلغاء الموعد",
+    "ReBooking-Appointment":  "إعادة حجز الموعد",
+    "Medical-History":  "تاريخ طبى",
+    "Rate":  "معدل",
+    "LE": "جنيه"
+  },
+ -->
+
+
+ <section class="my-schedule">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="javascript:void(0)">
+            <!-- Salamtak -->
+            {{ 'app-name' | transloco }}
+            </a>
+        </li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)" aria-label="my-schedule">
+            {{ 'my-schedule.title' | transloco}}
+          </a></li>
+        </ol>
+      </nav>
+
+      <div>
+        <mat-tab-group
+          [dynamicHeight]="true"
+          [selectedIndex]="0"
+          (selectedTabChange)="changeEventType($event)"
+
+        >
+        <mat-tab label="{{'my-schedule.upcoming.title' | transloco}}"></mat-tab>
+        <mat-tab label="{{ 'my-schedule.medical-history.title' | transloco }}"></mat-tab>
+        <mat-tab label="{{ 'my-schedule.canceled.title' | transloco }}"></mat-tab>
+        </mat-tab-group>
+
+        <div class="head">
+          <div class="">
+            <h5>
+              <div [ngSwitch]= "eventType">
+                <div *ngSwitchCase="0">
+                  {{ 'my-schedule.upcoming.sub-title' | transloco }}
+                </div>
+                <div *ngSwitchCase="1">
+                  {{ 'my-schedule.medical-history.sub-title' | transloco }}
+                </div>
+                <div *ngSwitchCase="2">
+                  {{ 'my-schedule.canceled.sub-title' | transloco }}
+                </div>
+              </div>
+            </h5>
+          </div>
+
+        </div>
+
+        <section class="main-card-app mt-4">
+          <div class="cards">
+            @if(data.length == 0 && !loading){
+                <div class="no-results"
+                >
+                  <div class="card text-center bg-transparent">
+                    <div class="card-body">
+                      <img src="assets/icons/no-results.svg" alt="no-results">
+                      <h5 class="mt-3">
+                        {{ 'find-a-doctor.doctors-list.no-results.title' | transloco }}
+                      </h5>
+                      <p>
+                        {{ 'find-a-doctor.doctors-list.no-results.description' | transloco }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+            }
+
+
+            <div class="row">
+                @for(doctor of data;track null){
+                    <div class="col-lg-6 mb-4" >
+                        <!-- <div class="card"
+                          [routerLink]="['/patient/doctor-profile',doctor['DoctorId']]"
+                          [queryParams]="{ClinicId:doctor['ClinicId'],AvalibleDate:doctor['AvalibleDate']}"
+                        > -->
+                        <!-- [routerLink]="[('doctor-profile'  | route ), doctor['DoctorId'], doctor['DoctorName']]" -->
+                        <div class="card"
+                        (click)="goToProfile(doctor)"
+                      >
+                          <div class="card-body">
+                            <div class="user">
+                              <div class="image">
+                                  <!-- <img src="assets/fake-images-for-test/Ellipse 4824.png" alt=""> -->
+                                  <img [src]="storageUrl + '/' + doctor.DoctorImage" alt="">
+                              </div>
+
+                              <div class="info">
+                                <h5 class="name"
+
+
+                                >
+                                  {{ 'find-a-doctor.doctors-list.cards.dr' | transloco }}
+                                  {{ doctor.DoctorName}}
+                                </h5>
+                                <p class="job">
+                                  {{ doctor.SpecialistName}} <span>({{doctor.SeniorityLevelName}})</span>
+                                </p>
+                                <!-- no rate in api -->
+                                <div class="rate">
+                                  <img src="assets/icons/Star2.svg">
+                                  <b>
+                                    {{ doctor.AvgRate}}
+
+                                  </b> &nbsp;
+                                  <span>
+                                    ({{ doctor.rateCount}}
+                                    {{ 'find-a-doctor.doctors-list.cards.reviews' | transloco }})
+                                  </span>
+                                </div>
+                                <!-- Upcoming step-->
+                                 @if(eventType == 0){
+                                     <a [matMenuTriggerFor]="dots" class="dots" href="javascript:void(0)" (click)="$event.stopPropagation()"
+                                     >
+                                       <img src="assets/icons/three-dots.svg" alt="">
+                                     </a>
+                                 }
+
+                                <mat-menu #dots="matMenu" class="userDropdown">
+                                  <button (click)="editAppointment(doctor)" mat-menu-item>
+                                    <img src="assets/icons/Edit.svg" alt="">
+                                    <span>
+                                      <!-- Edit Appointment -->
+                                      {{ 'my-schedule.Edit-Appointment' | transloco }}
+                                    </span>
+                                  </button>
+                                  <button mat-menu-item
+                                    (click)="map(doctor)"
+                                  >
+                                    <img src="assets/icons/View-Map.svg" alt="">
+                                    <span>
+                                      <!-- View Map -->
+                                      {{ 'my-schedule.View-Map' | transloco }}
+                                    </span>
+                                    <!-- <a href="https://www.google.com/maps/search/?api=1&query={{clinicInfo.Latitude}},{{clinicInfo.Longitude}} " target="_blank" class="btn btn-primary">Location</a> -->
+                                  </button>
+                                  <button mat-menu-item
+                                    (click)="help()"
+                                  >
+                                    <img src="assets/icons/Help.svg" alt="">
+                                    <span>{{ 'my-schedule.help' | transloco }}
+                                    </span>
+                                  </button>
+                                  <button (click)="cancelAppointment(doctor.AppointmentId,doctor.DoctorId,doctor.DoctorName)" mat-menu-item>
+                                    <img src="assets/icons/Cancel-Appointment.svg" alt="">
+                                    <span  class="text-danger">
+                                      <!-- Cancel Appointment -->
+                                      {{ 'my-schedule.Cancel-Appointment' | transloco }}
+                                    </span>
+                                  </button>
+                                </mat-menu>
+
+
+                                <!-- Medical History step-->
+                                 @if(eventType == 1){
+                                     <a [matMenuTriggerFor]="dots2" class="dots" href="javascript:void(0)" (click)="$event.stopPropagation()"
+                                     >
+                                       <img src="assets/icons/three-dots.svg" alt="">
+                                     </a>
+                                 }
+                                <mat-menu #dots2="matMenu" class="userDropdown">
+                                  <button (click)="RebookAppointment(doctor)" mat-menu-item>
+                                    <img src="assets/icons/Calendar22.svg" alt="">
+                                    <span >
+                                      <!-- Re-Booking Appointment -->
+                                      {{ 'my-schedule.ReBooking-Appointment' | transloco }}
+                                    </span>
+                                  </button>
+                                  <button mat-menu-item  (click)="goToMedical(doctor)">
+                                    <img src="assets/icons/Group2222.svg" alt="">
+                                    <span>
+                                      <!-- Medical History -->
+                                      {{ 'my-schedule.Medical' | transloco }}
+                                    </span>
+                                  </button>
+                                  <button mat-menu-item
+                                    (click)="rate(doctor)"
+                                   >
+                                    <img src="assets/icons/Star22.svg" alt="">
+                                    <span>
+                                      <!-- Rate -->
+                                      {{ 'my-schedule.Rate' | transloco }}
+                                    </span>
+                                  </button>
+                                </mat-menu>
+
+                              </div>
+                            </div>
+
+                            <div class="work-data">
+                                @if(doctor.HealthEntity_OffersID !== null){
+                                    <div class="row" >
+                                      <div class="col-6">
+                                         <span class="offer" style="color: #2B2979; font-weight: bold;">
+                                          <!-- Service -->
+                                          {{'booking-successfully.booking-details.offer' | transloco}}
+                                          <!-- {{ 'find-a-doctor.doctors-list.cards.sub-specialization' | transloco }} -->
+                                        </span>
+                                      </div>
+
+                                    </div>
+                                }
+                              <div class="row">
+                                <div class="col-6">
+                                  <img src="assets/icons/Sub-specialization.svg" alt="">
+                                  <span>
+                                    <!-- Service -->
+                                    {{ 'find-a-doctor.doctors-list.cards.service' | transloco }}
+                                    <!-- {{ 'find-a-doctor.doctors-list.cards.sub-specialization' | transloco }} -->
+                                  </span>
+                                </div>
+                                <div class="col-6 answer">
+                                  <span>
+                                    <!-- Clinic Booking -->
+                                    {{ doctor.MedicalExaminationTypeName}}
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-6">
+                                  <img src="assets/icons/Phone.svg" alt="">
+                                  <span>
+                                    <!-- Address -->
+                                    {{'booking-successfully.clinic-number' | transloco}}
+                                  </span>
+                                </div>
+                                <div class="col-6 answer">
+                                  <span>
+                                    <!-- التجمع الخامس الحي الرابع بجوار مركز شباب التجمع الخامس 44 بـــ شارع 11 -->
+                                    {{ doctor.ClinicPhone}}
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-6">
+                                  <img src="assets/icons/Address.svg" alt="">
+                                  <span>
+                                    <!-- Address -->
+                                    {{ 'booking-successfully.booking-details.clinic-address' | transloco }}
+                                  </span>
+                                </div>
+                                <div class="col-6 answer">
+                                  <span>
+                                    <!-- التجمع الخامس الحي الرابع بجوار مركز شباب التجمع الخامس 44 بـــ شارع 11 -->
+                                    {{ doctor.ClinicAddress}}
+                                  </span>
+                                </div>
+                              </div>
+                              <!-- <div class="row" >
+                                <div class="col-6">
+                                  <img src="assets/icons/Waiting-Time.svg" alt="">
+                                  <span>
+                                     {{ 'find-a-doctor.doctors-list.cards.waiting-time' | transloco }}
+                                  </span>
+                                </div>
+                                <div class="col-6 answer">
+                                  <span>
+
+                                    0
+                                  </span>
+                                </div>
+                              </div> -->
+                              <div class="row">
+                                <div class="col-6">
+                                  <img src="assets/icons/Fees.svg" alt="">
+                                  <span>
+                                    <!-- Fees -->
+                                    {{ 'find-a-doctor.doctors-list.cards.time' | transloco }}
+                                  </span>
+                                </div>
+                                <div class="col-6 answer">
+                                  <span>
+                                    {{returnWeekDay(doctor.AppointmentDate)}}
+                                    <!-- LE -->
+                                   </span>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-6">
+                                  <img src="assets/icons/Fees.svg" alt="">
+                                  <span>
+                                    <!-- Fees -->
+                                    {{ 'find-a-doctor.doctors-list.cards.fees' | transloco }}
+                                  </span>
+                                </div>
+                                <div class="col-6 answer">
+                                  <span>
+                                    {{doctor.Fees}}
+                                    <!-- LE -->
+                                    {{ 'my-schedule.LE' | transloco }}
+                                  </span>
+                                </div>
+                              </div>
+
+                            </div>
+                            <!-- eventType -->
+                             @if(eventType == 2){
+                                 <button class="btn btn-outline-info p-2 w-100" (click)="RebookAppointment(doctor)"
+                                 >
+                                   <img src="assets/icons/Calendar3.svg" alt="">
+                                   <!-- Re-Booking Appointment -->
+                                   {{ 'my-schedule.ReBooking-Appointment' | transloco }}
+                                 </button>
+                             }
+
+                          </div>
+                        </div>
+                      </div>
+                }
+
+
+            </div>
+
+            <!-- <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item control">
+                  <a class="page-link" href="#" aria-label="Previous">
+                    <img src="assets/icons/Arrow-Left-2.svg" alt="">
+
+                  </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item control">
+                  <a class="page-link" href="#" aria-label="Next">
+                    <img src="assets/icons/Arrow-Right-2.svg" alt="">
+
+                  </a>
+                </li>
+              </ul>
+            </nav> -->
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>

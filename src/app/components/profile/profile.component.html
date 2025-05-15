@@ -1,0 +1,90 @@
+<!--
+   "profile":{
+    "steps" : {
+      "personal-info" : "Personal Info",
+      "location" : "Location",
+      "medical-state" : "Medical State"
+    }
+  }
+ -->
+
+
+
+<section class="profile auth">
+  <div class="container">
+
+    <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0)">
+            {{ "app-name" | transloco }}
+          </a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0)">
+            {{ "profile.personal-info" | transloco }}
+          </a>
+        </li>
+
+      </ol>
+    </nav>
+
+    <div class="card bg-white shadow-sm pt-3 p-4  border border-dark-subtle rounded-3">
+      <div class="card-body">
+        <div class="steps">
+          <div class="overlay" *ngIf="user.ProfileStatus == 0"></div>
+          <div class="md-stepper-horizontal">
+            <div
+              class="md-step active done"
+              [ngClass]="{
+                'active done':
+                  pageName == 'personal-info' ||
+                  pageName == 'المعلومات-الشخصية' ||
+                  pageName == 'الملف-الشخصي' ||
+                  pageName == 'profile'
+              }"
+              [routerLink]="[('profile' | route) + ('personal-info' | route)]"
+            >
+              <div class="md-step-title">
+                <!-- Personal Info. -->
+                {{ "profile.steps.personal-info" | transloco }}
+              </div>
+              <div class="md-step-circle"></div>
+
+              <div class="md-step-bar-left"></div>
+              <div class="md-step-bar-right"></div>
+            </div>
+            <div
+              class="md-step"
+              [ngClass]="{
+                'active done': pageName == 'location' || pageName == 'الموقع'
+              }"
+              [routerLink]="[('profile' | route) + ('location' | route)]"
+            >
+              <div class="md-step-title">
+                <!-- Location -->
+                {{ "profile.steps.location" | transloco }}
+              </div>
+              <div class="md-step-circle circle2"></div>
+
+              <div class="md-step-bar-left"></div>
+              <div class="md-step-bar-right"></div>
+            </div>
+            <div
+              class="md-step"
+              [ngClass]="{'active done': pageName == 'medical-state' || pageName == 'الحالة-الطبية'}"[routerLink]="[('profile' | route) + ('medical-state' | route)]">
+              <div class="md-step-title">
+                <!-- Medical State -->
+                {{ "profile.steps.medical-state" | transloco }}
+              </div>
+              <div class="md-step-circle"></div>
+              <div class="md-step-bar-left"></div>
+              <div class="md-step-bar-right"></div>
+            </div>
+          </div>
+        </div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</section>

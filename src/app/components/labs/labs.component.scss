@@ -1,0 +1,80 @@
+.scrollable-dropdown {
+    max-height: 150px; /* Adjust this value as needed */
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  @media (max-width: 786px) ,  (max-width: 991px)
+  {
+    .col-lg-10{
+        padding-top: 50px;
+    }
+  }
+
+//   .image-lab{
+//     width: 400px;
+//     height: 200px;
+//   }
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card-img-top {
+    height: 150px; /* Adjust image height */
+    //object-fit: cover; /* Maintain aspect ratio */
+  }
+  select.form-select {
+    height: auto;
+    //min-height: 150px; /* Allow space for multiple selections */
+  }
+  .dropdown-menu {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .dropdown-toggle::after {
+    float: right;
+  }
+  
+  .form-control {
+    cursor: pointer;
+  }
+
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2B2979;
+  }
+
+  .lab-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .lab-card:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .image-lab {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  .dropdown-menu{
+    max-height: 90px;
+    overflow-y: auto;
+}

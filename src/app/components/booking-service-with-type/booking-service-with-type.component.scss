@@ -1,0 +1,72 @@
+.Red
+{
+  background-color: red;
+}
+.card.booking{
+  .card-header{
+    text-align: center;
+    background: #2B2979;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 20px;
+  }
+  .card-body{
+    .info{
+
+      .d-flex{
+        margin: 10px 0;
+        align-items: center;
+        img{
+          margin-right: 10px;
+        }
+        p{
+          font-weight: 500;
+          font-size: 13px;
+          color: #8F949F;
+          margin-bottom: 0;
+          display: block;
+          width: 100%;
+          span{
+            color: #000;
+            float: right;
+            margin-left: 20px;
+          }
+        }
+      }
+      
+    }
+    hr{
+      opacity: 0.1;
+    }
+.Red
+{
+  background-color: red !important;
+}
+ 
+  }
+
+    button.book{
+      background: #00D2CB;
+      border: none;
+      color: #fff;
+      font-weight: 500;
+      padding: 20px;
+      border-radius: 4px;
+      margin-top: 20px;
+      width: 80%;
+      font-size: 16px;
+      transition: .3s ease-in-out;
+      &:hover{
+        background: #00B5B0;
+      }
+    }
+    
+    
+  
+  // in mobile
+  @media (max-width: 767px) {
+    margin-top: 40px;
+  }
+
+}

@@ -1,0 +1,85 @@
+section.login {
+  input {
+    border-color: #e9eaef;
+    background-color: transparent;
+    border: 1px solid #cbd5e1;
+  }
+  input::placeholder{
+    color: #64748b !important;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  button[type="button"] {
+    border-radius: 7px;
+    margin-right: 10px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+  }
+  button:disabled {
+    background: #aeb3be;
+    color: #fff;
+    border-color: #aeb3be;
+  }
+
+
+  a.forgot {
+    text-decoration: none;
+    color: #2b2979;
+  }
+  @media (max-width: 768px) {
+    // Edit By (Ahmed Selima)
+    a.forgot {
+      display: block;
+      width: 170px;
+    }
+  }
+  .register {
+    color: #64748b;
+    a {
+      text-decoration: none;
+    }
+  }
+}
+.image-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* لإخفاء أي تدفق للصورة خارج الحاوية */
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+}
+
+@media (max-width: 768px) {
+  // Edit By (Ahmed Selima).
+  header .title {
+    text-align: center;
+    margin-bottom: 35px;
+  }
+}
+
+@media (max-width: 768px) {
+  // Edit By (Ahmed Selima).
+  .login-btn {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    margin-top: 32px;
+  }
+  .login-btn button {
+    font-weight: bold;
+  }
+}

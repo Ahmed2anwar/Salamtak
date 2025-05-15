@@ -1,0 +1,371 @@
+<form [formGroup]="form" (ngSubmit)="formSubmit()" class="form">
+  @if(form.value?.image){
+  <div class="text-center d-block mb-4">
+    <input type="text" hidden formControlName="image" />
+    <img
+      src="{{ form.value.image }}"
+      onerror="this.src='https://ui-avatars.com/api/?name=';"
+      style="width: 50px; height: 50px; margin: 0 auto"
+    />
+  </div>
+  }
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>
+          {{ "form.input.full-name-en.label" | transloco }}
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="{{ 'form.input.full-name-en.placeholder' | transloco }}"
+          formControlName="FullNameEn"
+          [ngClass]="{
+            'is-invalid': formSubmitted && ff['FullNameEn']['errors']
+          }"
+        />
+      </div>
+
+      @if(formSubmitted && ff['FullNameEn'].errors){
+      <div class="errors-area mt-2">
+        @if(ff['FullNameEn']['errors']['required']){
+        <p class="text-danger">
+          {{ "form.input.full-name-en.validation.required" | transloco }}
+        </p>
+        } @if(ff['FullNameEn']['errors']['pattern']){
+        <p class="text-danger">
+          {{ "form.input.full-name-en.validation.pattern" | transloco }}
+        </p>
+        } @if(ff['FullNameEn']['errors']['space']){
+        <p class="text-danger">
+          {{ "form.input.full-name-en.validation.space" | transloco }}
+        </p>
+        }
+      </div>
+      }
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>
+          <!-- Full Name in Arabic -->
+          {{ "form.input.full-name-ar.label" | transloco }}
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="{{ 'form.input.full-name-ar.placeholder' | transloco }}"
+          formControlName="FullNameAr"
+          [ngClass]="{
+            'is-invalid': formSubmitted && ff['FullNameAr']['errors']
+          }"
+        />
+      </div>
+
+      @if(formSubmitted && ff['FullNameAr'].errors){
+      <div class="errors-area mt-2">
+        @if(ff['FullNameAr']['errors']['required']){
+        <p class="text-danger">
+          {{ "form.input.full-name-ar.validation.required" | transloco }}
+        </p>
+        } @if(ff['FullNameAr']['errors']['pattern']){
+        <p class="text-danger">
+          {{ "form.input.full-name-ar.validation.pattern" | transloco }}
+        </p>
+        } @if(ff['FullNameAr']['errors']['space']){
+        <p class="text-danger">
+          {{ "form.input.full-name-ar.validation.space" | transloco }}
+        </p>
+        }
+      </div>
+      }
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="Phone">
+          <!-- Gender -->
+          <!--
+    "gender":{
+          "label" :  "جنس",
+          "male" : "ذكر",
+          "female" :  "أنثى"
+        }
+   -->
+          {{ "form.input.gender.label" | transloco }}
+        </label>
+        <div>
+          <input type="text" formControlName="gender" hidden />
+          <a
+            mat-button
+            [matMenuTriggerFor]="gendermenu"
+            [ngClass]="{
+              'is-invalid': formSubmitted && ff['gender']['errors']
+            }"
+            class="w-100 text-start"
+          >
+            {{
+              form.value.gender
+                ? form.value.gender
+                : ("form.input.gender.labell" | transloco)
+            }}
+            <img src="assets/icons/drop-down.svg" class="icon" />
+          </a>
+        </div>
+        <mat-menu #gendermenu="matMenu">
+          <button mat-menu-item (click)="setGenderValueToForm(1)">
+            <!-- Male -->
+            {{ "form.input.gender.male" | transloco }}
+          </button>
+          <button mat-menu-item (click)="setGenderValueToForm(2)">
+            <!-- Female -->
+            {{ "form.input.gender.female" | transloco }}
+          </button>
+        </mat-menu>
+      </div>
+
+      @if(formSubmitted && ff['gender']['errors']){
+      <div class="errors-area" style="margin-top: 2px !important">
+        @if(ff['gender']['errors']['required']){
+        <p class="text-danger">
+          {{ "form.input.gender.validation.required" | transloco }}
+        </p>
+        }
+      </div>
+      }
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label for="Nationality">
+          <!-- Nationality -->
+          {{ "form.input.nationality.label" | transloco }}
+        </label>
+        <div>
+          <input type="text" formControlName="Nationality" hidden />
+          <a
+            mat-button
+            [matMenuTriggerFor]="Nationalitymenu"
+            [ngClass]="{
+              'is-invalid': formSubmitted && ff['Nationality']['errors']
+            }"
+            class="w-100 text-start"
+          >
+            {{
+              form.value.Nationality
+                ? form.value.Nationality.Name
+                : ("form.input.nationality.labell" | transloco)
+            }}
+            <img src="assets/icons/drop-down.svg" class="icon" />
+          </a>
+        </div>
+        <mat-menu #Nationalitymenu="matMenu">
+          @for(country of countries; track null){
+          <button mat-menu-item (click)="setNationalityToForm(country)">
+            {{ country.Name }}
+          </button>
+          }
+        </mat-menu>
+      </div>
+
+      @if(formSubmitted && ff['Nationality']['errors']){
+      <div class="errors-area" style="margin-top: 2px !important">
+        @if(ff['Nationality']['errors']['required']){
+        <p class="text-danger">
+          {{ "form.input.nationality.validation.required" | transloco }}
+        </p>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="col-lg-6">
+      <div class="row">
+
+        <div class="col-4">
+          <div class="form-group">
+            <label for="Phone">
+              <!-- Date of Birth -->
+              {{ "form.input.dob.label" | transloco }}
+            </label>
+            <div>
+              <input type="text" id="day" formControlName="day" hidden />
+              <a
+                mat-button
+                [matMenuTriggerFor]="Daymenu"
+                [ngClass]="{
+                  'is-invalid': formSubmitted && ff['day']['errors']
+                }"
+                class="w-100 text-start"
+              >
+                {{
+                  form.value.day
+                    ? form.value.day
+                    : ("form.input.dob.inputs.day.label" | transloco)
+                }}
+
+                <img src="assets/icons/drop-down.svg" class="icon" />
+              </a>
+            </div>
+            <mat-menu #Daymenu="matMenu">
+              @for(item of [].constructor(31); track null){
+              <button mat-menu-item (click)="setDayValueToForm($index + 1)">
+                {{ $index + 1 }}
+              </button>
+              }
+            </mat-menu>
+          </div>
+
+          @if(formSubmitted && ff['day']['errors']){
+          <div class="errors-area" style="margin-top: 2px !important">
+            @if(ff['day']['errors']['required']){
+            <p class="text-danger">
+              {{ "form.input.dob.inputs.day.validation.required" | transloco }}
+            </p>
+            }
+          </div>
+          }
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label for="Phone"><br /></label>
+            <div>
+              <input type="text" formControlName="month" hidden />
+              <a
+                mat-button
+                [matMenuTriggerFor]="Monthmenu"
+                [ngClass]="{
+                  'is-invalid': formSubmitted && ff['month']['errors']
+                }"
+                class="w-100 text-start"
+              >
+                {{
+                  form.value.month
+                    ? form.value.month
+                    : ("form.input.dob.inputs.month.label" | transloco)
+                }}
+
+                <img
+                  src="assets/icons/drop-down.svg"
+                  class="icon"
+                  style="margin-right: 0px !important"
+                />
+              </a>
+            </div>
+            <mat-menu #Monthmenu="matMenu">
+              @for(item of [].constructor(12); track null){
+              <button mat-menu-item (click)="setMonthValueToForm($index + 1)">
+                {{ $index + 1 }}
+              </button>
+              }
+            </mat-menu>
+          </div>
+
+          @if(formSubmitted && ff['month']['errors']){
+          <div class="errors-area" style="margin-top: 2px !important">
+            @if(ff['month']['errors']['required']){
+            <p class="text-danger">
+              {{
+                "form.input.dob.inputs.month.validation.required" | transloco
+              }}
+            </p>
+            }
+          </div>
+          }
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label for="Phone"><br /></label>
+            <div>
+              <input type="text" class="year" formControlName="year" hidden />
+              <a
+                mat-button
+                [matMenuTriggerFor]="Yearmenu"
+                [ngClass]="{
+                  'is-invalid': formSubmitted && ff['year']['errors']
+                }"
+                class="w-100 text-start"
+              >
+                {{
+                  form.value.year
+                    ? form.value.year
+                    : ("form.input.dob.inputs.year.label" | transloco)
+                }}
+                <img src="assets/icons/drop-down.svg" class="icon" />
+              </a>
+            </div>
+            <mat-menu #Yearmenu="matMenu">
+              @for(year of getYears(); track null){
+              <button mat-menu-item (click)="setYearValueToForm(year)">
+                {{ year }}
+              </button>
+              }
+            </mat-menu>
+          </div>
+
+          @if(formSubmitted && ff['year']['errors']){
+          <div class="errors-area" style="margin-top: 2px !important">
+            @if(ff['year']['errors']['required']){
+            <p class="text-danger">
+              {{ "form.input.dob.inputs.year.validation.required" | transloco }}
+            </p>
+            }
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!--
+        "nationality":{
+          "label" : "Nationality",
+          "validation" : {
+            "required": "Nationality is required"
+          }
+        },
+        "occupation":{
+          "label" : "Occupation",
+          "validation" : {
+            "required": "Occupation is required"
+          }
+        }
+       -->
+
+    <!-- <div class="col-lg-6">
+
+
+        <div class="form-group">
+          <label>
+            {{ 'form.input.occupation.label' | transloco }}
+          </label>
+          <input type="text" class="form-control"
+          placeholder= "{{ 'form.input.occupation.label' | transloco }}"
+           formControlName="Occupation" [ngClass]="{ 'is-invalid': formSubmitted && ff['Occupation']['errors'] }">
+        </div>
+
+
+        @if(formSubmitted && ff['Occupation']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['Occupation']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.occupation.validation.required' | transloco }}
+
+                    </p>
+              }
+             </div>
+         }
+      </div> -->
+  </div>
+
+  <div class="text-end actions">
+    <button
+      class="btn"
+      disabled
+      style="padding: 15px 40px; background-color: #2b2979; color: white"
+      #saveChanges
+    >
+      {{ "form.buttons.next" | transloco }}
+    </button>
+  </div>
+</form>

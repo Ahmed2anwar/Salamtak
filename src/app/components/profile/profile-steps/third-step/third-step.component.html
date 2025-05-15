@@ -1,0 +1,332 @@
+<form  [formGroup]="form" (ngSubmit)="formSubmit()" class="form">
+
+    @if(form.value?.image){
+        <div class="text-center d-block mb-4">
+          <input type="text" hidden formControlName="image">
+          <img src="{{form.value.image}}" onerror="this.src='https://ui-avatars.com/api/?name=';" style="width: 50px;height: 50px; margin: 0 auto;">
+        </div>
+    }
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="number">
+            {{ 'form.input.height.label' | transloco }}
+          </label>
+          <input type="text" formControlName="Height" [ngClass]="{ 'is-invalid': formSubmitted && ff['Height']['errors'] }" class="form-control"
+           placeholder= "{{ 'form.input.height.labell' | transloco }}"
+          >
+        </div>
+
+        @if(formSubmitted && ff['Height']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['Height']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.height.validation.required' | transloco }}
+                    </p>
+              }
+             </div>
+         }
+
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="Weight">
+            {{ 'form.input.weight.label' | transloco }}
+          </label>
+          <input type="text" formControlName="Weight" [ngClass]="{ 'is-invalid': formSubmitted && ff['Weight']['errors'] }"
+          class="form-control" placeholder= "{{ 'form.input.weight.labell' | transloco }}">
+        </div>
+
+        @if(formSubmitted && ff['Weight']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['Weight']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.weight.validation.required' | transloco }}
+                    </p>
+              }
+             </div>
+         }
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="BloodTypeId">
+            {{ 'form.input.blood-group.label' | transloco }}
+          </label>
+
+        </div>
+        <mat-form-field class="w-100 remove-border" appearance="fill" >
+          <mat-select  formControlName="BloodTypeId" [ngClass]="{ 'is-invalid': formSubmitted && ff['BloodTypeId']['errors'] }"
+          [placeholder]=  "('form.input.blood-group.labell' | transloco)">
+
+            @for(item of bloodTypes;track null){
+                <mat-option [value]="item.Id">
+                  {{item.Name}}
+                </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+
+        @if(formSubmitted && ff['BloodTypeId']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['BloodTypeId']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.blood-group.validation.required' | transloco }}
+                    </p>
+              }
+             </div>
+         }
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="Pressure">
+            {{ 'form.input.pressure.label' | transloco }}
+          </label>
+          <input type="text" formControlName="Pressure" [ngClass]="{ 'is-invalid': formSubmitted && ff['Pressure']['errors'] }"
+           class="form-control" placeholder= "{{ 'form.input.pressure.labell' | transloco }}">
+        </div>
+
+        @if(formSubmitted && ff['Pressure']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['Pressure']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.pressure.validation.required' | transloco }}
+                    </p>
+              }
+             </div>
+         }
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="SugarLevel">
+            {{ 'form.input.sugar-level.label' | transloco }}
+          </label>
+          <input type="text" formControlName="SugarLevel" [ngClass]="{ 'is-invalid': formSubmitted && ff['SugarLevel']['errors'] }"
+           class="form-control" placeholder= "{{ 'form.input.sugar-level.labell' | transloco }}">
+        </div>
+
+        @if(formSubmitted && ff['SugarLevel']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['SugarLevel']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.sugar-level.validation.required' | transloco }}
+                    </p>
+              }
+             </div>
+         }
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group ">
+          <label for="MedicalAllergies">
+            {{ 'form.input.medical-allergies.label' | transloco }}
+          </label>
+        </div>
+
+          <mat-form-field class="w-100 remove-border" appearance="fill" >
+            <mat-select multiple [(ngModel)]="selectedMedicineAllergy" formControlName="MedicalAllergies"
+            [ngClass]="{ 'is-invalid': formSubmitted && ff['MedicalAllergies']['errors'] }"
+            [placeholder]=  "('form.input.medical-allergies.labell' | transloco)">
+
+              @for(item of MedicineAllergy;track null){
+                <mat-option [value]="item.Id">
+                  {{item.Name}}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+        @if(formSubmitted && ff['MedicalAllergies']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['MedicalAllergies']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.medical-allergies.validation.required' | transloco }}
+                    </p>
+              }
+             </div>
+         }
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="FoodAllergies">
+            {{ 'form.input.food-allergies.label' | transloco }}
+          </label>
+        </div>
+        <mat-form-field class="w-100 remove-border" appearance="fill" >
+          <mat-select multiple [(ngModel)]="selectedFoodAllergy" formControlName="FoodAllergies"
+           [ngClass]="{ 'is-invalid': formSubmitted && ff['FoodAllergies']['errors'] }"
+           [placeholder]=  "('form.input.food-allergies.labell' | transloco)">
+
+            @for(item of FoodAllergy;track null){
+              <mat-option [value]="item.Id">
+                {{item.Name}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+
+        @if(formSubmitted && ff['FoodAllergies']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['FoodAllergies']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.food-allergies.validation.required' | transloco }}
+                    </p>
+              }
+             </div>
+         }
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="OtherAllergies">
+            {{ 'form.input.other-allergies.label' | transloco }}
+          </label>
+          <input type="text" formControlName="OtherAllergies"
+          [ngClass]="{ 'is-invalid': formSubmitted && ff['OtherAllergies']['errors'] }" class="form-control"
+          placeholder= "{{ 'form.input.other-allergies.labell' | transloco }}">
+        </div>
+
+        @if(formSubmitted && ff['OtherAllergies']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['OtherAllergies']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.other-allergies.validation.required' | transloco }}
+                    </p>
+              }
+             </div>
+         }
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="Prescriptions">
+            {{ 'form.input.prescriptions.label' | transloco }}
+          </label>
+          <input type="text" formControlName="Prescriptions"
+          [ngClass]="{ 'is-invalid': formSubmitted && ff['Prescriptions']['errors'] }" class="form-control"
+          placeholder= "{{ 'form.input.prescriptions.labell' | transloco }}">
+        </div>
+
+        @if(formSubmitted && ff['Prescriptions']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['Prescriptions']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.prescriptions.validation.required' | transloco }}
+                    </p>
+              }
+             </div>
+         }
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="CurrentMedication">
+            {{ 'form.input.current-medication.label' | transloco }}
+          </label>
+          <input type="text" formControlName="CurrentMedication"
+           [ngClass]="{ 'is-invalid': formSubmitted && ff['CurrentMedication']['errors'] }" class="form-control"
+           placeholder= "{{ 'form.input.current-medication.labell' | transloco }}">
+        </div>
+
+        @if(formSubmitted && ff['CurrentMedication']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['CurrentMedication']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.current-medication.validation.required' | transloco }}
+                    </p>
+              }
+             </div>
+         }
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="PastMedication">
+            {{ 'form.input.past-medication.label' | transloco }}
+          </label>
+          <input type="text" formControlName="PastMedication"
+           [ngClass]="{ 'is-invalid': formSubmitted && ff['PastMedication']['errors'] }" class="form-control"
+           placeholder= "{{ 'form.input.past-medication.labell' | transloco }}">
+        </div>
+
+        @if(formSubmitted && ff['PastMedication']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['PastMedication']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.past-medication.validation.required' | transloco }}
+                    </p>
+              }
+             </div>
+         }
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="Injuries">
+            {{ 'form.input.injuries.label' | transloco }}
+          </label>
+          <input type="text" formControlName="Injuries" [ngClass]="{ 'is-invalid': formSubmitted && ff['Injuries']['errors'] }"
+          class="form-control" placeholder= "{{ 'form.input.injuries.labell' | transloco }}">
+        </div>
+
+        @if(formSubmitted && ff['Injuries']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['Injuries']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.injuries.validation.required' | transloco }}
+                    </p>
+              }
+             </div>
+         }
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="ChronicDiseases">
+            {{ 'form.input.chronic-diseases.label' | transloco }}
+          </label>
+          <input type="text" formControlName="ChronicDiseases" [ngClass]="{ 'is-invalid': formSubmitted && ff['ChronicDiseases']['errors'] }"
+          class="form-control" placeholder= "{{ 'form.input.chronic-diseases.labell' | transloco }}">
+        </div>
+
+        @if(formSubmitted && ff['ChronicDiseases']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['ChronicDiseases']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.chronic-diseases.validation.required' | transloco }}
+                    </p>
+              }
+             </div>
+         }
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="Surgeries">
+            {{ 'form.input.surgeries.label' | transloco }}
+          </label>
+          <input type="text" formControlName="Surgeries" [ngClass]="{ 'is-invalid': formSubmitted && ff['Surgeries']['errors'] }"
+          class="form-control" placeholder= "{{ 'form.input.surgeries.labell' | transloco }}">
+        </div>
+
+        @if(formSubmitted && ff['Surgeries']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['Surgeries']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.surgeries.validation.required' | transloco }}
+                    </p>
+              }
+             </div>
+         }
+      </div>
+
+    </div>
+    <div class="text-end actions">
+
+      <!-- <button (click)="previousStep()" type="button" class="btn btn-outline-info">
+        {{ 'form.buttons.previous' | transloco }}
+
+      </button> -->
+      <button class="btn btn-primary"   type="submit" >
+        {{ 'form.buttons.save-changes' | transloco }}
+      </button>
+
+
+    </div>
+
+
+  </form>

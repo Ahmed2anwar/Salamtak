@@ -1,0 +1,149 @@
+<!-- @if(showImage){
+     <div class="image-container" >
+         <img src="assets/main.jpeg" alt="Your Image"  >
+       </div>
+ }@else { -->
+<section class="auth layout_1 login mx-2 my-4 py-3">
+  <div class="container">
+    <div class="text-center mb-5 ">
+      <header>
+        <h2 class="" >
+          {{ "authentication.login.title" | transloco }}
+        </h2>
+      </header>
+      <button
+        type="button"
+        class="btn-close position-absolute m-2"
+        style="cursor: pointer; top: 5px; right: 5px"
+        aria-label="Close"
+        (click)="closeDialog()"
+      ></button>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <!-- Phone Number -->
+      <div class="mb-3">
+        <input
+          placeholder="Phone number"
+          formControlName="phone"
+          name="phone"
+          [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }"
+          type="tel"
+          class="form-control"
+          id="phone"
+        />
+      </div>
+
+      @if(submitted && f['phone'].errors){
+      @if(f['phone']['errors']['required']){
+      <div class="errors-area mt-2">
+        <p class="text-danger">
+          {{ "form.input.phone.validation.required" | transloco }}
+        </p>
+      </div>
+      } @if(f['phone']['errors']['pattern']){
+      <div class="errors-area mt-2">
+        <p class="text-danger">
+          {{ "form.input.phone.validation.pattern" | transloco }}
+        </p>
+      </div>
+      } @if (f['phone']['errors']['maxlength']) {
+      <div class="errors-area mt-2">
+        <p class="text-danger">
+          {{ "form.input.phone.validation.maxlength" | transloco }}
+        </p>
+      </div>
+      } }
+
+      <div class="mb-3 mt-2 password-area">
+        <input
+          placeholder="password"
+          formControlName="password"
+          [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+          type="{{ hidePassword ? 'password' : 'text' }}"
+          class="form-control"
+          id="password"
+        />
+
+        <div class="visibility">
+          <div class="show">
+            @if(hidePassword){
+            <i class="material-icons" (click)="showHidePassword()"
+              >visibility</i
+            >
+            }
+          </div>
+          <div class="hide">
+            @if(!hidePassword){
+            <i class="material-icons active" (click)="showHidePassword()"
+              >visibility_off</i
+            >
+            }
+          </div>
+        </div>
+      </div>
+
+      @if(submitted && f['password'].errors){ @if
+      (f['password']['errors']['required']) {
+      <div class="errors-area mt-2">
+        <p class="text-danger">
+          {{ "form.input.password.validation.required" | transloco }}
+        </p>
+      </div>
+      } }
+      <div class="my-4">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-check">
+              <input
+                formControlName="rememberMe"
+                class="form-check-input"
+                type="checkbox"
+                id="rememberMe"
+              />
+              <label
+                class="form-check-label"
+                style="color: #a5abbf"
+                for="rememberMe"
+              >
+                <!-- Remember me -->
+                {{ "authentication.login.remember-me" | transloco }}
+              </label>
+            </div>
+          </div>
+          <div class="col-6 text-end">
+            <!-- <a [routerLink]="['/' + lang + '/auth/forgot-password']" -->
+            <a
+              (click)="forgetPassword()"
+              href="javascript:void(0)"
+              class="forgot"
+              aria-label="forgot"
+            >
+              <!-- Forgot password? -->
+              {{ "authentication.login.forgot-password" | transloco }}
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary fs-6 w-100">
+          {{ "form.buttons.login" | transloco }}
+        </button>
+        <div class="mt-4 register" style="color: #a5abbf; font-size: 14px">
+          <!-- Don't have an account? -->
+          {{ "authentication.login.dont-have-an-account" | transloco }}
+
+          <a
+          (click)="signUp()"
+            href="javascript:void(0)"
+            class="text-primary"
+            aria-label="sign-up"
+            style="font-size: 14px"
+          >
+            <!-- Create free account -->
+            {{ "authentication.login.create-free-account" | transloco }}
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

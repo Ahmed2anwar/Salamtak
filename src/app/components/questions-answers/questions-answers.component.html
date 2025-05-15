@@ -1,0 +1,56 @@
+<div class="container">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="javascript:void(0)">
+          {{ 'app-name' | transloco }}
+        </a></li>
+
+      <li class="breadcrumb-item"><a href="javascript:void(0)">
+          <!-- Egypt -->
+          {{ 'questions-answers.title' | transloco }}
+        </a></li>
+    </ol>
+  </nav>
+
+  <div class="text-center" style="color: #2B2979;"><h1>{{ 'questions-answers.title' | transloco }}</h1></div>
+
+  <div class="questions-container mt-3 mb-5">
+    <div *ngFor="let question of questions" class="question-card">
+      <div class="card-header">
+        <!-- <h3>{{ question.PatientFirstname }}</h3> -->
+        <h3>{{ question.SpecialityName }}</h3>
+        <span>{{ question.QDate | date:'mediumDate' }}</span>
+      </div>
+      <div class="card-body ml-5">
+        <!-- <p><strong> {{ 'questions-answers.card.speciality' | transloco }}:</strong> {{ question.SpecialityName }}</p> -->
+        <p class="question"><strong>{{ 'questions-answers.card.question' | transloco }}:</strong> <span class="question-description">{{ question.Question }}</span></p>
+        <p><strong>{{ 'questions-answers.card.name' | transloco }}:</strong> {{ question.PatientFirstname }}</p>
+        <p><strong>{{ 'questions-answers.card.age' | transloco }}:</strong> {{ question.Age }}</p>
+        <!-- <p><strong>{{ 'questions-answers.card.gender' | transloco }}:</strong> {{ question.GenderID}}</p> -->
+        <p><strong>{{ 'questions-answers.card.chronic-diseases' | transloco }}:</strong> {{ question.Chronic_disease }}</p>
+        <p><strong>{{ 'questions-answers.card.pre-surgery' | transloco }}:</strong> {{ question.PrevSurgery }}</p>
+      </div>
+      <div class="card-footer ml-5">
+        <!-- <button (click)="toggleAnswers(question.id)">Show Answers</button> -->
+        <button  style="background: #2B2979; color: white;" mat-button (click)="showAnswers(question)">{{ 'questions-answers.card.show-answers' | transloco }}</button>
+       </div>
+    </div>
+  </div>
+
+  <div class="no-results text-center mt-3 mb-5" *ngIf="questions.length == 0 && loading ==  true">
+    <div class="card">
+      <div class="card-body">
+        <img src="assets/icons/no-results.svg" alt="no-results">
+        <h5 class="mt-2">
+          <!-- No Results -->
+          {{ 'pages.No-Results' | transloco }}
+        </h5>
+        <p>
+          <!-- No results found -->
+          {{ 'pages.No-results-found' | transloco }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>

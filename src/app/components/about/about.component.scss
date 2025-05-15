@@ -1,0 +1,275 @@
+section.main {
+  // background-image: url('/assets/background/home.jpg');
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  margin: 10px 0 80px 0;
+  overflow: hidden;
+  @media screen and (max-height: 662px) {
+    height: fit-content;
+  }
+
+  .vector {
+    position: absolute;
+    top: 19%;
+    height: 60px;
+    width: 60px;
+    left: 4%;
+    z-index: 0;
+    animation: animationShapeOne 15s infinite linear;
+    @keyframes animationShapeOne {
+      0% {
+        -webkit-transform: translate(0px, 0px) rotate(0deg);
+      }
+      20% {
+        -webkit-transform: translate(73px, -1px) rotate(36deg);
+      }
+      40% {
+        -webkit-transform: translate(141px, 72px) rotate(72deg);
+      }
+      60% {
+        -webkit-transform: translate(83px, 122px) rotate(108deg);
+      }
+      80% {
+        -webkit-transform: translate(-40px, 72px) rotate(144deg);
+      }
+      100% {
+        -webkit-transform: translate(0px, 0px) rotate(0deg);
+      }
+    }
+  }
+  .content {
+    position: relative;
+    z-index: 1;
+
+    h1 {
+      color: #fff;
+      font-size: 30px;
+      font-weight: 600;
+      text-align: left;
+      margin-bottom: 30px;
+    }
+    h4 {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      padding-bottom: 5px;
+      white-space: nowrap;
+    }
+  }
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  font-family: "Tajawal", sans-serif;
+  direction: ltr; // left-to-left support
+  text-align: left;
+
+  .hero {
+    text-align: center;
+    padding: 50px 20px;
+    background: #2b2979;
+    color: white;
+    border-radius: 10px;
+  }
+
+
+  h2 {
+    color: #2b2979;
+    text-align: left;
+  }
+}
+
+
+h1 p {
+  font-size: 18px;
+}
+.ourservices {
+  border-radius: 0px 0px 10px 10px;
+  position: relative;
+  width: 1092px;
+  left: -2px;
+}
+
+//new test
+.image-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px; /* Adjust as needed */
+  margin: auto;
+  overflow: hidden;
+  border-radius: 10px; /* Rounded corners */
+}
+
+.image-container img {
+  width: 100%;
+  display: block;
+}
+
+.background-curve {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70%;
+  height: 100%;
+
+  z-index: 1;
+  // opacity: 0.8;
+}
+
+.FullDev {
+  background-repeat: no-repeat;
+  z-index: 122;
+  background-size: contain;
+}
+
+.custom-shape {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 50% 100%, 0% 80%);
+  background-color: #2b2979;
+  height: 300px;
+  width: 100%;
+}
+
+.ourservices {
+  border-radius: 0px 0px 10px 10px;
+  position: relative;
+  width: 1159px;
+  left: -31px;
+}
+
+.header-salamtak {
+  text-align: center;
+  font-size: 40px;
+  color: white;
+  position: relative;
+  top: 110px;
+  left: 70px;
+}
+.image-salamtak {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  position: relative;
+  left: 180px;
+  top: 200px;
+}
+
+section.popular-doctors {
+  h2 {
+    font-size: 32px;
+    font-weight: 600;
+    text-align: left;
+  }
+  .card {
+    border: 1px solid #e9eaef;
+    background: white;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 28px 25px -25px;
+    text-align: left;
+    //border: 1px solid transparent;
+    cursor: pointer;
+    //border: 2px solid #2b2979;
+    //border-radius: 10px;
+
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    .title{
+      font-size: 17px;
+      font-weight: 600;
+    }
+    .icon {
+      padding: 16px 0;
+    }
+    .description {
+      padding-right: 16px;
+      font-size: 15px;
+      color: #8088a4;
+
+    }
+    .text-secondary {
+      color: #343435 !important;
+    }
+    img.user {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 6px;
+      border-radius: 50%;
+      transition: 0.5s ease-in-out;
+      border: 3px solid transparent;
+    }
+    .name {
+      color: #222222;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .job {
+      font-size: 13px;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+    .rate {
+      span {
+        color: #2c2979;
+        font-size: 12px;
+        font-weight: 400;
+      }
+    }
+    &:hover {
+      img.user {
+        transform: scale(1.1);
+      }
+    }
+  }
+  a.see-all {
+    padding: 20px 90px;
+  }
+
+  .icon img {
+    width: 50px;
+    height: 50px;
+  }
+
+  @media (max-width: 768px) {
+    .about-container .main .img-doc img{
+      width: 10% !important;
+    }
+
+    // padding-bottom: 0px;
+    // .row.flex-fill {
+    //   justify-content: end;
+    // }
+
+    // .icon {
+    //   padding-bottom: 20px;
+    // }
+    // .title {
+    //   padding-bottom: 9px;
+    //   font-size: 16px;
+    // }
+    // .description {
+    //   font-size: 14px;
+    //   color: black;
+    //   text-align: left;
+    // }
+    // h3.title {
+    //   color: #2b2979;
+    //   margin-bottom: 20px;
+    //   font-size: 18px;
+    //   text-align: center;
+    // }
+  }
+}
+ @media (max-width: 998px) {
+
+     .mobile-img {
+      display: none !important  ;
+    }
+  }

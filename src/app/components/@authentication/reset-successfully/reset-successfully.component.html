@@ -1,0 +1,23 @@
+<section class="auth layout_1 reset-successfully">
+    <div class="container text-center">
+      <img src="assets/large-logo2-color.svg" class="logo">
+      <br>
+      <br>
+      <img src="assets/shapes/reset-successfully-icon.svg" class="successfully-icon">
+      <div class="mt-5">
+        <h1>
+          {{ 'authentication.reset-successfully.title' | transloco }}
+        </h1>
+        <p>
+          {{ 'authentication.reset-successfully.description' | transloco }}
+        </p>
+      </div>
+      <!-- [routerLink]="['/' + lang + '/auth/login']" -->
+      <button type="submit" class="btn btn-primary btn-lg"
+       [routerLink]="['login' | route ]"
+      >
+        {{ 'form.buttons.login' | transloco }}
+      </button>
+    </div>
+  </section>
+  

@@ -1,0 +1,135 @@
+
+<section class="medical-history-2" style="margin: 20px;">
+
+  @if(!showAddButton && EmrDetails) {
+    <section class="form" >
+      <div>
+       <h3>
+         <b>
+           <!-- Diagnosis -->
+           {{'medical-history.Diagnosis' | transloco}}
+         </b>
+       </h3>
+       <div class="form-group">
+         <textarea class="form-control mt-2" rows="3" value="{{EmrDetails.Instructions}}" disabled></textarea>
+     
+     
+     
+       <!-- <button class="btn btn-primary mt-2" (click)="addInstruction(instruction)">
+         Save
+       </button> -->
+       </div>
+     
+     
+      </div>
+     
+     
+       <div>
+         <h3>
+           <b>
+             <!-- Medications -->
+             {{'medical-history.Medications' | transloco}}
+           </b>
+         </h3>
+         <!-- class="descriptions" -->
+       
+
+
+         @if(EmrDetails && EmrDetails.PatientEmrdetails.length > 0) {
+          @for(item of EmrDetails.PatientEmrdetails; track null) {
+            <div class="mb-4">
+              <div class="form-group mb-2">
+                <!-- Delete.svg -->
+                <div class="d-flex align-content-center">
+                  <input type="text" class="form-control" value="{{item.Title}}" disabled>
+                </div>
+                <textarea class="form-control mt-2" rows="3" value="{{item.Description}}" disabled></textarea>
+              </div>
+            </div>
+          }
+        }
+        
+     
+     
+         <!-- <div>
+           <button
+           class="btn btn-primary mt-3 addRx"
+           (click)="addRx(rxTitle, rxDescription)"
+           >
+           Save
+         </button>
+         </div> -->
+       </div>
+     
+       <div class="row mt-4">
+         <!-- col-lg-6 -->
+          @if(EmrDetails && EmrDetails['PatientEmrdocuments'].length > 0){
+           <div class="col-lg-6"
+     
+           >
+             <h3 class="mt-0">
+               <!-- Attachments -->
+               {{'medical-history.Attachments' | transloco}}
+             </h3>
+             <div class="card files"
+             >
+               <div class="card-body">
+                 <ul class="p-0 list-unstyled mb-0">
+                   @for(file of EmrDetails['PatientEmrdocuments'];track null) {
+                     <li>
+                       <div class="row align-items-center">
+                         <div class="col-9">
+                           <img src="{{storageUrl}}/{{file.DocumentUrl}}" alt="">
+                         </div>
+                         <div class="col-2">
+                           <a href="{{storageUrl}}{{file.DocumentUrl}}" target="_blank" download="">
+                           </a>
+                         </div>
+                       </div>
+                     </li>
+                   }
+   
+                   
+                 </ul>
+               </div>
+             </div>
+          
+           </div>
+          }
+      
+       
+         
+   
+   
+         
+     
+     
+       </div>
+     
+     
+     
+       </section>
+  } @else {
+    <div class="text-center">
+      <br>
+      <h2>
+        <b>
+          Sorry!
+          </b>
+      </h2>
+      <p>
+        No Medical History
+
+      </p>
+      <br>
+      
+    </div>
+  }
+   
+  </section>
+      <!-- <div class="input-group mb-2" >
+        <input type="text" class="form-control" placeholder="Write of Instructions" [(ngModel)]="instruction" (keyup.enter)="addInstruction(instruction)">
+        <button class="btn btn-danger" (click)="addInstruction(instruction)" [attr.disabled]="!instruction || instruction.length < 1 ? true : null" >-</button>
+       </div> -->
+  
+  

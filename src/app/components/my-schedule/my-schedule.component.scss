@@ -1,0 +1,137 @@
+section.my-schedule{
+    background-color: #F3F3FF;
+    padding: 50px 0 ;
+
+    mat-tab-group{
+      .mat-mdc-tab.mdc-tab{
+        height: 59px;
+      }
+      // .mat-mdc-tab-body-content{
+      //   overflow: scroll
+      // }
+      .mdc-tab{
+        font-size: 17px !important;
+        font-weight: 600 !important;
+        font-family: 'Poppins', sans-serif;
+        border-bottom: 3px solid #2B29790D;
+        span{
+
+        }
+      }
+      .mdc-tab__text-label{
+        font-size: 17px !important;
+        font-weight: 600 !important;
+        // color: #2B2979 !important;
+        font-family: 'Poppins', sans-serif;
+
+      }
+      .mdc-tab--active{
+        border-bottom: 3px solid #2B2979 !important;
+        background: #fff;
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0px 4px 4px rgba(43, 41, 121, 0.1);
+        border-radius: 6px 6px 0px 0px;
+        .mdc-tab__text-label{
+          color: #2B2979 !important;
+        }
+        .mdc-tab-indicator{
+          top: 2px;
+        }
+      }
+    }
+    .head{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0;
+      margin-top: 30px;
+      width: 100%;
+      // in mobile
+      @media (max-width: 767px){
+        flex-direction: column;
+        align-items: flex-start;
+        h5{
+          margin-bottom: 10px !important;
+        }
+        a{
+          margin: 0 !important;
+          margin-right: 20px !important;
+        }
+      }
+      h5{
+        font-size: 20px;
+        font-weight: 500;
+        color: #2B2979;
+        margin-bottom: 0;
+      }
+      .filter{
+        display: flex;
+        //
+        a{
+          display: block;
+          background: #E8E8FD;
+          border-radius: 4px;
+          color: #2B2979;
+          padding: 10px 20px;
+          text-decoration: none;
+          margin-left: 20px;
+          font-size: 14px;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          img{
+            width: 20px;
+            margin-right: 5px;
+            transition: all 0.3s ease;
+          }
+          &:hover{
+            background: #2B2979;
+            color: #fff;
+            img{
+              filter: brightness(0) invert(1);
+            }
+          }
+        }
+      }
+    }
+    section.main-card-app{
+      .card{
+        .user{
+          .info{
+            .dots{
+              position: absolute;
+              right: 0px;
+              top: 8px;
+              width: 30px;
+              height: 30px;
+              text-align: center;
+
+            }
+          }
+        }
+      }
+    }
+  }
+  .cancel-appointment-swal-modal{
+    .swal2-title{
+      font-size: 20px;
+      font-weight: 600;
+      color: #000000;
+      margin-top: 30px;
+
+    }
+    button{
+      border-radius: 8px !important;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 20px;
+    }
+    .swal2-confirm{
+      color: #CB544B;
+      background: transparent;
+      border: 1px solid #CB544B;
+      &:hover{
+        background: #CB544B;
+        color: #fff;
+      }
+    }
+  }

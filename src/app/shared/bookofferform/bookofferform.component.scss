@@ -1,0 +1,271 @@
+.Red
+{
+  background-color: red;
+}
+.card.booking{
+  .card-header{
+    text-align: center;
+    background: #2B2979;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 20px;
+  }
+  .card-body{
+    .info{
+
+      .d-flex{
+        margin: 10px 0;
+        align-items: center;
+        img{
+          margin-right: 10px;
+        }
+        p{
+          font-weight: 500;
+          font-size: 13px;
+          color: #8F949F;
+          margin-bottom: 0;
+          display: block;
+          width: 100%;
+          span{
+            color: #000;
+            float: right;
+            margin-left: 20px;
+          }
+        }
+      }
+      .documentation{
+        // height: 0;
+        overflow: hidden;
+        &.exist-clinic{
+
+        }
+      }
+    }
+    hr{
+      opacity: 0.1;
+    }
+.Red
+{
+  background-color: red !important;
+}
+  .radios-container{
+      display: flex;
+      justify-content: start;
+      flex-direction: row;
+      flex-wrap: wrap;
+      & >div{
+        margin-left: 15px;
+      }
+  }
+
+
+
+
+    .dates-slider{
+      input[type=radio] + label{
+          background: none !important;
+          width: 100%;
+          margin-top: 20px;
+          border-radius: 10px;
+
+          .name{
+            font-weight: 400;
+            font-size: 14px;
+            color: #8F949F;
+            margin-bottom: 20px;
+            display: block;
+          }
+          .date{
+            display: block;
+            color: #000;
+            font-size: 18px;
+            font-weight: 5s00;
+          }
+        }
+        input[type=radio]:checked + label{
+          background: #2B2979 !important;
+          box-shadow: 0px 6px 16px rgba(43, 41, 121, 0.08);
+          span{
+            color: #fff !important;
+          }
+
+        }
+
+    }
+    label{
+      &.is-invalid{
+        background: #CB544B;
+        box-shadow: none;
+        color: #fff !important;
+
+      }
+
+    }
+    .errors-area{
+      p{
+        background: #CB544B;
+      color: #fff !important;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 500;
+      display: block;
+      width: 100%;
+      position: relative;
+      // add arrow to top in after
+      &:after{
+        content: '🢑';
+        position: absolute;
+        left: 9px;
+        top: -70px;
+        font-size: 56px;
+        color: #CB544B;
+      }
+      }
+
+    }
+    button.book{
+      background: #00D2CB;
+      border: none;
+      color: #fff;
+      font-weight: 500;
+      padding: 20px;
+      border-radius: 4px;
+      margin-top: 20px;
+      width: 80%;
+      font-size: 16px;
+      transition: .3s ease-in-out;
+      &:hover{
+        background: #00B5B0;
+      }
+    }
+    button.cancel{
+      background: transparent;
+      border: 1px solid #686868;
+      color: rgba(4, 4, 4, 0.6) !important;
+      font-weight: 500;
+      padding: 20px;
+      border-radius: 4px;
+      margin-top: 20px;
+      font-size: 16px;
+      transition: .3s ease-in-out;
+      &:hover{
+        background: #686868;
+        color: #fff !important;
+      }
+    }
+    .second-form{
+      .form{
+        .parent{
+          position: relative;
+          img{
+            position: absolute;
+            left: 6px;
+            top: 36%;
+            transform: translateY(-50%);
+          }
+          input{
+            border: none;
+            border-bottom: 1px solid #f0e8e8;
+            padding: 10px 0;
+            width: 100%;
+            font-size: 14px;
+            color: #00000066;
+            margin-bottom: 20px;
+            padding-left: 40px;
+            &::placeholder{
+              color: #8F949F;
+            }
+          }
+        }
+      }
+    }
+  }
+  // in mobile
+  @media (max-width: 767px) {
+    margin-top: 40px;
+  }
+}
+/* app.component.css */
+
+.offer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.offer-card {
+  width: 95%; /* Adjust the width as needed */
+  margin: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.offer-card:hover {
+  transform: scale(1.05);
+}
+
+.image-container {
+  position: relative;
+}
+
+.offer-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.offer-discount {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #d9534f; /* Red color for discount label */
+  color: #fff;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.offer-details {
+  padding: 15px;
+}
+
+.offer-details h2 {
+  color: #007bff;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.price-before {
+  color: #777;
+  text-decoration: line-through;
+}
+
+.price-after {
+  color: #28a745; /* Green color for price information */
+}
+
+.btn-book-now {
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-book-now:hover {
+  background-color: #0056b3;
+}
+.hidden {
+  display: none;
+}

@@ -1,0 +1,303 @@
+<section class="contact-us">
+  <div class="container">
+    <nav
+      class="breadcrumb mt-5 mb-1"
+      style="--bs-breadcrumb-divider: '>'"
+      aria-label="breadcrumb"
+    >
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0)">
+            <!-- Home -->
+            {{ "app-name" | transloco }}
+          </a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0)">
+            {{ "contact-us.breadcrumb.contact-us" | transloco }}
+          </a>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="text-center mb-5 head">
+      <h2 class="text-primary-dark fw-bold fs-1">
+        <!-- Contact us -->
+        {{ "contact-us.title" | transloco }}
+      </h2>
+
+    </div>
+
+    <div
+      class="row bg-white"
+      style="border-radius: 10px; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1)"
+    >
+      <div class="col-lg-5 d-flex justify-content-between flex-column rounded-3" style="background-color: #2b2979">
+        <div class="pt-4 pb-2 px-4 contact-info">
+          <h2 class="text-white pt-3">Contact Information</h2>
+
+           <p
+        class="text-white mt-3" style="font-size: 16px"
+        [innerHTML]="'contact-us.description' | transloco"
+      ></p>
+        </div>
+        <div>
+          <div class="p-4 pt-0" style="background-color: #2b2979">
+            <div class="d-flex" style="background-color: #2b2979">
+              <i class="fa-solid fa-location-dot pt-2 pe-4 fs-5 text-white"></i>
+              <a href="" class="text-whhite">
+                <a
+                  href=""
+                  style="font-size: 17px"
+                  class="text-white text-decoration-none"
+                >
+                  Villa 14 - 6th Touristic District. 1st Floor. 6th october
+                  City, Giza, Egypt
+                </a>
+              </a>
+            </div>
+
+            <div
+              class="pt-5 d-flex align-items-center"
+              style="background-color: #2b2979"
+            >
+              <i class="fa-regular fa-envelope pe-3 fs-4 text-white"></i>
+              <a
+                href="mailto:helpcenter@mail.com"
+                class="text-white text-decoration-none"
+                style="font-size: 17px"
+              >
+                customercare&#64;salamtakgroup.com
+              </a>
+            </div>
+
+            <div
+              class="pt-5 d-flex align-items-center"
+              style="background-color: #2b2979"
+            >
+              <i class="fa-solid fa-phone pe-4 fs-5 text-white"></i>
+              <a href="" class="text-whhite">
+                <a
+                  href="tel:{{ phone }}"
+                  class="text-white text-decoration-none"
+                  style="font-size: 19px"
+                >
+                  <!-- <i class="fa fa-phone"></i> -->
+                  {{ phone }}
+                </a>
+              </a>
+            </div>
+          </div>
+
+        </div>
+        <div class="shareArticle pb-4 ps-4">
+          <div class="shareSocial ">
+            <ul class="socialList ">
+              <li>
+                <a href="#" aria-label="Share on Facebook"
+                  ><i class="fa-brands fa-facebook-f"></i
+                ></a>
+              </li>
+              <li>
+                <a href="#" aria-label="Share on Twitter"
+                  ><i class="fa-brands fa-twitter"></i
+                ></a>
+              </li>
+              <li>
+                <a href="#" aria-label="Share on Pinterest"
+                  ><i class="fa-brands fa-pinterest-p"></i
+                ></a>
+              </li>
+              <li>
+                <a href="#" aria-label="Share via Email"
+                  ><i class="fa-solid fa-envelope"></i
+                ></a>
+              </li>
+              <li>
+                <a href="#" aria-label="Share on WhatsApp"
+                  ><i class="fa-brands fa-whatsapp"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <section class="form auth">
+          <form [formGroup]="form" (ngSubmit)="submit()">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="name">
+                    <!-- Name -->
+                    {{ "form.input.name.label" | transloco }}
+                    <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    [placeholder]="'form.input.name.placeholder' | transloco"
+                    class="form-control"
+                    formControlName="name"
+                    [ngClass]="{
+                      'is-invalid': submitted && f['name']['errors']
+                    }"
+                  />
+                </div>
+                @if(submitted && f['name']['errors']) {
+                <div class="errors-area mt-2">
+                  @if(f['name']['errors']['required']) {
+                  <p class="text-danger">
+                    <!-- Name is required. -->
+                    {{ "form.input.name.validation.required" | transloco }}
+                  </p>
+                  }
+                </div>
+                }
+              </div>
+              <div class="col-lg-6">
+                <!-- Email -->
+                <div class="form-group">
+                  <label for="email">
+                    <!-- Email -->
+                    {{ "form.input.email.label" | transloco }}
+                    <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="email"
+                    [placeholder]="'form.input.email.placeholder' | transloco"
+                    class="form-control"
+                    formControlName="email"
+                    [ngClass]="{
+                      'is-invalid': submitted && f['email']['errors']
+                    }"
+                  />
+                </div>
+                @if(submitted && f['email']['errors']) {
+                <div class="errors-area mt-2">
+                  @if(f['email']['errors']['required']) {
+                  <p class="text-danger">
+                    <!-- Email is required. -->
+                    {{ "form.input.email.validation.required" | transloco }}
+                  </p>
+                  } @if(f['email']['errors']['email']) {
+                  <p class="text-danger">
+                    <!-- Email is invalid. -->
+                    {{ "form.input.email.validation.pattern" | transloco }}
+                  </p>
+                  }
+                </div>
+                }
+              </div>
+              <div class="col-lg-6">
+                <!-- Phone -->
+                <div style="position: relative">
+                  <!-- <span class="placeholder-phone">
+                    Your phone number
+                  </span> -->
+                  <label class="form-label m-0">
+                    <!-- Phone -->
+                    {{ "form.input.phone.label" | transloco }}
+                    <span class="text-danger">*</span>
+                  </label>
+                  <ngx-mat-intl-tel-input
+                    #phone_number
+                    [cssClass]="'ngx-mat-intl-tel-input-contact-us'"
+                    [enablePlaceholder]="false"
+                    [placeholder]="'form.input.phone.placeholder' | transloco"
+                    [enableSearch]="true"
+                    searchPlaceholder="Search..."
+                    [onlyCountries]="[CountryISO.Egypt]"
+                    name="Phone"
+                    formControlName="Phone"
+                  >
+                    x
+                  </ngx-mat-intl-tel-input>
+                  @if(submitted && f['Phone'].errors) {
+                  <div class="errors-area" style="margin-top: 4px !important">
+                    @if(f['Phone']['errors']['required']) {
+                    <p class="text-danger">
+                      <!-- Phone is required. -->
+                      {{ "form.input.phone.validation.required" | transloco }}
+                    </p>
+                    } @if(f['Phone']['errors']['validatePhoneNumber']) {
+                    <p class="text-danger">
+                      <!-- Phone is invalid format please check it. -->
+                      {{ "form.input.phone.validation.pattern" | transloco }}
+                    </p>
+                    }
+                  </div>
+                  }
+                </div>
+              </div>
+              <!--  -->
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="name">
+                    <!-- Subject -->
+                    {{ "form.input.subject.label" | transloco }}
+                    <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    [placeholder]="'form.input.subject.placeholder' | transloco"
+                    class="form-control"
+                    formControlName="subject"
+                    [ngClass]="{
+                      'is-invalid': submitted && f['subject']['errors']
+                    }"
+                  />
+                </div>
+                @if(submitted && f['subject']['errors']) {
+                <div class="errors-area mt-2">
+                  @if(f['subject']['errors']['required']) {
+                  <p class="text-danger">
+                    <!-- subject is required. -->
+                    {{ "form.input.subject.validation.required" | transloco }}
+                  </p>
+                  }
+                </div>
+                }
+              </div>
+
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="message">
+                    <!-- Message -->
+                    {{ "form.input.message.label" | transloco }}
+                    <span class="text-danger">*</span></label
+                  >
+                  <textarea
+                    rows="4"
+                    class="form-control"
+                    [placeholder]="'form.input.message.placeholder' | transloco"
+                    formControlName="message"
+                    [ngClass]="{
+                      'is-invalid': submitted && f['message']['errors']
+                    }"
+                  ></textarea>
+                </div>
+                @if(submitted && f['message']['errors']) {
+                <div class="errors-area mt-2">
+                  @if(f['message']['errors']['required']) {
+                  <p class="text-danger">
+                    <!-- Message is required. -->
+                    {{ "form.input.message.validation.required" | transloco }}
+                  </p>
+                  }
+                </div>
+                }
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary mt-3 text-white">
+                <!-- Send -->
+                {{ "form.buttons.send" | transloco }}
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,27 @@
+section.reset-successfully{
+    .logo{
+  
+      @media (max-width: 440px){
+        width: 100%;
+      }
+    }
+    .successfully-icon{
+      width: 370px;
+      margin: 0 auto;
+      display: block;
+      margin-bottom: 20px;
+      // in mobile
+      @media (max-width: 1200px){
+        width: 100%;
+      }
+    }
+    h1{
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      // font-family: 'AvenirLTStd-Black', 'Poppins', sans-serif;
+    }
+    p{
+      color: #B7B7B7;
+    }
+  }
+  

@@ -1,0 +1,238 @@
+<footer>
+  <div class="container">
+    <div class="row main-row">
+      <div class="col-lg-4 about">
+        <a
+          [routerLink]="['/' + translocoService.getActiveLang() + '/home']"
+          class="navbar-brand"
+          href="javascript:void(0)"
+          aria-label="navbar-brand"
+        >
+          <img src="assets/Salamtak.png" alt="logo" class="logo logo-light" />
+        </a>
+        <p class="pt-3" style="font-weight: 400; font-size: 16px; color: white">
+          {{ "footer.description" | transloco }}
+        </p>
+        <div class="d-flex align-content-between">
+          <a
+            href="https://apps.apple.com/eg/app/salamtak-%D8%B3%D9%84%D8%A7%D9%85%D8%AA%D9%83/id6445848575"
+            target="_blank"
+          >
+            <img
+              class="apps-image"
+              src="/assets/background/app-store.png"
+              alt="Download from Apple Store"
+              style="margin-bottom: 15px"
+            />
+            <br />
+          </a>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.korashiGroup.salamtakPatient&pli=1"
+            target="_blank"
+          >
+            <img
+              class="apps-image"
+              src="/assets/background/google-play.png"
+              alt="Download from Google Play"
+            />
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-8 links">
+        <div>
+          <div class="row g-4" style="font-size: 13px">
+            <div class="col-lg-3 col-sm-6">
+              <h4 class="title">
+                <!-- Landing -->
+                {{ "footer.columns.landing.title" | transloco }}
+              </h4>
+              <ul>
+                <li>
+                  <a
+                    href="javascript:void(0);"
+                    [routerLink]="['hospitals' | route]"
+                    aria-label="hospitals"
+                  >
+                    <!-- Hospitals -->
+                    {{ "footer.columns.landing.links.hospitals" | transloco }}
+                  </a>
+                </li>
+                <li>
+                  <a (click)="gotoDoctorWebsi()" aria-label="hospitals">
+                    <!-- Hospitals -->
+                    {{ "footer.columns.landing.links.insurance" | transloco }}
+                  </a>
+                </li>
+                <li>
+                  <!-- [routerLink]="['/' + translocoService.getActiveLang() + '/pharmacies']" -->
+                  <a
+                    href="javascript:void(0);"
+                    [routerLink]="['pharmacies' | route]"
+                    aria-label="consults"
+                  >
+                    <!-- Online Consults -->
+                    {{ "footer.columns.landing.links.pharmacies" | transloco }}
+                  </a>
+                </li>
+                <li>
+                  <!-- [routerLink]="['/' + translocoService.getActiveLang() + '/find-a-doctor']" -->
+                  <a
+                    href="javascript:void(0);"
+                    [routerLink]="['find-a-doctor' | route]"
+                    aria-label="booking"
+                  >
+                    <!-- Booking -->
+                    {{ "footer.columns.landing.links.booking" | transloco }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <!--About -->
+            <div class="col-lg-3 col-sm-6">
+              <h4 class="title">
+                <!-- About -->
+                {{ "footer.columns.site-map.links.title" | transloco }}
+              </h4>
+              <ul>
+                <li>
+                  <a
+                    [routerLink]="[
+                      '/' + translocoService.getActiveLang() + '/about'
+                    ]"
+                    routerLinkActive="active"
+                    (click)="collapse()"
+                    class="nav-link"
+                    href="javascript:void(0)"
+                    aria-label="navbar"
+                  >
+                    {{ "footer.columns.site-map.links.about" | transloco }}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    [routerLink]=""
+                    routerLinkActive="active"
+                    (click)="collapse()"
+                    class="nav-link"
+                    href="javascript:void(0)"
+                    aria-label="navbar"
+                  >
+                    {{ "footer.columns.site-map.links.Our-Team" | transloco }}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    [routerLink]=""
+                    routerLinkActive="active"
+                    (click)="collapse()"
+                    class="nav-link"
+                    href="javascript:void(0)"
+                    aria-label="navbar"
+                  >
+                    {{ "footer.columns.site-map.links.Careers" | transloco }}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    [routerLink]="[
+                      '/' + translocoService.getActiveLang() + '/SalamtakGate'
+                    ]"
+                    routerLinkActive="active"
+                    (click)="collapse()"
+                    class="nav-link"
+                    href="javascript:void(0)"
+                    aria-label="navbar"
+                  >
+                    {{ "footer.columns.site-map.links.Press" | transloco }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-3 col-sm-6">
+              <h4 class="title">
+                <!-- Utility -->
+                {{ "footer.columns.utility.title" | transloco }}
+              </h4>
+              <ul>
+                <li>
+                  <a
+                    [routerLink]="['questionList' | route]"
+                    href="javascript:void(0)"
+                    aria-label="faq"
+                  >
+                    <!-- FAQ -->
+                    {{ "footer.columns.utility.links.faq" | transloco }}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    [routerLink]="['termsOf' | route]"
+                    href="javascript:void(0)"
+                    target="_blank"
+                    aria-label="terms"
+                  >
+                    <!-- Terms & Conditions -->
+                    {{
+                      "footer.columns.utility.links.terms-conditions"
+                        | transloco
+                    }}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    [routerLink]="['privacyPolicy' | route]"
+                    href="javascript:void(0)"
+                    target="_blank"
+                    aria-label="terms"
+                  >
+                    {{
+                      "footer.columns.utility.links.Privacy-Policy" | transloco
+                    }}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    [routerLink]="['doctorPrivacy' | route]"
+                    href="javascript:void(0)"
+                    target="_blank"
+                    aria-label="terms"
+                  >
+                    {{
+                      "footer.columns.utility.links.Doctors-Privacy-Policy"
+                        | transloco
+                    }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-3 col-sm-6">
+              <h4 class="title">
+                <!-- Landing -->
+                {{ "footer.columns.Are you A Doctor.title" | transloco }}
+              </h4>
+              <ul>
+                <li>
+                  <a
+                    (click)="gotoDoctorWebsite()"
+                    href="https://www.salamtak.com/doctor-registration"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="Join Salamtak as a doctor"
+                  >
+                    {{
+                      "footer.columns.Are you A Doctor.links.join-Salamtak"
+                        | transloco
+                    }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

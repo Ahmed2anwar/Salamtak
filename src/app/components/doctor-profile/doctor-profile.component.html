@@ -1,0 +1,567 @@
+@if(!doctor){
+<section>
+  <div class="container">
+    <div class="row pt-4">
+      <div class="col-lg-7">
+        @for(item of [].constructor(2); track null){
+        <div class="ph-item">
+          <div class="ph-col-12">
+            <div class="ph-picture"></div>
+            <div class="ph-row">
+              <div class="ph-col-6 big"></div>
+              <div class="ph-col-4 empty big"></div>
+              <div class="ph-col-2 big"></div>
+              <div class="ph-col-4"></div>
+              <div class="ph-col-8 empty"></div>
+              <div class="ph-col-6"></div>
+              <div class="ph-col-6 empty"></div>
+              <div class="ph-col-12"></div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+      <div class="col-lg-5">
+        <div class="ph-item">
+          <div class="ph-col-12">
+            <div class="ph-picture"></div>
+            <div class="ph-row">
+              <div class="ph-col-6 big"></div>
+              <div class="ph-col-4 empty big"></div>
+              <div class="ph-col-2 big"></div>
+              <div class="ph-col-4"></div>
+              <div class="ph-col-8 empty"></div>
+              <div class="ph-col-6"></div>
+              <div class="ph-col-6 empty"></div>
+              <div class="ph-col-12"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+} @if(doctor){
+<section class="pt-5 mt-5">
+  <div class="container">
+    <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0)">
+            <!-- Home -->
+            {{ "app-name" | transloco }}
+          </a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0)">
+            <!-- Dr. -->
+            {{ "find-a-doctor.doctors-list.cards.dr" | transloco }}
+            {{ this.getDocFullName(this.doctor) }}
+            <!-- {{doctor['FirstName']}} {{doctor['MiddelName']}} {{doctor['LastName']}} -->
+          </a>
+        </li>
+      </ol>
+    </nav>
+
+
+
+    <div class="row">
+
+
+      <div class="col-lg-7">
+        <div class="card mb-4">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="{{ storageUrl }}/{{ doctor['Image'] }}" class="img-fluid border-2" alt="" />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="name fw-bold">
+                  {{ "find-a-doctor.doctors-list.cards.dr" | transloco }}
+                  {{ this.getDocFullName(this.doctor) }}
+                </h5>
+
+                <p class="m-0 pb-2">
+                  {{ doctor["SpecialistName"] }} <span class="text-muted"> ({{doctor["SeniorityLevelName"]}})</span>
+                </p>
+                <div class="rate pb-3">
+                  <img src="assets/icons/Star2.svg" />
+                  <img src="assets/icons/Star2.svg" />
+                  <img src="assets/icons/Star2.svg" />
+                  <img src="assets/icons/Star2.svg" />
+                  <img src="assets/icons/Star2.svg" />
+                </div>
+
+                <h6 class="pb-2">Number: <span style="color: #8088A4; font-weight: normal;" > {{doctor["Phone"]}} </span></h6>
+                <h6>
+                  {{
+                  "find-a-doctor.doctors-list.cards.sub-specialization"
+                  | transloco
+                  }} :
+                  <span><a style="color: #8088A4; font-weight: normal; text-decoration: none;"
+                      href="javascript:void(0);" [routerLink]="['find-a-doctor' | route]" [queryParams]="{
+                      SeniortyLevelId: doctor['SeniorityLevelId']
+                    }">
+                      {{ doctor["SeniorityLevelName"] }}
+                    </a>
+
+                    @for( subSpecial of doctor.SubSpecialistName ;let last =
+                    $last; track null){
+
+                    <a href="{{
+                      routesPipe.transform('find-a-doctor-by-sub-specialty')
+                    }}/{{ this.replaceSpaceWithDash(subSpecial) }}" class="text-decoration-none " (click)="
+                      goToSubSpecial(
+                        subSpecial,
+                        doctor['DoctorSubSpecialist'][$index],
+                        doctor.SpecialistName
+                      )
+                    " style="cursor: pointer ; font-weight: normal; font-size: 14px; color: #8088A4;"
+                      title="{{ subSpecial }}">
+                      <b class="fw-normal">{{ subSpecial }}</b>
+                    </a>
+                    {{ last ? "" : ", " }}
+                    }</span>
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="card info">
+          <div class="card-body">
+            <div class="user p-2 pt-2 pb-4" style="border-bottom: 1px solid #E9EAEF">
+              <div class="image">
+                <img src="{{ storageUrl }}/{{ doctor['Image'] }}" alt="" />
+              </div>
+              <div class="info w-100">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <h5 class="name">
+                      {{ "find-a-doctor.doctors-list.cards.dr" | transloco }}
+                      {{ this.getDocFullName(this.doctor) }}
+                    </h5>
+
+                    <p class="job">
+                      {{ doctor["SpecialistName"] }}
+                    </p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row g-3 justify-content-center text-center">
+            <div class="col-md-6 col-sm-12 ps-4">
+              <div>
+                <img src="assets/icons/subcat.svg" class="py-2" alt="icon" />
+                <h5>
+                  {{
+                  "find-a-doctor.doctors-list.cards.sub-specialization"
+                  | transloco
+                  }}
+                </h5>
+                <p class="hyperlinks">
+                  <a style="color: #8088A4;" href="javascript:void(0);" [routerLink]="['find-a-doctor' | route]"
+                    [queryParams]="{
+                      SeniortyLevelId: doctor['SeniorityLevelId']
+                    }">
+                    {{ doctor["SeniorityLevelName"] }}
+                  </a>
+
+                  @for( subSpecial of doctor.SubSpecialistName ;let last =
+                  $last; track null){
+
+                  <a href="{{
+                      routesPipe.transform('find-a-doctor-by-sub-specialty')
+                    }}/{{ this.replaceSpaceWithDash(subSpecial) }}" class="text-decoration-none " (click)="
+                      goToSubSpecial(
+                        subSpecial,
+                        doctor['DoctorSubSpecialist'][$index],
+                        doctor.SpecialistName
+                      )
+                    " style="cursor: pointer ; font-size: 14px; color: #8088A4;" title="{{ subSpecial }}">
+                    <b>{{ subSpecial }}</b>
+                  </a>
+                  {{ last ? "" : ", " }}
+                  }
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 pe-4">
+              <div>
+                <img src="assets/icons/money.png" class="pt-2 pb-1" alt="icon" />
+                <h5>
+                  {{ "find-a-doctor.doctors-list.cards.fees" | transloco }}
+                </h5>
+                <p class="text-muted" style="font-size: 14px; color: #8088A4;">
+                  {{ doctor.doctorFees }} LE
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        @if(doctor['DoctorInfo']){
+
+        <div class="card about my-4">
+          <div class="card-body pt-3">
+            <h5 class="name fw-bold py-2 px-2">
+              {{ "doctor-profile.about-doctor" | transloco }}
+            </h5>
+            <p class="time px-2">
+              {{ doctor["DoctorInfo"] }}
+            </p>
+          </div>
+        </div>
+        }
+
+
+        <div class="card clinic mt-4 mb-3">
+          <div class="card-body">
+            <h4 class="title">
+              {{ "doctor-profile.doctor-clinics" | transloco }}
+            </h4>
+
+            @for(clinic of doctor['clinicDtos']; track null ) {
+
+            <div class="clinic-container" [ngClass]="{ isFirst: $first }">
+              <div class="clinic-data d-flex">
+                <div class="image">
+                  <img src="{{ storageUrl }}{{ clinic.Logo }}" width="65" height="65" priority alt="clinic logo"
+                    class="rounded-circle" (error)="onClinicImgError($event, clinic['Name'])" />
+                </div>
+                <div class="">
+                  <h5>
+                    {{ clinic["Name"] }}
+                  </h5>
+                  <p>
+                    {{ "doctor-profile.you-can-book-now-at" | transloco }}
+                    {{ clinic["Name"] }}
+                  </p>
+                </div>
+              </div>
+
+              <div class="rows">
+                <div class="row">
+                  <div class="col-6">
+                    <img src="assets/icons/Address.svg" alt="" />
+                    <span>
+                      {{ "doctor-profile.address" | transloco }}
+                    </span>
+                  </div>
+                  <div class="col-6 answer">
+                    <span>
+                      {{ clinic["AreaName"] }} ({{ clinic["SubAreaName"] }})
+                    </span>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-6">
+                    <img src="assets/icons/Fees.svg" alt="" />
+                    <span>
+                      {{ "doctor-profile.service" | transloco }}
+                    </span>
+                  </div>
+                  <div class="col-6 answer">
+                    <span>
+                      {{ clinic["Services"] }}
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <img src="assets/icons/Fees.svg" alt="" />
+                    <span>
+                      {{ "doctor-profile.features" | transloco }}
+                    </span>
+                  </div>
+                  <div class="col-6 answer">
+                    <span>
+                      {{ clinic["Features"] }}
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <img src="assets/icons/Fees.svg" alt="" />
+                    <span>
+                      {{ "doctor-profile.ins" | transloco }}
+                    </span>
+                  </div>
+                  <div class="col-6 answer">
+                    <span>
+                      {{ clinic["Insurance"] }}
+                    </span>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="">
+
+                    @if(clinic.Gallary && clinic.Gallary.length > 0) {
+                    <h5 class="clinic-card-title">
+                      {{ "doctor-profile.Gallary" | transloco }}
+                    </h5>
+                    <div class="clinic-images">
+                      @for(image of clinic.Gallary; track null) {
+                      <img [src]="storageUrl + '/' + image" alt="Clinic Image" />
+                      }
+                    </div>
+                    } @if(!clinic.Gallary || clinic.Gallary.length === 0) {
+
+                    }
+                  </div>
+                </div>
+
+                  @if(clinic.videos && clinic.videos.length > 0) {
+                   <div style="margin-bottom: 10px">
+                    <h5 style="margin: 0">
+                      {{ "doctor-profile.video" | transloco }}
+                    </h5>
+                  </div>
+                  }
+
+
+                  @if(!clinic.Videos || clinic.Videos.length === 0) {
+
+                  }
+
+              </div>
+            </div>
+            }
+          </div>
+        </div>
+
+        <!-- <div>
+          <h5 class="fw-bold pb-3 pt-4">Clinic Gallary</h5>
+
+          <div class="card reviews">
+            <div class="card-body">
+              <div class="review pt-3 px-2">
+                <div class="user">
+                  <div class="info">
+                    <div class="row g-3">
+                      <div class="col-md-3">
+                        <img src="../../../assets/clinc.jpg" class="img-fluid rounded-3" alt="img" />
+                      </div>
+                      <div class="col-md-3">
+                        <img src="../../../assets/clinc.jpg" class="img-fluid rounded-3" alt="img" />
+                      </div>
+                      <div class="col-md-3">
+                        <img src="../../../assets/clinc.jpg" class="img-fluid rounded-3" alt="img" />
+                      </div>
+                      <div class="col-md-3">
+                        <img src="../../../assets/clinc.jpg" class="img-fluid rounded-3" alt="img" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- <div class="card about mt-5">
+          <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px">
+            <div style="margin-bottom: 10px">
+              <h5 style="margin: 0">
+
+              </h5>
+            </div>
+
+            @if(videos && videos.length > 0) {
+            <div style="
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+              ">
+              @for(video of videos; track null) {
+              <div style="width: calc(25% - 10px); margin-bottom: 20px">
+                <div style="width: 100%">
+                  <iframe [src]="
+                      sanitizeUrll(
+                        'https://www.youtube.com/embed/' +
+                          extractYouTubeVideoID(video.VideoURL)
+                      )
+                    " frameborder="0" allowfullscreen></iframe>
+                </div>
+              </div>
+              }
+            </div>
+            } @if(!videos || videos.length === 0) {
+            <div class="no-data">
+              <div class="card text-center">
+                <div class="card-body">
+                  <img src="assets/icons/no-data.svg" />
+                  <h6 class="mt-3">
+                    {{
+                    "doctor-profile.there-is-no-doctorVideo-to-show"
+                    | transloco
+                    }}
+                  </h6>
+                </div>
+              </div>
+            </div>
+            }
+          </div>
+        </div> -->
+
+        <div>
+          <h5 class="fw-bold pb-3 pt-4">
+            {{ "doctor-profile.Doctor-video" | transloco }}
+          </h5>
+          @if(videos && videos.length > 0) {
+          <div class="card reviews">
+            <div class="card-body">
+              <div class="review pt-3 px-2">
+                <div class="user">
+                  <div class="info">
+                    <div class="row g-3">
+                      <div class="col-md-3">
+                        <img src="../../../assets/clinc.jpg" class="img-fluid rounded-3" alt="img" />
+                      </div>
+                      <div class="col-md-3">
+                        <img src="../../../assets/clinc.jpg" class="img-fluid rounded-3" alt="img" />
+                      </div>
+                      <div class="col-md-3">
+                        <img src="../../../assets/clinc.jpg" class="img-fluid rounded-3" alt="img" />
+                      </div>
+                      <div class="col-md-3">
+                        <img src="../../../assets/clinc.jpg" class="img-fluid rounded-3" alt="img" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          }
+          @if(!videos || videos.length === 0) {
+          <div class="card">
+            <div class="text-center">
+              <div class="card-body">
+                <img src="assets/icons/no-data.svg" />
+                <h6 class="mt-3">
+                  <!-- there is no images to show ! -->
+                  {{
+                  "doctor-profile.there-is-no-videos-to-show" | transloco
+                  }}
+                </h6>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+
+        <!-- Doctor's Q&A -->
+
+        <div>
+          <h5 class="fw-bold pb-3 pt-4">Doctor’s Q&A</h5>
+          <div class="card reviews">
+            <div class="card-body">
+              <div class="review pt-3 px-2">
+                <div class="user">
+                  <div class="info w-100">
+                    <div class="d-flex justify-content-between">
+                      <div class="" style="border-bottom: 1px solid #f3f3f3">
+                        <p class="time mb-2">A 37 years old, male asked</p>
+                        <h5 class="name pb-2">
+                          I have had a problem for a few days that has been
+                          worrying me, of course.
+                        </h5>
+                        <p class="time mb-3">
+                          Lorem ipsum dolor sit amet consectetur. Augue
+                          imperdiet aliquam mi sit. pharetra mattis. Sapien
+                          infaucibus... Read more
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- @if(!reviews || reviews.length === 0) {
+            <div class="no-data">
+              <div class="card text-center">
+                <div class="card-body">
+                  <img src="assets/icons/no-data.svg" />
+                  <h6 class="mt-3">
+                    {{
+                      "doctor-profile.there-is-no-review-to-show" | transloco
+                    }}
+                  </h6>
+                </div>
+              </div>
+            </div>
+            } -->
+            </div>
+          </div>
+        </div>
+
+        <!-- reviw -->
+        <div>
+          <h5 class="fw-bold pb-3 pt-4">
+            {{ "doctor-profile.reviews" | transloco }}
+          </h5>
+          <div class="card reviews">
+            <div class="card-body">
+              @for(item of reviews; track null){
+              <div class="review pt-3 px-2">
+                <div class="user">
+                  <div class="info w-100">
+                    <div class="d-flex justify-content-between">
+                      <div class="">
+                        <h5 class="name">
+                          {{ item["PatientName"] }}
+                        </h5>
+
+                        <div class="rate">
+                          @for(i of [].constructor(item['Rate']); track
+                          null){<img src="assets/icons/Stars.png" />} @for(i of
+                          [].constructor(5 - item['Rate']); track null){<img src="assets/icons/un-star.svg" />}
+                        </div>
+                      </div>
+                      <div class="">
+                        <span class="time">
+                          {{ AvalibleDate }}
+                          06 Jan,2024
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="review-body">
+                  <p>
+                    {{ item["Comment"] }}
+                    "Great experience overall. The doctor was very experienced
+                    and helped me understand my condition. The clinic was clean
+                    and well-organized."
+                  </p>
+                </div>
+              </div>
+              } @if(!reviews || reviews.length === 0) {
+              <div class="">
+                <div class="text-center">
+                  <div class="card-body">
+                    <img src="assets/icons/no-data.svg" />
+                    <h6 class="mt-3">
+                      <!-- there is no images to show ! -->
+                      {{
+                      "doctor-profile.there-is-no-review-to-show" | transloco
+                      }}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5" #book>
+        <app-book-form [doctor]="doctor"></app-book-form>
+      </div>
+    </div>
+  </div>
+</section>
+}

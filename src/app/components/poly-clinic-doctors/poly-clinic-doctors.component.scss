@@ -1,0 +1,100 @@
+section.list {
+    background-color: #F3F3FF;
+    overflow: hidden;
+
+    .filter-tools {
+      // in mobile
+      @media (max-width: 767px) {
+        margin-top: 40px;
+
+        .row {
+          .text-end {
+            margin-top: 20px;
+            text-align: left !important;
+          }
+        }
+      }
+    }
+
+    .cards {
+      // display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .col-lg-6 {
+        display: flex;
+        flex: 1 1 48%; // لضبط عرض العمود بنسبة 48% لتوفير بعض المسافة بين الأعمدة
+        margin-bottom: 20px;
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%; // لضبط ارتفاع محتوى البطاقة ليكون بالكامل
+      }
+
+      .user,
+      .work-data,
+      .book-button {
+        margin-bottom: 20px; // إضافة بعض المسافة بين الأجزاء المختلفة داخل البطاقة
+      }
+
+      .book-button {
+        margin-top: auto; // لدفع الزر إلى أسفل البطاقة
+      }
+    }
+
+  }
+  .no-results-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* الارتفاع الكامل للنافذة */
+    background-color: #f8f9fa; /* خلفية خفيفة للمساعدة على رؤية التصميم */
+  }
+
+  .no-results-card {
+    max-width: 800px; /* أقصى عرض للبطاقة */
+    width: 100%;
+    text-align: center;
+    border: 1px solid #ddd; /* يمكنك تعديل الحدود إذا أردت */
+    border-radius: 10px;
+    padding: 40px; /* زيادة التباعد الداخلي */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff; /* خلفية بيضاء للبطاقة */
+  }
+
+  .no-results-card-body {
+    padding: 40px; /* زيادة التباعد الداخلي */
+  }
+
+  .no-results-image {
+    width: 200px; /* تكبير الصورة */
+    margin: 0 auto 30px; /* وضع الصورة في الوسط بتحديد الهوامش */
+  }
+
+  .no-results-title {
+    font-size: 32px; /* تكبير العنوان */
+    margin-bottom: 20px; /* زيادة المسافة السفلية */
+  }
+
+  .no-results-description {
+    font-size: 24px; /* تكبير الوصف */
+    color: #666; /* لون النص */
+  }
+

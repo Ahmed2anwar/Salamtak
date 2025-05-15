@@ -1,0 +1,77 @@
+<section class="auth layout_1 mx-2 my-4 py-3 text-center">
+  <div class="container">
+    <div class="text-center mb-4 mt-2">
+      <header>
+        <h2 class="">
+          {{
+            fromPage == "forgot-password"
+              ? ("authentication.verification-code.title-forgot-password"
+                | transloco)
+              : ("authentication.verification-code.title-create-account"
+                | transloco)
+          }}
+        </h2>
+        <p class="pt-3" style="color: #8088A4;">
+
+          {{ "authentication.verification-code.description" | transloco
+          }}<span class="ps-2 text-dark fw-bold">{{ phone }}</span>
+        </p>
+      </header>
+    </div>
+
+    <button
+      type="button"
+      class="bg-transparent border-0 position-absolute m-2"
+      style="cursor: pointer; top: 5px; left: 5px"
+      aria-label="back"
+      (click)="PreviousPage()"
+    >
+      <i class="fa-solid fa-arrow-left fs-5"></i>
+    </button>
+    <form action="javascript:void(0)">
+      <div class="mb-3 mt-4">
+        <code-input
+          dir="ltr"
+          [codeLength]="codeLength"
+          [isCodeHidden]="false"
+          (codeChanged)="onCodeChanged($event)"
+          (codeCompleted)="onCodeCompleted($event)"
+        >
+        </code-input>
+
+      </div>
+      <p class="time" style="color: #8088A4;">
+        <!-- Verification code will be sent within -->
+        {{
+          "authentication.verification-code.verification-code-will-be-sent-within"
+            | transloco
+        }}
+
+        @if (message != null) {
+        <span class="text-info">
+          {{ "authentication.verification-code.remain" | transloco }}..{{
+            message
+          }}
+        </span>
+        }
+
+        <br />
+      </p>
+      <p>
+        @if (message == null) {
+        <a href="javascript:void(0)" class="text-info" (click)="reSendCode()">
+          {{ "authentication.verification-code.resend-code" | transloco }}
+        </a>
+        }
+      </p>
+      <button
+        [disabled]="!codeCompleted"
+        type="submit"
+        (click)="verify()"
+        class="btn btn-primary w-100"
+      >
+        {{ "form.buttons.verify" | transloco }}
+      </button>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,183 @@
+<form  [formGroup]="form" (ngSubmit)="formSubmit()" class="form">
+
+    @if(form.value?.image){
+        <div class="text-center d-block mb-4">
+          <input type="text" hidden formControlName="image">
+          <img src="{{form.value.image}}" onerror="this.src='https://ui-avatars.com/api/?name=';" style="width: 50px;height: 50px; margin: 0 auto;">
+        </div>
+    }
+
+    <div class="row">
+
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="CityId">
+            <!-- City -->
+            {{ 'form.input.city.label' | transloco }}
+          </label>
+          <div>
+            <input type="text" formControlName="CityId" hidden>
+            <a mat-button [matMenuTriggerFor]="CityIdmenu"  [ngClass]="{ 'is-invalid': formSubmitted && ff['CityId']['errors'] }" class="w-100 text-start">
+              {{form.value.CityId ? form.value.CityId.Name : ('form.input.city.labell' | transloco)}}
+              <img src="assets/icons/drop-down.svg" class="icon">
+            </a>
+          </div>
+          <mat-menu #CityIdmenu="matMenu">
+
+            @for(city of cities ;track null){
+                <button mat-menu-item (click)="setCityIdToForm(city)">
+                  {{city.Name}}
+                </button>
+            }
+          </mat-menu>
+        </div>
+
+        @if(formSubmitted && ff['CityId']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['CityId']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.city.validation.required' | transloco }}
+
+                  </p>
+              }
+            </div>
+        }
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="AreaId">
+            <!-- Area -->
+            {{ 'form.input.area.label' | transloco }}
+          </label>
+          <div>
+            <input type="text" formControlName="AreaId" hidden>
+            <a mat-button [matMenuTriggerFor]="AreaIdmenu"  [ngClass]="{ 'is-invalid': formSubmitted && ff['AreaId']['errors'] }" class="w-100 text-start">
+              {{form.value.AreaId ? form.value.AreaId.Name :  ('form.input.area.labell' | transloco)}}
+              <img src="assets/icons/drop-down.svg" class="icon">
+            </a>
+          </div>
+          <mat-menu #AreaIdmenu="matMenu">
+
+            @for(area of areas; track null){
+                <button mat-menu-item (click)="setAreaIdToForm(area)">
+                  {{area.Name}}
+                </button>
+            }
+          </mat-menu>
+        </div>
+
+        @if(formSubmitted && ff['AreaId']['errors']){
+            <div class="errors-area "  style="margin-top: 2px !important;">
+              @if(ff['AreaId']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.area.validation.required' | transloco }}
+
+                  </p>
+              }
+            </div>
+        }
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>
+            <!-- Street -->
+            {{ 'form.input.street.label' | transloco }}
+          </label>
+          <input type="text" class="form-control" placeholder="{{ 'form.input.street.labell' | transloco }}" formControlName="Address" [ngClass]="{ 'is-invalid': formSubmitted && ff['Address']['errors'] }">
+        </div>
+
+        @if(formSubmitted && ff['Address']['errors']){
+            <div class="errors-area mt-2" >
+              @if(ff['Address']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.street.validation.required' | transloco }}
+
+                  </p>
+              }
+              @if(ff['Address']['errors']['pattern']){
+                  <p class="text-danger">
+                      {{ 'form.input.street.validation.pattern' | transloco }}
+
+                  </p>
+              }
+            </div>
+        }
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>
+            <!-- Building Number -->
+            {{ 'form.input.building-number.label' | transloco }}
+          </label>
+          <input type="text" class="form-control" placeholder="{{ 'form.input.building-number.labell' | transloco }}" formControlName="BlockNo" [ngClass]="{ 'is-invalid': formSubmitted && ff['BlockNo']['errors'] }">
+        </div>
+
+        @if(formSubmitted && ff['BlockNo']['errors']){
+            <div class="errors-area mt-2" >
+              @if(ff['BlockNo']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.building-number.validation.required' | transloco }}
+
+                  </p>
+              }
+            </div>
+        }
+      </div>
+      <!-- Floor Number -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>
+            <!-- Floor Number -->
+            {{ 'form.input.floor-number.label' | transloco }}
+          </label>
+          <input type="text" class="form-control" placeholder="{{ 'form.input.floor-number.labell' | transloco }}" formControlName="FloorNo" [ngClass]="{ 'is-invalid': formSubmitted && ff['FloorNo']['errors'] }">
+        </div>
+
+        @if(formSubmitted && ff['FloorNo']['errors']){
+            <div class="errors-area mt-2" >
+              @if(ff['FloorNo']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.floor-number.validation.required' | transloco }}
+
+                  </p>
+              }
+            </div>
+        }
+      </div>
+      <!-- Apartment Number -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>
+            <!-- Apartment Number -->
+            {{ 'form.input.apartment-number.label' | transloco }}
+          </label>
+          <input type="text" class="form-control" placeholder="{{ 'form.input.apartment-number.labell' | transloco }}" formControlName="ApartmentNo" [ngClass]="{ 'is-invalid': formSubmitted && ff['ApartmentNo']['errors'] }">
+        </div>
+
+        @if(formSubmitted && ff['ApartmentNo']['errors']){
+            <div class="errors-area mt-2" >
+              @if(ff['ApartmentNo']['errors']['required']){
+                  <p class="text-danger">
+                      {{ 'form.input.apartment-number.validation.required' | transloco }}
+
+                  </p>
+              }
+            </div>
+        }
+      </div>
+    </div>
+    <div class="text-end actions">
+      <button class="btn btn-info"
+
+        #saveChanges
+      >
+        {{ 'form.buttons.next' | transloco }}
+      </button>
+
+
+    </div>
+
+
+  </form>

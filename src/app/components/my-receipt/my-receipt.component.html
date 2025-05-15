@@ -1,0 +1,110 @@
+<section class="my-receipt ">
+  <div class="container">
+    <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>';"  aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0)">
+            {{ 'app-name' | transloco }}
+          </a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0)" aria-label="my-schedule">
+            {{ 'invoice.title' | transloco}}
+          </a>
+        </li>
+      </ol>
+    </nav>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 ps-0">
+        <div class="mt-4 mb-2">
+          <h2 class="ms-2 mb-2">
+            {{ 'header.drop-down.my-invoices' | transloco }}
+          </h2>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="container">
+    <div class="invoices-container" *ngIf="invoices.length > 0">
+      <!-- Iterate through each invoice -->
+      <div class="row invoice-card mb-4 border rounded" *ngFor="let invoice of invoices">
+        <div class="invoice-header">
+          <div class="patient-info">
+            <h4>{{invoice.DoctorName}}</h4>
+            <p>{{invoice.Date | date:'longDate' }}</p>
+          </div>
+        </div>
+
+        <!-- Display items for each invoice -->
+        <div class="col-12 col-md-6 items-list" *ngIf="invoice.Items.length > 0">
+
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <td class="total">{{'invoice.invoice-item.Total' | transloco}} &nbsp;<span style="color: #2b2979; font-weight: 900;">{{invoice.TotalAmount  }}</span> </td>
+                  <td class="paid">{{'invoice.invoice-item.Paid' | transloco}} &nbsp; <span style="color: #2b2979; font-weight: 900;">{{invoice.PaidAmount  }}</span>  </td>
+                  <td >{{'invoice.invoice-item.Balance' | transloco}} &nbsp; <span style="color: #dc3545; font-weight: 900;">{{invoice.TotalAmount - invoice.PaidAmount  }}</span> </td>
+                </tr>
+              </thead>
+            </table>
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>{{'invoice.invoice-item.Date' | transloco}}</th>
+                <th>{{'invoice.invoice-item.Service' | transloco}}</th>
+                <th>{{'invoice.invoice-item.ServiceFee' | transloco}}</th>
+                <th>{{'invoice.invoice-item.Paid' | transloco}}</th>
+                <th class="balance">{{'invoice.invoice-item.Balance' | transloco}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of invoice.Items">
+                <td>{{item.Date | date:'longDate'}}</td>
+                <td>{{item.Service}}</td>
+                <td>{{item.ServiceFee}}</td>
+                <td>{{item.Paid}}</td>
+                <td class="balance">{{item.ServiceFee - item.Paid}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- <div class="item-card" *ngFor="let item of invoice.Items">
+            <div class="item-details mb-3">
+              <h5>{{item.Service}}</h5>
+              <p>{{'invoice.invoice-item.Date' | transloco}}: {{item.Date | date:'longDate' }}</p>
+              <p>{{'invoice.invoice-item.ServiceFee' | transloco}}: {{item.ServiceFee}}</p>
+              <p>{{'invoice.invoice-item.Paid' | transloco}}: {{item.Paid}}</p>
+              <p class="balance">{{'invoice.invoice-item.Balance' | transloco}}: {{item.ServiceFee - item.Paid}}</p>
+            </div>
+          </div> -->
+
+        </div>
+      </div>
+    </div>
+
+    @if( invoices.length == 0){
+      <div class="no-results text-center">
+        <div class="card rounded-3" style="border: 1px solid #E9EAEF ;box-shadow: none; box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 20px -20px;">
+          <div class="card-body mt-3">
+
+                    <img src="assets/icons/invoicesbg.png" alt="no-results" />
+            <h4 class="mt-2 fw-bold">
+              <!-- No Results -->
+              {{ "pages.No-Results" | transloco }}
+            </h4>
+            <p class="text-muted mt-2 mb-5">
+              <!-- No results found -->
+              {{ "pages.No-invoices-found" | transloco }}
+            </p>
+          </div>
+        </div>
+      </div>
+      }
+
+  </div>
+</section>

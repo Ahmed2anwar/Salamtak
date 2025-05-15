@@ -1,0 +1,1082 @@
+{
+  "app-name": "Salamtak",
+  "default-title": "Salamtak | Find a doctor and book an appointment",
+  "default-keyword": "Salamtak | Find a doctor and book an appointment",
+  "home-title": "Salamtak Group | find a docotor near you.",
+  "home-description": "Salamtak Group provides heath services including home visits, online doctor visits, doctor appointment reservations, clinic reservation and online medical advice.",
+  "homePath": "home",
+  "findADoctorPath": "find-doctor",
+  "hospitalsPath": "hospitals",
+  "form": {
+    "input": {
+      "email_or_phone": {
+        "label": "Email or Phone",
+        "placeholder": "email or phone",
+        "validation": {
+          "required": "Email or Phone is required"
+        }
+      },
+      "titles": {
+        "default-title": "Salamtak | Find a doctor and book an appointment",
+        "home-title": "Salamtak Group | find a docotor near you.",
+        "home-description": "Salamtak Group provides heath services including home visits, online doctor visits, doctor appointment reservations, clinic reservation and online medical advice.",
+        "find-title": "Salamtak Group | reserve your doctor appointment, home visits doctors or online visit.",
+        "find-description": "With Salamtak Group, you can reserve your home visits doctors, clinic appointments, or clinic visit in all medical specialties online.   (for online url)   Salamtak group is a medical care application that provides you with an online reservation to the nearest doctor clinic, in all medical specialties, along with a free online medical advice and online doctor consultation through Salamtak teleservices(Video call, and call).",
+        "contactus-title": "Contact Us",
+        "contactus-description": "Need to get in touch with Salamtak Group? Call us at 17143, or write to us, and we'll work towards a solution for you.",
+        "SalamtakGate-title": "Salamtak Gate",
+        "SalamtakGate-description": "Salamtak Group is your gate to medical information, free meidcal advice, and online medical care."
+      },
+      "phone": {
+        "label": "Mobile Number",
+        "placeholder": "Enter Mobile",
+        "validation": {
+          "required": "Mobile Number is required",
+          "pattern": "Mobile must be  11 numbers ",
+          "minlength": "Mobile must be  11 numbers .",
+          "maxlength": "Mobile cannot be more than 11 numbers ."
+        }
+      },
+      "password": {
+        "label": "Password",
+        "labell": "New Password",
+        "placeholder": "Password",
+        "validation": {
+          "required": "Password is required",
+          "minlength": "Password must consist of min..  6 digits ( Numbers & characters )",
+          "pattern": "Password must consist of min..  6 digits ( Numbers & characters )"
+        }
+      },
+      "confirm-password": {
+        "label": "Confirm Password",
+        "labell": "Confirm New Password",
+        "placeholder": "Confirm Password",
+        "validation": {
+          "required": "Confirm Password is required",
+          "notMatch": "Password and Confirm Password Don't match",
+          "minlength": "Password and Confirm Password Don't match"
+        }
+      },
+      "old-password": {
+        "label": "Old Password",
+        "placeholder": "Enter your old password",
+        "validation": {
+          "required": "Old Password is required",
+          "minlength": "Password must be at least 6 characters long."
+        }
+      },
+      "full-name-en": {
+        "label": "Full Name In English",
+        "placeholder": "Full Name In English",
+        "validation": {
+          "required": " Full Name (First-Middle-Last) In English Is Required",
+          "pattern": "Please Enter Name (First-Middle-Last)  In English",
+          "space": "Full Name (First-Middle-Last) In English Is Required"
+        }
+      },
+      "full-name-ar": {
+        "label": "Full Name In Arabic",
+        "placeholder": "Full Name In Arabic",
+        "validation": {
+          "required": "Full Name (First-Middle-Last) In Arabic Is Required ",
+          "pattern": "Please Enter Name (First-Middle-Last) In Arabic",
+          "space": "Full Name (First-Middle-Last) In Arabic Is Required"
+        }
+      },
+      "ask": {
+        "label": "Your question(Your identity will be anonymous)",
+        "placeholder": " Example:what are the causes of acne? ",
+        "desc": "Question Description(Explanation of your medical symptoms)",
+        "desc-required": "Required field  ",
+        "age": "How old are you?(years old) ",
+        "age-placeholder": "Add age ",
+        "text": "Text answers on Salamtak are not intended for individual diagnosis, treatment or prescription.",
+        "text-c": "For these, please consult a doctor.",
+        "for-me": "For Me  ",
+        "que": "The question is for",
+        "for-an": "For Another Person ",
+        "gender": " Select your gender",
+        "male": "Male",
+        "female": "Female",
+        "save": "Save Changes",
+        "done": " Your question will be answered by a specialized doctor and will be answered as soon as possible",
+        "validation": {
+          "required": " Required field ",
+          "pattern": " Required field "
+        }
+      },
+      "choose-your-speciality": {
+        "label": "Choose your speciality",
+        "searchPlaceholder": "Search for your speciality",
+        "validation": {
+          "required": "Choose your speciality is required"
+        }
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "Email Address",
+        "validation": {
+          "required": "Email is required",
+          "pattern": "Email is invalid format please check it."
+        }
+      },
+      "name": {
+        "label": "Name",
+        "placeholder": "Full Name",
+        "validation": {
+          "required": "Name is required",
+          "pattern": "Name is invalid format please check it."
+        }
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": " Subject",
+        "validation": {
+          "required": "Subject is required"
+        }
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Enter Message",
+        "validation": {
+          "required": "Message is required"
+        }
+      },
+      "gender": {
+        "label": "Gender",
+        "labell": "Choose Gender",
+        "male": "Male",
+        "female": "Female",
+        "validation": {
+          "required": "Gender is required"
+        }
+      },
+      "dob": {
+        "label": "Birth Date",
+        "inputs": {
+          "day": {
+            "label": "Day",
+            "validation": {
+              "required": "Required"
+            }
+          },
+          "month": {
+            "label": "Month",
+            "validation": {
+              "required": "Required"
+            }
+          },
+          "year": {
+            "label": "Year",
+            "validation": {
+              "required": "Required"
+            }
+          }
+        }
+      },
+      "nationality": {
+        "label": "Country",
+        "labell": "Choose Country",
+        "validation": {
+          "required": "Country is required"
+        }
+      },
+      "occupation": {
+        "label": "Occupation",
+        "validation": {
+          "required": "Occupation is required"
+        }
+      },
+      "city": {
+        "label": "City",
+        "labell": "Choose City",
+        "validation": {
+          "required": "City is required"
+        }
+      },
+      "area": {
+        "label": "Area",
+        "labell": "Choose Area",
+        "validation": {
+          "required": "Area is required"
+        }
+      },
+
+      "street": {
+        "label": "Street",
+        "labell": "Enter Street",
+        "validation": {
+          "required": "Street is required",
+          "pattern": "Street is invalid format you must enter address in Arabic, please check it."
+        }
+      },
+      "building-number": {
+        "label": "Building Number",
+        "labell": "Enter Building Number",
+        "validation": {
+          "required": "Building Number is required"
+        }
+      },
+      "floor-number": {
+        "label": "Floor Number",
+        "labell": "Enter Floor Number",
+        "validation": {
+          "required": "Floor Number is required"
+        }
+      },
+      "apartment-number": {
+        "label": "Apartment Number",
+        "labell": "Enter Apartment Number",
+        "validation": {
+          "required": "Apartment Number is required"
+        }
+      },
+
+      "height": {
+        "label": "Height (CM)",
+        "labell": "Enter Height",
+        "validation": {
+          "required": "Height is required"
+        }
+      },
+      "weight": {
+        "label": "Weight (KG)",
+        "labell": "Enter Weight",
+        "validation": {
+          "required": "Weight is required"
+        }
+      },
+      "blood-group": {
+        "label": "Blood Group",
+        "labell": "Choose Blood Group",
+        "validation": {
+          "required": "Blood Group is required"
+        }
+      },
+      "pressure": {
+        "label": "Pressure (MM/GG)",
+        "labell": "Enter Pressure (MM/GG)",
+        "validation": {
+          "required": "Pressure is required"
+        }
+      },
+      "sugar-level": {
+        "label": "Sugar Level (MG/DL)",
+        "labell": "Enter Sugar Level (MG/DL)",
+        "validation": {
+          "required": "Sugar Level is required"
+        }
+      },
+      "medical-allergies": {
+        "label": "Medical Allergies",
+        "labell": "Choose Medical Allergies",
+        "validation": {
+          "required": "Medical Allergies is required"
+        }
+      },
+      "food-allergies": {
+        "label": "Food Allergies",
+        "labell": "Choose Food Allergies",
+        "validation": {
+          "required": "Food Allergies is required"
+        }
+      },
+      "other-allergies": {
+        "label": "Other Allergies",
+        "labell": "Enter Other Allergies",
+        "validation": {
+          "required": "Other Allergies is required"
+        }
+      },
+      "prescriptions": {
+        "label": "Prescriptions",
+        "labell": "Enter Prescriptions",
+        "validation": {
+          "required": "Prescriptions is required"
+        }
+      },
+      "current-medication": {
+        "label": "Current Medication",
+        "labell": "Enter Current Medication",
+        "validation": {
+          "required": "Current Medication is required"
+        }
+      },
+      "past-medication": {
+        "label": "Past Medication",
+        "labell": "Enter Past Medication",
+        "validation": {
+          "required": "Past Medication is required"
+        }
+      },
+      "injuries": {
+        "label": "Injuries",
+        "labell": "Enter Injuries",
+        "validation": {
+          "required": "Injuries is required"
+        }
+      },
+      "chronic-diseases": {
+        "label": "Chronic Diseases",
+        "labell": "Enter Chronic Diseases",
+        "validation": {
+          "required": "Chronic Diseases is required"
+        }
+      },
+      "surgeries": {
+        "label": "Surgeries",
+        "labell": "Enter Surgeries",
+        "validation": {
+          "required": "Surgeries is required"
+        }
+      }
+    },
+    "buttons": {
+      "send": "Send",
+      "login": "Log in",
+      "save": "Save",
+      "sign-up": "Sign Up",
+      "verify": "Verify",
+      "cancel": "Cancel",
+      "save-changes": "Save Changes",
+      "next": "Next",
+      "previous": "Previous",
+      "home": "Let's Start",
+      "dear": "Dear ",
+      "thank": "Thank you",
+      "com": "Now, You Have Successfully Complete Your Profile.",
+      "comm": "You Are Most Welcomed To Use Salamtak Application Services"
+    }
+  },
+  "swal": {
+    "confirmBooking": {
+      "title": "Confirm Booking",
+      "text": "Are You Sure You Want To Book This Appointment?",
+      "confirmButtonText": "Yes, book it!",
+      "cancelButtonText": "No, cancel it!",
+      "sorry": "Sorry, there is no data for the clinic site",
+      "floor": "Floor Number",
+      "Appatrment": "Appatrment Number",
+      "cancelap": "Are you sure you want to cancel this appointment?",
+      "can": "Cancel",
+      "re": "ReBooking",
+      "ss": "Teeth Cleaning",
+      "tt": "Metal Braces",
+      "dd": "Facial Cleansing",
+      "ll": "Face peeling"
+    },
+    "Soon": {
+      "title": "The service will be activated later",
+      "ConfirmButtonText": "OK"
+    }
+  },
+  "header": {
+    "links": {
+      "home": "Home",
+      "find-a-doctor": "Find a Doctor",
+      "blogs": "Salamtak Gate",
+      "about": "About Us",
+      "contact": "Contact Us"
+    },
+    "buttons": {
+      "login": "Log in",
+      "sign-up": "Sign up"
+    },
+    "drop-down": {
+      "edit-profile": "Edit Profile",
+      "my-invoices": "My invoices",
+      "ques": "My questions",
+      "my-schedule": "My Booking",
+      "change-password": "Change Password",
+      "language": "Language",
+      "sign-out": "Sign Out"
+    }
+  },
+  "footer": {
+    "title": "Follow us",
+    "description": "Your all-in-one platform for booking medical appointments, accessing trusted consultations, and managing your healthcare effortlessly",
+    "columns": {
+      "site-map": {
+        "title": "Site Map",
+        "links": {
+          "title": "About",
+          "about": "About Us",
+          "Our-Team": "Our Team ",
+          "Careers": "Careers",
+          "Press": "Salamtak Gate"
+        }
+      },
+      "landing": {
+        "title": "Landing",
+        "links": {
+          "mobile-app": "Mobile App",
+          "clinics": "Clinics",
+          "doctors": "Doctors",
+          "hospitals": "Hospitals",
+          "PolyClinic": "PolyClinic",
+          "pharmacies": "Pharmacies",
+          "insurance": "insurance",
+          "online-consults": "Online Consults",
+          "booking": "Booking"
+        }
+      },
+      "Are you A Doctor": {
+        "title": "Are you a Doctor?",
+        "links": {
+          "join-Salamtak": "Join Salamtak Doctors"
+        }
+      },
+      "utility": {
+        "title": "Utility",
+        "links": {
+          "faq": "FAQ",
+          "terms-conditions": "Terms & Conditions",
+          "Privacy-Policy": "Privacy Policy",
+          "Doctors-Privacy-Policy": "Doctors Privacy Policy"
+        }
+      }
+    }
+  },
+  "search-form": {
+    "Book-with-the-best": "Book with the best",
+    "doctor": "doctor",
+    "Book-with-the-best-doctor": "Book with the best doctor",
+    "in": "in",
+    "specialty": {
+      "label": " Specialty",
+      "placeholder": " Specialty",
+      "search-placeholder": "Choose Specialty"
+    },
+    "city": {
+      "label": "City",
+      "placeholder": " City",
+      "search-placeholder": "Choose City"
+    },
+    "area": {
+      "label": "Area",
+      "placeholder": " Area",
+      "search-placeholder": "Choose Area"
+    },
+    "name": {
+      "label": "Search by Name",
+      "placeholder": "Or Search by doctor name  "
+    },
+    "search": {
+      "placeholder": "Search"
+    }
+  },
+  "home": {
+    "main-section": {
+      "title": "Your Health...",
+      "title-span": "Our Aim",
+      "title-hid": "Book an online appointment now with Salamtak elite certified doctors",
+      "title-hidd": "book an online or in clinic appointment with just a click on your mobile phone or call ",
+      "title-hidspan": "or call",
+      "floor": "Floor Number",
+      "Appatrment": "Appatrment Number"
+    },
+    "services": {
+      "title": " Services",
+      "description": "We Have Several Service You Can Choose.",
+      "th": "Let’s check it out",
+      "cards": {
+        "text": "You can call us for any support",
+        "button": "Book Now",
+        "Poly": "PolyClinic",
+        "poly-Des": "you Can book now From PolyClinic",
+        "Labs": "Lab Test",
+        "Labs-Des": "you Can book now From Lab Tests",
+        "Radiology": "Radiology",
+        "Radiology-Des": "you Can book now From Radiology",
+        "HomeCare": "Home Care",
+        "HomeCare-Des": "you Can book now From Home Care"
+      }
+    },
+    "ask": {
+      "title": "Have a Medical Question?",
+      "title-span": "Get A Professional Medical Answers To All Your Questions.",
+      "button": "Ask Now",
+      "tit": "Ask",
+      "dis": "Salamtak is your go-to platform for expert medical answers from certified doctors. Get trusted health advice quickly and easily."
+    },
+    "medical-services-directory": {
+      "title": "Guide",
+      "description": "You ask...Salamtak provides",
+      "cards": {
+        "radiology-center": "Radiology Centers",
+        "laboratories": "Laboratories",
+        "pharmacies": "Pharmacies",
+        "polyclinics": "Polyclinics",
+        "hospitals": "Hospitals",
+        "emergency": "Salamtak Angel",
+        "offerh": "don't miss it."
+      }
+    },
+    "trusted": {
+      "title": "Your health  ",
+      "dis": "and the health of our families",
+      "description": "Our aim..."
+    },
+    "popular-doctors": {
+      "title": "Popular Doctors",
+      "see-all": "See All"
+    },
+    "book-doctor": {
+      "title": "Book a Doctor"
+    },
+    "top-specialties": {
+      "title": "Top Specialties",
+      "cards": {
+        "Skin": "Skin",
+        "Teeth": "Teeth",
+        "Child": "Child",
+        "Therapist": "Therapist"
+      }
+    },
+    "what-people-say": {
+      "small": "TESTIMONIAL",
+      "big": "News",
+      "offer": "Medical Offers",
+      "offerh": "Don't Miss It."
+    },
+    "our-blog": {
+      "title": "Our News",
+      "description": "Your Gate To The World Of Medical Care Updates",
+      "see-all": "See All",
+      "ss": "Teeth Cleaning",
+      "tt": "Metal Braces",
+      "dd": "Facial Cleansing",
+      "ll": "Face peeling",
+      "kk": "Laser Hair Removal",
+      "qq": "Vision Correction",
+      "oo": "Weight Loss",
+      "sec-title": "Your health is Our Aim. Salamtak Group Application provides high standard medical services in all medical specialties where everybody can have an instant access to online doctor appointments with reasonable prices, including in clinic reservation, home visits, online doctor consultation."
+    },
+    "download-section": {
+      "title": "Download Salamtak app now.",
+      "co": "Book a clinic appointment with only a click on your mobile.Discover comprehensive and diverse medical information and explore a variety of medical offers tailored to meet your expectations."
+    },
+    "news": {
+      "title": "Why us?",
+      "first-title": "All your medical needs in one app.",
+      "first-des": " Salamtak unifies your healthcare needs and book clinic visits, home consultations, or online appointments with ease.",
+      "second-title": "New Medical Innovation in Egypt.",
+      "second-des": "Book an in-clinic appointment or medical consultation through telehealth services easily and fastest with the Salamtak app.",
+      "third-title": "Salamtak elite certified doctors.",
+      "third-des": "Get top medical services and trusted consultations from Salamtak-certified doctors.",
+      "four-title": "Anytime & anywhere",
+      "four-des": "Book now a doctor appointment for free with Salamtak app anytime and anywhere."
+    }
+  },
+  "find-a-doctor": {
+    "breadcrumb": {
+      "find-a-doctor": "Find a Doctor",
+      "dentist-in-egypt": "Egypt"
+    },
+    "filters-menu": {
+      "title": "Filter",
+      "gender": {
+        "title": "Gender",
+        "male": "Male",
+        "female": "Female"
+      },
+      "seiority": {
+        "title": "Seniority Level"
+      },
+      "subspeciality": {
+        "title": "Sub-Speciality"
+      },
+      "service": {
+        "title": "Service"
+      },
+      "date": {
+        "title": "Date",
+        "description": "Choose Date"
+      },
+      "price": {
+        "title": "Examination Fee",
+        "description": "Price Range",
+        "from": "From",
+        "to": "To"
+      },
+      "promo": {
+        "title": "promo code "
+      },
+      "apply": "Apply"
+    },
+    "doctors-list": {
+      "title": "Doctors List",
+      "doctors": "Doctors",
+      "sorting": {
+        "title": "Sort By",
+        "most-popular": "Most Popular",
+        "reviews": "Reviews and Ratings",
+        "wating-time": "Wating Time",
+        "fees": "Fees"
+      },
+      "most-popular-placeholder": "Most Popular",
+      "no-results": {
+        "title": "No Doctors Found",
+        "description": "Try searching for a different specialty or change your location to see more available doctors.",
+        "no-current": "Currently No Offers Available",
+        "details-noCuurent": "Offers will be displayed as soon as",
+        "detail-curr": "they are activated by Salamtak Doctor"
+      },
+      "cards": {
+        "dr": "Dr ",
+        "reviews": "Reviews",
+        "sub-specialization": "Sub-Speciality",
+        "address": "Area",
+        "waiting-time": "Waiting Time",
+        "fees": "Fees",
+        "book-now": "Book Now",
+        "service": "Service",
+        "time": "Date and Time",
+        "call": "Salamtak Support",
+        "hotline": "17143"
+      },
+      "load-more": "Load More"
+    }
+  },
+  "blogs": {
+    "title": "Salamtak Gate ",
+    "description": "Your gate to the world of medical care updates",
+    "search-placeholder": "Topic",
+    "button": "Search",
+    "recent-articles": "Recent Articles",
+    "all-articles": "All Articles",
+    "angel": "Salamtak Angel",
+    "angel-title": "Your quick guide to important medical information and emergencies.",
+    "emergency": "Emergency",
+    "faq": "FAQ",
+    "care": "Salamtak Care",
+    "ref": "References :",
+    "caree": "Salamtak Care",
+    "cap": "Salamtak Capsola",
+    "trueor": "Salamtak True Or False",
+    "promo": "Salamtak Promotions",
+    "scope": "Salamtak Scope",
+    "angell": "Salamtak Angel",
+    "salamtakOffer": "Salamtak Offer"
+  },
+  "offer": {
+    "title": "Salamtak Offers",
+    "all": "All Offers"
+  },
+  "about": {
+    "breadcrumb": {
+      "about": "About"
+    },
+    "title": "We help you to get better always",
+    "description": "Over the years we strive to create the most innovative technologies used <br> by small and medium-sized companies",
+    "contact-button": "Contact Us",
+    "our-achievement": {
+      "title": "Our Achievement",
+      "cards": {
+        "clients": "Our clients are spread over 17 countries around the world",
+        "thousand": "We have 13 thousand and more client around the world",
+        "feedback": "Good reviews and positive feedback from our client",
+        "experience": "More than 3 years experience, make sure you choose our services"
+      }
+    },
+    "achieve": {
+      "title": "Empower business to achieve success.",
+      "description": "We provide small industries, organizations and institutes of high-tech industries with modern components."
+    },
+    "blogs": {
+      "title": "Read our blog",
+      "button": "View all"
+    },
+    "review": {
+      "title": "Understanding the market is the key to successful business. It is very important for us to understand how to deliver the best products to the customer.",
+      "name": "Alex - CEO"
+    }
+  },
+  "Promotions": {
+    "title": "Salamtak Promotions"
+  },
+  "contact-us": {
+    "breadcrumb": {
+      "contact-us": "Contact Us"
+    },
+    "title": "Contact Us",
+    "description": "Have a question or just want to say hi? Don’t bother, we'd love to hear from you.",
+    "email": {
+      "label": "Email",
+      "description": "Email us for help with a current product or service"
+    },
+    "call": {
+      "label": "Call",
+      "description": "For support and inquiries, salamtak support "
+    },
+    "help-support": {
+      "title": "Help & Support",
+      "description": "Check out helpful resources, FAQs and developer tools.",
+      "button": "Support Center"
+    }
+  },
+  "invoice": {
+    "title": "Invoices",
+    "invoice-item": {
+      "Doctor-Name": "Doctor Name",
+      "Date": "Date",
+      "Service": "Service",
+      "Add-Item": "ِAdd Service",
+      "Total": "Total",
+      "Fee": "Fee",
+      "edititem": "Edit Service",
+      "Paid": "Paid",
+      "balance": "Balance",
+      "ServiceFee": "Fee",
+      "Total-Service-Fee": "Total Fee",
+      "Total-Paid": "Total Paid",
+      "Balance": "Balance",
+      "Add-Bill": "Add New Bill",
+      "remove": "Remove",
+      "search": "Search",
+      "clear": "Clear "
+    }
+  },
+  "doctor-profile": {
+    "views": "Views",
+    "specialized-in": "Specialized in",
+    "book-now": "Book Now",
+    "about-doctor": "About Doctor",
+    "doctor-clinics": "Doctor Clinics",
+    "you-can-book-now-at": "You can book now at",
+    "address": "Area",
+    "waiting-time": "Waiting Time",
+    "service": "Services",
+    "features": "Features",
+    "ins": "Insurance companies",
+    "Gallary": "Clinic Gallary",
+    "video": "Clinic Videos",
+    "there-is-no-images-to-show": "There Are No Photos To Show",
+    "there-is-no-videos-to-show": "There Are No Videos To Show",
+    "there-is-no-review-to-show": "There Are No reviews To Show",
+    "there-is-no-doctorVideo-to-show": "There Are No Videos To Show",
+    "Doctor-video": "Doctor Videos",
+    "fees": "Fees",
+    "photos-of-clinic": "Photos of Clinic",
+    "reviews": "Reviews & Rating",
+    "book-form": {
+      "title": "Booking Information",
+      "description": "Book now to receive the clinic’s address details and phone number",
+      "appointments-type": "Booking Type",
+      "appointments-type-required": "Appointments Type is required",
+      "choose-clinic": "Choose Clinic",
+      "clinic-required": "Choose Clinic is required",
+      "choose-appointment-day": "Choose Appointment Day",
+      "appointment-day-required": "Choose Appointment Day is required",
+      "time-required": "Time is required",
+      "appointments-available": " Available Appointments",
+      "no-appointments-available": "No Appointments available for this day. Please choose another day.",
+      "book-online-pay-at-the-clinic": "Book online, Pay at the clinic!",
+      "doctor-requires-reservation": "Doctor requires reservation!",
+      "price-Afer": "Price After",
+      "Start-Date": "Start Date",
+      "End-Date": "End Date",
+      "off": "Off"
+    }
+  },
+  "change-password": {
+    "title": "Change Password"
+  },
+  "my-schedule": {
+    "title": "My Schedule",
+    "upcoming": {
+      "title": "Upcoming",
+      "sub-title": "All Upcoming Appointment"
+    },
+    "medical-history": {
+      "title": "Completed",
+      "sub-title": "Medical History"
+    },
+    "canceled": {
+      "title": "Canceled",
+      "sub-title": "Canceled Appointment"
+    },
+    "Edit-Appointment": "Edit Appointment",
+    "View-Map": "View Map",
+    "Help": "Help",
+    "Cancel-Appointment": "Cancel Appointment",
+    "ReBooking-Appointment": "Rebooking Appointment",
+    "Medical-History": "Medical History",
+    "Medical": "Medical History",
+    "Rate": "Rate",
+    "LE": "LE",
+    "help": "Support"
+  },
+  "profile": {
+    "steps": {
+      "personal-info": "Personal Info",
+      "location": "Location",
+      "medical-state": "Medical Record",
+      "finish": "Final"
+    }
+  },
+  "timeout": {
+    "title": "Timeout has occurred",
+    "description": "please try again later or contact us !",
+    "button": "Retry Now !"
+  },
+  "booking-successfully": {
+    "title": " Thank you.Your booking has been confirmed successfully",
+    "notified": "We notified Dr. {{doctorName}} of your booking",
+    "examination-fees": "Examination fees:",
+    "clinic-number": "Clinic Phone Number :",
+    "booking-details": {
+      "title": "Booking Details",
+      "patient-name": "Patient Name",
+      "service": "Service Type",
+      "booking-date": "Booking Date",
+      "doctor-name": "Doctor Name",
+      "waiting-time": "Waiting Time",
+      "clinic-address": "Clinic Address",
+      "add-additional-files": "Add Additional Files",
+      "my-appointments": "My Appointments",
+      "floor": "Floor Number",
+      "Appatrment": "Appatrment Number",
+      "offer": "Booked By Offer",
+      "symptomtitle": "Patient Symptoms",
+      "symptoms": "Symptoms",
+      "comment": "comment",
+      "Patient-Age": "Patient Age",
+      "no-data": "No symptoms available"
+    }
+  },
+  "medical-history": {
+    "Add-New-Medical-Record": "Add New Medical Record",
+    "MedicalExaminationTypeImage": "MedicalExaminationTypeImage",
+    "Diagnosis": "Diagnosis",
+    "Save": "Save",
+    "Medications": "Medications",
+    "Attachments": "Attachments",
+    "there-is-no-data-to-show": "there is no data to show",
+    "Upload-document-or-report": "Upload document or report"
+  },
+  "pages": {
+    "Hospitals": "Hospitals",
+    "Polyclinics": "Polyclinics",
+    "Pharmacies": "Pharmacies",
+    "Laboratories": "Laboratories",
+    "emergency": "Emergency",
+    "radiology-center": "Radiology Center",
+    "Egypt": "Egypt",
+    "Filters": "Filters",
+    "Hospital": "Hospital",
+    "No-Results": "No Results Found",
+    "No-results-found": "Try to change your location to see more available results.",
+    "No-invoices-found": "You don’t have any invoices yet. Once transactions are made, your invoices will appear here.",
+    "Reviews": "Reviews",
+    "Call": "Call",
+    "Load-More": "Load More"
+  },
+  "questions-answers": {
+    "title": "Questions & Answers",
+    "card": {
+      "speciality": "Speciality Type",
+      "question": "Question",
+      "name": "Name",
+      "age": "Age",
+      "chronic-diseases": "Chronic diseases",
+      "pre-surgery": "Previous Surgery",
+      "show-answers": "Show Answers",
+      "gender": "gender"
+    },
+    "answers": {
+      "details": "Answer Details",
+      "date": "Date",
+      "doc-name": "Doctor Name",
+      "ans": "Answer",
+      "close": "Close",
+      "book": "Book"
+    }
+  },
+
+  "authentication": {
+    "authentication-layout": {
+      "help": "Help",
+      "lay": "Salamtak ... Our aim. ",
+      "out": "Salamtak application is designed to improve health care services and facilities communication between patients and doctors in a manner that serves both thier interests.",
+      "las": "Now,is easer than ever. with a mere touch on your mobile phone. you can instantly book Salamtak inclinic booking, Home visit , Salamtak Connect (call-video call )"
+    },
+    "forgot-password": {
+      "title": "Forgot Password",
+      "description": "Enter your email or phone or phone number we will send you a code to reset the password"
+    },
+    "login": {
+      "title": "Login",
+      "description": "Salamtak website It gives you the ability to control the dates of medical disclosures of all kinds as well as statistics about your work",
+      "remember-me": "Remember me",
+      "forgot-password": "Forgot Password?",
+      "dont-have-an-account": "Don’t have an account?",
+      "create-free-account": "Sign up",
+      "welcome-user": "Welcome"
+    },
+    "new-password": {
+      "title": "New Password"
+    },
+    "reset-successfully": {
+      "title": "Password reset successfully",
+      "description": "Password reset successfully"
+    },
+    "sign-up": {
+      "title": "Sign Up",
+      "upload-your-photo": "Upload your photo",
+      "i-agree-to-the": "By signing up you agree to",
+      "terms-and-conditions": "Terms and Conditions",
+      "terms-required": "Terms and Conditions is required",
+      "are-you-have-an-account": "Do You Have An Account ?",
+      "login": "Login",
+      "optional": "Optional"
+    },
+    "verification-code": {
+      "title-create-account": "Phone Verification",
+      "title-forgot-password": "OTP",
+      "description": "Verification Code Is Send To",
+      "verification-code-will-be-sent-within": "Verification code will be sent within",
+      "remain": "Remaining Time",
+      "resend-code": "Resend Activation code",
+      "code": "Verification Code Sent Successfully",
+      "suc": "successfully",
+      "opps": "Oops...",
+      "mess": "Invalid Verification Code !"
+    },
+    "contact-us": {
+      "For-support-call-us": "For support call us"
+    }
+  },
+  "about-us": {
+    "title": {
+      "label": "Salamtak – Your Health, Our Aim",
+      "description": "Salamtak is your medical companion, connecting you with top doctors and healthcare services effortlessly. Save time, effort, and money—all with just one tap!"
+    },
+    "mission": {
+      "label": "Our Mission",
+      "description": "Everyone deserves quality healthcare. At Salamtak, we bring medical services closer to you through:",
+      "mission-services": [
+        {
+          "img": "assets/background/Group1.svg",
+          "name": "Clinic Appointments ",
+          "role": "with top doctors in all specialties."
+        },
+        {
+          "img": "assets/background/Group5.svg",
+          "name": "A Smooth Experience",
+          "role": "via an advanced and user-friendly app."
+        },
+        {
+          "img": "assets/background/Group4.svg",
+          "name": "24/7 Customer Support",
+          "role": "to ensure the best service experience."
+        }
+      ]
+    },
+    "salamtak": {
+      "description": "Because your health matters, Salamtak is always by your side."
+    },
+    "vision": {
+      "label": "Our Vision",
+      "description": "To be the first choice for healthcare in Egypt, bridging the gap between patients and providers while delivering high-quality medical services.",
+      "vision-services": [
+        {
+          "img": "assets/background/Group2.svg",
+          "name": "Trusted Healthcare Network",
+          "role": "Building a strong connection between patients and trusted healthcare providers."
+        },
+        {
+          "img": "assets/background/Group3.svg",
+          "name": "Seamless Access to Care",
+          "role": "Making healthcare accessible anytime, anywhere for everyone."
+        },
+        {
+          "img": "assets/background/Group1.svg",
+          "name": "Excellence in Medical Services",
+          "role": "Delivering top-quality, reliable, and patient-centered healthcare."
+        }
+      ]
+    },
+    "services": {
+      "title": "Our Services",
+      "salamtak-services": [
+        {
+          "name": "سلامتك: Connect",
+          "role": "Get answers to all your medical concerns through video or phone consultations with Salamtak expert doctors.",
+          "image": "assets/background/about/Logo/Connect.png"
+        },
+        {
+          "name": "سلامتك Angel",
+          "role": "Your guide for simple medical consultations and access to high-quality healthcare services.",
+          "image": "assets/background/about/Logo/Angel.png"
+        },
+        {
+          "name": "سلامتك Booking",
+          "role": "Instantly book a clinic appointment with Salamtak top doctors across all specialties and locations.",
+          "image": "assets/background/about/Logo/Booking.png"
+        },
+        {
+          "name": "سلامتك Support",
+          "role": "A dedicated team available 24/7 to enhance your experience with the Salamtak app.",
+          "image": "assets/background/about/Logo/Support.png"
+        },
+        {
+          "name": "سلامتك Home Care",
+          "role": "Expert medical care at your doorstep. Whether through voice or video consultations, Salamtak Home Care connects you with specialists in physiotherapy, mental health, nutrition, and more. We also provide daily home care services, ensuring personalized support that meets your health needs with comfort and ease.",
+          "image": "assets/background/about/Logo/Home Care.png"
+        },
+        {
+          "name": "سلامتك polyclinics",
+          "role": "Your one-stop destination for specialized care. Polyclinics offer a wide range of medical services within a single specialty, led by highly qualified doctors at all levels—from general practitioners to senior consultants—ensuring top-quality healthcare tailored to your needs.",
+          "image": "assets/background/about/Logo/polyclinics.png"
+        },
+        {
+          "name": "سلامتك Labs",
+          "role": "Precision matters. Our advanced laboratories and Radiology centers provide accurate diagnostic tests, giving your doctor the essential insights needed for a precise diagnosis and effective treatment plan.",
+          "image": "assets/background/about/Logo/Labs-analysis.png"
+        },
+        {
+          "name": "سلامتك Radiology",
+          "role": "Precision matters. Our advanced laboratories and Radiology centers provide accurate diagnostic tests, giving your doctor the essential insights needed for a precise diagnosis and effective treatment plan.",
+          "image": "assets/background/about/Logo/Radiology.png"
+        },
+        {
+          "name": "سلامتك Home Visit",
+          "role": "brings medical care straight to your home! Through our app, you can book home visits in various specialties, ensuring expert healthcare is always within reach—whether at home or beyond the clinic.",
+          "image": "assets/background/about/Logo/Home Visit.png"
+        }
+      ]
+    },
+    "whysalamtak": {
+      "title": "Why Choose Salamtak?",
+      "first-feature": {
+        "label": "Easy Communication with Expert Doctors ",
+        "description": "Connect with specialists anytime, anywhere.."
+      },
+      "second-feature": {
+        "label": "Comprehensive Medical Services ",
+        "description": "(Clinic visits, home visits, video & phone consultations)."
+      },
+      "third-feature": {
+        "label": "Instant & Easy Booking with top specialists. ",
+        "description": "Book appointments quickly with trusted doctors.."
+      },
+      "fourth-feature": {
+        "label": "High-quality care tailored to your needs.",
+        "description": "Personalized healthcare focused on you."
+      },
+      "fifth-feature": {
+        "label": "Nationwide Coverage",
+        "description": "Access healthcare services across multiple cities and regions."
+      },
+      "six-feature": {
+        "label": "24/7 Support",
+        "description": "Call us anytime at 17143."
+      }
+    },
+    "contact-us": {
+      "label": "Contact Us",
+      "description": "We’re here to help anytime! Feel free to reach out for support or to share your suggestions."
+    }
+  }
+}

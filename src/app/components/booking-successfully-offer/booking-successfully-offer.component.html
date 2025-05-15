@@ -1,0 +1,205 @@
+<section class="booking-successfully">
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-lg-7  order-lg-1 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <br>
+              <h3 class="text-center animate__animated animate__flash">
+                <img src="assets/icons/Tick Square.svg" alt="">
+                {{'booking-successfully.title' | transloco}}
+              </h3>
+              <div class="text-center wallpaper">
+                <img src="assets/background/booking-successfully.png">
+              </div>
+
+              <div class="items">
+                <div class="row">
+                  <div class="col-auto">
+                    <img src="assets/icons/calendar.svg" alt="" style="margin-top: 10px;">
+                  </div>
+                  <div class="col">
+                    <img src="assets/icons/calendar.svg" style="opacity: 0;">
+                    <p style="margin-left: -15px; margin-top: -15px;">
+                      {{'booking-successfully.booking-details.title' | transloco}}
+                    </p>
+                  </div>
+                </div>
+                <div class="row reservation-details">
+                  <div class="col">
+                    <div>
+                      <div class="row">
+                        <div class="col-12 col-lg-6 title text-secondary-dark">
+                          {{'booking-successfully.booking-details.patient-name' | transloco}}
+                        </div>
+                        <div class="col-12 col-lg-6 text-left answer text-dark" *ngIf="IsEnglish">
+                          {{username}}
+                        </div>
+                        <div class="col-12 col-lg-6 text-left answer text-dark" *ngIf="IsArabic">
+                          {{username}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 col-lg-6 title text-secondary-dark">
+                          {{'booking-successfully.clinic-number' | transloco}}
+                        </div>
+                        <div class="col-12 col-lg-6 text-left answer text-dark">
+                          {{booking['clinic']['Phone']}}
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-12 col-lg-6 title text-secondary-dark">
+                          {{'booking-successfully.examination-fees' | transloco}}
+                        </div>
+                        <div class="col-12 col-lg-6 text-left answer text-dark" *ngIf="IsEnglish">
+                          {{this.fees}}  LE
+                        </div>
+                        <div class="col-12 col-lg-6 text-left answer text-dark" *ngIf="IsArabic">
+                          {{this.fees}}  جنيه
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-12 col-lg-6 title text-secondary-dark">
+                          {{'booking-successfully.booking-details.service' | transloco}}
+                        </div>
+                        <div class="col-12 col-lg-6 text-left answer text-dark">
+                          {{booking['appointment']['Name']}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 col-lg-6 title text-secondary-dark">
+                          {{'booking-successfully.booking-details.booking-date' | transloco}}
+                        </div>
+                        <div class="col-12 col-lg-6 text-left answer text-dark">
+                          {{returnWeekDay(booking['day'])}} /{{convertTime24to12(booking['time'])}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 col-lg-6 title text-secondary-dark">
+                          {{'booking-successfully.booking-details.doctor-name' | transloco}}
+                        </div>
+                        <div class="col-12 col-lg-6 text-left answer text-dark" *ngIf="IsEnglish">
+                          {{booking['doctor']['FirstName']}}
+                          {{booking['doctor']['MiddelName']}}
+                          {{booking['doctor']['LastName']}}
+                        </div>
+                        <div class="col-12 col-lg-6 text-left answer text-dark" *ngIf="IsArabic">
+                          {{booking['doctor']['FirstNameAr']}}
+                          {{booking['doctor']['MiddelNameAr']}}
+                          {{booking['doctor']['LastNameAr']}}
+                        </div>
+                      </div>
+
+                      <div class="row" style="border-bottom: none;">
+                        <div class="col-12 col-lg-6 title text-secondary-dark">
+                          {{'booking-successfully.booking-details.clinic-address' | transloco}}
+                        </div>
+
+                        <div class="col-12 col-lg-6 text-left answer text-dark" >
+                          <!-- {{this.area}} <br>
+                          {{this.address}} -->
+
+                          {{booking?.clinic?.Address}} -
+                          {{booking?.clinic?.AreaName}} -
+                          {{booking?.clinic?.CityName}}
+                        </div>
+
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="col-lg-5  order-lg-2 mb-4">
+          <div class="card shadow-sm">
+            <div class="card-header py-4 bg-primary text-white">
+              <h4 class="mb-0">{{ 'booking-successfully.booking-details.symptomtitle' | transloco }}</h4>
+            </div>
+
+            <div class="card-body">
+              <form>
+                <div class="row mb-4">
+                  <div class="col-12">
+                    <label for="ageInput">
+                      <strong>{{ 'booking-successfully.booking-details.Patient-Age' | transloco }} :</strong>
+                    </label>
+                    <input type="number" id="ageInput" class="form-control"  placeholder="{{ 'booking-successfully.booking-details.Patient-Age' | transloco }}">
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <h5>{{ 'booking-successfully.booking-details.symptoms' | transloco }} :</h5>
+                  <div class="row">
+                    <div class="col-md-12 mb-3">
+                      <!-- <mat-select formControlName="selectedSymptoms"  multiple (selectionChange)="onSymptomSelect($event)">
+                        <mat-select-filter placeholder="Search Symptoms..." [displayMember]="'Name'" [array]="symptomps" (filteredReturn)="filteredSymptoms = $event"></mat-select-filter>
+
+                        <mat-option *ngFor="let symptom of filteredSymptoms" [value]="symptom.Id">
+                          {{ symptom.Name }}
+                        </mat-option>
+
+
+                        <mat-option *ngIf="filteredSymptoms.length === 0" disabled>
+                          {{ 'booking-successfully.booking-details.no-data' | transloco }}
+                        </mat-option>
+
+                      </mat-select> -->
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <label for="patientcomment">
+                    <strong>{{ 'booking-successfully.booking-details.comment' | transloco }} :</strong>
+                  </label>
+                  <textarea id="patientcomment" class="form-control"  rows="4" placeholder="{{ 'booking-successfully.booking-details.comment' | transloco }}"></textarea>
+                </div>
+
+                <!-- <div class="actions">
+                  <div class="row">
+                    <div class="col">
+                      <button class="btn" type="submit">
+                        {{ 'booking-successfully.booking-details.my-appointments' | transloco }}
+                      </button>
+                    </div>
+                  </div>
+                </div> -->
+
+                <div class="actions">
+                  <div class="row">
+
+                    <div class="col">
+                      <button class="btn btn-info text-white"
+                      [routerLink]="['my-schedule' | route ]"
+                      [queryParams]="{id: booking['id']}"
+                      >
+                        {{'booking-successfully.booking-details.my-appointments' | transloco}}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+  </section>

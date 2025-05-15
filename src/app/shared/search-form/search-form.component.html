@@ -1,0 +1,112 @@
+
+  <section class="search-form ">
+    <form>
+      <h3 class="text-info animate__animated animate__fadeInUp"
+          *ngIf="!form.loading &&  (subSpecialtyTitle && !(form.specialty.selectedValue?.length > 0 || form.city.selectedValue?.length > 0 || (form.area.selectedValue && form.area.selectedValue.length > 0)))"
+      >
+        {{subSpecialtyTitle[language.getActiveLang()] || ''}}
+      </h3>
+      <h3 *ngIf="!form.loading && (form.specialty.selectedValue?.length > 0 || form.city.selectedValue?.length > 0 || (form.area.selectedValue && form.area.selectedValue.length > 0))" class="text-info animate__animated animate__fadeInUp">
+        {{ 'search-form.Book-with-the-best-doctor' | transloco }}
+
+        <ng-container *ngIf="form.specialty.selectedValue?.length > 0 && !subSpecialtyUrlValue">
+          {{ form.specialty.selectedValue[0]?.Name }}
+        </ng-container>
+        <ng-container *ngIf="form.specialty.selectedValue?.length > 0 && subSpecialtyUrlValue">
+          {{subSpecialtyUrlValue}}
+        </ng-container>
+
+        <ng-container *ngIf="form.area.selectedValue && form.area.selectedValue.length > 0">
+          {{ 'search-form.in' | transloco }} {{ form.area.selectedValue[0]?.Name }}
+        </ng-container>
+        <ng-container *ngIf="(form.city.selectedValue && form.city.selectedValue.length > 0) && !(form.area.selectedValue && form.area.selectedValue.length > 0)">
+          {{ 'search-form.in' | transloco }} {{ form.city.selectedValue[0]?.Name }}
+        </ng-container>
+      </h3>
+      <div class="main">
+        <div >
+
+          <ng-multiselect-dropdown
+              [placeholder]="'search-form.specialty.placeholder' | transloco"
+              [settings]="dropdownSettings"
+              [data]="form.specialty.list"
+              [(ngModel)]="form.specialty.selectedValue"
+              [ngModelOptions]="{standalone: true}"
+              class="specialty search"
+              (onDeSelect)="form.specialty.selectedValue = []"
+
+          >
+          </ng-multiselect-dropdown>
+
+        </div>
+        <div>
+
+
+          <ng-multiselect-dropdown
+              [placeholder]="'search-form.city.placeholder' | transloco"
+              [settings]="dropdownSettings"
+              [data]="form.city.list"
+              [(ngModel)]="form.city.selectedValue"
+              [ngModelOptions]="{standalone: true}"
+              (onSelect)="getAreas($event);form.area.selectedValue = [];"
+              (onDeSelect) ="form.area.selectedValue = [];form.area.list = []"
+              class="search"
+          >
+          </ng-multiselect-dropdown>
+
+        </div>
+        <div>
+
+
+<!-- {{selectedCity}} -->
+          <!-- <ng-multiselect-dropdown
+          [placeholder]= "'search-form.area.placeholder' | transloco"
+          [settings]="dropdownSettings"
+          [data]="areas"
+          [(ngModel)]="selectedArea"
+          [ngModelOptions]="{standalone: true}"
+          (onSelect)="setSelectedArea($event);setTitle()"
+          (onDeSelect) ="deselectoption('search-form-area')"
+      >
+      </ng-multiselect-dropdown> -->
+      <ng-multiselect-dropdown
+      [placeholder]= "'search-form.area.placeholder' | transloco"
+      [settings]="dropdownSettings"
+      [data]="form.area.list"
+      [(ngModel)]="form.area.selectedValue"
+      [ngModelOptions]="{standalone: true}"
+      (onDeSelect) ="form.area.selectedValue = []"
+      class="search"
+  >
+  </ng-multiselect-dropdown>
+
+
+        </div>
+
+        <div class="me-4">
+
+          <input type="text" [(ngModel)]="form.doctorName" name="name" style="color: #e5e5e5 ;margin-top: 7px; text-align: center; border-radius: 5px ; border: 1px solid #e5e5e5;"
+          [placeholder]  = "'search-form.name.placeholder' | transloco"
+          class="search "
+          >
+        </div>
+        <div>
+
+          <button (click)="search()" class="btn btn-search" type="button" aria-label="search" style="margin-top: 7px; padding: 10px;"
+          [disabled]="form.loading"
+
+          >
+
+
+              @if(form.loading){
+                <div class="spinner-border text-light" role="status">
+                  <span class="sr-only"></span>
+                </div>
+              } @else {
+                <p style="margin-bottom: 0px; padding: 0px 20px; color: white;  ;">{{'search-form.search.placeholder' | transloco}}</p>
+              }
+          </button>
+        </div>
+      </div>
+    </form>
+  </section>

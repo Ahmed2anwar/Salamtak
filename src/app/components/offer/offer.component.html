@@ -1,0 +1,74 @@
+<section class="blogs pt-5 mt-5">
+  <div class="container">
+    <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">
+            {{'app-name' | transloco}}
+          </a></li>
+        <li class="breadcrumb-item"><a href="javascript:void(0)">
+            {{'blogs.salamtakOffer' | transloco}}
+          </a></li>
+      </ol>
+    </nav>
+
+
+
+    @if ( offers.length == 0) {
+    <div class="no-results text-center">
+      <div class="card rounded-3 py-5"
+        style="border: 1px solid #E9EAEF ;box-shadow: none; box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 20px -20px;">
+        <div class="card-body">
+          <img src="assets/icons/no-results.svg" class="my-3" alt="no-results">
+          <h5 class="my-2 fw-bold">{{ 'find-a-doctor.doctors-list.no-results.no-current' | transloco }}</h5>
+          <p>{{ 'find-a-doctor.doctors-list.no-results.details-noCuurent' | transloco }}
+            <span>{{ 'find-a-doctor.doctors-list.no-results.detail-curr' | transloco }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    }
+    <div class="offer-container">
+      <div class="offer-card" *ngFor="let offer of offers">
+        <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple"
+          [fullScreen]="true" class="spinner"></ngx-spinner>
+        <div class="image-container">
+          <img src="{{storageUrl}}{{offer.L1image}}" alt="Offer Image" class="offer-image">
+          <p class="offer-discount">{{ offer.DiscountPerc }}% {{'doctor-profile.book-form.off' | transloco}}</p>
+        </div>
+        <div class="offer-details">
+          <h2>{{ offer.ServiceName }}</h2>
+          <div class="doctor-info">
+            <img src="{{storageUrl}}{{offer.doctorDto.Image}}" alt="Doctor Image" class="doctor-image">
+            <p class="doctor-name" *ngIf="lang=='en'">{{ offer.doctorDto.FullName }}</p>
+            <p class="doctor-name" *ngIf="lang=='ar'">{{ offer.doctorDto.FullNameAr }}</p>
+          </div>
+          <p class="price-before"> <del>{{ offer.PriceBefore}}</del></p>
+          <p class="price-after"><strong>{{'doctor-profile.book-form.price-Afer' | transloco}}:</strong> {{
+            offer.PriceAfter }}</p>
+          <p><strong>{{'doctor-profile.book-form.Start-Date' | transloco}}:</strong> {{ offer.StartDate | date }}</p>
+          <p><strong>{{'doctor-profile.book-form.End-Date' | transloco}}:</strong> {{ offer.EndDate | date }}</p>
+          <div class="p-3 d-flex justify-content-center">
+            <button class="btn-book-now" (click)="onBookNow(offer.Id)"> {{ 'find-a-doctor.doctors-list.cards.book-now' |
+              transloco }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row g-4">
+      <div class="col-md-4"  *ngFor="let offer of offers">
+        <div class="card" >
+          <img src="{{storageUrl}}{{offer.L1image}}" alt="Offer Image" class="offer-image">
+          <p class="offer-discount">{{ offer.DiscountPerc }}% {{'doctor-profile.book-form.off' | transloco}}</p>
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s
+              content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

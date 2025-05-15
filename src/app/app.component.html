@@ -1,0 +1,22 @@
+<ngx-spinner type="ball-scale-multiple">
+  <div class="wrapper">
+    <div class="circle"></div>
+  </div>
+</ngx-spinner>
+
+@if(lang){
+  <router-outlet />
+}
+
+
+<ul hidden>
+  @for(link of links;track null){
+    <li>
+      <a
+        [routerLinkActive]="['active']"
+        href="javascript:void(0);"
+        [routerLink]="[link]"
+      >{{ link }}</a>
+    </li>
+  }
+</ul>

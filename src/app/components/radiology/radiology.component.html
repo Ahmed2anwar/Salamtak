@@ -1,0 +1,133 @@
+<section class="list main-card-app ">
+  <div class="container">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">
+          {{ 'app-name' | transloco }}
+        </a></li>
+        <li class="breadcrumb-item"><a href="javascript:void(0)">
+          <!-- Laboratories -->
+          <!-- {{ 'pages.Laboratories' | transloco }} -->
+            Radiology
+        </a></li>
+        <!-- <li class="breadcrumb-item"><a href="javascript:void(0)">
+          Egypt
+          {{ 'pages.Egypt' | transloco }}
+        </a></li> -->
+      </ol>
+    </nav>
+
+    <div>
+      <div class="row">
+        <div class="col-lg-10 " id="list" >
+          <!-- Analysis Selection -->
+          <div class="dropdown w-100">
+            <button class="form-control text-start dropdown-toggle" type="button" (click)="toggleDropdown()">
+              Select Analysis
+            </button>
+            <div class="dropdown-menu w-100 p-2" [class.show]="isDropdownOpen && analyses.length > 0">
+              <div *ngFor="let analysis of analyses" class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  [id]="'analysis-' + analysis.Id"
+                  [checked]="isSelected(analysis.Id)"
+                  (change)="onAnalysisSelect(analysis)"
+                />
+                <label [for]="'analysis-' + analysis.Id" class="form-check-label">
+                  {{ analysis.Name }}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Search Button -->
+          <button
+            class="btn btn-primary mt-3"
+            (click)="onSearch()"
+            [disabled]="selectedAnalyses.length === 0"
+            >
+              Search
+          </button>
+          <!-- Display Lab Branches if available -->
+<div *ngIf="labBranches.length > 0" class="row">
+  <div *ngFor="let branch of labBranches" class="col-md-4 mb-4">
+    <div class="card shadow-sm m-2" style="border: 2px solid #2B2979;">
+      <img
+        class="image-lab"
+        [src]="getImageUrl(branch.Image)"
+        alt="{{ branch.Name }}"
+        class="card-img-top img-fluid"
+      />
+      <div class="card-body text-center pb-0">
+        <h5 class="card-title" style="color:#2B2979;">{{ branch.Name }}</h5>
+        <h5 class="card-title" style="color:#2B2979;">
+          {{ branch.CityName }} - {{ branch.AreaName }}
+        </h5>
+        <p class="card-title" style="font-size: 14px; color:#2B2979;">
+          {{ branch.BranchAddress }}
+        </p>
+        <hr />
+        <h5 class="card-title" style="color:#2B2979;">
+          {{ branch.ServiceAvailabilityMessage }}
+        </h5>
+      </div>
+      <div>
+        <button class="btn book btn-primary w-100" (click)="onBookNow(branch)">
+          {{ 'find-a-doctor.doctors-list.cards.book-now' | transloco }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Display Labs if no branches are available -->
+<div *ngIf="labBranches.length === 0" class="row">
+  <div *ngFor="let lab of labs" class="col-md-4 mb-4">
+    <div class="card shadow-sm m-2" style="border: 2px solid #2B2979;">
+      <img
+        class="image-lab"
+        [src]="getImageUrl(selectedTypeIds.length > 0 ? lab.LabImage : lab.Image)"
+        alt="{{ lab.Name }}"
+        class="card-img-top img-fluid"
+      />
+      <div class="card-body text-center pb-0">
+        <h5 class="card-title" style="color:#2B2979;">{{ lab.Name }}</h5>
+        <h5 class="card-title" style="color:#2B2979;" *ngIf="selectedTypeIds.length > 0">
+          {{ lab.CityName }} - {{ lab.AreaName }}
+        </h5>
+        <p class="card-title" style="font-size: 14px; color:#2B2979;" *ngIf="selectedTypeIds.length > 0">
+          {{ lab.BranchAddress }}
+        </p>
+        <hr />
+        <h5 class="card-title" style="color:#2B2979;" *ngIf="selectedTypeIds.length > 0">
+          {{ lab.ServiceAvailabilityMessage }}
+        </h5>
+      </div>
+      <div>
+        <button class="btn book btn-primary w-100" (click)="onBookNow(lab)">
+          {{ 'find-a-doctor.doctors-list.cards.book-now' | transloco }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Validation Message -->
+<div *ngIf="showValidationMessage" class="alert alert-warning mt-3">
+  You must select at least one analysis from the list.
+</div>
+
+
+        </div>
+      </div>
+
+
+
+      </div>
+
+
+  </div>
+</section>
+
+

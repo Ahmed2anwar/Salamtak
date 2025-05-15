@@ -1,0 +1,280 @@
+$main-font : 'Alexandria',sans-serif;
+
+html[dir="rtl"] {
+  body{
+    app-header{
+      .collapse{
+        &.show{
+          .user .user-name{
+            color: #000;
+          }
+        }
+      }
+
+      }
+      .navbar .user .user-name{
+        color: #fff ;
+      }
+      .navbar .user .notification{
+        margin-right: 0;
+        margin-left: 10px;
+      }
+      .navbar .user .user-img{
+        margin-left: 0;
+        margin-right: 10px;
+      }
+      .navbar .hamburger{
+        left: 20px;
+      }
+
+      nav.sticky{
+        .user .user-name{
+          color: #000 !important;
+        }
+      }
+    }
+    app-home{
+      section.main{
+        h1{
+          text-align: right;
+        }
+      }
+      section.trusted{
+        h1{
+          text-align: right;
+        }
+      }
+      section.top-specialties{
+        .card .card-footer{
+          text-align: right;
+        }
+      }
+      section.popular-doctors .card .description {
+        min-height: 85px ;
+        text-align: right;
+        padding-top: 10px;
+      }
+    }
+    app-search-form{
+      h4{
+        text-align: right;
+      }
+      .search-form form .main > div:nth-child(1) mat-select{
+        border-radius: 0 10px 10px 0 !important;
+      }
+      .search-form form .main > div button{
+        border-radius: 10px 0 0 10px !important;
+      }
+      .search-form form .main > div mat-select, .search-form form .main > div input{
+        font-size: 13px;
+      }
+      .search-form{
+        *{
+          font-family: $main-font;
+        }
+      }
+    }
+    // app-find-a-doctor
+    .main-card-app{
+      .filter-tools{
+        .text-end{
+          text-align: end !important;
+        }
+      }
+
+      .cards{
+        .card{
+          .info{
+            margin-left: 0;
+            margin-right: 15px;
+          }
+          .work-data{
+            img{
+              margin-right: 0;
+              margin-left: 7px;
+            }
+            .answer{
+              p{
+                text-align: right ;
+              }
+            }
+          }
+        }
+      }
+      .filters-menu{
+         accordion-group .accordion-toggle[aria-expanded=true]:before, accordion-group .accordion-toggle[aria-expanded=false]:before{
+          right: auto;
+          left: 14px ;
+        }
+      }
+    }
+    app-doctor-profile{
+      .card.info{
+        .user{
+          .image{
+            img{
+              margin-right: 0;
+              margin-left: 15px;
+            }
+          }
+        }
+      }
+      .card.clinic{
+        .image{
+          margin-right: 0  !important;
+          margin-left: 10px;
+
+        }
+        .rows {
+          img{
+            margin-right: 0;
+            margin-left: 7px;
+          }
+
+        }
+        .answer{
+          span{
+            text-align: left ;
+            display: block;
+          }
+        }
+      }
+    }
+    app-book-form{
+      .card.booking .card-body .info .d-flex p span{
+        float: left;
+      }
+      .card.booking .card-body .info .d-flex img{
+        margin-right: 0;
+        margin-left: 10px;
+      }
+    }
+    app-profile{
+
+      .md-stepper-horizontal{
+        direction: ltr;
+        transform: scaleX(-1);
+        .md-step-title{
+          transform: scaleX(-1);
+        }
+      }
+      .form-group a{
+        text-align: right !important;
+      }
+      .form-group,.mdc-button__label,button,p{
+        font-family: $main-font !important;
+        *{
+          font-size: 13px;
+          text-align: right;
+        }
+      }
+      .errors-area{
+        p{
+          font-size: 14px;
+          margin-top: 20px;
+
+        }
+      }
+      .card a img.icon{
+        left: 5px;
+        right: auto;
+      }
+    }
+    section.auth .was-validated .form-control:invalid, section.auth .form-control.is-invalid{
+      background-position : left calc(0.375em + 0.1875rem) center !important
+    }
+
+
+
+  // dropdowns
+  .userDropdown button img{
+    margin-right: 0 ;
+    margin-left: 10px;
+  }
+  .mat-mdc-menu-content, .mat-mdc-menu-content .mat-mdc-menu-item {
+    span{
+      font-family: $main-font;
+      font-size: 13px;
+    }
+  }
+  mat-select,mat-option,.mat-mdc-select-panel form input{
+    font-size: 13px;
+    font-family: $main-font;
+  }
+
+  // breadcrumb
+  .breadcrumb{
+    width: 100%;
+    direction: rtl;
+    text-align: right;
+    display: flex;
+    justify-content: flex-start;
+    .breadcrumb-item{
+      &::before{
+        padding-left: 10px;
+        float: right;
+      }
+    }
+  }
+  section#authentication-layout{
+    .help{
+      right: auto !important;
+      left: 20px;
+    }
+  }
+  section.auth .password-area .visibility{
+    right: auto;
+    left: 15px;
+  }
+  section.auth .col-6 .form-check{
+    display: flex;
+    justify-content: flex-start;
+    label{
+      padding-right: 36px;
+    }
+  }
+  // .multiselect-dropdown .dropdown-btn .selected-item-container .selected-item a{
+  //   left: 36px;
+  //   right: auto;
+  // }
+  // section.my-schedule section.main-card-app .card .user .info .dots{
+  //   right: auto;
+  //   left: 10px;
+  // }
+
+  // Download Section.
+  section.download .content .apps a:last-of-type {
+    margin-right: 8px;
+  }
+
+  .clinic-area{
+    padding-right: 10px;
+  }
+  .questions-container p.question{
+    text-align: right;
+  }
+
+  .search-form form .main > div:nth-child(1) {
+    border-radius: 0 10px 10px 0 !important;
+  }
+
+  .about-container,section.popular-doctors
+  {
+    direction: rtl;
+    section.popular-doctors h3.title {
+      text-align: right;
+      
+    }
+
+    .ourservices{
+      left: 31px;
+    }
+
+    .header-salamtak{
+      right:403px
+    }
+    .image-salamtak {
+      left: 690px;
+    }
+  }
+}

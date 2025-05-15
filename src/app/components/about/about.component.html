@@ -1,0 +1,331 @@
+<div class="about-container mt-5 pt-5">
+    <section class="main pt-2">
+      <div class="container overflow-hidden">
+        <div
+          class="row g-4 align-items-center"
+          style="background-color: #2c2979; border-radius: 10px"
+        >
+          <div class="col-md-7 px-5 pt-lg-0 pt-4">
+            <div class="custom-content pe-md-4">
+              <h2 class="custom-heading text-white fw-bold">
+                {{ "about-us.title.label" | transloco }}
+              </h2>
+              <p class="text-white pt-4 pe-md-4 ">
+                {{ "about-us.title.description" | transloco }}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <img
+              src="../../../../../assets/Doctor-bg 1.svg"
+              class="overflow-hidden"
+              alt="img"
+              style="width: 90%"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--
+    <section class="company-info">
+      <h2 style="text-align: center; font-size: 40px">
+        {{ "about-us.mission.label" | transloco }}
+      </h2>
+      <p style="text-align: center">
+        {{ "about-us.mission.description" | transloco }}
+      </p>
+      <section class="team" style="margin: 0px">
+        <div class="team-grid">
+          <div class="team-member" *ngFor="let member of missoinServices | async">
+            <h3 style="color: #2b2979">{{ member.name }}</h3>
+            <p style="text-shadow: 0px 0px 2px #2b2979">{{ member.role }}</p>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="mission">
+      <h2 style="text-align: center; font-size: 40px">
+        {{ "about-us.vision.label" | transloco }}
+      </h2>
+      <p style="text-align: center">
+        {{ "about-us.vision.description" | transloco }}
+      </p>
+    </section> -->
+
+    <section style="margin-bottom: 100px">
+      <div class="container">
+        <div class="row g-3">
+          <div class="col-lg-5">
+            <img
+              src="/assets/mission.png"
+              class="img-fluid"
+              alt="Mission Image"
+            />
+          </div>
+          <div class="col-lg-7">
+            <div class="px-md-4">
+              <h2 class="text-black fw-bold pe-md-4">
+                {{ "about-us.mission.label" | transloco }}
+              </h2>
+              <p class="text-muted pt-2 mb-3 pe-md-4">
+                {{ "about-us.mission.description" | transloco }}
+              </p>
+
+              <div *ngFor="let service of missoinServices | async" class="d-flex pt-4">
+                <img
+                  [src]="service.img"
+                  alt="Icon"
+                />
+                <div class="ms-3">
+                  <h5 class="m-0" style="font-weight: 400">{{ service.name }}</h5>
+                  <p class="mb-0" style="color: #8088a4">{{ service.role }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="main" style="margin-bottom: 0px;">
+      <div class="container overflow-hidden p-0 rounded-3">
+        <div
+          class="row g-4 align-items-center"
+          style="background-color: #2c2979; border-radius: 10px"
+        >
+          <div class="col-md-7 px-md-4 py-4 ">
+            <div class="custom-content px-4">
+              <h2 class="custom-heading text-white fw-bold">
+                {{ "about-us.salamtak.description" | transloco }}
+              </h2>
+            </div>
+          </div>
+          <div class="col-md-5 pb-0 ">
+            <img
+              src="../../../../../assets/salamtak health.svg"
+              class="overflow-hidden img-doc"
+              alt="img"
+              style="width: 100%"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin: 120px 0 80px 0" >
+      <div class="container">
+        <div class="row g-3">
+
+          <div class="col-lg-7">
+            <div class="pe-md-4">
+              <h2 class="text-black fw-bold pe-md-4">
+                {{ "about-us.vision.label" | transloco }}
+              </h2>
+              <p class="text-muted pt-2 mb-3 pe-md-4">
+                {{ "about-us.vision.description" | transloco }}
+              </p>
+
+              <div *ngFor="let service of visionServices | async" class="d-flex pt-4">
+                <img
+                  [src]="service.img"
+                  alt="Icon"
+                />
+                <div class="ms-3">
+                  <h5 class="m-0" style="font-weight: 400">{{ service.name }}</h5>
+                  <p class="mb-0" style="color: #8088a4">{{ service.role }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <img
+              src="../../../assets/doctorr.svg"
+              class="img-fluid"
+              alt="Mission Image"
+            />
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section class="mission mt-5" style="margin-bottom: 80px; padding-bottom: 0px"
+    >
+    <div class="container">
+      <section class="team" style="margin: 0px; padding-bottom: 0px">
+        <div class="row g-4">
+          <div class="custom-content pe-4">
+            <h2 class="custom-heading text-black fw-bold">
+              {{ "about-us.services.title" | transloco }}
+            </h2>
+          </div>
+          <div class="col-lg-4 col-sm-6" *ngFor="let member of salamtakServices | async">
+            <div
+              class="card text-center p-3"
+              style="
+                border-radius: 10px;
+                border: 1px solid #e9eaef;
+                min-height: 320px;
+              "
+            >
+              <img
+                class="pt-2"
+                [src]="member.image"
+                style="width: 150px; margin: 0 auto; text-align: center"
+                [alt]="member.name"
+              />
+              <p class="text-muted pt-2" style="font-size: 16px">
+                {{ member.role }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      </div>
+    </section>
+
+    <section class="popular-doctors">
+      <div class="container">
+        <div class="row">
+          <h2
+            class="text-start text-black pb-4"
+            style="font-size: 32px; font-weight: 600"
+          >
+            {{ "about-us.whysalamtak.title" | transloco }}
+          </h2>
+        </div>
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-4">
+            <div class="row g-3">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="icon" style="">
+                      <img src="assets/background/Group1.svg" />
+                    </div>
+                    <h5 class="title">
+                      {{ "about-us.whysalamtak.first-feature.label" | transloco }}
+                    </h5>
+                    <p class="description">
+                      {{
+                        "about-us.whysalamtak.first-feature.description"
+                          | transloco
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="icon" style="">
+                      <img src="assets/background/Group5.svg" />
+                    </div>
+                    <h5 class="title">
+                      {{
+                        "about-us.whysalamtak.second-feature.label" | transloco
+                      }}
+                    </h5>
+                    <p class="description">
+                      {{
+                        "about-us.whysalamtak.second-feature.description"
+                          | transloco
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="icon" style="">
+                      <img src="assets/background/Group3.svg" />
+                    </div>
+                    <h5 class="title">
+                      {{ "about-us.whysalamtak.third-feature.label" | transloco }}
+                    </h5>
+                    <p class="description">
+                      {{
+                        "about-us.whysalamtak.third-feature.description"
+                          | transloco
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <img
+            class="mobile-img"
+              src="assets/Doctori.svg"
+              alt="logo"
+              style="width: 100%; height: 800px"
+            />
+          </div>
+          <div class="col-lg-4">
+            <div class="row g-3">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="icon" style="">
+                      <img src="assets/background/Group2.svg" />
+                    </div>
+                    <h5 class="title">
+                      {{
+                        "about-us.whysalamtak.fourth-feature.label" | transloco
+                      }}
+                    </h5>
+                    <p class="description">
+                      {{
+                        "about-us.whysalamtak.fourth-feature.description"
+                          | transloco
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="icon" style="">
+                      <img src="assets/background/Group6.svg" />
+                    </div>
+                    <h5 class="title">
+                      {{ "about-us.whysalamtak.fifth-feature.label" | transloco }}
+                    </h5>
+                    <p class="description">
+                      {{
+                        "about-us.whysalamtak.fifth-feature.description"
+                          | transloco
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="icon" style="">
+                      <img src="assets/background/Group4.svg" />
+                    </div>
+                    <h5 class="title">
+                      {{ "about-us.whysalamtak.six-feature.label" | transloco }}
+                    </h5>
+                    <p class="description">
+                      {{
+                        "about-us.whysalamtak.six-feature.description" | transloco
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <app-download-app></app-download-app>
+</div>

@@ -1,0 +1,35 @@
+.card {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.mat-dialog-actions .btn {
+  min-width: 100px;
+}
+
+.btn-primary {
+  background-color: #2b2979;
+  border-color: #2b2979;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1f1c59;
+  border-color: #1f1c59;
+}
+
+h1.head{
+  color: #2b2979;
+  font-weight: 300;
+}
+p.question{
+  max-width: 300px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+  }
