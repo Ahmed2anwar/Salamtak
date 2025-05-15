@@ -1,49 +1,57 @@
-textarea{
-    border: 1px solid rgb(0, 112, 205);
-    padding: 20px;
-    height: 100px;
-    font-size: 13px;
-    font-weight: 500;
-    width: 100%;
-    margin: 0;
-  
-    &:focus{
-      background: #fff;
-  
-    }
+textarea {
+  border: 1px solid rgb(233, 234, 235);
+  padding: 20px;
+  height: 200px;
+  font-size: 13px;
+  font-weight: 500;
+  width: 100%;
+  margin: 0;
+
+  &:focus {
+    background: #fff;
   }
-  .radio-toolbar {
-    margin: 10px;
-  }
-  
-    .radio-toolbar input[type="radio"] {
-        opacity: 0;
-        position: fixed;
-        width: 0;
-    }
-  
-    .radio-toolbar label {
-        display: inline-block;
-        background-color: #dde6eb;
-        padding: 10px 20px;
-        font-family: sans-serif, Arial;
-        font-size: 16px;
-        border: 1px solid rgb(0, 112, 205);
-        border-radius: 4px;
-        margin: 20px;
-    }
-  
-        .radio-toolbar label:hover {
-            background-color: #dfd;
-        }
-  
-    .radio-toolbar input[type="radio"]:focus + label {
-        border: 1px solid rgb(0, 112, 205);
-    }
-  
-    .radio-toolbar input[type="radio"]:checked + label {
-        background-color: rgb(80, 201, 222);
-        border-color: 1px solid rgb(0, 112, 205);
-    }
-  
-  
+}
+.radio-toolbar {
+  margin: 10px;
+}
+.radio-toolbar input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.radio-toolbar label {
+  display: inline-block;
+  padding: 10px 20px;
+  font-family: sans-serif, Arial;
+  font-size: 13px;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  margin: 10px 10px 10px 0;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.radio-toolbar input[type="radio"]:focus + label {
+  border: 1px solid #000;
+  color: white;
+  background-color: #000;
+  cursor: pointer;
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+  background-color: none;
+  border-color: none;
+}
+
+.form-control:focus {
+  box-shadow: none !important;
+  border-color: #ced4da;
+}
+
+.form-control::placeholder {
+  font-size: 0.8rem;
+  color: #646464;
+}

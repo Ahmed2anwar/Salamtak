@@ -1,28 +1,4 @@
-<!--
-    "doctor-profile":{
-    "views" : "Views",
-    "specialized-in" : "Specialized in",
-    "book-now" : "Book Now",
-    "about-doctor" : "About Doctor",
-    "doctor-clinics" : "Doctor Clinics",
-    "you-can-book-now-at" : "You can book now at",
-    "address" : "Address",
-    "waiting-time" : "Waiting Time",
-    "fees" : "Fees",
-    "photos-of-clinic" : "Photos of Clinic",
-    "reviews" : "Reviews",
-    "book-form":{
-      "title" : "Booking Information",
-            "description" : "Book now to receive the clinic’s address details and phone number",
 
-      "appointments-type" : "Appointments Type",
-      "choose-clinic" : "Choose Clinic",
-      "appointments-available" : "Appointments available",
-      "book-online-pay-at-the-clinic" : "Book online, Pay at the clinic!",
-      "doctor-requires-reservation" : "Doctor requires reservation!"
-    }
-  }
- -->
  <div class="card booking" id="book" >
     <div class="card-header">
       <!-- Booking Information -->
@@ -47,7 +23,7 @@
                           LE</span>
                       </p>
                     </div>
-        
+
                   </div>
                   <div class="col" hidden>
                     <div class="d-flex">
@@ -71,7 +47,7 @@
                       <img src="assets/icons/Address.svg" alt="">
                       <p class="text-dark">
                         <!-- Address -->
-        
+
                         <span class="text-secondary-dark">
                           {{selectedClinic && selectedClinic['AreaName']}}
                         </span>
@@ -87,15 +63,15 @@
                 <hr>
               </div>
         }
-      
-  
-  
+
+
+
         <form class="first-form"  [formGroup]="form" (ngSubmit)="submit()">
           <div class="mt-3">
             <h5 class="text-center">
               <!-- Choose Clinic -->
               {{'doctor-profile.book-form.choose-clinic' | transloco}}
-  
+
 
               <!-- get clinic value -->
               <!-- {{f['clinic'].value}} -->
@@ -103,7 +79,7 @@
             <div class="mt-4">
               <div class="radios-container custom-radio-checkbox">
                  @for(clinic of clinics; track null){
-                     <div 
+                     <div
                      >
                        <!-- {{clinic?.active}}
                          ClinicId
@@ -118,7 +94,7 @@
                      </div>
                  }
 
-  
+
               </div>
               <!-- errors -->
 
@@ -138,7 +114,7 @@
               <!-- Appointments Type -->
               {{'doctor-profile.book-form.appointments-type' | transloco}}
             </h5>
-            <div class="mt-4"> 
+            <div class="mt-4">
               <div class="radios-container custom-radio-checkbox">
                  @for(type of appointmentTypes; track null){
                      <div >
@@ -148,7 +124,7 @@
                  }
               </div>
                <!-- errors -->
-              
+
               @if(submitted && f['appointment'].errors){
                   <div  class="errors-area mt-2" >
                     @if(f['appointment']['errors']['required']){
@@ -160,9 +136,9 @@
               }
             </div>
           </div>
-  
+
           <!-- getClinicSchedualByClinicDayId -->
-     
+
            @if(selectedClinic && selectedAppointment){
             <div class="mt-5" >
                 <h5 class="text-center">
@@ -176,8 +152,8 @@
                            [attr.data-id]="day['id']"
                            (change)="getClinicSchedualByClinicDayId(day);setSelectedDayId(day)"
                            [checked]="day['date'] == f['appointmentDay'].value ? true : false"
-           
-           
+
+
                          formControlName="appointmentDay"
                            >
                            <label for="day-{{$index}}">
@@ -192,7 +168,7 @@
                                     {{day['name'] | slice:0:3}}
                                   </span>
                               }
-                           
+
                              <br>
                              <span class="date">{{day['number']}}</span>
                            </label>
@@ -200,10 +176,10 @@
                          </ng-template>
                      }
                   </owl-carousel-o>
-      
+
                 </div>
                 <!-- {{f['appointmentDay'].value}} -->
-             
+
                 @if(submitted && f['appointmentDay'].errors){
                     <div  class="errors-area mt-2" >
                       @if(f['appointmentDay']['errors']['required']){
@@ -216,13 +192,13 @@
 
               </div>
            }
-         
+
           <hr>
 
 
           @if(f['appointmentDay'].value && selectedClinic && selectedAppointment){
             <div class="mt-5"
-          
+
             >
               <h5 class="text-center">
                 <!-- Appointments available -->
@@ -231,7 +207,7 @@
               <div class="mt-4">
                  @if(times.length == 0){
                      <div
-                     
+
                      >
                        <p class="text-center" class="alert alert-danger">
                          <!-- No Appointments available -->
@@ -239,32 +215,32 @@
                        </p>
                      </div>
                  }
-    
+
                  @for(time of times; track null){
                      <div class="radios-container custom-radio-checkbox" >
-  
+
                        @for(time of time.times; track null){
                           <div  >
                               <input type="radio" id="time-{{time.time24}}" name="times" value="{{time.time24}}"
                               [checked]="time['time24'] == f['times'].value ? true : false"
                               formControlName="times"
-              
-              
+
+
                               >
                               <label for="time-{{time.time24}}"
-              
+
                               [ngClass]="{'Red': time.IsBooked}"
-              
+
                               >
                                 {{time.time12}}
                               </label>
                             </div>
                        }
-                       
+
                      </div>
                  }
                 <!-- errors -->
-              
+
                 @if(submitted && f['times'].errors){
                     <div  class="errors-area mt-2" >
                       @if(f['times']['errors']['required']){
@@ -274,80 +250,28 @@
                       }
                     </div>
                 }
-                
+
               </div>
             </div>
           }
-         
+
           <div class="mt-4 text-center">
             <button (click)="isBokking = !isBokking" class="btn btn-info btn-lg text-white book">
-              <!-- Book Now -->
+
               {{'doctor-profile.book-now' | transloco}}
             </button>
           </div>
         </form>
-        <!-- <div class="second-form" >
-  
-             <div class="text-center">
-                <h5>
-                  Enter Your Info.
-                </h5>
-                <p class="text-secondary-dark">
-                  Thu February 02 - 08:00PM
-                </p>
-             </div>
-             <div class="form">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="parent">
-                      <img src="assets/icons/user-icon.svg" alt="">
-                      <input type="text" value="mohamed farag abdelatif">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-6">
-                    <div class="parent">
-                      <img src="assets/icons/phone-icon.svg" alt="">
-                      <input type="text" value="01000000000">
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="parent">
-                      <img src="assets/icons/email-icon.svg" alt="">
-                      <input type="text" value="mohamed farag22@gmail.com">
-                    </div>
-                  </div>
-                </div>
-             </div>
-              <div class="checkbox mt-3">
-                <input type="checkbox" id="checkbox">
-                <label for="checkbox" class="text-secondary-dark">&nbsp;  I’m booking on behalf of another patient</label>
-              </div>
-              <div class="mt-4 text-center">
-                <div class="row">
-                  <div class="col-6">
-                    <button (click)="isBokking = !isBokking" class="btn btn-outline-secondary btn-lg text-white cancel w-100">Cancel</button>
-                  </div>
-                  <div class="col-6">
-                    <button class="btn btn-info btn-lg text-white book w-100" [routerLink]="['/patient/booking-successfully']" >Book Now</button>
-                  </div>
-                </div>
-              </div>
-        </div> -->
-  
+
+
         <div class="text-center mt-4">
           <p class="text-secondary-dark">
-            <!-- Book online, Pay at the clinic! -->
+
             {{'doctor-profile.book-form.book-online-pay-at-the-clinic' | transloco}}
-  
+
           </p>
-          <!-- <p style="color: rgba(239, 68, 68, 0.75);">
-             {{'doctor-profile.book-form.doctor-requires-reservation' | transloco}}
-  
-          </p> -->
+
         </div>
       </div>
     </div>
   </div>
-  

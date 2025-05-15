@@ -60,8 +60,8 @@
 }
 
 .doctor-image {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 10px;
@@ -229,3 +229,31 @@
     transform: translateX(-100%);
   }
 }
+ .card-offer {
+      position: relative;
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+
+    .offer-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background-color: #dc3545;
+      color: white;
+      padding: 5px 10px;
+      font-size: 0.75rem;
+      border-radius: 0.25rem;
+      font-weight: bold;
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      color: #6c757d;
+    }
+
+    .new-price {
+      font-size: 1.3rem;
+      color: #28a745;
+      font-weight: bold;
+    }

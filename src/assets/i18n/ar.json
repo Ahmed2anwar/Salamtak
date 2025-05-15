@@ -837,7 +837,9 @@
     "button": "أعد المحاولة الآن!"
   },
   "booking-successfully": {
+    "head":" حجزك ناجح",
     "title": "تم تأكيد الحجز بنجاح",
+    "description":" شكرا لك  تم تأكيد حجزكك بنجاح ",
     "notified": "أبلغنا د. {{doctorName}} من حجزك",
     "examination-fees": "رسوم الكشف:",
     "clinic-number": "رقم تليفون العيادة:",

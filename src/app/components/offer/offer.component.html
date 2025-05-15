@@ -27,45 +27,37 @@
       </div>
     </div>
     }
-    <div class="offer-container">
-      <div class="offer-card" *ngFor="let offer of offers">
-        <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple"
-          [fullScreen]="true" class="spinner"></ngx-spinner>
-        <div class="image-container">
-          <img src="{{storageUrl}}{{offer.L1image}}" alt="Offer Image" class="offer-image">
-          <p class="offer-discount">{{ offer.DiscountPerc }}% {{'doctor-profile.book-form.off' | transloco}}</p>
-        </div>
-        <div class="offer-details">
-          <h2>{{ offer.ServiceName }}</h2>
-          <div class="doctor-info">
-            <img src="{{storageUrl}}{{offer.doctorDto.Image}}" alt="Doctor Image" class="doctor-image">
-            <p class="doctor-name" *ngIf="lang=='en'">{{ offer.doctorDto.FullName }}</p>
-            <p class="doctor-name" *ngIf="lang=='ar'">{{ offer.doctorDto.FullNameAr }}</p>
-          </div>
-          <p class="price-before"> <del>{{ offer.PriceBefore}}</del></p>
-          <p class="price-after"><strong>{{'doctor-profile.book-form.price-Afer' | transloco}}:</strong> {{
-            offer.PriceAfter }}</p>
-          <p><strong>{{'doctor-profile.book-form.Start-Date' | transloco}}:</strong> {{ offer.StartDate | date }}</p>
-          <p><strong>{{'doctor-profile.book-form.End-Date' | transloco}}:</strong> {{ offer.EndDate | date }}</p>
-          <div class="p-3 d-flex justify-content-center">
-            <button class="btn-book-now" (click)="onBookNow(offer.Id)"> {{ 'find-a-doctor.doctors-list.cards.book-now' |
-              transloco }}</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    
 
     <div class="row g-4">
-      <div class="col-md-4"  *ngFor="let offer of offers">
-        <div class="card" >
+      <div class="col-md-4" *ngFor="let offer of offers">
+        <div class="card">
           <img src="{{storageUrl}}{{offer.L1image}}" alt="Offer Image" class="offer-image">
           <p class="offer-discount">{{ offer.DiscountPerc }}% {{'doctor-profile.book-form.off' | transloco}}</p>
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s
-              content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+
+              <div class="doctor-info">
+                <img src="{{storageUrl}}{{offer.doctorDto.Image}}" alt="Doctor Image" class="doctor-image">
+                <p class="doctor-name m-0" *ngIf="lang=='en'">{{ offer.doctorDto.FullName }}</p>
+                <p class="doctor-name m-0" *ngIf="lang=='ar'">{{ offer.doctorDto.FullNameAr }}</p>
+              </div>
+              <h5 class="card-title fw-bold" style="color: #007bff;">{{ offer.ServiceName }}</h5>
+
+            <p class="mb-2 ">
+              <strong>Price:</strong>
+              <span class="old-price me-2 ps-2">{{ offer.PriceBefore}}LE</span>
+              <span class="new-price">{{ offer.PriceAfter}}LE</span>
+            </p>
+            <div class="d-flex justify-content-between ">
+              <p style="font-size: 14px;"><strong>{{'doctor-profile.book-form.Start-Date' | transloco}}:</strong> {{
+                offer.StartDate | date }}
+              </p>
+              <p style="font-size: 14px;"><strong>{{'doctor-profile.book-form.End-Date' | transloco}}:</strong> {{
+                offer.EndDate | date }}</p>
+            </div>
+            <button class="btn py-2 btn-primary w-100 text-center" (click)="onBookNow(offer.Id)"> {{
+              'find-a-doctor.doctors-list.cards.book-now' |
+              transloco }}</button>
           </div>
         </div>
       </div>

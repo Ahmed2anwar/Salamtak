@@ -821,7 +821,9 @@
     "button": "Retry Now !"
   },
   "booking-successfully": {
-    "title": " Thank you.Your booking has been confirmed successfully",
+    "head":"Successfully Booking",
+    "title": " Your Booking is Successful",
+    "description": "Thank you, Your  booking has been confirmed successfully",
     "notified": "We notified Dr. {{doctorName}} of your booking",
     "examination-fees": "Examination fees:",
     "clinic-number": "Clinic Phone Number :",

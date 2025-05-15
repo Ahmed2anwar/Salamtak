@@ -8,6 +8,11 @@ import {
   ReactiveFormsModule,
   FormsModule,
 } from '@angular/forms';
+import {
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -18,6 +23,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RoutesPipe } from '../../pipes/routes.pipe';
+import { BookingSuccessfullyOfferComponent } from '../../components/booking-successfully-offer/booking-successfully-offer.component';
 
 @Component({
   selector: 'app-book-form',
@@ -25,6 +31,7 @@ import { RoutesPipe } from '../../pipes/routes.pipe';
   imports: [
     CarouselModule,
     TranslocoModule,
+    MatDialogModule,
     RouterModule,
     CommonModule,
     ReactiveFormsModule,
@@ -44,9 +51,8 @@ import { RoutesPipe } from '../../pipes/routes.pipe';
 })
 export class BookFormComponent {
   @Input() doctor: any = null;
-
   public clinics: any = [];
-  @Input ()fees: any;
+  @Input() fees: any;
   appointmentTypes: any = [];
   times: any = [];
   public submitted = false;
@@ -99,6 +105,7 @@ export class BookFormComponent {
   constructor(
     private formbuilder: FormBuilder,
     private service: AppService,
+    public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     private router: Router,
     private mktService: MarketingService,
@@ -313,9 +320,17 @@ export class BookFormComponent {
                 // this.router.navigate(['/patient/booking-successfully'])
 
                 // this.storage.setItem('bookingData',bookingOfferData)
-                this.router.navigate([
-                  this.routesPipe.transform('booking-successfully-offer'),
-                ]);
+                this.dialog.open(BookingSuccessfullyOfferComponent, {
+                  width: '500px',
+                  height: 'auto',
+                  data: {
+                    doctor: this.doctor,
+                    clinic: this.selectedClinic,
+                    appointment: this.selectedAppointment,
+                    day: this.form.value.appointmentDay,
+                    time: this.form.value.times,
+                  },
+                });
               });
           } else {
             this.service.createPatientappointment(form).subscribe((res) => {
@@ -334,9 +349,16 @@ export class BookFormComponent {
                 JSON.stringify(bookingData)
               );
               // this.router.navigate(['/patient/booking-successfully'])
-              this.router.navigate([
-                this.routesPipe.transform('booking-successfully-offer'),
-              ]);
+              this.dialog.open(BookingSuccessfullyOfferComponent, {
+                width: '600px',
+                data: {
+                  doctor: this.doctor,
+                  clinic: this.selectedClinic,
+                  appointment: this.selectedAppointment,
+                  day: this.form.value.appointmentDay,
+                  time: this.form.value.times,
+                },
+              });
             });
           }
         } else {
@@ -447,5 +469,4 @@ export class BookFormComponent {
   getLanguage() {
     return this.translocoService.getActiveLang();
   }
-
 }
