@@ -9,38 +9,25 @@ import { TranslocoModule } from '@jsverse/transloco';
 @Component({
   selector: 'app-my-receipt',
   standalone: true,
-  imports:[
-    RouterModule,
-    CommonModule,
-    TranslocoModule
-  ],
+  imports: [RouterModule, CommonModule, TranslocoModule],
   templateUrl: './my-receipt.component.html',
-  styleUrls: ['./my-receipt.component.scss']
+  styleUrls: ['./my-receipt.component.scss'],
 })
 export class MyReceiptComponent {
-  invoices:any[]=[]
-   constructor(
-     private service : AppService,
-     private spinner :NgxSpinnerService
+  invoices: any[] = [];
 
-    ) {
+  constructor(private service: AppService, private spinner: NgxSpinnerService) {
     // this.editAppointment()
   }
   ngOnInit(): void {
-    this.spinner.show()
-     this.getInvoices();
+    this.spinner.show();
+    this.getInvoices();
   }
   getInvoices(): void {
-
     this.service.getInvoicesForPatient().subscribe((res) => {
       this.invoices = res['Data']?.reverse() || [];
-      if(this.invoices.length>0)
-
-      setTimeout(() => {
-       }, 1000);
-      this.spinner.hide()
+      if (this.invoices.length > 0) setTimeout(() => {}, 1000);
+      this.spinner.hide();
     });
-
   }
-
 }

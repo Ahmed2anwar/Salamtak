@@ -1,9 +1,6 @@
 <section class="main">
   <div class="container overflow-hidden">
-    <div
-      class="row align-items-center"
-      style="background-color: #2c2979; border-radius: 10px"
-    >
+    <div class="row align-items-center" style="background-color: #2c2979; border-radius: 10px">
       <div class="col-md-7 px-5">
         <div class="custom-content pe-4">
           <h1 class="custom-heading">
@@ -15,15 +12,11 @@
           <h4 class="custom-subheading">
             <span class="custom-subtitle">
               {{ "home.main-section.title-hidd" | transloco }}
-              <a
-                href="tel:{{ phone }}"
-                class="btn btn-primary"
-                style="
+              <a href="tel:{{ phone }}" class="btn btn-primary" style="
                   background-color: transparent;
                   border: none;
                   text-decoration: underline;
-                "
-              >
+                ">
                 {{ phone }}
               </a>
             </span>
@@ -32,11 +25,7 @@
         </div>
       </div>
       <div class="col-md-5">
-        <img
-          src="../../../../../assets/image 2.png"
-          class="overflow-hidden"
-          alt="img"
-        />
+        <img src="../../../../../assets/image 2.png" class="overflow-hidden" alt="img" />
       </div>
     </div>
   </div>
@@ -56,7 +45,7 @@
 
     <div class="row align-items-center">
       <div class="col-md-12">
-        <h2 class="title" >
+        <h2 class="title">
           {{ "home.top-specialties.title" | transloco }}
         </h2>
       </div>
@@ -66,11 +55,7 @@
 
 <section class="services">
   <div class="container">
-    <h2
-      class="pb-4"
-      style="font-size: 32px; font-weight: 600"
-      data-aos="fade-up"
-    >
+    <h2 class="pb-4" style="font-size: 32px; font-weight: 600" data-aos="fade-up">
       {{ "home.services.title" | transloco }}
     </h2>
     <div class="cards">
@@ -102,21 +87,13 @@
       <div class="row row2">
         @for(service of services;track null){
         <div class="col-service mb-3">
-          <div
-            class="card"
-            [attr.data-aos]="$index % 2 != 0 ? 'fade-up-left' : 'fade-up-right'"
-            style="cursor: pointer"
-            [routerLink]="['find-a-doctor' | route]"
-            [queryParams]="{
+          <div class="card" [attr.data-aos]="$index % 2 != 0 ? 'fade-up-left' : 'fade-up-right'" style="cursor: pointer"
+            [routerLink]="['find-a-doctor' | route]" [queryParams]="{
               service: replaceSpaceWithDash(service['Name'])
-            }"
-          >
+            }">
             <div class="card-body">
               <div class="icon">
-                <img
-                  [src]="storageUrl + '/' + service['Image']"
-                  [alt]="service['Name'] + ' icon'"
-                />
+                <img [src]="storageUrl + '/' + service['Image']" [alt]="service['Name'] + ' icon'" />
               </div>
               <h5 class="title fw-medium">
                 {{ service["Name"] }}
@@ -127,18 +104,10 @@
         }
         <!-- Poly -->
         <div class="col-service mb-3">
-          <div
-            class="card"
-            style="cursor: pointer"
-            [routerLink]="['polyclinics' | route]"
-            data-aos="fade-up"
-          >
+          <div class="card" style="cursor: pointer" [routerLink]="['polyclinics' | route]" data-aos="fade-up">
             <div class="card-body">
               <div class="icon">
-                <img
-                  src="assets/background/poly.svg"
-                  alt="Static Service icon"
-                />
+                <img src="assets/background/poly.svg" alt="Static Service icon" />
               </div>
               <h5 class="title fw-medium">
                 {{ "home.services.cards.Poly" | transloco }}
@@ -410,20 +379,13 @@
 
 
     <div class="row">
-      <h2
-        class="text-start text-black pb-4"
-        style="font-size: 32px; font-weight: 600"
-      >
+      <h2 class="text-start text-black pb-4" style="font-size: 32px; font-weight: 600">
         {{ "about-us.whysalamtak.title" | transloco }}
       </h2>
     </div>
     <div class="row align-items-center">
       <div class="col-lg-4">
-        <img
-          src="assets/Doctori.svg"
-          alt="logo"
-          style="width: 85%; height: 600px"
-        />
+        <img src="assets/Doctori.svg" alt="logo" style="width: 85%; height: 600px" />
       </div>
       <div class="col-lg-8">
         <div class="row gy-4 gx-3">
@@ -496,29 +458,16 @@
 <section class="what-people-say" style="padding: 80px 0px 80px 0">
   <div class="container">
     <div class="cards mt-5" dir="ltr">
-      <h2
-        class="text-start text-black pb-4"
-        style="font-size: 32px; font-weight: 600"
-        data-aos="fade-up"
-      >
+      <h2 class="text-start text-black pb-4" style="font-size: 32px; font-weight: 600" data-aos="fade-up">
         {{ "home.what-people-say.offer" | transloco }}
       </h2>
-      <owl-carousel-o
-        [options]="testimonialsOwlOptions"
-        style="box-shadow: rgba(0, 0, 0, 0.45) 0px 28px 25px -25px"
-      >
+      <owl-carousel-o [options]="testimonialsOwlOptions" style="box-shadow: rgba(0, 0, 0, 0.45) 0px 28px 25px -25px">
         @for(testimonial of offers;track null){
         <ng-template carouselSlide>
           <div class="card rounded-3" (click)="navigateToOffer(testimonial.id)">
             <div class="card-body">
-              <img
-                class="rounded-3"
-                src="{{ storageUrl }}{{ testimonial.image }}"
-                alt="Star"
-                width="100%"
-                height="130px"
-                style="object-fit: cover"
-              />
+              <img class="rounded-3" src="{{ storageUrl }}{{ testimonial.image }}" alt="Star" width="100%"
+                height="130px" style="object-fit: cover" />
             </div>
             <div class="user pb-2">
               <h5 class="name text-center fw-medium">
@@ -536,18 +485,11 @@
 <!-- Ask section -->
 <section class="download">
   <div class="container">
-    <div
-      class="row w-100 justify-content-between align-items-center"
-      style="background-color: #2b2979; border-radius: 10px"
-    >
+    <div class="row w-100 justify-content-between align-items-center"
+      style="background-color: #2b2979; border-radius: 10px">
       <div class="content ps-5">
         <div class="">
-          <img
-            src="assets/Salamtak.png"
-            alt="logo"
-            class="logo logo-light"
-            style="width: 250px"
-          />
+          <img src="assets/Salamtak.png" alt="logo" class="logo logo-light" style="width: 250px" />
         </div>
         <div class="py-3 pe-5">
           <p class="text-white" style="font-size: 16px">
@@ -555,32 +497,20 @@
           </p>
         </div>
         <div class="">
-          <button
-            class="btn btn-primary px-4 py-2"
-            style="background-color: white; color: #2b2979"
-            [routerLink]="['ask' | route]"
-          >
+          <button class="btn btn-primary px-4 py-2" style="background-color: white; color: #2b2979"
+            [routerLink]="['ask' | route]">
             {{ "home.ask.button" | transloco }}
           </button>
         </div>
       </div>
-      <img
-        src="/assets/Doctor.png"
-        alt="Download"
-        class="doctor-img"
-        style="padding: initial"
-      />
+      <img src="/assets/Doctor.png" alt="Download" class="doctor-img" style="padding: initial" />
     </div>
   </div>
 </section>
 
 <section class="medical-services" style="padding: 80px 0px">
   <div class="container">
-    <h2
-      class="pb-4"
-      style="font-size: 32px; font-weight: 600"
-      data-aos="fade-up"
-    >
+    <h2 class="pb-4" style="font-size: 32px; font-weight: 600" data-aos="fade-up">
       {{ "blogs.title" | transloco }}
     </h2>
 
@@ -589,19 +519,15 @@
         @for(service of medicalServices ; track null){
         <div class="col-service">
           <!-- [routerLink]="[service.url]" -->
-          <div
-            class="card"
-            style="cursor: pointer"
-            [routerLink]="[service.url | route]"
-          >
+          <div class="card" style="cursor: pointer" [routerLink]="[service.url | route]">
             <div class="overlay" [style.background-color]="service.hex"></div>
             <div class="card-body" [style.background-color]="service.hex">
               <img src="{{ service.icon }}" alt="service" width="100%" />
             </div>
             <div class="card-footer">
               {{
-                "home.medical-services-directory.cards." + service.translate
-                  | transloco
+              "home.medical-services-directory.cards." + service.translate
+              | transloco
               }}
             </div>
           </div>
@@ -614,11 +540,7 @@
 
 <section class="blogss">
   <div class="container">
-    <h2
-      class="text-black pb-4"
-      style="font-size: 32px; font-weight: 600"
-      data-aos="fade-up"
-    >
+    <h2 class="text-black pb-4" style="font-size: 32px; font-weight: 600" data-aos="fade-up">
       {{ "blogs.title" | transloco }}
     </h2>
 
@@ -626,11 +548,7 @@
       <div class="row" style="align-items: center">
         @for(service of blog;track null){
         <div class="col-lg-2 col-md-3 col-sm-6">
-          <div
-            class="card"
-            style="cursor: pointer"
-            [routerLink]="[service.url | route]"
-          >
+          <div class="card" style="cursor: pointer" [routerLink]="[service.url | route]">
             <div class="overlay" [style.background-color]="service.hex"></div>
             <div class="card-body" [style.background-color]="service.hex">
               <img class="card-img" src="{{ service.icon }}" alt="" />
@@ -642,6 +560,8 @@
     </div>
   </div>
 </section>
+
+
 
 <!-- download -->
 <app-download-app></app-download-app>

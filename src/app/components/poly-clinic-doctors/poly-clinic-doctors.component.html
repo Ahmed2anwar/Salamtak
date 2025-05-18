@@ -1,201 +1,180 @@
-<section class="list main-card-app">
-    <div class="container">
-      <nav class="breadcrumb" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="javascript:void(0)">
+<section class="list main-card-app mt-5 pt-5">
+  <div class="container">
+    <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">
             <!-- Salamtak -->
             {{ 'app-name' | transloco }}
           </a></li>
-          <li class="breadcrumb-item"><a href="javascript:void(0)">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">
             <!-- find-a-doctor -->
             <!-- Dentist in Egypt -->
             {{ 'find-a-doctor.breadcrumb.find-a-doctor' | transloco }}
           </a></li>
-          <li class="breadcrumb-item"><a href="javascript:void(0)">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">
             {{ 'find-a-doctor.breadcrumb.dentist-in-egypt' | transloco }}
           </a></li>
-          <!-- <li class="breadcrumb-item active" aria-current="page">Alexandria</li> -->
-        </ol>
-      </nav>
-  <div class="cards" >
-    <!-- no-results -->
-     @if(!loading && doctors.length == []){
-       <div class="no-results-container" >
-         <div class="no-results-card">
-           <div class="no-results-card-body">
-             <img src="assets/icons/no-results.svg" alt="no-results" class="no-results-image">
-             <h5 class="no-results-title">
-               {{ 'find-a-doctor.doctors-list.no-results.title' | transloco }}
-             </h5>
-             <p class="no-results-description">
-               {{ 'find-a-doctor.doctors-list.no-results.description' | transloco }}
-             </p>
-           </div>
-         </div>
-       </div>
-     }
+        <!-- <li class="breadcrumb-item active" aria-current="page">Alexandria</li> -->
+      </ol>
+    </nav>
+    <div class="cards">
+      <!-- no-results -->
+      @if(!loading && doctors.length == []){
+      <div class="no-results-container">
+        <div class="no-results-card">
+          <div class="no-results-card-body">
+            <img src="assets/icons/no-results.svg" alt="no-results" class="no-results-image">
+            <h5 class="no-results-title">
+              {{ 'find-a-doctor.doctors-list.no-results.title' | transloco }}
+            </h5>
+            <p class="no-results-description">
+              {{ 'find-a-doctor.doctors-list.no-results.description' | transloco }}
+            </p>
+          </div>
+        </div>
+      </div>
+      }
 
 
 
-    @if(doctors.length != 0){
-      <div class="row" >
+      @if(doctors.length != 0){
+      <div class="row">
         @for(doctor of doctors;track null){
-          <div class="col-lg-6 mb-4" >
-            <!--
-                    this.router.navigate([this.routesPipe.transform('doctor-profile',doctor.Id,doctor.DoctorName)], { queryParams: {
 
-      DoctorId : doctor.Id,
-      ClinicId : doctor.ClinicID,
-            -->
-            <!-- [routerLink]="['doctor-profile' | route]"
-            [queryParams]="{ClinicId:doctor['ClinicId'],AvalibleDate:doctor['AvalibleDate']}"> -->
-            <div class="card"
-            [routerLink]="[('doctor'  | route ), doctor['Id'], replaceSpaceWithDash(doctor['FullName'])]"
+        <div class="col-md-6 col-sm-12 mb-4">
+          <div class="card rounded-3" style="
+                        border: 1px solid #e9eaef;
 
+                        box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 20px -20px;
+                      " [routerLink]="[('doctor'  | route ), doctor['Id'], replaceSpaceWithDash(doctor['FullName'])]"
+            [queryParams]="{
+            ClinicId:doctor['ClinicId'],
+            Specialist:replaceSpaceWithDash(doctor['SpecialistName']),
+            AvalibleDate:doctor['AvalibleDate']}">
+            <div class="card-body">
 
-
-                      [queryParams]="{
-                        ClinicId:doctor['ClinicId'],
-                        Specialist:replaceSpaceWithDash(doctor['SpecialistName']),
-                        AvalibleDate:doctor['AvalibleDate']}
-                        "
-            >
-              <div class="card-body">
-                <div class="user">
+              <div
+                class="pt-1 pb-3 user d-flex justify-content-center justify-content-sm-between  flex-wrap"
+                style="
+                            border-bottom: 1px solid #e0e2e9;
+                            padding-bottom: 20px;
+                          ">
+                <div class="d-flex p-2">
                   <div class="image">
-                    <!-- [viewerOptions]="doctorViewerOptions" -->
-                      <img ngxViewer  src="{{storageUrl}}/{{doctor.Image}}" alt="">
-                      <!-- <img src="assets/fake-images-for-test/Ellipse 4824.png" alt=""> -->
+                    <img ngxViewer src="{{ storageUrl }}/{{ doctor.Image }}" alt="" />
                   </div>
-                  <div class="info">
-                    <h5 class="name" *ngIf="lang == 'en' ">
-                      <!-- Dr. -->
-                      {{ 'find-a-doctor.doctors-list.cards.dr' | transloco }}
-                       {{ doctor.NickName ?? doctor.FullName }}
-                     </h5>
-                     <h5 class="name" *ngIf="lang == 'ar' ">
-                      <!-- Dr. -->
-                      {{ 'find-a-doctor.doctors-list.cards.dr' | transloco }}
-                       {{ doctor.NickNameAr ?? doctor.FullNameAr }}
-                     </h5>
-                    <p class="job" >
-                      {{doctor.SpecialistName}}
-                      <span>({{doctor.SeniorityLevelName}})</span>
-                     </p>
-                    <div class="rate">
-                      <img src="assets/icons/Star2.svg" >
-                      <img src="assets/icons/Star2.svg" >
-                      <img src="assets/icons/Star2.svg" >
-                      <img src="assets/icons/Star2.svg" >
-                      <img src="assets/icons/Star2.svg" >
-                     </div>
-                  </div>
-                </div>
-                <div class="work-data">
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="assets/icons/Sub-specialization.svg" alt="">
-                      <span>
-                        <!-- Sub-specialization -->
-                        {{ 'find-a-doctor.doctors-list.cards.sub-specialization' | transloco }}
-                      </span>
-                    </div>
-                    <div class="col-6 answer">
-                      <p>
 
-                        @for(subspecialist of doctor.SubSpecialistName;track null){
-                          <span  title="{{subspecialist}}"  style="white-space: pre-wrap;">
-                            {{subspecialist}}
-                            {{$last ? '' : ', '}}
-                          </span>
-                        }
+                  <div class="user">
+                    <div class="info">
+                      <h5 class="name" *ngIf="lang == 'en' ">
+                        <!-- Dr. -->
+                        {{ 'find-a-doctor.doctors-list.cards.dr' | transloco }}
+                        {{ doctor.NickName ?? doctor.FullName }}
+                      </h5>
+                      <h5 class="name" *ngIf="lang == 'ar' ">
+                        <!-- Dr. -->
+                        {{ 'find-a-doctor.doctors-list.cards.dr' | transloco }}
+                        {{ doctor.NickNameAr ?? doctor.FullNameAr }}
+                      </h5>
+                      <p class="job">
+                        {{doctor.SpecialistName}}
+                        <span>({{doctor.SeniorityLevelName}})</span>
                       </p>
+                      <div class="rate">
+                        <img src="assets/icons/Star2.svg" />
+                        <img src="assets/icons/Star2.svg" />
+                        <img src="assets/icons/Star2.svg" />
+                        <img src="assets/icons/Star2.svg" />
+                        <img src="assets/icons/Star2.svg" />
+
+                        &nbsp;<span class="review">({{ doctor.RateCount }}
+
+                          <!-- Reviews -->
+                          {{
+                          "find-a-doctor.doctors-list.cards.reviews"
+                          | transloco
+                          }}
+                          )</span>
+                      </div>
                     </div>
                   </div>
-
-                  <!-- <div class="row">
-                    <div class="col-6">
-                      <img src="assets/icons/Address.svg" alt="">
-                      <span>
-                         {{ 'find-a-doctor.doctors-list.cards.address' | transloco }}
-                      </span>
-                    </div>
-
-                  </div> -->
-                                              <!-- Waiting Time -->
-
-                  <!-- <div class="row">
-                    <div class="col-6">
-                      <img src="assets/icons/Waiting-Time.svg" alt="">
-                      <span>
-                        {{ 'find-a-doctor.doctors-list.cards.waiting-time' | transloco }}
-                      </span>
-                    </div>
-                    <div class="col-6 answer">
-                      <span>
-                        {{doctor.WaitingTime}} Min.
-                      </span>
-                    </div>
-                  </div> -->
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="assets/icons/Fees.svg" alt="">
-                      <span>
-                        <!-- Fees -->
-                        {{ 'find-a-doctor.doctors-list.cards.fees' | transloco }}
-                      </span>
-                    </div>
-                    <div class="col-6 answer">
-                      <span>
-                        {{doctor.Fees }} LE
-                        <!-- - {{doctor.FeesTo}} LE -->
-                        <!-- 200 LE -->
-                      </span>
-                    </div>
-                  </div>
-
                 </div>
                 <div>
-
                   <button (click)="bookFor($event,doctor)" class="btn book btn-primary w-100">
-                    <!-- Book Now -->
                     {{ 'find-a-doctor.doctors-list.cards.book-now' | transloco }}
                   </button>
                 </div>
               </div>
+
+
+
+              <div class="work-data">
+                <div class="row justify-content-center text-center">
+                  <div class="col-md-6  col-sm-12">
+                    <img src="assets/icons/subcat.svg" class="py-2" alt="icon " />
+                    <h5>
+                      <!-- Sub-specialization -->
+                      {{ 'find-a-doctor.doctors-list.cards.sub-specialization' | transloco }}
+                    </h5>
+                    <p>
+
+                      @for(subspecialist of doctor.SubSpecialistName;track null){
+                      <span title="{{subspecialist}}" style="white-space: pre-wrap;">
+                        {{subspecialist}}
+                        {{$last ? '' : ', '}}
+                      </span>
+                      }
+                    </p>
+                  </div>
+
+                  <div class="col-md-6  col-sm-12">
+                    <img src="assets/icons/money.png" class="py-2" alt="icon" />
+                    <h5>
+                      <!-- Fees -->
+                      {{ 'find-a-doctor.doctors-list.cards.fees' | transloco }}
+
+                    </h5>
+                    <h6>
+                      {{doctor.Fees }} LE
+                    </h6>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
+        </div>
         }
       </div>
-    }
+      }
 
-    @if(loading && doctors.length == 0){
+      @if(loading && doctors.length == 0){
       <div class="row">
-         @for(item of [].constructor(6);track null){
-          <div class="col-lg-6 mb-4" >
-            <div class="ph-item">
-              <div class="ph-col-12">
-                  <div class="ph-picture"></div>
-                  <div class="ph-row">
-                      <div class="ph-col-6 big"></div>
-                      <div class="ph-col-4 empty big"></div>
-                      <div class="ph-col-2 big"></div>
-                      <div class="ph-col-4"></div>
-                      <div class="ph-col-8 empty"></div>
-                      <div class="ph-col-6"></div>
-                      <div class="ph-col-6 empty"></div>
-                      <div class="ph-col-12"></div>
-                  </div>
+        @for(item of [].constructor(6);track null){
+        <div class="col-lg-6 mb-4">
+          <div class="ph-item">
+            <div class="ph-col-12">
+              <div class="ph-picture"></div>
+              <div class="ph-row">
+                <div class="ph-col-6 big"></div>
+                <div class="ph-col-4 empty big"></div>
+                <div class="ph-col-2 big"></div>
+                <div class="ph-col-4"></div>
+                <div class="ph-col-8 empty"></div>
+                <div class="ph-col-6"></div>
+                <div class="ph-col-6 empty"></div>
+                <div class="ph-col-12"></div>
               </div>
+            </div>
           </div>
-          </div>
-         }
+        </div>
+        }
 
       </div>
 
-    }
+      }
 
-  </div>
+    </div>
   </div>
 
-   </section>
+</section>

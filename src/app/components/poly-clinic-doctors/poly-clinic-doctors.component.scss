@@ -1,19 +1,9 @@
 section.list {
-    background-color: #F3F3FF;
     overflow: hidden;
 
     .filter-tools {
       // in mobile
-      @media (max-width: 767px) {
-        margin-top: 40px;
-
-        .row {
-          .text-end {
-            margin-top: 20px;
-            text-align: left !important;
-          }
-        }
-      }
+      
     }
 
     .cards {

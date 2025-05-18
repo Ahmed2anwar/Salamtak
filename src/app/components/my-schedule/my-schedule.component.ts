@@ -18,7 +18,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatMenuModule} from '@angular/material/menu';
 import { MetadataService } from '../../services/metadata.service';
 import { RoutesPipe } from '../../pipes/routes.pipe';
-
+import { TableModule } from 'primeng/table';
 @Component({
   selector: 'app-my-schedule',
   standalone: true,
@@ -30,13 +30,15 @@ import { RoutesPipe } from '../../pipes/routes.pipe';
     AccordionModule,
     FormsModule,
     MatTabsModule,
-    MatMenuModule,RoutesPipe
+    MatMenuModule,RoutesPipe,
+    TableModule
   ],
   templateUrl: './my-schedule.component.html',
   styleUrl: './my-schedule.component.scss',
   encapsulation: ViewEncapsulation.None
 })
 export class MyScheduleComponent {
+
   date = null;
   lat:any;
   long :any;
@@ -90,6 +92,8 @@ export class MyScheduleComponent {
 
 
       }
+      
+      
 
  }
 
@@ -149,6 +153,7 @@ export class MyScheduleComponent {
       });
 
     })
+    console.log(this.data);
   }
   getMedicalHistoryAppointmentes(){
     this.spinner.show()
