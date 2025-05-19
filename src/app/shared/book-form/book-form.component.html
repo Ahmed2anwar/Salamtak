@@ -140,7 +140,7 @@
                 <input type="radio" id="day-{{$index}}" name="appointmentDay" value="{{day['date']}}"
                   [attr.data-id]="day['id']" (change)="getClinicSchedualByClinicDayId(day);setSelectedDayId(day)"
                   [checked]="day['date'] == f['appointmentDay'].value ? true : false" formControlName="appointmentDay">
-                <label style="    border: none;" [class.active]="day['date'] == f['appointmentDay'].value" class="p-0" for="day-{{$index}}">
+                <label style="border: none;" [class.active]="day['date'] == f['appointmentDay'].value" class="p-0" for="day-{{$index}}">
                   <!-- {{day['id']}} -->
                   @if(getLanguage()=='ar'){
                   <span class="name">
@@ -152,8 +152,6 @@
                     {{day['name'] | slice:0:3}}
                   </span>
                   }
-
-                  <br>
                   <span class="date">{{day['number']}}</span>
                 </label>
                 <!-- {{day['date']}} -->
