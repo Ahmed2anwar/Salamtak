@@ -1,86 +1,87 @@
-  <section class="booking-successfully">
-    <div class="container">
-      <div class="card">
-        <div class="card-body">
-          <br>
-          <h3 class="text-center animate__animated  animate__flash">
-            <img src="assets/icons/Tick Square.svg" alt="">
-            {{'booking-successfully.title' | transloco}}
-          </h3>
-          <div class="text-center wallpaper">
-            <img src="assets/background/booking-successfully.png">
-          </div>
+<section class="booking-successfully">
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <br>
+        <h3 class="text-center animate__animated  animate__flash">
+          <img src="assets/icons/Tick Square.svg" alt="">
+          {{'booking-successfully.title' | transloco}}
+        </h3>
+        <div class="text-center wallpaper">
+          <img src="assets/background/booking-successfully.png">
+        </div>
 
-          <div class="items">
+        <div class="items">
 
-            <div class="row">
-              <div class="col-auto">
-                <img src="assets/icons/calendar.svg" alt="">
-              </div>
-              <div class="col">
-                {{'booking-successfully.booking-details.title' | transloco}}
-              </div>
+          <div class="row">
+            <div class="col-auto">
+              <img src="assets/icons/calendar.svg" alt="">
             </div>
-            <div class="row mt-4 reservation-details">
-              <div class="col-auto">
-                <img src="assets/icons/calendar.svg" style="opacity: 0;">
-              </div>
-              <div class="col">
-                <div>
-                  <div class="row">
-                    <div class="col-6 title text-secondary-dark">
-                      {{'booking-successfully.booking-details.patient-name' | transloco}}
-                    </div>
-                    <div class="col-6 text-end answer text-dark" >
-                      {{username}}
-                    </div>
-
+            <div class="col">
+              {{'booking-successfully.booking-details.title' | transloco}}
+            </div>
+          </div>
+          <div class="row mt-4 reservation-details">
+            <div class="col-auto">
+              <img src="assets/icons/calendar.svg" style="opacity: 0;">
+            </div>
+            <div class="col">
+              <div>
+                <div class="row">
+                  <div class="col-6 title text-secondary-dark">
+                    {{'booking-successfully.booking-details.patient-name' | transloco}}
                   </div>
-                  <div class="row">
-                    <div class="col-6 title text-secondary-dark">
-                      {{'booking-successfully.clinic-number' | transloco}}
-                    </div>
-                    <div class="col-6 text-end answer text-dark">
-                      {{booking['clinic']['Phone']}}
-                    </div>
+                  <div class="col-6 text-end answer text-dark">
+                    {{username}}
                   </div>
 
-                  <div class="row">
-                    <div class="col-6 title text-secondary-dark">
-                      {{'booking-successfully.examination-fees' | transloco}}
-                    </div>
-                    <div class="col-6 text-end answer text-dark" >
-                        {{this.fees }}  {{IsEnglish ? 'LE' : 'جنيه'}}
-                      </div>
+                </div>
+                <div class="row">
+                  <div class="col-6 title text-secondary-dark">
+                    {{'booking-successfully.clinic-number' | transloco}}
+                  </div>
+                  <div class="col-6 text-end answer text-dark">
+                    {{booking['clinic']['Phone']}}
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-6 title text-secondary-dark">
+                    {{'booking-successfully.examination-fees' | transloco}}
+                  </div>
+                  <div class="col-6 text-end answer text-dark">
+                    {{this.fees }} {{IsEnglish ? 'LE' : 'جنيه'}}
+                  </div>
+
+                </div>
+
+                <div class="row">
+                  <div class="col-6 title text-secondary-dark">
+                    {{'booking-successfully.booking-details.service' | transloco}}
+                  </div>
+                  <div class="col-6 text-end answer text-dark">
+                    {{booking['appointment']['Name']}} </div>
+                </div>
+                <div class="row">
+                  <div class="col-6 title text-secondary-dark">
+                    {{'booking-successfully.booking-details.booking-date' | transloco}}
+                  </div>
+                  <div class="col-6 text-end answer text-dark">
+                    {{returnWeekDay(booking['day'])}} /{{convertTime24to12(booking['time'])}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6 title text-secondary-dark">
+                    {{'booking-successfully.booking-details.doctor-name' | transloco}}
+                  </div>
+                  <div class="col-6 text-end answer text-dark">
+                    {{IsEnglish ? booking['doctor']['FirstName'] + ' ' + booking['doctor']['LastName'] :
+                    booking['doctor']['FirstNameAr'] + ' ' + booking['doctor']['LastNameAr']}}
 
                   </div>
 
-                  <div class="row">
-                    <div class="col-6 title text-secondary-dark">
-                      {{'booking-successfully.booking-details.service' | transloco}}
-                    </div>
-                    <div class="col-6 text-end answer text-dark">
-                      {{booking['appointment']['Name']}}                  </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-6 title text-secondary-dark">
-                      {{'booking-successfully.booking-details.booking-date' | transloco}}
-                    </div>
-                    <div class="col-6 text-end answer text-dark">
-                      {{returnWeekDay(booking['day'])}} /{{convertTime24to12(booking['time'])}}
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-6 title text-secondary-dark">
-                      {{'booking-successfully.booking-details.doctor-name' | transloco}}
-                    </div>
-                    <div class="col-6 text-end answer text-dark" >
-                        {{IsEnglish ? booking['doctor']['FirstName'] + ' ' + booking['doctor']['LastName'] : booking['doctor']['FirstNameAr'] + ' ' + booking['doctor']['LastNameAr']}}
-
-                    </div>
-
-                  </div>
-                  <!-- <div class="row">
+                </div>
+                <!-- <div class="row">
                     <div class="col-6 title text-secondary-dark">
                       {{'booking-successfully.booking-details.waiting-time' | transloco}}
                     </div>
@@ -88,33 +89,30 @@
                       0 Minutes
                     </div>
                   </div> -->
-                  <div class="row">
-                    <div class="col-6 title text-secondary-dark">
-                      {{'booking-successfully.booking-details.clinic-address' | transloco}}
-                    </div>
+                <div class="row">
+                  <div class="col-6 title text-secondary-dark">
+                    {{'booking-successfully.booking-details.clinic-address' | transloco}}
+                  </div>
 
-                    <div class="col-6 text-end answer text-dark">
-                      {{this.area}} <br>
-                      {{this.address}}
-                    </div>
+                  <div class="col-6 text-end answer text-dark">
+                    {{this.area}} <br>
+                    {{this.address}}
                   </div>
                 </div>
-                <div class="actions">
-                  <div class="row">
-                    <!-- <div class="col">
+              </div>
+              <div class="actions">
+                <div class="row">
+                  <!-- <div class="col">
                       <button (click)="addNote()" class="btn btn-outline-info" >
                         {{'booking-successfully.booking-details.add-additional-files' | transloco}}
                       </button>
                     </div> -->
-                    <div class="col">
-                      <!-- [routerLink]="['/' + lang + '/my-schedule']" -->
-                      <button class="btn btn-info text-white"
-                        [routerLink]="['my-schedule' | route ]"
-                         [queryParams]="{id: booking['id']}"
-                      >
-                        {{'booking-successfully.booking-details.my-appointments' | transloco}}
-                      </button>
-                    </div>
+                  <div class="col">
+
+                    <button class="btn btn-info text-white" (click)="goToSchedule(booking.id)"
+                     >
+                      {{'booking-successfully.booking-details.my-appointments' | transloco}}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -122,6 +120,7 @@
           </div>
         </div>
       </div>
-      <br>
     </div>
-  </section>
+    <br>
+  </div>
+</section>

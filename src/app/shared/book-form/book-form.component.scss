@@ -9,7 +9,8 @@
     border: none;
     color: #fff;
     font-weight: 600;
-    padding: 20px;
+    font-size: 21px;
+
   }
   .card-body{
     .info{
@@ -50,17 +51,8 @@
   background-color: red !important;
 }
   .radios-container{
-      display: flex;
-      justify-content: center;
-      flex-direction: row;
-      flex-wrap: wrap;
-      & >div{
-        margin-left: 15px;
-      }
+
   }
-
-
-
 
     .dates-slider{
       input[type=radio] + label{
@@ -80,17 +72,17 @@
             display: block;
             color: #000;
             font-size: 18px;
-            font-weight: 5s00;
+            font-weight: 5  00;
           }
         }
-        input[type=radio]:checked + label{
-          background: #2B2979 !important;
-          box-shadow: 0px 6px 16px rgba(43, 41, 121, 0.08);
-          span{
-            color: #fff !important;
-          }
+        // input[type=radio]:checked + label{
+        //   background: #2B2979 !important;
+        //   box-shadow: 0px 6px 16px rgba(43, 41, 121, 0.08);
+        //   span{
+        //     color: #fff !important;
+        //   }
 
-        }
+        // }
 
     }
     label{
@@ -187,4 +179,50 @@
   @media (max-width: 767px) {
     margin-top: 40px;
   }
+}
+
+
+.location input[type=radio]{
+  display: inline;
+  margin: 0;
+    accent-color: #33C9BE;
+}
+
+ .location input[type="radio"] + label {
+    background-image: none !important;
+    background-color: transparent;
+    color: black;
+  }
+
+.selected-clinic {
+  display: flex; /* put radio and text on the same line */
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  border: 1px solid #f0e8e8;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 12px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.selected-clinic input[type="radio"] {
+  margin: 0;
+  position: relative;
+  top: -19px;
+}
+
+/* Style selected */
+.selected-clinic.active {
+  background-color: #2b2979;
+  color: white;
+  border-color: #2b2979;
+}
+.selected-clinic.active  p{
+  color: white !important;
+
+}
+.dates-slider label.active {
+  background-color: #2b2979;
+  color: white;
 }

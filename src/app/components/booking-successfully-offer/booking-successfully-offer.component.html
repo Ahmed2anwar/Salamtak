@@ -2,20 +2,19 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12  order-lg-1 mb-2">
-        <h3 class="pt-4 fw-bold pb-2 text-center">{{'booking-successfully.head' | transloco}}</h3>
+        <h4 class="pt-3 fw-bold text-center">{{'booking-successfully.head' | transloco}}</h4>
         <div class="card">
           <div class="card-body">
-
-            <div class="px-5 text-center rounded-4" style="border: 1px solid #E9EAEF">
-              <img src="assets/success.png" class="img-fluid" alt="">
-              <h4 class="fw-bold text-center animate__animated animate__flash mt-2">
+            <div class="px-4 text-center rounded-4" style="border: 1px solid #E9EAEF">
+              <img src="assets/success.png" class="" style="width: 70px;" alt="">
+              <h5 class="fw-bold text-center animate__animated animate__flash mt-2">
                 {{'booking-successfully.title' | transloco}}
-              </h4>
+              </h5>
               <p style="color: #8088A4;">
                 {{'booking-successfully.description' | transloco}}
               </p>
             </div>
-            <h5 class="text-black fw-bold pt-2 pb-1">
+            <h5 class="text-black fw-bold pt-3 pb-2">
               {{'booking-successfully.booking-details.title' | transloco}}
             </h5>
             <div class="items">
@@ -144,44 +143,26 @@
 
 
 
-      <!--
-        <div class="col-lg-5  order-lg-2 mb-4">
-          <div class="card shadow-sm">
-            <div class="card-header py-4 bg-primary text-white">
-              <h4 class="mb-0">{{ 'booking-successfully.booking-details.symptomtitle' | transloco }}</h4>
-            </div>
+      
 
-            <div class="card-body">
+    </div>
+    <div class="row">
+         <h5 class="mb-0 ps-4 py-2 fw-bold">{{ 'booking-successfully.booking-details.symptomtitle' | transloco }}</h5>
+        <div class="col-lg-12 ">
+          <div class="card ">
+            <div class="card-body" style="border: 1px solid #E9EAEF">
               <form>
-                <div class="row mb-4">
+                <div class="row mb-2">
                   <div class="col-12">
-                    <label for="ageInput">
-                      <strong>{{ 'booking-successfully.booking-details.Patient-Age' | transloco }} :</strong>
-                    </label>
                     <input type="number" id="ageInput" class="form-control"  placeholder="{{ 'booking-successfully.booking-details.Patient-Age' | transloco }}">
                   </div>
                 </div>
-
-                <div class="mb-4">
-                  <h5>{{ 'booking-successfully.booking-details.symptoms' | transloco }} :</h5>
-                  <div class="row">
-                    <div class="col-md-12 mb-3">
-
-                    </div>
-                  </div>
-                </div>
-
-                <div class="mb-4">
-                  <label for="patientcomment">
-                    <strong>{{ 'booking-successfully.booking-details.comment' | transloco }} :</strong>
-                  </label>
+                <div class="mb-2">  
                   <textarea id="patientcomment" class="form-control"  rows="4" placeholder="{{ 'booking-successfully.booking-details.comment' | transloco }}"></textarea>
                 </div>
 
-
                 <div class="actions">
                   <div class="row">
-
                     <div class="col">
                       <button class="btn btn-info text-white"
                       [routerLink]="['my-schedule' | route ]"
@@ -197,11 +178,7 @@
             </div>
 
           </div>
-        </div> -->
-
+        </div>
     </div>
-
-
-
   </div>
 </section>

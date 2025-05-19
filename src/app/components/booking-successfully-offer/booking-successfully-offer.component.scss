@@ -53,37 +53,9 @@
   overflow-y: auto;
 }
 
-@media (max-width: 991px) {
-  .card-body {
-    width: 100%;
-  }
-
-  .actions button {
-    width: 100%;
-  }
-}
-
-@media (max-width: 991px) {
-  .booking-successfully .card-body {
-    padding: 20px;
-  }
-  .booking-successfully .form-select {
-    width: 100%;
-  }
-}
-
-@media (max-width: 767px) {
-  .booking-successfully .card-body {
-    width: 100%;
-    text-align: left;
-  }
-  .booking-successfully .wallpaper img {
-    width: 100%;
-  }
-}
 .booking-card {
   border: 1px solid #E9EAEF;
-  padding: 20px;
+  padding: 15px;
   border-radius: 8px;
   margin: auto;
 }

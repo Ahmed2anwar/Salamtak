@@ -79,7 +79,6 @@ export class DoctorProfileComponent {
       this.ClinicId = params['ClinicId'];
     });
 
-    console.log(this.doctor)
   }
 
   getDoctorVideos() {
@@ -111,7 +110,6 @@ export class DoctorProfileComponent {
         this.spinner.hide();
 
         this.lang = this.translocoService.getActiveLang();
-console.log(this.doctor)
         res['Data']['clinicDtos'].forEach((clinic: any) => {
 
           if (this.ClinicId == clinic['ClinicId']) {

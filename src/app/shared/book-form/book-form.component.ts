@@ -52,7 +52,7 @@ import { BookingSuccessfullyOfferComponent } from '../../components/booking-succ
 export class BookFormComponent {
   @Input() doctor: any = null;
   public clinics: any = [];
-  @Input() fees: any;
+  fees: any;
   appointmentTypes: any = [];
   times: any = [];
   public submitted = false;
@@ -71,6 +71,7 @@ export class BookFormComponent {
   public BookedAppointments: any = [];
   ClinicId = null;
   public isBooked = false;
+  selectedClinicId: number | null = null;
 
   //**
   // الايام ثابته
@@ -114,13 +115,10 @@ export class BookFormComponent {
     private routesPipe: RoutesPipe
   ) {}
 
-  getDoctorProfileByDoctorId(DoctorId: any) {
-    // return this.service.getDoctorProfileByDoctorId(DoctorId).subscribe((res:any)=>{
-    // })
-  }
+  getDoctorProfileByDoctorId(DoctorId: any) {}
+
   ngOnInit(): void {
     // this.getDoctorProfileByDoctorId(this.doctor['doctorId'])
-
     this.dayes = this.enumerateDaysBetweenDates(
       new Date().setDate(new Date().getDate() - 1),
       new Date().setDate(new Date().getDate() + 15)
@@ -374,6 +372,8 @@ export class BookFormComponent {
         }
       });
     }
+        console.log(this.clinics);
+
   }
   selectedDayId = null;
   setSelectedDayId(day: any) {}

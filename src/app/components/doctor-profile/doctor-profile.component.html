@@ -65,7 +65,7 @@
 
 
 
-    <div class="row">
+    <div class="row g-4">
 
 
       <div class="col-lg-7">
@@ -221,6 +221,7 @@
           <div class="card-body">
             <h4 class="title">
               {{ "doctor-profile.doctor-clinics" | transloco }}
+              
             </h4>
 
             @for(clinic of doctor['clinicDtos']; track null ) {
@@ -559,7 +560,7 @@
         </div>
       </div>
       <div class="col-lg-5" #book>
-        <app-book-form [doctor]="doctor"></app-book-form>
+        <app-book-form [doctor]="doctor" ></app-book-form>
       </div>
     </div>
   </div>
