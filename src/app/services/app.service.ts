@@ -87,6 +87,9 @@ export class AppService {
   getspecialist() {
     return this.http.get<any>(`${environment.apiUrl}/Specialist/GetSpecialist`);
   }
+  getTopSpecialist() {
+    return this.http.get<any>(`${environment.apiUrl}/Specialist/GetTop10Specialist`);
+  }
   getSubSpecialist(SpecialistId: any) {
     return this.http.get<any>(
       `${environment.apiUrl}/Specialist/GetSubSpecialist?SpecialistId=${SpecialistId}`

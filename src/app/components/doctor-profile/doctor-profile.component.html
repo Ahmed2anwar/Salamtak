@@ -69,7 +69,7 @@
 
 
       <div class="col-lg-7">
-        <div class="card mb-4">
+        <!-- <div class="card mb-4">
           <div class="row g-0">
             <div class="col-md-4">
               <img src="{{ storageUrl }}/{{ doctor['Image'] }}" class="img-fluid border-2" alt="" />
@@ -92,7 +92,8 @@
                   <img src="assets/icons/Star2.svg" />
                 </div>
 
-                <h6 class="pb-2">Number: <span style="color: #8088A4; font-weight: normal;" > {{doctor["Phone"]}} </span></h6>
+                <h6 class="pb-2">Number: <span style="color: #8088A4; font-weight: normal;"> {{doctor["Phone"]}} </span>
+                </h6>
                 <h6>
                   {{
                   "find-a-doctor.doctors-list.cards.sub-specialization"
@@ -126,8 +127,8 @@
               </div>
             </div>
           </div>
-        </div>
-        <!-- <div class="card info">
+        </div> -->
+        <div class="card info">
           <div class="card-body">
             <div class="user p-2 pt-2 pb-4" style="border-bottom: 1px solid #E9EAEF">
               <div class="image">
@@ -140,10 +141,17 @@
                       {{ "find-a-doctor.doctors-list.cards.dr" | transloco }}
                       {{ this.getDocFullName(this.doctor) }}
                     </h5>
-
-                    <p class="job">
-                      {{ doctor["SpecialistName"] }}
+                    <p class="m-0 ">
+                      {{ doctor["SpecialistName"] }} <span class="text-muted"> ({{doctor["SeniorityLevelName"]}})</span>
                     </p>
+                    <div class="rate pb-1">
+                      <img src="assets/icons/Star2.svg" />
+                      <img src="assets/icons/Star2.svg" />
+                      <img src="assets/icons/Star2.svg" />
+                      <img src="assets/icons/Star2.svg" />
+                      <img src="assets/icons/Star2.svg" />
+                    </div>
+
 
                   </div>
                 </div>
@@ -192,15 +200,17 @@
               <div>
                 <img src="assets/icons/money.png" class="pt-2 pb-1" alt="icon" />
                 <h5>
-                  {{ "find-a-doctor.doctors-list.cards.fees" | transloco }}
+                  <!-- {{ "find-a-doctor.doctors-list.cards.fees" | transloco }} -->
+                    Number
                 </h5>
                 <p class="text-muted" style="font-size: 14px; color: #8088A4;">
-                  {{ doctor.doctorFees }} LE
+                   {{doctor["Phone"]}}
+
                 </p>
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
 
         @if(doctor['DoctorInfo']){
 
@@ -221,7 +231,7 @@
           <div class="card-body">
             <h4 class="title">
               {{ "doctor-profile.doctor-clinics" | transloco }}
-              
+
             </h4>
 
             @for(clinic of doctor['clinicDtos']; track null ) {
@@ -299,7 +309,6 @@
                 </div>
                 <div class="">
                   <div class="">
-
                     @if(clinic.Gallary && clinic.Gallary.length > 0) {
                     <h5 class="clinic-card-title">
                       {{ "doctor-profile.Gallary" | transloco }}
@@ -310,23 +319,22 @@
                       }
                     </div>
                     } @if(!clinic.Gallary || clinic.Gallary.length === 0) {
-
                     }
                   </div>
                 </div>
 
-                  @if(clinic.videos && clinic.videos.length > 0) {
-                   <div style="margin-bottom: 10px">
-                    <h5 style="margin: 0">
-                      {{ "doctor-profile.video" | transloco }}
-                    </h5>
-                  </div>
-                  }
+                @if(clinic.videos && clinic.videos.length > 0) {
+                <div style="margin-bottom: 10px">
+                  <h5 style="margin: 0">
+                    {{ "doctor-profile.video" | transloco }}
+                  </h5>
+                </div>
+                }
 
 
-                  @if(!clinic.Videos || clinic.Videos.length === 0) {
+                @if(!clinic.Videos || clinic.Videos.length === 0) {
 
-                  }
+                }
 
               </div>
             </div>
@@ -363,7 +371,7 @@
           </div>
         </div> -->
 
-        <!-- <div class="card about mt-5">
+        <div class="card about mt-5">
           <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px">
             <div style="margin-bottom: 10px">
               <h5 style="margin: 0">
@@ -406,7 +414,7 @@
             </div>
             }
           </div>
-        </div> -->
+        </div>
 
         <div>
           <h5 class="fw-bold pb-3 pt-4">
@@ -560,7 +568,7 @@
         </div>
       </div>
       <div class="col-lg-5" #book>
-        <app-book-form [doctor]="doctor" ></app-book-form>
+        <app-book-form [doctor]="doctor"></app-book-form>
       </div>
     </div>
   </div>
