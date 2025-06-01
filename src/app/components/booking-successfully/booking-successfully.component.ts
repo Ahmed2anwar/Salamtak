@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { languages } from '../../languages';
 import { AuthenticationService } from '../../services/authentication.service';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import {
   MatDialog,
   MatDialogModule,
@@ -26,7 +26,6 @@ import { RoutesPipe } from '../../pipes/routes.pipe';
     CommonModule,
     AccordionModule,
     FormsModule,
-    RoutesPipe,
   ],
   templateUrl: './booking-successfully.component.html',
   styleUrl: './booking-successfully.component.scss',
@@ -50,7 +49,7 @@ export class BookingSuccessfullyComponent {
   constructor(
     public dialog: MatDialog,
     private dialogRef: MatDialogRef<BookingSuccessfullyComponent>,
-
+    private routes:ActivatedRoute,
     private router: Router,
 
     private translocoService: TranslocoService,
@@ -223,10 +222,12 @@ export class BookingSuccessfullyComponent {
       }
     });
   }
-  goToSchedule(bookingId: number) {
-    // First close the dialog
-    this.dialogRef.close();
-    // Then navigate to the desired route
-    this.router.navigate(['my-schedule'], { queryParams: { id: bookingId } });
+   goToMySchedule(bookingId: number): void {
+    const lang = this.routes.snapshot.paramMap.get('lang') || 'en';
+    if (!bookingId) return;
+    this.router.navigate(['/', lang, 'my-schedule'], {
+      queryParams: { id: bookingId },
+    });
+    this.dialogRef.close()
   }
 }

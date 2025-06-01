@@ -21,6 +21,7 @@ import { MetadataService } from '../../services/metadata.service';
 import { RoutesPipe } from '../../pipes/routes.pipe';
 import { DownloadAppComponent } from '../download-app/download-app.component';
 import { TableModule } from 'primeng/table';
+import { Specialty } from '../../../model';
 
 @Component({
   selector: 'app-home',
@@ -39,13 +40,13 @@ import { TableModule } from 'primeng/table';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
- 
   public blogs: any[] = [];
   public offers: any[] = [];
   storageUrl = environment.storageUrl;
   titleKey: any;
   descriptionKey: any;
   services = [];
+  topSpecialties: Specialty[] = [];
   popularDoctors = [];
   salamtakCapId = 1;
   phone = '17143';
@@ -235,6 +236,35 @@ export class HomeComponent {
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     },
   ];
+
+  selectedCategory: string = 'all';
+
+  cards = [
+    {
+      title: 'Classic Shirt',
+      description: 'Dentistry ',
+      category: 'Dentistry',
+    },
+    {
+      title: 'Casual Tee',
+      description: 'Neurology .',
+      category: 'Neurology',
+    },
+    {
+      title: 'Semi Blazer',
+      description: 'General Surgery .',
+      category: 'General Surgery',
+    },
+    {
+      title: 'Formal Suit',
+      description: 'Perfect for business.',
+      category: 'ENT',
+    },
+
+    // add more cards as needed
+  ];
+  filteredCards = [...this.cards];
+
   testimonialsOwlOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -246,7 +276,7 @@ export class HomeComponent {
       '<img src="assets/icons/Arrow-Left-2.svg">',
       '<img src="assets/icons/Arrow-Right-2.svg">',
     ],
-    autoplay: true,
+    autoplay: false,
     margin: 20,
     autoplayTimeout: 3000,
     nav: false,
@@ -290,17 +320,34 @@ export class HomeComponent {
     this.showCustomView = !this.showCustomView;
   }
 
+  filterCards(category: string) {
+    this.selectedCategory = category;
+    this.filteredCards =
+      category === 'all'
+        ? [...this.cards]
+        : this.cards.filter((card) => card.category === category);
+  }
+
+  getTop10Specialties(): void {
+    this.service.getTopSpecialist().subscribe({
+      next: (response: { Data: Specialty[] }) => {
+        this.topSpecialties = response.Data.slice(0, 6);
+        console.log('Top Specialties:', this.topSpecialties);
+      },
+      error: (error) => {
+        console.error('Error fetching API data:', error);
+      },
+    });
+  }
   ngOnInit() {
     this.metadataService.updateMetadata('home');
-
     // AOS.init();
     this.getMedicalExaminationType();
     this.getPopularDoctors();
     this.getDoctorHealthTopics();
     this.getBlogs();
-
     this.getWhatsAppAds(); // 401 Unauthorized
-
+    this.getTop10Specialties();
     this.getoffers();
   }
   getMedicalExaminationType() {
@@ -345,6 +392,10 @@ export class HomeComponent {
     return name?.replace(/ /g, '-');
   }
 
+  goToSpecialty(specialtyName: string): void {
+    const slug = this.replaceSpaceWithDash(specialtyName);
+    this.router.navigate(['/en/doctors', slug]);
+  }
   getColClass(index: number): string {
     const sizes = [
       'col-4', // size for the first card

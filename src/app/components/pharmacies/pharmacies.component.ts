@@ -18,7 +18,6 @@ import { MetadataService } from '../../services/metadata.service';
     TranslocoModule,
     RouterModule,
     CommonModule,
-    SearchFormComponent,
     AccordionModule,
     FormsModule
   ],

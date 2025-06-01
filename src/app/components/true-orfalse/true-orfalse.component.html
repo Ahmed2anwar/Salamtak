@@ -1,11 +1,6 @@
-
 <section class="blogs mt-5 pt-5">
   <div class="container">
-    <nav
-      class="breadcrumb"
-      style="--bs-breadcrumb-divider: '>'"
-      aria-label="breadcrumb"
-    >
+    <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="javascript:void(0)">
@@ -36,31 +31,27 @@
       <div>
         <div class="row">
           @for(item of blogs; let i = $index; track null) {
-            <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card">
-                <div class="card-body">
-                  <img
-                    class="rounded-3"
-                    src="{{ storageUrl }}{{ item.image }}"
-                    width="100%"
-                    style="height: 200px; object-fit: cover;"
-                  />
-                  <div class="texts my-3">
-                    <h5>{{ item.Title }}</h5>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <img class="rounded-3" src="{{ storageUrl }}{{ item.image }}" width="100%"
+                  style="height: 200px; object-fit: cover;" />
+                <div class="texts my-3">
+                  <h5>{{ item.Title }}</h5>
 
-                    @if (expandedIndex !== i) {
-                      <p class="text-muted">{{ item.Description | slice: 0:100 }}</p>
-                    } @else {
-                      <p  class="text-muted">{{ item.Description }}</p>
-                    }
+                  @if (expandedIndex !== i) {
+                  <p class="text-muted">{{ item.Description | slice: 0:100 }}</p>
+                  } @else {
+                  <p class="text-muted">{{ item.Description }}</p>
+                  }
 
-                    <button class="btn btn-primary" (click)="showAllDesc(i)">
-                      {{ expandedIndex === i ? 'Show Less' : 'Show More' }}
-                    </button>
-                  </div>
+                  <button class="btn btn-primary" (click)="showAllDesc(i)">
+                    {{ expandedIndex === i ? 'Show Less' : 'Show More' }}
+                  </button>
                 </div>
               </div>
             </div>
+          </div>
           }
 
         </div>
@@ -68,17 +59,18 @@
     </div>
   </div>
   <div class="no-results" *ngIf="blogs.length == 0">
-   <div class="container">
-    <div class="card" style="align-items: center">
-      <div class="card-body">
-        <img src="assets/icons/no-results.svg" alt="no-results" />
-        <h5>
-          <!-- No Results -->
-          {{ "find-a-doctor.doctors-list.no-results.title" | transloco }}
-        </h5>
-
+    <div class="container">
+      <div class="no-results">
+        <div class="card rounded-3 py-3  text-center"
+          style="border: 1px solid #E9EAEF ;box-shadow: none; box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 20px -20px;">
+          <div class="card-body">
+            <img src="assets/icons/no-results.svg" alt="no-results" />
+            <h5 class="py-3">
+              {{ "pages.No-Results" | transloco }}
+            </h5>
+          </div>
+        </div>
       </div>
     </div>
-   </div>
   </div>
 </section>

@@ -352,16 +352,7 @@ export const routes: Routes = [
               },
             ],
           },
-          // {
-          //   path: routeName('profile','en'),
-          //   component: ProfileComponent,
-          //   children: [
-          //     { path: '', component: FirstStepComponent },
-          //     { path: routeName('personal-info'), component: FirstStepComponent },
-          //     { path: routeName('location'), component: SecondStepComponent },
-          //     { path: routeName('medical-state'), component: ThirdStepComponent },
-          //   ]
-          // },
+
         ],
       },
       {
@@ -377,6 +368,8 @@ export const routes: Routes = [
             path: routeName('find-a-doctor', 'en') + '/:specialty',
             component: FindADoctorComponent,
           },
+           
+
           {
             path: routeName('find-a-doctor', 'en') + '/:specialty/:city',
             component: FindADoctorComponent,
@@ -385,7 +378,6 @@ export const routes: Routes = [
             path: routeName('find-a-doctor', 'en') + '/:specialty/:city/:area',
             component: FindADoctorComponent,
           },
-
           {
             path: routeName('find-a-doctor', 'ar'),
             component: FindADoctorComponent,

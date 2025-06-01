@@ -41,7 +41,7 @@ export class VerificationCodeComponent {
   r = '';
   codeLength = 0;
   from = '';
-  dialogRef = inject(MatDialogRef);
+
   // ReSendCounter = 0;
   intervalId = 0;
   message: any = '';
@@ -56,20 +56,22 @@ export class VerificationCodeComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any, // receive passed data here
     private StorageService: LocalStorageService,
+    private dialogRef: MatDialogRef<VerificationCodeComponent>,
     private formbuilder: FormBuilder,
     private router: Router,
     private service: AuthenticationService,
     private spinner: NgxSpinnerService,
     private translocoService: TranslocoService,
     public dialog: MatDialog,
-
     private route: RoutesPipe
   ) {
     this.router.parseUrl(this.router.url).queryParams['r'];
     this.router.parseUrl(this.router.url).queryParams['p'];
     this.from = this.router.parseUrl(this.router.url).queryParams['from'];
     this.r = this.router.parseUrl(this.router.url).queryParams['r'];
+     console.log('Dialog Data:', this.data); // ✅ Confirm data is received
   }
+
   onCodeChanged(e: any) {
     this.codeCompleted = false;
     this.keyUpCode = null;
@@ -86,10 +88,8 @@ export class VerificationCodeComponent {
       const decodedData = atob(encodedData);
       const jsonString = decodeURIComponent(escape(decodedData));
       this.form = JSON.parse(jsonString);
-
       this.phone = this.data?.p;
       this.fromPage = this.data?.from;
-
       let code = String(this.form['Code']);
       this.codeLength = code.length;
       this.seconds = this.form['ReSendCounter'];
@@ -133,25 +133,18 @@ export class VerificationCodeComponent {
     }, 1000);
   }
   verify() {
-    //
-
     this.code = this.StorageService.getItem('auth-verification-code');
     if (this.keyUpCode == this.code) {
       this.spinner.show();
       if (this.fromPage == 'forgot-password') {
-        // عدم معرفه الرابط الصحيح للتحويل للصفحة الخاصة بتغيير كلمة المرور
-        // this.router.navigate([`/${this.lang}/auth/new-password`,this.r])
         this.router.navigate([
           this.route.transform('new-password') + `/${this.r}`,
         ]);
         this.spinner.hide();
         return;
-
         return;
       }
-
       this.service.createUser(this.registerForm).subscribe((res: any) => {
-        // this.router.navigate([`/${this.lang}/profile`],{queryParams: {redirect: `/${this.lang}/auth/reset-successfully`}}).then(() => {
         this.StorageService.setItem('new-user', true);
         this.router
           .navigate([this.route.transform('profile')], {
@@ -160,9 +153,9 @@ export class VerificationCodeComponent {
             },
           })
           .then(() => {
-            // To solve the problem of not adding the user to the service - temporarily
-            // window.location.reload();
+
             this.spinner.hide();
+            this.dialogRef.close();
           });
       });
 

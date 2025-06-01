@@ -357,7 +357,9 @@ export class BookFormComponent {
                   time: this.form.value.times,
                 },
               });
+
             });
+
           }
         } else {
           Swal.fire({
@@ -403,8 +405,8 @@ export class BookFormComponent {
         }
         res['Data'].forEach((element: any) => {
           this.fees = element.Fees;
-          // sessionStorage.setItem  ('Fees',element.Fees);
-          this.StorageService.setItem('Fees', element.Fees);
+          sessionStorage.setItem  ('Fees',element.Fees);
+          // this.StorageService.setItem('Fees', element.Fees);
 
           if (element.MaxNoOfPatients == null) {
             element['times'] = this.timeInterval(

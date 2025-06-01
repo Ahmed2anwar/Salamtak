@@ -28,6 +28,7 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { RoutesPipe } from '../../../pipes/routes.pipe';
 import { LoginComponent } from '../login/login.component';
+import { VerificationCodeComponent } from '../verification-code/verification-code.component';
 
 @Component({
   selector: 'app-sign-up',
@@ -128,18 +129,20 @@ export class SignUpComponent {
       this.StorageService.setItem('auth-verification-code', res.Data.Code);
 
       res = btoa(unescape(encodeURIComponent(JSON.stringify(res.Data))));
-      // this.router.navigate([`/${this.lang}/auth/verification-code`],
-      this.router.navigate([this.route.transform('verification-code')], {
-        queryParams: {
-          // response
-          r: res,
-          // phone number
+        this.dialog.open(VerificationCodeComponent, {
+      width: '450px',
+      data: {
+         r: res,
           p: this.form.value.Phone,
-        },
-      });
+      },
+    });
       this.spinner.hide();
+      this.dialogRef.close();
     });
   }
+
+
+
   showHidePassword() {
     this.hidePassword = !this.hidePassword;
   }

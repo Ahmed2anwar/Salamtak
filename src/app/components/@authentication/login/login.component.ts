@@ -127,9 +127,8 @@ export class LoginComponent {
   closeDialog() {
     this.dialogRef.close();
   }
-  // open forget password component Dialog
   forgetPassword() {
-    console.log('login');
+
     this.dialog.open(ForgotPasswordComponent, {
       width: '400px',
       height: 'auto',

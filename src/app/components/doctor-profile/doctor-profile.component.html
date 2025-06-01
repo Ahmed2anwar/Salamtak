@@ -48,16 +48,13 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="javascript:void(0)">
-            <!-- Home -->
             {{ "app-name" | transloco }}
           </a>
         </li>
         <li class="breadcrumb-item">
           <a href="javascript:void(0)">
-            <!-- Dr. -->
             {{ "find-a-doctor.doctors-list.cards.dr" | transloco }}
             {{ this.getDocFullName(this.doctor) }}
-            <!-- {{doctor['FirstName']}} {{doctor['MiddelName']}} {{doctor['LastName']}} -->
           </a>
         </li>
       </ol>
@@ -201,10 +198,10 @@
                 <img src="assets/icons/money.png" class="pt-2 pb-1" alt="icon" />
                 <h5>
                   <!-- {{ "find-a-doctor.doctors-list.cards.fees" | transloco }} -->
-                    Number
+                  Number
                 </h5>
                 <p class="text-muted" style="font-size: 14px; color: #8088A4;">
-                   {{doctor["Phone"]}}
+                  {{doctor["Phone"]}}
 
                 </p>
               </div>
@@ -226,16 +223,111 @@
         </div>
         }
 
+        <div>
 
-        <div class="card clinic mt-4 mb-3">
+          <div class="card reviews mt-4">
+            <div class="card-body">
+              <div class="review pt-1 px-2">
+                <div class="user">
+                  <div class="info w-100">
+                    <h5 class="fw-bold pb-3 "> {{ "doctor-profile.service" | transloco }}</h5>
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <span class="" *ngFor="let service of allUniqueServices"
+                          class="time  me-2 mb-3 border border-1 px-3 py-2 rounded rounded-2">
+                          {{service}}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card reviews mt-4">
+            <div class="card-body">
+              <div class="review pt-1 px-2">
+                <div class="user">
+                  <div class="info w-100">
+                    <h5 class="fw-bold pb-3 "> {{ "doctor-profile.features" | transloco }} </h5>
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <span class="" *ngFor="let service of allUniqueServices"
+                          class="time  me-2 mb-3 border border-1 px-3 py-2 rounded rounded-2">
+                          {{service}}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card reviews mt-4 mb-3">
+            <div class="card-body">
+              <div class="review pt-1 px-2">
+                <div class="user">
+                  <div class="info w-100">
+                    <h5 class="fw-bold pb-3 "> {{ "doctor-profile.ins" | transloco }} </h5>
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <span class="" *ngFor="let service of allUniqueServices"
+                          class="time  me-2 mb-3 border border-1 px-3 py-2 rounded rounded-2">
+                          {{service}}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card reviews my-4 ">
+            <h5 class="fw-bold pb-1 pt-3 px-4">
+              {{ "doctor-profile.Gallary" | transloco }}
+            </h5>
+            <div class="card-body">
+              <div class="review  px-2">
+                <div class="user">
+                  <div class="info">
+                    <div class="row g-3">
+                      <div class="col-md-3" *ngFor="let image of allImages">
+                        <img [src]="storageUrl + image" class=" rounded-2" width="120px" height="120px " alt="img" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="card reviews">
+            <h5 class="fw-bold pb-1 pt-3 px-4">
+              {{ "doctor-profile.Gallary" | transloco }}
+            </h5>
+            <div class="card-body">
+              <div class="review  px-2">
+                <div class="user">
+
+                  <div class="info">
+                    <div class="row g-3">
+                      <div class="col-md-3" *ngFor="let video of allVideos">
+                        <img [src]="storageUrl + video" class="img-fluid rounded-3" alt="img" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <!-- <div class="card clinic mt-4 mb-3">
           <div class="card-body">
             <h4 class="title">
               {{ "doctor-profile.doctor-clinics" | transloco }}
-
             </h4>
-
             @for(clinic of doctor['clinicDtos']; track null ) {
-
             <div class="clinic-container" [ngClass]="{ isFirst: $first }">
               <div class="clinic-data d-flex">
                 <div class="image">
@@ -252,9 +344,8 @@
                   </p>
                 </div>
               </div>
-
-              <div class="rows">
-                <div class="row">
+              <div class="rows"> -->
+        <!-- <div class="row">
                   <div class="col-6">
                     <img src="assets/icons/Address.svg" alt="" />
                     <span>
@@ -266,9 +357,9 @@
                       {{ clinic["AreaName"] }} ({{ clinic["SubAreaName"] }})
                     </span>
                   </div>
-                </div>
+                </div> -->
 
-                <div class="row">
+        <!-- <div class="row">
                   <div class="col-6">
                     <img src="assets/icons/Fees.svg" alt="" />
                     <span>
@@ -280,8 +371,8 @@
                       {{ clinic["Services"] }}
                     </span>
                   </div>
-                </div>
-                <div class="row">
+                </div> -->
+        <!-- <div class="row">
                   <div class="col-6">
                     <img src="assets/icons/Fees.svg" alt="" />
                     <span>
@@ -306,8 +397,8 @@
                       {{ clinic["Insurance"] }}
                     </span>
                   </div>
-                </div>
-                <div class="">
+                </div> -->
+        <!-- <div class="">
                   <div class="">
                     @if(clinic.Gallary && clinic.Gallary.length > 0) {
                     <h5 class="clinic-card-title">
@@ -331,7 +422,6 @@
                 </div>
                 }
 
-
                 @if(!clinic.Videos || clinic.Videos.length === 0) {
 
                 }
@@ -340,38 +430,9 @@
             </div>
             }
           </div>
-        </div>
-
-        <!-- <div>
-          <h5 class="fw-bold pb-3 pt-4">Clinic Gallary</h5>
-
-          <div class="card reviews">
-            <div class="card-body">
-              <div class="review pt-3 px-2">
-                <div class="user">
-                  <div class="info">
-                    <div class="row g-3">
-                      <div class="col-md-3">
-                        <img src="../../../assets/clinc.jpg" class="img-fluid rounded-3" alt="img" />
-                      </div>
-                      <div class="col-md-3">
-                        <img src="../../../assets/clinc.jpg" class="img-fluid rounded-3" alt="img" />
-                      </div>
-                      <div class="col-md-3">
-                        <img src="../../../assets/clinc.jpg" class="img-fluid rounded-3" alt="img" />
-                      </div>
-                      <div class="col-md-3">
-                        <img src="../../../assets/clinc.jpg" class="img-fluid rounded-3" alt="img" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div> -->
 
-        <div class="card about mt-5">
+        <!-- <div class="card about mt-5">
           <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px">
             <div style="margin-bottom: 10px">
               <h5 style="margin: 0">
@@ -414,9 +475,9 @@
             </div>
             }
           </div>
-        </div>
+        </div> -->
 
-        <div>
+        <!-- <div>
           <h5 class="fw-bold pb-3 pt-4">
             {{ "doctor-profile.Doctor-video" | transloco }}
           </h5>
@@ -452,7 +513,6 @@
               <div class="card-body">
                 <img src="assets/icons/no-data.svg" />
                 <h6 class="mt-3">
-                  <!-- there is no images to show ! -->
                   {{
                   "doctor-profile.there-is-no-videos-to-show" | transloco
                   }}
@@ -461,7 +521,7 @@
             </div>
           </div>
           }
-        </div>
+        </div> -->
 
         <!-- Doctor's Q&A -->
 

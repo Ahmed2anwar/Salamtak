@@ -43,26 +43,22 @@
         <div class="cards">
           @if(data.length == 0 && !loading){
           <div class="no-results">
-            <div class="card text-center bg-transparent">
-              <div class="card-body">
+             <div class="card rounded-3 text-center" style="border: 1px solid #E9EAEF ;box-shadow: none; box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 20px -20px;">
+                <div class="card-body my-3">
                 <img src="assets/icons/no-results.svg" alt="no-results">
                 <h5 class="mt-3">
-                  {{ 'find-a-doctor.doctors-list.no-results.title' | transloco }}
+                  {{ 'pages.No-Results' | transloco }}
                 </h5>
-                <p>
-                  {{ 'find-a-doctor.doctors-list.no-results.description' | transloco }}
-                </p>
               </div>
             </div>
           </div>
           }
-
-
+          @else {
           <div class="row">
-
             <div class="col-lg-12 mb-4">
               <p-table [value]="data" stripedRows [rows]="10" [paginator]="true" [tableStyle]="{ 'min-width': '75rem' }"
-                [rowHover]="true"   showGridlines class="custom-table">
+                [rowHover]="true" showGridlines class="custom-table">
+
                 <ng-template pTemplate="header">
                   <tr>
                     <th>#</th>
@@ -77,7 +73,7 @@
 
                 <!-- BODY TEMPLATE - NO @for or *ngFor here -->
                 <ng-template pTemplate="body" let-doctor let-i="rowIndex">
-                  <tr (click)="goToProfile(doctor)" >
+                  <tr (click)="goToProfile(doctor)">
                     <td>{{ i + 1 }}</td>
                     <td>
                       <div class="d-flex align-items-center">
@@ -109,10 +105,14 @@
                           <img src="assets/icons/View-Map.svg" alt="">
                           <span>{{ 'my-schedule.View-Map' | transloco }}</span>
                         </button>
-                        <button mat-menu-item (click)="help()">
-                          <img src="assets/icons/Help.svg" alt="">
-                          <span>{{ 'my-schedule.help' | transloco }}</span>
+                        <button data-bs-toggle="modal" data-bs-target="#myModalHelp" aria-label="help" type="button"
+                          class="btn btn-primary" mat-menu-item>
+                          <img src="assets/icons/auth-help.svg" />
+                          <span class="">
+                            {{ "authentication.authentication-layout.help" | transloco }}
+                          </span>
                         </button>
+
                         <button (click)="cancelAppointment(doctor.AppointmentId, doctor.DoctorId, doctor.DoctorName)"
                           mat-menu-item>
                           <img src="assets/icons/Cancel-Appointment.svg" alt="">
@@ -145,215 +145,45 @@
                   </tr>
                 </ng-template>
               </p-table>
-
-
-              <!-- <div class="card  mt-5" (click)="goToProfile(doctor)">
-                <div class="card-body">
-                  <div class="user">
-                    <div class="image">
-
-                      <img [src]="storageUrl + '/' + doctor.DoctorImage" alt="">
-                    </div>
-
-                    <div class="info">
-                      <h5 class="name">
-                        {{ 'find-a-doctor.doctors-list.cards.dr' | transloco }}
-                        {{ doctor.DoctorName}}
-                      </h5>
-                      <p class="job">
-                        {{ doctor.SpecialistName}} <span>({{doctor.SeniorityLevelName}})</span>
-                      </p>
-                      <div class="rate">
-                        <img src="assets/icons/Star2.svg">
-                        <b>
-                          {{ doctor.AvgRate}}
-
-                        </b> &nbsp;
-                        <span>
-                          ({{ doctor.rateCount}}
-                          {{ 'find-a-doctor.doctors-list.cards.reviews' | transloco }})
-                        </span>
-                      </div>
-                      @if(eventType == 0){
-                      <a [matMenuTriggerFor]="dots" class="dots" href="javascript:void(0)"
-                        (click)="$event.stopPropagation()">
-                        <img src="assets/icons/three-dots.svg" alt="">
-                      </a>
-                      }
-
-                      <mat-menu #dots="matMenu" class="userDropdown">
-                        <button (click)="editAppointment(doctor)" mat-menu-item>
-                          <img src="assets/icons/Edit.svg" alt="">
-                          <span>
-                            {{ 'my-schedule.Edit-Appointment' | transloco }}
-                          </span>
-                        </button>
-                        <button mat-menu-item (click)="map(doctor)">
-                          <img src="assets/icons/View-Map.svg" alt="">
-                          <span>
-                            {{ 'my-schedule.View-Map' | transloco }}
-                          </span>
-                        
-                        </button>
-                        <button mat-menu-item (click)="help()">
-                          <img src="assets/icons/Help.svg" alt="">
-                          <span>{{ 'my-schedule.help' | transloco }}
-                          </span>
-                        </button>
-                        <button (click)="cancelAppointment(doctor.AppointmentId,doctor.DoctorId,doctor.DoctorName)"
-                          mat-menu-item>
-                          <img src="assets/icons/Cancel-Appointment.svg" alt="">
-                          <span class="text-danger">
-                       
-                            {{ 'my-schedule.Cancel-Appointment' | transloco }}
-                          </span>
-                        </button>
-                      </mat-menu>
-
-
-                  
-                      @if(eventType == 1){
-                      <a [matMenuTriggerFor]="dots2" class="dots" href="javascript:void(0)"
-                        (click)="$event.stopPropagation()">
-                        <img src="assets/icons/three-dots.svg" alt="">
-                      </a>
-                      }
-
-                      <mat-menu #dots2="matMenu" class="userDropdown">
-                        <button (click)="RebookAppointment(doctor)" mat-menu-item>
-                          <img src="assets/icons/Calendar22.svg" alt="">
-                          <span>
-                          
-                            {{ 'my-schedule.ReBooking-Appointment' | transloco }}
-                          </span>
-                        </button>
-                        <button mat-menu-item (click)="goToMedical(doctor)">
-                          <img src="assets/icons/Group2222.svg" alt="">
-                          <span>
-                           
-                            {{ 'my-schedule.Medical' | transloco }}
-                          </span>
-                        </button>
-                        <button mat-menu-item (click)="rate(doctor)">
-                          <img src="assets/icons/Star22.svg" alt="">
-                          <span>
-                            
-                            {{ 'my-schedule.Rate' | transloco }}
-                          </span>
-                        </button>
-                      </mat-menu>
-
-                    </div>
-                  </div>
-
-                  <div class="work-data">
-                    @if(doctor.HealthEntity_OffersID !== null){
-                    <div class="row">
-                      <div class="col-6">
-                        <span class="offer" style="color: #2B2979; font-weight: bold;">
-                          
-                          {{'booking-successfully.booking-details.offer' | transloco}}
-
-                        </span>
-                      </div>
-
-                    </div>
-                    }
-                    <div class="row">
-                      <div class="col-6">
-                        <img src="assets/icons/Sub-specialization.svg" alt="">
-                        <span>
-                       
-                          {{ 'find-a-doctor.doctors-list.cards.service' | transloco }}
-                        
-                        </span>
-                      </div>
-                      <div class="col-6 answer">
-                        <span>
-                         
-                          {{ doctor.MedicalExaminationTypeName}}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-6">
-                        <img src="assets/icons/Phone.svg" alt="">
-                        <span>
-                   
-                          {{'booking-successfully.clinic-number' | transloco}}
-                        </span>
-                      </div>
-                      <div class="col-6 answer">
-                        <span>
-                          
-                          {{ doctor.ClinicPhone}}
-                        </span>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-6">
-                        <img src="assets/icons/Address.svg" alt="">
-                        <span>
-                        
-                          {{ 'booking-successfully.booking-details.clinic-address' | transloco }}
-                        </span>
-                      </div>
-                      <div class="col-6 answer">
-                        <span>
-                         
-                          {{ doctor.ClinicAddress}}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-6">
-                        <img src="assets/icons/Fees.svg" alt="">
-                        <span>
-                        
-                          {{ 'find-a-doctor.doctors-list.cards.time' | transloco }}
-                        </span>
-                      </div>
-                      <div class="col-6 answer">
-                        <span>
-                          {{returnWeekDay(doctor.AppointmentDate)}}
-                
-                        </span>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-6">
-                        <img src="assets/icons/Fees.svg" alt="">
-                        <span>
-                          {{ 'find-a-doctor.doctors-list.cards.fees' | transloco }}
-                        </span>
-                      </div>
-                      <div class="col-6 answer">
-                        <span>
-                          {{doctor.Fees}}
-                          {{ 'my-schedule.LE' | transloco }}
-                        </span>
-                      </div>
-                    </div>
-
-                  </div>
-              
-                  @if(eventType == 2){
-                  <button class="btn btn-outline-info p-2 w-100" (click)="RebookAppointment(doctor)">
-                    <img src="assets/icons/Calendar3.svg" alt="">
-                    {{ 'my-schedule.ReBooking-Appointment' | transloco }}
-                  </button>
-                  }
-
-                </div>
-              </div> -->
-
-
             </div>
           </div>
+          }
         </div>
       </section>
     </div>
   </div>
+  <div class="modal fade" id="myModalHelp" tabindex="-1" aria-labelledby="myModalHelpLabel" aria-hidden="true"
+    data-bs-toggle="modal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content position-relative border-0">
+        <button type="button" class="btn-close position-absolute m-2" data-bs-dismiss="modal"
+          style="cursor: pointer; top: 10px; right: 10px" aria-label="Close"></button>
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <div class="sign-out">
+                <img src="../../../assets/icons/contact-us.png" class="img-fluid mt-3" alt="Sign out" />
+                <h5 class="my-3 fw-bold">Salamtak Support</h5>
+                <p class="my-2" style="color: #8088a4">
+                  Our support team is ready to assist you. Reach out for help,
+                  inquiries, or feedback at any time.
+                </p>
+              </div>
+
+              <div class="d-flex justify-content-center mt-4">
+                <a href="" class="text-whhite w-100">
+                  <a href="tel:{{ phone }}" class="btn py-3 btn-primary w-100 rounded-3  " style="font-size: 19px">
+
+                    {{ phone }}
+                  </a>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </section>

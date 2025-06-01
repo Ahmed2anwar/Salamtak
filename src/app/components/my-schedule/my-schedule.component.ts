@@ -26,11 +26,10 @@ import { TableModule } from 'primeng/table';
     TranslocoModule,
     RouterModule,
     CommonModule,
-    SearchFormComponent,
     AccordionModule,
     FormsModule,
     MatTabsModule,
-    MatMenuModule,RoutesPipe,
+    MatMenuModule,
     TableModule
   ],
   templateUrl: './my-schedule.component.html',
@@ -41,6 +40,7 @@ export class MyScheduleComponent {
 
   date = null;
   lat:any;
+   phone = '17143'
   long :any;
   data :any ;
   todayDate:any;
@@ -92,8 +92,8 @@ export class MyScheduleComponent {
 
 
       }
-      
-      
+
+
 
  }
 
@@ -151,9 +151,7 @@ export class MyScheduleComponent {
           e.ClinicAddress=e.ClinicAddress+" "+this.appartment+" "+e.ApartmentNo ;
         }
       });
-
     })
-    console.log(this.data);
   }
   getMedicalHistoryAppointmentes(){
     this.spinner.show()
@@ -259,14 +257,7 @@ export class MyScheduleComponent {
     // dialogRef.afterClosed().subscribe(result => {
     // });
   }
-  help(){
-    // ContactUsComponent
-    this.dialog.open(ContactUsComponent, {
-      width: '500px',
-      // height: '500px',
-      data: {}
-    });
-  }
+
   // RateComponent
   rate(doctor:any){
     const dialogRef = this.dialog.open(RateComponent, {

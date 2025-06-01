@@ -27,7 +27,7 @@ import { RoutesPipe } from '../../pipes/routes.pipe';
     TranslocoModule,
     RouterModule,
     CommonModule,
-    SearchFormComponent,
+
     AccordionModule,
     FormsModule,
     BookFormComponent,
@@ -43,6 +43,9 @@ export class DoctorProfileComponent {
   languages = languages;
   selectedLanguage = this.languages[0];
   videos: any = [];
+  allVideos: any = [];
+  allUniqueServices: any = [];
+  allImages: any = [];
   loadingVideos = false;
   doctorFees: any;
   storageUrl = environment.storageUrl;
@@ -52,6 +55,7 @@ export class DoctorProfileComponent {
   ClinicId = null;
   public IsEnglish = true;
   public IsArabic = false;
+
   lang: any;
   replaceSpaceWithDash(name: any) {
     return name?.replace(/ /g, '-');
@@ -63,14 +67,12 @@ export class DoctorProfileComponent {
     private translocoService: TranslocoService,
     private sanitizer: DomSanitizer,
     private StorageService: LocalStorageService,
-    // private metadataService : MetadataService,
     private router: Router,
     public routesPipe: RoutesPipe,
     @Inject(DOCUMENT) private document: Document
   ) {}
 
   ngOnInit(): void {
-
     this.getDoctorDetail();
     this.getDoctorRateByDoctorIdPagedList();
     this.doctorFees = sessionStorage.getItem('DoctorFees');
@@ -78,9 +80,7 @@ export class DoctorProfileComponent {
       this.AvalibleDate = params['AvalibleDate'];
       this.ClinicId = params['ClinicId'];
     });
-
   }
-
   getDoctorVideos() {
     this.loadingVideos = true;
     this.spinner.show();
@@ -99,26 +99,36 @@ export class DoctorProfileComponent {
   sanitizeUrll(videoUrl: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl);
   }
-
   getDoctorDetail(doctorId = this.doctorId) {
     this.spinner.show();
     this.service
       .getDoctorDetail(doctorId, 0, new Date().toISOString().split('T')[0])
       .subscribe((res) => {
-        this.doctor = res['Data'];
-
         this.spinner.hide();
 
-        this.lang = this.translocoService.getActiveLang();
-        res['Data']['clinicDtos'].forEach((clinic: any) => {
+        this.doctor = res['Data'];
 
-          if (this.ClinicId == clinic['ClinicId']) {
-            clinic['active'] = true;
-          } else {
-            clinic['active'] = false;
-          }
-
+        this.doctor.clinicDtos.forEach((clinic: any) => {
+          clinic['active'] = this.ClinicId == clinic['ClinicId'];
         });
+
+        const allServices = this.doctor.clinicDtos.flatMap(
+          (clinic: any) => clinic.Services || []
+        );
+
+        this.allUniqueServices = [...new Set(allServices)];
+
+        const allImages = this.doctor.clinicDtos.flatMap(
+          (clinic: any) => clinic.Gallary || []
+        );
+
+        this.allVideos = this.doctor.clinicDtos.flatMap(
+          (clinic: any) => clinic.Videos || []
+        );
+
+        this.allImages = allImages;
+
+        this.lang = this.translocoService.getActiveLang();
       });
   }
   getDocFullName(doctor: any) {
