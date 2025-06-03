@@ -49,8 +49,7 @@
           {{ "home.top-specialties.title" | transloco }}
         </h2>
         <div class="row g-3 mt-3">
-          <div class="col-md-2" *ngFor="let item of topSpecialties"
-            (click)="goToSpecialty(item.Name)" 
+          <div class="col-md-2" *ngFor="let item of topSpecialties | slice:0:6" (click)="goToSpecialty(item.Name)"
             style="cursor: pointer;">
             <div class="d-flex p-2 align-items-center justify-content-between  border-1 rounded-2 border"
               style="cursor: pointer; text-decoration: none;">
@@ -118,7 +117,7 @@
           </div>
         </div>
         }
-        <!-- Poly -->
+
         <div class="col-service mb-3">
           <div class="card" style="cursor: pointer" [routerLink]="['polyclinics' | route]" data-aos="fade-up">
             <div class="card-body">
@@ -131,77 +130,8 @@
             </div>
           </div>
         </div>
-
-        <!-- New Labs -->
-        <!-- <div class="col-service mb-3">
-                <div class="card" data-aos="fade-up">
-                  <div class="card-body">
-                    <div class="icon">
-                      <img src="assets/lab.png" alt="Static Service icon">
-                    </div>
-                    <h3 class="title text-primary">
-                      {{ 'home.services.cards.Labs' | transloco }}
-                    </h3>
-                    <p class="description">
-                      {{ 'home.services.cards.Labs-Des' | transloco }}
-                    </p>
-                    <div class="text-center">
-                      <a href="javascript:void(0)" class="btn btn-info text-white" aria-label="find-a-doctor"
-                        [routerLink]="['labs'  | route]">
-                        {{ 'home.services.cards.button' | transloco }}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-
-        <!-- New Radiology -->
-        <!-- <div class="col-service mb-3">
-                <div class="card" data-aos="fade-up">
-                  <div class="card-body">
-                    <div class="icon">
-                      <img src="assets/radiology.png" alt="Static Service icon">
-                    </div>
-                    <h3 class="title text-primary">
-                      {{ 'home.services.cards.Radiology' | transloco }}
-                    </h3>
-                    <p class="description">
-                      {{ 'home.services.cards.Radiology-Des' | transloco }}
-                    </p>
-                    <div class="text-center">
-                      <a href="javascript:void(0)" class="btn btn-info text-white" aria-label="find-a-doctor"
-                        [routerLink]="['radiology' | route]">
-                        {{ 'home.services.cards.button' | transloco }}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-
-        <!-- HomeCare -->
-        <!-- <div class="col-service mb-3">
-                <div class="card" data-aos="fade-up">
-                  <div class="card-body">
-                    <div class="icon">
-                      <img src="assets/background/about/Logo/Home Care.png" alt="Static Service icon">
-                    </div>
-                    <h3 class="title text-primary">
-                      {{ 'home.services.cards.HomeCare' | transloco }}
-                    </h3>
-                    <p class="description">
-                      {{ 'home.services.cards.HomeCare-Des' | transloco }}
-                    </p>
-                    <div class="text-center">
-                      <a href="javascript:void(0)" class="btn btn-info text-white" aria-label="find-a-doctor"
-                        >
-                        {{ 'home.services.cards.button' | transloco }}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
       </div>
-      <!-- </div> -->
+
 
       }
     </div>
@@ -210,203 +140,48 @@
 
 <div class="container mb-5 rounded-2 p-4" style="background-color: white; border: 1px solid #e7e7e7">
   <div class="row g-3 justify-content-center">
+
     <div class="d-flex m-0 align-items-center justify-content-between ">
       <h2 class="text-start text-black mt-3 " style="font-size: 32px; font-weight: 600" data-aos="fade-up">
         {{ 'home.popular-doctors.title' | transloco }}
       </h2>
-      <p class="text-info p-0 m-0" style="cursor: pointer;">See All</p>
+      <p class="text-info p-0 m-0" style="cursor: pointer;" [routerLink]="['find-a-doctor' | route]">See All</p>
     </div>
-    <div class="tabs mb-4">
-      <button class="btn btn-outline-primary me-2 px-4 py-2" (click)="filterCards('all')"
-        [class.active]="selectedCategory === 'all'">All</button>
-      <button class="btn btn-outline-primary mx-2 px-4 py-2" (click)="filterCards('classic')"
-        [class.active]="selectedCategory === 'General Surgery'">Classic</button>
-      <button class="btn btn-outline-primary mx-2 px-4 py-2" (click)="filterCards('casual')"
-        [class.active]="selectedCategory === 'Dentistry'">Casual</button>
-      <button class="btn btn-outline-primary mx-2 px-4 py-2" (click)="filterCards('semi')"
-        [class.active]="selectedCategory === 'ENT'">Semi</button>
-      <button class="btn btn-outline-primary mx-2 px-4 py-2" (click)="filterCards('formal')"
-        [class.active]="selectedCategory === 'Neurology'">Formal</button>
-    </div>
-    <div *ngFor="let card of filteredCards" class="col-md-3">
-      <div class="card rounded-3" style="background-color: white;border: 1px solid #e7e7e7">
-        <div class="card-body">
-          <img class="rounded-3 img-fluid" src="../../../assets/Doctorrr.png" alt="Star" style="object-fit: cover" />
+
+    <owl-carousel-o [options]="SpecialtyOption">
+      <ng-template carouselSlide *ngFor="let item of topSpecialties">
+
+        <button class="btn btn-outline-primary fw-normal w-100 mb-3  mx-2 px-3 py-2 " style="font-size: 14px;"
+          (click)="getPopularDoctors(item.Id)">{{ item.Name.length > 15 ? item.Name.split(' ')[0] : item.Name
+          }}</button>
+      </ng-template>
+    </owl-carousel-o>
+    <owl-carousel-o [options]="doctOption">
+      <ng-template carouselSlide *ngFor="let doc of doctors">
+        <div class="card rounded-3" style="background-color: white; border: 1px solid #e7e7e7">
+          <div class="card-body">
+            <img class="rounded-3 img-fluid" [src]="storageUrl + '/' + doc.DoctorImage" alt="Star"
+              style=" height: 130px; width: 100%;" />
+          </div>
+          <div class="user pb-2 px-3"
+            style="min-height:152px; display: flex; flex-direction: column; justify-content: space-between;">
+            <h5 class="fw-bold text-center fw-medium">{{ doc.DoctorName }}</h5>
+            <p class="text-center text-muted" style="font-size: 14px">
+              {{ doc.DoctorSpeciality }}
+            </p>
+            <button  class="btn btn-primary w-100 text-center fw-light mb-3"
+              style="font-size:14px;">
+              View Doctor Profile
+            </button>
+          </div>
         </div>
-        <div class="user pb-2 px-3">
-          <h5 class="fw-bold text-center fw-medium">
-            Dr. Hani H.Korashi
-          </h5>
-          <p class="text-center text-muted" style="font-size: 14px">
-            Cardiology and Vascular Disease
-          </p>
-          <button class="btn btn-primary w-100 text-center fw-normal" style="font-size:15px ;">View Doctor
-            Profile</button>
-        </div>
-      </div>
-    </div>
+      </ng-template>
+    </owl-carousel-o>
+
+
   </div>
 </div>
 
-<!--
-<section class="ask-question">
-  <div class="ask-question-image">
-    <img
-      src="https://salamtechapi.azurewebsites.net/images/large-logo2-color.svg"
-      alt="Question Image"
-    />
-  </div>
-  <div class="ask-question-header">
-    <h2 data-aos="fade-up">{{ "home.ask.tit" | transloco }}</h2>
-    <p>{{ "home.ask.dis" | transloco }}</p>
-  </div>
-
-  <div class="ask-question-content">
-    <button class="btn btn-primary btn-lg w-100" [routerLink]="['ask' | route]">
-      {{ "home.ask.button" | transloco }}
-    </button>
-  </div>
-</section> -->
-
-<!-- Trusted by many people -->
-<!-- <section class="trusted" style="padding-top: 80px">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 col-md-12">
-        <div class="card">
-          <div class="card-body">
-            <h1 class="title text-center">
-              {{ "home.trusted.title" | transloco }}
-            </h1>
-            <h3 class="description">
-              {{ "home.trusted.description" | transloco }}
-            </h3>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-12">
-        <div class="sliders">
-          <img
-            class="shape shape_1"
-            src="assets/shapes/green-circle.svg"
-            alt="shape_1"
-          />
-          <img
-            class="shape shape_2"
-            src="assets/shapes/blue-circle.svg"
-            alt="shape_2"
-          />
-          <img
-            class="shape shape_3"
-            src="assets/shapes/yello-circle.svg"
-            alt="shape_3"
-          />
-
-          <div class="row image-grid">
-            <div class="col-4">
-              <img
-                src="assets/fake-images-for-test/home-avatars/1.jpg"
-                width="100%"
-                data-aos="fade-up"
-                data-aos-offset="0"
-                alt="Image"
-              />
-              <img
-                src="assets/fake-images-for-test/home-avatars/5.jpg"
-                width="100%"
-                data-aos="fade-up"
-                data-aos-offset="400"
-                alt="Image"
-              />
-            </div>
-            <div class="col-4">
-              <img
-                src="assets/fake-images-for-test/home-avatars/12.jpg"
-                width="100%"
-                data-aos="fade-up"
-                data-aos-offset="0"
-                alt="Image3"
-              />
-              <img
-                src="assets/fake-images-for-test/home-avatars/4.jpg"
-                width="100%"
-                data-aos="fade-up"
-                data-aos-offset="200"
-                alt="Image4"
-              />
-              <img
-                src="assets/fake-images-for-test/home-avatars/14.jpg"
-                width="100%"
-                data-aos="fade-up"
-                data-aos-offset="400"
-                alt="Image5"
-              />
-            </div>
-            <div class="col-4">
-              <img
-                src="assets/fake-images-for-test/home-avatars/2.jpg"
-                width="100%"
-                data-aos="fade-up"
-                data-aos-offset="0"
-                alt="Image6"
-              />
-              <img
-                src="assets/fake-images-for-test/home-avatars/11.jpg"
-                width="100%"
-                data-aos="fade-up"
-                data-aos-offset="400"
-                alt="Image7"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-<!-- Popular Doctors -->
-<!-- If popularDoctors.length != 0 -->
-
-<!-- <section class="popular-doctors">
-    <div class="container">
-      <h2  data-aos="fade-up">
-        {{ 'home.popular-doctors.title' | transloco }}
-      </h2>
-      <div class="cards mt-5">
-        <div class="row">
-          <div class="col-lg-3 mb-4" >
-            <div class="card" [routerLink]="['/patient/doctor-profile',doctor['DoctorId']]">
-              <div class="card-body">
-                <div class="image">
-                  <img class="user" src="{{storageUrl}}/{{doctor['DoctorImage']}}" alt="doc-home">
-                </div>
-                <h5 class="name mt-3">
-                  {{doctor['DoctorName']}}
-                </h5>
-                <p class="job text-secondary">
-                  {{doctor['DoctorSpec']}}
-                </p>
-                <div class="rate">
-                  <img src="assets/icons/Star2.svg" alt="Star">  &nbsp;
-                  <b>{{doctor['Rate'] | number:'1.1-1'}}
-
-                  </b> &nbsp;<span class="text-secondary">
-                    ({{doctor['reviewsCount'] || 0}}Reviews)</span>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="text-center mt-5">
-        <a [routerLink]="['/patient/find-a-doctor']" href="javascript:void(0)" aria-label="see-all" class="btn btn-info text-white see-all">
-          {{ 'home.popular-doctors.see-all' | transloco }}
-        </a>
-      </div>
-    </div>
-  </section> -->
 
 <section class="popular-doctors">
   <div class="container">

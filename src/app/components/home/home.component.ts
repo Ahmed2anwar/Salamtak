@@ -1,3 +1,4 @@
+import { Specialty } from './../../../model';
 import {
   Component,
   HostListener,
@@ -21,7 +22,8 @@ import { MetadataService } from '../../services/metadata.service';
 import { RoutesPipe } from '../../pipes/routes.pipe';
 import { DownloadAppComponent } from '../download-app/download-app.component';
 import { TableModule } from 'primeng/table';
-import { Specialty } from '../../../model';
+import { ApiResponse, Doctor,  } from '../../../model';
+import { log } from 'node:console';
 
 @Component({
   selector: 'app-home',
@@ -46,12 +48,12 @@ export class HomeComponent {
   titleKey: any;
   descriptionKey: any;
   services = [];
+  doctors: Doctor[];
   topSpecialties: Specialty[] = [];
   popularDoctors = [];
   salamtakCapId = 1;
   phone = '17143';
   lang = this.translocoService.getActiveLang();
-
   blog = [
     {
       icon: 'assets/icons/scoopN.png',
@@ -90,7 +92,6 @@ export class HomeComponent {
       url: `emergency`,
     },
   ];
-
   medicalServices = [
     {
       icon: 'assets/icons/Hospitals.svg',
@@ -150,6 +151,55 @@ export class HomeComponent {
     //   title: 'Therapist',
     // }
   ];
+  SpecialtyOption: OwlOptions = {
+   mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    margin: 20,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 4,
+      },
+      400: {
+        items: 8,
+      },
+      740: {
+        items: 8,
+      },
+      940: {
+        items: 7,
+      },
+    },
+    nav: false,
+  };
+  doctOption: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 700,
+    autoplay: false,
+    margin: 20,
+    nav: false,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      400: {
+        items: 2,
+      },
+      740: {
+        items: 4,
+      },
+      940: {
+        items: 4,
+      },
+    },
+  };
   specialtiesOwlOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -180,7 +230,6 @@ export class HomeComponent {
       },
     },
   };
-
   testimonials = [
     {
       userImage: 'assets/fake-images-for-test/one.jpg',
@@ -237,7 +286,6 @@ export class HomeComponent {
     },
   ];
 
-  selectedCategory: string = 'all';
 
   cards = [
     {
@@ -312,43 +360,36 @@ export class HomeComponent {
       AOS.init();
     }
   }
-
-  showCustomView: boolean = false; // Variable to control the visibility of the custom view
-
-  // Function to toggle the visibility of the custom view
+  showCustomView: boolean = false;
   toggleCustomView() {
     this.showCustomView = !this.showCustomView;
   }
-
-  filterCards(category: string) {
-    this.selectedCategory = category;
-    this.filteredCards =
-      category === 'all'
-        ? [...this.cards]
-        : this.cards.filter((card) => card.category === category);
-  }
-
-  getTop10Specialties(): void {
+getPopularDoctors(specialtyId?: number): void {
+  this.service.getPopularDoctors(specialtyId).subscribe({
+    next: (response: ApiResponse) => {
+      this.doctors = response.Data;
+    },
+    error: (error) => {
+    }
+  });
+}
+getTop10Specialties(): void {
     this.service.getTopSpecialist().subscribe({
       next: (response: { Data: Specialty[] }) => {
-        this.topSpecialties = response.Data.slice(0, 6);
-        console.log('Top Specialties:', this.topSpecialties);
+        this.topSpecialties = response.Data;
       },
-      error: (error) => {
-        console.error('Error fetching API data:', error);
-      },
+      error: (error) => {},
     });
   }
   ngOnInit() {
     this.metadataService.updateMetadata('home');
-    // AOS.init();
     this.getMedicalExaminationType();
-    this.getPopularDoctors();
     this.getDoctorHealthTopics();
     this.getBlogs();
-    this.getWhatsAppAds(); // 401 Unauthorized
+    this.getWhatsAppAds();
     this.getTop10Specialties();
     this.getoffers();
+    this.getPopularDoctors();
   }
   getMedicalExaminationType() {
     this.service
@@ -358,11 +399,7 @@ export class HomeComponent {
         this.services = res;
       });
   }
-  getPopularDoctors() {
-    this.service.getPopularDoctors().subscribe((res: any) => {
-      this.popularDoctors = res;
-    });
-  }
+
   getDoctorHealthTopics() {
     this.service.getDoctorHealthTopics().subscribe((res: any) => {
       this.specialties = res['Data'];
@@ -391,7 +428,6 @@ export class HomeComponent {
   replaceSpaceWithDash(name: any) {
     return name?.replace(/ /g, '-');
   }
-
   goToSpecialty(specialtyName: string): void {
     const slug = this.replaceSpaceWithDash(specialtyName);
     this.router.navigate(['/en/doctors', slug]);

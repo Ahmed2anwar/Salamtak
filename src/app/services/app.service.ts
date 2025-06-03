@@ -6,6 +6,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { COMPONENT_KEYWORDS } from '../component-keywords';
 import { Data } from '@angular/router';
 import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
+import {  ApiResponse, Doctor } from '../../model';
 
 @Injectable({
   providedIn: 'root',
@@ -90,6 +91,12 @@ export class AppService {
   getTopSpecialist() {
     return this.http.get<any>(`${environment.apiUrl}/Specialist/GetTop10Specialist`);
   }
+  getPopularDoctors(specialityId?: number): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${environment.apiUrl}/Doctor/GetPopularDoctors`, {
+      SpecialityId: specialityId
+    });
+  }
+
   getSubSpecialist(SpecialistId: any) {
     return this.http.get<any>(
       `${environment.apiUrl}/Specialist/GetSubSpecialist?SpecialistId=${SpecialistId}`
@@ -140,12 +147,7 @@ export class AppService {
     );
   }
   // POST ​/api​/{culture}​/Doctor​/GetPopularDoctors
-  getPopularDoctors() {
-    return this.http.post<any>(
-      `${environment.apiUrl}/Doctor/GetPopularDoctors`,
-      {}
-    );
-  }
+
   // GET /api​/{culture}​/LookUp​/GetDoctorHealthTopics
   getDoctorHealthTopics() {
     return this.http.get<any>(
