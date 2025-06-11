@@ -36,11 +36,7 @@
           <accordion id="accordion" class="accordion">
             <!-- City -->
             <accordion-group [heading]="'City'" [isOpen]="true">
-              <div style=" max-height: 350px;
-  overflow-y: auto;
-  overflow-x: hidden;">
-
-
+              <div style=" max-height: 350px; overflow-y: auto;overflow-x: hidden;">
                 @for(city of cities; track null){
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="cities" id="city-{{$index}}" value="{{city?.Id}}"

@@ -317,15 +317,17 @@ $secondary: #8088a4;
   // Clicked State
   .hamburger--open {
     .hamburger__inner {
-
+      background: none;
       &::before,
       &::after {
         top: $hamburger__layer__height * 2;
+
       }
       &::before {
         -webkit-transform: rotate(-45deg);
         -ms-transform: rotate(-45deg);
         transform: rotate(-45deg);
+
       }
       &::after {
         -webkit-transform: rotate(45deg);

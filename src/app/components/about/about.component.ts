@@ -38,14 +38,10 @@ export class AboutComponent {
   visionServices:Observable<any>;
   salamtakServices:Observable<any>;
   constructor(private translocoService: TranslocoService,private metadataService: MetadataService,private route: RoutesPipe) {
-
     this.missoinServices = this.translocoService.selectTranslateObject('about-us.mission.mission-services');
     this.salamtakServices = this.translocoService.selectTranslateObject('about-us.services.salamtak-services');
     this.visionServices = this.translocoService.selectTranslateObject('about-us.vision.vision-services');
   }
-
-
-
 
   ngOnInit(): void {
 

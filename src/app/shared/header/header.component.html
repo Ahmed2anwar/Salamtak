@@ -108,7 +108,7 @@
           </a>
         </li>
 
-        <li class="nav-item" *ngIf="user != null">
+        <!-- <li class="nav-item" *ngIf="user != null">
           <div class="notification">
             <mat-icon class="notification-icon" (click)="toggleDropdown()"
               >notifications</mat-icon
@@ -145,14 +145,14 @@
               </p>
             </div>
           </div>
-        </li>
+        </li> -->
       </ul>
       @if(!user || user.ProfileStatus == 0){
       <form class="d-flex" role="search">
         <ul class="navbar-nav me-auto"></ul>
         <li class="btn btn-lang">
           <div class="d-flex align-items-center">
-            <i class="fas fa-globe pe-2"></i>
+            <i class="fas fa-globe px-2"></i>
 
             <a
               routerLinkActive="active"
@@ -187,7 +187,7 @@
           </div>
         </li>
 
-        <button (click)="login()" class="btn btn-login" type="button">
+        <button (click)="login()" class="btn btn-login mx-2" type="button">
 
           {{ "header.buttons.login" | transloco }}
         </button>
@@ -283,7 +283,7 @@
             />
 
           </span>
-          <img class="user-img" src="../../../assets/user.svg" alt="user" />
+          <!-- <img class="user-img" src="../../../assets/user.svg" alt="user" /> -->
           <i class="fa-solid fa-chevron-down px-2 text-muted"></i
         ></a>
       </div>

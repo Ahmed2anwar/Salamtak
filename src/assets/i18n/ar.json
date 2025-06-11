@@ -372,6 +372,9 @@
       "ConfirmButtonText":"حسنا"
     }
   },
+  "view-all":{
+    "title": "عرض المزيد"
+  },
   "header": {
     "links": {
       "home": "القائمة الرئيسية",
@@ -665,7 +668,7 @@
     "faq":"بنك الاسئلة",
     "ref": " :المصادر",
     "caree":"Salamtak Care",
-    "cap":"Salamtak Capsola",
+    "cap":"سلامتك كابسولة",
     "trueor":"Salamtak True Or False",
     "promo":"Salamtak Promotions",
     "scope":"Salamtak Scope",

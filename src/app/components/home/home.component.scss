@@ -476,7 +476,6 @@ section.popular-doctors {
   h2 {
     font-size: 32px;
     font-weight: 600;
-    text-align: left;
   }
   .card {
     border: 1px solid #e9eaef;
@@ -863,6 +862,9 @@ section.download .content a:first-of-type {
     padding: 6px;
     font-size: 16px;
   }
+  .doctor-header-img{
+    display: none !important;
+  }
 }
 .blogss img.card-img {
   height: 150px;
@@ -871,7 +873,7 @@ section.download .content a:first-of-type {
 }
 .blogss .card {
   border: none !important;
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 28px 25px -25px;
+  box-shadow: rgb(160 160 160 / 45%) 0px 28px 25px -25px;
 }
 .doctor-img {
   width: 30% !important;

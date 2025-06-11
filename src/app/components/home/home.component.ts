@@ -161,16 +161,16 @@ export class HomeComponent {
     navText: ['', ''],
     responsive: {
       0: {
-        items: 4,
+        items: 2,
       },
       400: {
-        items: 8,
+        items: 3,
       },
       740: {
-        items: 8,
+        items: 4,
       },
       940: {
-        items: 7,
+        items: 6,
       },
     },
     nav: false,
@@ -285,8 +285,6 @@ export class HomeComponent {
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     },
   ];
-
-
   cards = [
     {
       title: 'Classic Shirt',
@@ -312,7 +310,6 @@ export class HomeComponent {
     // add more cards as needed
   ];
   filteredCards = [...this.cards];
-
   testimonialsOwlOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -333,7 +330,7 @@ export class HomeComponent {
         items: 1,
       },
       400: {
-        items: 3,
+        items: 2,
       },
       740: {
         items: 4,
@@ -399,7 +396,6 @@ getTop10Specialties(): void {
         this.services = res;
       });
   }
-
   getDoctorHealthTopics() {
     this.service.getDoctorHealthTopics().subscribe((res: any) => {
       this.specialties = res['Data'];
@@ -430,19 +426,22 @@ getTop10Specialties(): void {
   }
   goToSpecialty(specialtyName: string): void {
     const slug = this.replaceSpaceWithDash(specialtyName);
-    this.router.navigate(['/en/doctors', slug]);
+    this.router.navigate(['/doctors', slug]);
   }
   getColClass(index: number): string {
     const sizes = [
-      'col-4', // size for the first card
-      'col-4', // size for the second card
-      'col-4', // size for the third card
-      'col-1', // empty column
-      'col-5', // size for the fourth card
-      'col-5', // size for the fifth card
-      'col-1', // empty column
+      'col-4',
+      'col-4',
+      'col-4',
+      'col-1',
+      'col-5',
+      'col-5',
+      'col-1',
     ];
-
     return sizes[index];
   }
+  goToDoctorProfile(id: number, name: string): void {
+  this.router.navigate(['/en/doctor', id, this.replaceSpaceWithDash(name)]);
+
+}
 }

@@ -31,6 +31,7 @@ import { MetadataService } from '../../services/metadata.service';
 import { RoutesPipe } from '../../pipes/routes.pipe';
 // import { NgxViewerModule } from 'ngx-viewer';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { Specialty } from '../../../model';
 
 @Component({
   selector: 'app-find-a-doctor',
@@ -66,6 +67,7 @@ export class FindADoctorComponent {
     MaxResultCount: 10,
     SkipCount: 0,
   };
+  topSpecialties: Specialty[] = [];
 
   seniorityLevels: any = [];
   genders: any = [
@@ -136,8 +138,6 @@ export class FindADoctorComponent {
         .get('specialty')
         ?.replace(/-/g, ' ')
         .toLowerCase();
-
-     ;
     });
 
     this.StorageService.setItem('PAGE_CURRENT_KEY', 'find-a-doctor');
@@ -221,6 +221,18 @@ export class FindADoctorComponent {
     // this.isScrolled = true
     // this.doctorsSearch()
   }
+  getTop10Specialties(): void {
+    this.service.getTopSpecialist().subscribe({
+      next: (response: { Data: Specialty[] }) => {
+        this.topSpecialties = response.Data;
+      },
+      error: (error) => {},
+    });
+  }
+  goToSpecialty(specialtyName: string): void {
+    const slug = this.replaceSpaceWithDash(specialtyName);
+    this.router.navigate(['/en/doctors', slug]);
+  }
   private padZero(value: number): string {
     return value < 10 ? `0${value}` : `${value}`;
   }
@@ -229,6 +241,7 @@ export class FindADoctorComponent {
   alternativeUrl: any;
 
   ngOnInit(): void {
+    this.getTop10Specialties();
     this.currentUrl = this.StorageService.getItem('currentUrl');
     this.alternativeUrl = this.StorageService.getItem('alternativeUrl');
 
@@ -249,10 +262,7 @@ export class FindADoctorComponent {
     }
 
     this.doctorsSearch();
-
-    // this.setTitle()
     this.metadataService.updateMetadata('find-a-doctor');
-
     this.getSeniorityLevel();
     this.getspecialist();
     this.getMedicalExaminationType();

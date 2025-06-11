@@ -370,6 +370,9 @@
       "ConfirmButtonText": "OK"
     }
   },
+  "view-all":{
+    "title": "View more"
+  },
   "header": {
     "links": {
       "home": "Home",

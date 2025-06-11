@@ -21,21 +21,21 @@ import { RoutesPipe } from '../../pipes/routes.pipe';
     CommonModule,
     AccordionModule,
     FormsModule,
-    RoutesPipe
+    RoutesPipe,
   ],
   templateUrl: './polyclinics.component.html',
-  styleUrl: './polyclinics.component.scss'
+  styleUrl: './polyclinics.component.scss',
 })
 export class PolyclinicsComponent {
-  data :any = {
-    Items : [],
-    TotalCount : 0
-  }
-  cities :any = []
-  CityId :any = null
-  areas :any = []
-  areaId :any = null
-  loading = false
+  data: any = {
+    Items: [],
+    TotalCount: 0,
+  };
+  cities: any = [];
+  CityId: any = null;
+  areas: any = [];
+  areaId: any = null;
+  loading = false;
   storageUrl = environment.storageUrl;
   public doctorViewerOptions: any = {
     navbar: false,
@@ -43,59 +43,61 @@ export class PolyclinicsComponent {
     title: false,
     movable: false,
   };
-  private HealthEntityPagedList = 6
-  public filterObject :any;
-  lang :any = this.translocoService.getActiveLang()
+  private HealthEntityPagedList = 6;
+  public filterObject: any;
+  lang: any = this.translocoService.getActiveLang();
   constructor(
-    private service : AppService,
-    private spinner :NgxSpinnerService,
-    private translocoService : TranslocoService,
-    private metadataService : MetadataService
-  ) { }
+    private service: AppService,
+    private spinner: NgxSpinnerService,
+    private translocoService: TranslocoService,
+    private metadataService: MetadataService
+  ) {}
 
   ngOnInit(): void {
     this.metadataService.updateMetadata('polyclinics');
-
-    this.getHealthEntityPagedList()
-    this.getCities()
-    console.log(this.data)
+    this.getHealthEntityPagedList();
+    this.getCities();
+    console.log(this.data);
   }
-  getHealthEntityPagedList(filters = false){
-    this.loading = true
+  getHealthEntityPagedList(filters = false) {
+    this.loading = true;
     var filter = {
-      ...(this.CityId && {CityId: +this.CityId}),
-      ...(this.areaId && {AreaId: +this.areaId}),
-    }
+      ...(this.CityId && { CityId: +this.CityId }),
+      ...(this.areaId && { AreaId: +this.areaId }),
+    };
 
-    this.filterObject = filter
-    this.spinner.show()
-    this.service.getHealthEntityPagedListt(filter).pipe(map(res=>res['Data'])).subscribe(res=>{
-      // this.doctors = [...this.doctors, ...res]
-      this.data = res
-
-      if(!filters){
-        this.data = [...this.data, ...res]
-      }else{
-        this.data = res
-      }
-      setTimeout(() => {
-        this.loading = false
-      }, 1000);
-      this.spinner.hide()
-    })
+    this.filterObject = filter;
+    this.spinner.show();
+    this.service
+      .getHealthEntityPagedListt(filter)
+      .pipe(map((res) => res['Data']))
+      .subscribe((res) => {
+        // this.doctors = [...this.doctors, ...res]
+        this.data = res;
+        console.log(this.data);
+        if (!filters) {
+          this.data = [...this.data, ...res];
+        } else {
+          this.data = res;
+        }
+        setTimeout(() => {
+          this.loading = false;
+        }, 1000);
+        this.spinner.hide();
+      });
   }
 
-  handleImageError(text = '',e:any){
-    return e.target.src = `https://ui-avatars.com/api/?name=${text}&background=222161&color=fff`;
+  handleImageError(text = '', e: any) {
+    return (e.target.src = `https://ui-avatars.com/api/?name=${text}&background=222161&color=fff`);
   }
   getCities() {
-    this.service.getCities().subscribe((res:any) => {
-      this.cities = res.Data
-    })
+    this.service.getCities().subscribe((res: any) => {
+      this.cities = res.Data;
+    });
   }
   getAreasByCityId(cityId: any) {
-    this.service.getAreas(cityId).subscribe((res:any) => {
-      this.areas = res.Data
-    })
+    this.service.getAreas(cityId).subscribe((res: any) => {
+      this.areas = res.Data;
+    });
   }
 }
