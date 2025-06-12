@@ -15,19 +15,19 @@
 
       </ol>
     </nav>
-      <div class="filter-tools">
-    <div class="row">
-      <div class="col-auto pl-0">
-        <h2 style="font-weight: 500">
-          <span>
-            <span  style="font-weight: 600; color: #00D2CB;">{{ data?.TotalCount }}</span>
-            {{ "pages.Laboratories" | transloco }}
-          </span>
-          Found
-        </h2>
+    <div class="filter-tools">
+      <div class="row">
+        <div class="col-auto pl-0">
+          <h2 style="font-weight: 500">
+            <span>
+              <span style="font-weight: 600; color: #00D2CB;">{{ data?.TotalCount }}</span>
+              {{ "pages.Laboratories" | transloco }}
+            </span>
+            {{ "pages.found" | transloco }}
+          </h2>
+        </div>
       </div>
     </div>
-  </div>
 
 
     <div>
@@ -35,33 +35,21 @@
         <div class="col-lg-3  col-md-4 filters-menu">
           <accordion id="accordion" class="accordion">
             <!-- City -->
-            <accordion-group id="accordion-group"
-              [heading]="'search-form.city.placeholder' | transloco"
-              [isOpen]="true"
-            >
+            <accordion-group id="accordion-group" [heading]="'search-form.city.placeholder' | transloco"
+              [isOpen]="true">
               <div class="scrollable-dropdown">
                 @for(city of cities; track null){
                 <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="cities"
-                    id="city-{{ $index }}"
-                    value="{{ city?.Id }}"
-                    [(ngModel)]="CityId"
-                    (change)="
+                  <input class="form-check-input" type="radio" name="cities" id="city-{{ $index }}"
+                    value="{{ city?.Id }}" [(ngModel)]="CityId" (change)="
                       getHealthEntityPagedList(
                         filterObject.MaxResultCount,
                         filterObject?.SkipCount,
                         true
                       );
                       getAreasByCityId(city?.Id)
-                    "
-                  />
-                  <label
-                    class="form-check-label text-capitalize"
-                    for="city-{{ $index }}"
-                  >
+                    " />
+                  <label class="form-check-label text-capitalize" for="city-{{ $index }}">
                     {{ city?.Name }}
                   </label>
                 </div>
@@ -69,33 +57,20 @@
               </div>
             </accordion-group>
             <!-- Area -->
-            <accordion-group
-              [heading]="'search-form.area.placeholder' | transloco"
-              [isOpen]="false"
-            >
+            <accordion-group [heading]="'search-form.area.placeholder' | transloco" [isOpen]="false">
               <div class="scrollable-dropdown">
                 @for(area of areas; track null){
 
                 <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="areas"
-                    id="area-{{ $index }}"
-                    value="{{ area?.Id }}"
-                    [(ngModel)]="areaId"
-                    (change)="
+                  <input class="form-check-input" type="radio" name="areas" id="area-{{ $index }}"
+                    value="{{ area?.Id }}" [(ngModel)]="areaId" (change)="
                       getHealthEntityPagedList(
                         filterObject.MaxResultCount,
                         filterObject?.SkipCount,
                         true
                       )
-                    "
-                  />
-                  <label
-                    class="form-check-label text-capitalize"
-                    for="area-{{ $index }}"
-                  >
+                    " />
+                  <label class="form-check-label text-capitalize" for="area-{{ $index }}">
                     {{ area?.Name }}
                   </label>
                 </div>
@@ -109,10 +84,11 @@
             <!-- no-results -->
             @if(!loading && data.Items.length == 0){
             <div class="no-results text-center">
-              <div class="card rounded-3" style="border: 1px solid #E9EAEF ;box-shadow: none; box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 20px -20px;">
+              <div class="card rounded-3"
+                style="border: 1px solid #E9EAEF ;box-shadow: none; box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 20px -20px;">
                 <div class="card-body">
 
-                          <img src="assets/icons/lab.png" alt="no-results" />
+                  <img src="assets/icons/lab.png" alt="no-results" />
                   <h5 class="mt-2 fw-bold">
                     <!-- No Results -->
                     {{ "pages.No-Results" | transloco }}
@@ -128,19 +104,16 @@
 
             <div class="row">
               @for(item of data.Items; track null){
-              <div class="col-lg-12 mb-4" >
-                <div class="card rounded-3" style="border: 1px solid #E9EAEF ;box-shadow: none; box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 20px -20px;" >
-                  <div class="card-body" >
-                    <div class="pt-1 pb-3 user d-flex justify-content-lg-between align-items-center flex-wrap justify-content-center " style="border-bottom: 1px solid #e0e2e9; padding-bottom: 20px;">
+              <div class="col-lg-12 mb-4">
+                <div class="card rounded-3"
+                  style="border: 1px solid #E9EAEF ;box-shadow: none; box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 20px -20px;">
+                  <div class="card-body">
+                    <div
+                      class="pt-1 pb-3 user d-flex justify-content-lg-between align-items-center flex-wrap justify-content-center "
+                      style="border-bottom: 1px solid #e0e2e9; padding-bottom: 20px;">
                       <div class="d-flex px-2">
-                        <img
-                          ngxViewer
-                          src="assets/icons/image.png"
-                          alt=""
-                          width="60px"
-                          height="60px"
-                          style=" border-radius: 50%"
-                        />
+                        <img ngxViewer src="assets/icons/image.png" alt="" width="60px" height="60px"
+                          style=" border-radius: 50%" />
 
                         <div class="info mt-1">
                           <h6 class="name">
@@ -154,8 +127,7 @@
                       </div>
                       <div>
                         <button class="btn btn-outline-primary px-4 py-2">
-                          Get direction
-                        </button>
+                          {{ "pages.get-direction" | transloco }} </button>
                       </div>
                     </div>
                     <div class="work-data">
@@ -166,7 +138,7 @@
                             <!-- Address -->
                             {{ "Address" | transloco }}
                           </h5>
-                          <p class="text-muted" >
+                          <p class="text-muted">
                             {{ converter(item.Address) }}
                           </p>
                         </div>
@@ -175,23 +147,16 @@
                           <h5>
                             <!-- Phone -->
                             {{ "Phone" | transloco }}
-                            </h5>
-                            <div class="">
-                              <p
-                                class="text-muted"
-                                style="cursor: pointer; display: inline-block; margin-right: 8px;"
-                                (click)="copyToClipboard(item.HealthEntityPhoneDtos[0])"
-                                title="Click to copy"
-                              >
-                                {{ convertToArabicNumber(item.HealthEntityPhoneDtos[0]) }}
-                              </p>
-                              <img
-                                src="../../../assets/icons/copy.png"
-                                alt="icon"
-                                style="width: 16px; height: 16px; vertical-align: middle; display: inline-block; cursor: pointer;"
-                                (click)="copyToClipboard(item.HealthEntityPhoneDtos[0])"
-                              />
-                            </div>
+                          </h5>
+                          <div class="">
+                            <p class="text-muted" style="cursor: pointer; display: inline-block; margin-right: 8px;"
+                              (click)="copyToClipboard(item.HealthEntityPhoneDtos[0])" title="Click to copy">
+                              {{ convertToArabicNumber(item.HealthEntityPhoneDtos[0]) }}
+                            </p>
+                            <img src="../../../assets/icons/copy.png" alt="icon"
+                              style="width: 16px; height: 16px; vertical-align: middle; display: inline-block; cursor: pointer;"
+                              (click)="copyToClipboard(item.HealthEntityPhoneDtos[0])" />
+                          </div>
 
                         </div>
 
@@ -231,23 +196,16 @@
             </div>
             } @if(data && data.Items.length != 0){
             <div class="my3 text-center">
-              <button
-                class="btn btn-primary  px-4 py-3"
-                (click)="
+              <button class="btn btn-primary  px-4 py-3" (click)="
                   getHealthEntityPagedList(
                     filterObject.MaxResultCount + 10,
                     filterObject?.SkipCount + 10
                   )
-                "
-              >
+                ">
                 &nbsp;
                 {{ "pages.Load-More" | transloco }}
                 &nbsp; @if(loading){
-                <span
-                  class="spinner-border spinner-border-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 }
               </button>
             </div>

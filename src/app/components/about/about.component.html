@@ -26,7 +26,7 @@
         </div>
       </div>
     </section>
-    
+
 
     <section style="margin-bottom: 100px">
       <div class="container">
@@ -52,7 +52,7 @@
                   [src]="service.img"
                   alt="Icon"
                 />
-                <div class="mx-3">
+                <div class="mx-3 mission-content">
                   <h5 class="m-0" style="font-weight: 400">{{ service.name }}</h5>
                   <p class="mb-0" style="color: #8088a4">{{ service.role }}</p>
                 </div>
@@ -99,13 +99,13 @@
               <p class="text-muted pt-2 mb-3 pe-md-4">
                 {{ "about-us.vision.description" | transloco }}
               </p>
-              
+
               <div *ngFor="let service of visionServices | async" class="d-flex pt-4">
                 <img
                   [src]="service.img"
                   alt="Icon"
                 />
-                <div class="ms-3">
+                <div class="mx-3 mission-content">
                   <h5 class="m-0" style="font-weight: 400">{{ service.name }}</h5>
                   <p class="mb-0" style="color: #8088a4">{{ service.role }}</p>
                 </div>
@@ -175,7 +175,7 @@
             <div class="row g-3">
               <div class="col-lg-12">
                 <div class="card">
-                  <div class="card-body">
+                  <div class="card-body mission-content">
                     <div class="icon" style="">
                       <img src="assets/background/Group1.svg" />
                     </div>
@@ -193,7 +193,7 @@
               </div>
               <div class="col-lg-12">
                 <div class="card">
-                  <div class="card-body">
+                  <div class="card-body mission-content">
                     <div class="icon" style="">
                       <img src="assets/background/Group5.svg" />
                     </div>
@@ -213,7 +213,7 @@
               </div>
               <div class="col-lg-12">
                 <div class="card">
-                  <div class="card-body">
+                  <div class="card-body mission-content">
                     <div class="icon" style="">
                       <img src="assets/background/Group3.svg" />
                     </div>
@@ -243,7 +243,7 @@
             <div class="row g-3">
               <div class="col-lg-12">
                 <div class="card">
-                  <div class="card-body">
+                  <div class="card-body mission-content">
                     <div class="icon" style="">
                       <img src="assets/background/Group2.svg" />
                     </div>
@@ -263,7 +263,7 @@
               </div>
               <div class="col-lg-12">
                 <div class="card">
-                  <div class="card-body">
+                  <div class="card-body mission-content">
                     <div class="icon" style="">
                       <img src="assets/background/Group6.svg" />
                     </div>
@@ -281,7 +281,7 @@
               </div>
               <div class="col-lg-12">
                 <div class="card">
-                  <div class="card-body">
+                  <div class="card-body mission-content">
                     <div class="icon" style="">
                       <img src="assets/background/Group4.svg" />
                     </div>

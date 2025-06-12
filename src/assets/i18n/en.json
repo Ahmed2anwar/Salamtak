@@ -699,6 +699,8 @@
     "title": "Salamtak Promotions"
   },
   "contact-us": {
+    "contact-info": "Contact Information",
+    "location": "Villa 14 - 6th Touristic District. 1st Floor. 6th october City, Giza, Egypt",
     "breadcrumb": {
       "contact-us": "Contact Us"
     },
@@ -716,6 +718,11 @@
       "title": "Help & Support",
       "description": "Check out helpful resources, FAQs and developer tools.",
       "button": "Support Center"
+    },
+     "salamtak-support": {
+      "title": "Salamtak Support",
+      "description": "Our support team is ready to assist you. Reach out for help , feedback, or inquiries."
+      
     }
   },
   "invoice": {
@@ -740,6 +747,7 @@
       "clear": "Clear "
     }
   },
+  
   "doctor-profile": {
     "views": "Views",
     "specialized-in": "Specialized in",
@@ -875,7 +883,9 @@
     "No-invoices-found": "You don’t have any invoices yet. Once transactions are made, your invoices will appear here.",
     "Reviews": "Reviews",
     "Call": "Call",
-    "Load-More": "Load More"
+    "Load-More": "Load More",
+    "found": "Found",
+    "get-direction":"Get Direction"
   },
   "questions-answers": {
     "title": "Questions & Answers",

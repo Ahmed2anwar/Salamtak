@@ -27,7 +27,7 @@
 
 
       <div class="row g-3 flex-wrap justify-content-center">
-        <div class="col-lg-2 col-md-4 col-sm-6">
+        <div class="col-lg-3 col-md-4 col-sm-6">
           <div>
             <ng-multiselect-dropdown [placeholder]="'search-form.specialty.placeholder' | transloco"
               [settings]="dropdownSettings" [data]="form.specialty.list" [(ngModel)]="form.specialty.selectedValue"
@@ -36,7 +36,7 @@
             </ng-multiselect-dropdown>
           </div>
         </div>
-        <div class="col-lg-2 col-md-4 col-sm-6">
+        <div class="col-lg-3 col-md-4 col-sm-6">
           <div>
 
             <ng-multiselect-dropdown [placeholder]="'search-form.city.placeholder' | transloco"
@@ -47,7 +47,7 @@
 
           </div>
         </div>
-        <div class="col-lg-2 col-md-4 col-sm-6">
+        <div class="col-lg-3 col-md-4 col-sm-6">
           <div>
 
 
@@ -70,7 +70,7 @@
 
           </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-6">
+        <div class="col-lg-2 col-md-4 col-sm-6">
           <div class="">
 
             <input type="text" [(ngModel)]="form.doctorName" name="name"
@@ -78,7 +78,7 @@
               [placeholder]="'search-form.name.placeholder' | transloco" class="search ">
           </div>
         </div>
-        <div class="col-lg-2 col-md-4 col-sm-6">
+        <div class="col-lg-1 col-md-4 col-sm-6">
           <div>
             <button (click)="search()" class="btn btn-search w-100" type="button" aria-label="search"
               style=" padding: 10px;" [disabled]="form.loading">
@@ -89,7 +89,7 @@
                 <span class="sr-only"></span>
               </div>
               } @else {
-              <p style="margin-bottom: 0px; padding: 0px 20px; color: white;  ;">{{'search-form.search.placeholder' |
+              <p style="margin-bottom: 0px; color: white;">{{'search-form.search.placeholder' |
                 transloco}}</p>
               }
             </button>
