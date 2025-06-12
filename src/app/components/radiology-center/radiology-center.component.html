@@ -132,7 +132,7 @@
                 <div class="card rounded-3" style="border: 1px solid #E9EAEF ;box-shadow: none; box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 20px -20px;" >
                   <div class="card-body" >
                     <div class="pt-1 pb-3 user d-flex justify-content-md-between align-items-center flex-wrap justify-content-center " style="border-bottom: 1px solid #e0e2e9; padding-bottom: 20px;">
-                      <div class="d-flex px-2">
+                      <div class="d-flex align-items-center px-2">
                         <img
                           ngxViewer
                           src="assets/icons/image.png"
@@ -147,9 +147,9 @@
                             {{ item.Name }}
                           </h5>
 
-                          <div class="rate mt-3">
+                          <!-- <div class="rate mt-3">
                             <p class="text-muted">All Tests are available</p>
-                          </div>
+                          </div> -->
                         </div>
                       </div>
                       <div>
@@ -163,7 +163,7 @@
                           <img src="assets/icons/location.png" class="py-2" alt="icon " />
                           <h5>
                             <!-- Address -->
-                            {{ "Address" | transloco }}
+                            {{ "address.title" | transloco }}
                           </h5>
                           <p class="text-muted" >
                             {{ converter(item.Address) }}
@@ -173,7 +173,7 @@
                           <img src="assets/icons/call-calling.svg" class="py-2" alt="icon " />
                           <h5>
                             <!-- Phone -->
-                            {{ "Phone" | transloco }}
+                            {{ "phone.title" | transloco }}
                             </h5>
                             <div class="">
                               <p

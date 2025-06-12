@@ -39,6 +39,7 @@ import { RoutesPipe } from '../../pipes/routes.pipe';
 export class DoctorProfileComponent {
   public doctorId: any = this.route.snapshot.paramMap.get('doctorId');
   public name: any = this.route.snapshot.paramMap.get('doctorName');
+
   doctor: any = null;
   languages = languages;
   selectedLanguage = this.languages[0];
@@ -55,7 +56,6 @@ export class DoctorProfileComponent {
   ClinicId = null;
   public IsEnglish = true;
   public IsArabic = false;
-
   lang: any;
   replaceSpaceWithDash(name: any) {
     return name?.replace(/ /g, '-');
@@ -70,7 +70,9 @@ export class DoctorProfileComponent {
     private router: Router,
     public routesPipe: RoutesPipe,
     @Inject(DOCUMENT) private document: Document
-  ) {}
+  ) {
+   
+  }
 
   ngOnInit(): void {
     this.getDoctorDetail();
@@ -80,6 +82,9 @@ export class DoctorProfileComponent {
       this.AvalibleDate = params['AvalibleDate'];
       this.ClinicId = params['ClinicId'];
     });
+
+  
+    
   }
   getDoctorVideos() {
     this.loadingVideos = true;

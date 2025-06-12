@@ -73,11 +73,6 @@ export class BookFormComponent {
   public isBooked = false;
   selectedClinicId: number | null = null;
 
-  //**
-  // الايام ثابته
-  // يوم الححد يساوي 1
-  // يوم السبت 7
-  // */
   public dayes = [];
 
   daysOptions: OwlOptions = {
@@ -173,6 +168,8 @@ export class BookFormComponent {
         }
       }
     });
+    console.log(this.doctor);
+    
   }
   getAppointmentTypes() {
     // this.service.getMedicalExaminationType().subscribe((res: any) => {

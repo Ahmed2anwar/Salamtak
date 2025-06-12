@@ -370,8 +370,11 @@
       "ConfirmButtonText": "OK"
     }
   },
-  "view-all":{
+  "view-all": {
     "title": "View more"
+  },
+  "view-less": {
+    "title": "Show less"
   },
   "header": {
     "links": {
@@ -467,6 +470,15 @@
     "search": {
       "placeholder": "Search"
     }
+  },
+  "emergency":{
+    "title": "Emergency services 24 hours"
+  },
+  "phone": {
+    "title": "phone"
+  },
+  "address": {
+    "title": "Address"
   },
   "home": {
     "main-section": {
@@ -719,10 +731,9 @@
       "description": "Check out helpful resources, FAQs and developer tools.",
       "button": "Support Center"
     },
-     "salamtak-support": {
+    "salamtak-support": {
       "title": "Salamtak Support",
       "description": "Our support team is ready to assist you. Reach out for help , feedback, or inquiries."
-      
     }
   },
   "invoice": {
@@ -747,7 +758,7 @@
       "clear": "Clear "
     }
   },
-  
+
   "doctor-profile": {
     "views": "Views",
     "specialized-in": "Specialized in",
@@ -832,7 +843,7 @@
     "button": "Retry Now !"
   },
   "booking-successfully": {
-    "head":"Successfully Booking",
+    "head": "Successfully Booking",
     "title": " Your Booking is Successful",
     "description": "Thank you, Your  booking has been confirmed successfully",
     "notified": "We notified Dr. {{doctorName}} of your booking",
@@ -885,7 +896,7 @@
     "Call": "Call",
     "Load-More": "Load More",
     "found": "Found",
-    "get-direction":"Get Direction"
+    "get-direction": "Get Direction"
   },
   "questions-answers": {
     "title": "Questions & Answers",

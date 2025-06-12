@@ -317,4 +317,9 @@ html[dir="rtl"] {
   .mission-content {
     text-align: right !important;
   }
+  .multiselect-dropdown .dropdown-btn .selected-item-container .selected-item a {
+    left: 2px !important;
+    top:10px !important;
+    right: auto;
+}
 }

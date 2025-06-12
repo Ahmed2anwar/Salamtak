@@ -46,8 +46,8 @@
                   }
 
                   <button class="btn btn-primary" (click)="showAllDesc(i)">
-                     {{ expandedIndex === i ? 'Show Less' : 'view-all.title' | transloco }}
-                  </button>
+                    {{ (expandedIndex === i ? 'view-less.title' : 'view-all.title') | transloco }}
+                   </button>
                 </div>
               </div>
             </div>
