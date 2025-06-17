@@ -322,4 +322,7 @@ html[dir="rtl"] {
     top:10px !important;
     right: auto;
 }
+.owl-carousel.owl-theme.owl-loaded.owl-responsive.owl-drag {
+    direction: ltr !important;
+}
 }

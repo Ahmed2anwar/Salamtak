@@ -60,7 +60,8 @@
                   {{ item.Name.length > 15 ? item.Name.split(' ')[0] : item.Name }}
                 </p>
               </div>
-              <img src="../../../assets/arrow-right.png" class="doctor-header-img" style="width: 20px ; height: 20px;" alt="">
+              <img src="../../../assets/arrow-right.png" class="doctor-header-img" style="width: 20px ; height: 20px;"
+                alt="">
             </div>
           </div>
         </div>
@@ -142,8 +143,8 @@
 <div class="container mb-5 rounded-2 p-4" style="background-color: white; border: 1px solid #e7e7e7">
   <div class="row g-3 justify-content-center">
 
-    <div class="d-flex m-0 align-items-center justify-content-between ">
-      <h2 class="text-start text-black mt-3 " style="font-size: 32px; font-weight: 600" data-aos="fade-up">
+    <div class="d-flex m-0 align-items-center justify-content-between">
+      <h2 class="text-start text-black mt-3" style="font-size: 32px; font-weight: 600" data-aos="fade-up">
         {{ 'home.popular-doctors.title' | transloco }}
       </h2>
       <p class="text-info p-0 m-0" style="cursor: pointer;" [routerLink]="['find-a-doctor' | route]">
@@ -153,37 +154,62 @@
 
     <owl-carousel-o [options]="SpecialtyOption">
       <ng-template carouselSlide *ngFor="let item of topSpecialties">
-
-        <button class="btn btn-outline-primary fw-normal w-100 mb-3  mx-2 px-3 py-2 " style="font-size: 14px;"
-          (click)="getPopularDoctors(item.Id)">{{ item.Name.length > 15 ? item.Name.split(' ')[0] : item.Name
-          }}</button>
+        <button class="btn btn-outline-primary fw-normal w-100 mb-3 mx-2 px-3 py-2" style="font-size: 14px;"
+          (click)="getPopularDoctors(item.Id)">
+          {{ item.Name.length > 15 ? item.Name.split(' ')[0] : item.Name }}
+        </button>
       </ng-template>
     </owl-carousel-o>
-    <owl-carousel-o [options]="doctOption">
-      <ng-template carouselSlide *ngFor="let doc of doctors">
+
+    <owl-carousel-o *ngIf="doctors?.length" [options]="doctOption">
+      <!-- <ng-template carouselSlide *ngFor="let doc of doctors">
         <div class="card rounded-3" style="background-color: white; border: 1px solid #e7e7e7">
           <div class="card-body">
-            <img class="rounded-3 img-fluid" [src]="storageUrl + '/' + doc.DoctorImage" alt="Star"
-              style=" height: 130px; width: 100%;" />
+            <img
+              class="rounded-3 img-fluid"
+              [src]="storageUrl + '/' + doc.DoctorImage"
+              alt="Star"
+              style="height: 130px; width: 100%;" />
           </div>
-          <div class="user pb-2 px-3"
+          <div
+            class="user pb-2 px-3"
             style="min-height:152px; display: flex; flex-direction: column; justify-content: space-between;">
             <h5 class="fw-bold text-center fw-medium">{{ doc.DoctorName }}</h5>
             <p class="text-center text-muted" style="font-size: 14px">
               {{ doc.DoctorSpeciality }}
             </p>
-            <button class="btn btn-primary w-100 text-center fw-light mb-3" style="font-size:14px;"
+            <button
+              class="btn btn-primary w-100 text-center fw-light mb-3"
+              style="font-size:14px;"
               (click)="goToDoctorProfile(doc.DoctorId, doc.DoctorName)">
               View Doctor Profile
             </button>
           </div>
         </div>
-      </ng-template>
+      </ng-template> -->
     </owl-carousel-o>
-
-
+    <div class="col-md-3" *ngFor="let doc of doctors | slice:0:4">
+      <div class="card rounded-3" style="background-color: white; border: 1px solid #e7e7e7">
+        <div class="card-body">
+          <img class="rounded-3 img-fluid" [src]="storageUrl + '/' + doc.DoctorImage" alt="Star"
+            style="height: 130px; width: 100%;" />
+        </div>
+        <div class="user pb-2 px-3"
+          style="min-height:152px; display: flex; flex-direction: column; justify-content: space-between;">
+          <h5 class="fw-bold text-center fw-medium">{{ doc.DoctorName }}</h5>
+          <p class="text-center text-muted" style="font-size: 14px">
+            {{ doc.DoctorSpeciality }}
+          </p>
+          <button class="btn btn-primary w-100 text-center fw-light mb-3" style="font-size:14px;"
+            (click)="goToDoctorProfile(doc.DoctorId, doc.DoctorName)">
+            {{ "view-doctor.profile.title" | transloco }} </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+
 
 
 <section class="popular-doctors">
@@ -264,7 +290,6 @@
     </div>
   </div>
 </section>
-
 <section class="what-people-say " style="padding: 80px 0px 80px 0">
   <div class="container rounded-2 p-4" style="    background-color: white;
     border: 1px solid #e7e7e7">
@@ -293,7 +318,6 @@
     </div>
   </div>
 </section>
-
 <!-- Ask section -->
 <section class="download">
   <div class="container">

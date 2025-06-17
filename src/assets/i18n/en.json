@@ -376,6 +376,10 @@
   "view-less": {
     "title": "Show less"
   },
+  "view-doctor.profile": {
+    "title": "View Doctor Profile"
+
+  },
   "header": {
     "links": {
       "home": "Home",

@@ -22,7 +22,7 @@ import { MetadataService } from '../../services/metadata.service';
 import { RoutesPipe } from '../../pipes/routes.pipe';
 import { DownloadAppComponent } from '../download-app/download-app.component';
 import { TableModule } from 'primeng/table';
-import { ApiResponse, Doctor,  } from '../../../model';
+import { ApiResponse, Doctor } from '../../../model';
 import { log } from 'node:console';
 
 @Component({
@@ -42,13 +42,14 @@ import { log } from 'node:console';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
+
   public blogs: any[] = [];
   public offers: any[] = [];
   storageUrl = environment.storageUrl;
   titleKey: any;
   descriptionKey: any;
   services = [];
-  doctors: Doctor[];
+ public doctors: Doctor[];
   topSpecialties: Specialty[] = [];
   popularDoctors = [];
   salamtakCapId = 1;
@@ -152,7 +153,7 @@ export class HomeComponent {
     // }
   ];
   SpecialtyOption: OwlOptions = {
-   mouseDrag: true,
+    mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
     dots: false,
@@ -340,6 +341,7 @@ export class HomeComponent {
       },
     },
   };
+  
 
   constructor(
     private service: AppService,
@@ -361,16 +363,15 @@ export class HomeComponent {
   toggleCustomView() {
     this.showCustomView = !this.showCustomView;
   }
-getPopularDoctors(specialtyId?: number): void {
-  this.service.getPopularDoctors(specialtyId).subscribe({
-    next: (response: ApiResponse) => {
-      this.doctors = response.Data;
-    },
-    error: (error) => {
-    }
-  });
-}
-getTop10Specialties(): void {
+  getPopularDoctors(specialtyId?: number): void {
+    this.service.getPopularDoctors(specialtyId).subscribe({
+      next: (response: ApiResponse) => {
+          this.doctors = response.Data;
+      },
+      error: (error) => {},
+    });
+  }
+  getTop10Specialties(): void {
     this.service.getTopSpecialist().subscribe({
       next: (response: { Data: Specialty[] }) => {
         this.topSpecialties = response.Data;
@@ -441,7 +442,6 @@ getTop10Specialties(): void {
     return sizes[index];
   }
   goToDoctorProfile(id: number, name: string): void {
-  this.router.navigate(['/en/doctor', id, this.replaceSpaceWithDash(name)]);
-
-}
+    this.router.navigate(['/en/doctor', id, this.replaceSpaceWithDash(name)]);
+  }
 }
