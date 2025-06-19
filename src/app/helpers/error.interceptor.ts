@@ -32,7 +32,7 @@ export function ErrorInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn)
       }
       switch (err.status) {
         case 400:
-          debugger
+
           console.log(err)
           console.log(err.error)
           if(err.error['Message']){
@@ -40,35 +40,18 @@ export function ErrorInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn)
           }
           if(err.error.errors){
             for (var i in err.error.errors) {
-              // toastr.error('Error status 400 !', err.error.errors[i])
               Swal.fire('Error !', err.error.errors[i], 'error')
             }
           }
           break;
         case 401:
-        Swal.fire('Error !', 'Unauthorized access !', 'error')
+        Swal.fire('Error !', 'Sign up first !', 'error')
           service.logout()
-          // router.navigate(['/auth/login'])
-
           break;
       }
 
-
-//             if ([401, 403].indexOf(err.status) !== -1) {
-//                 // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
-//                  this.authenticationService.logout();
-//                 //  location.reload(true);
-//             }
-//
         const error = err.error.message || err.statusText;
-        // Swal.fire('Error !', error, 'error')
 
-            // for (var i in err.error.msg.messages) {
-            //     toastr.error('error !', err.error.msg.messages[i])
-            //   }
-
-        // return throwError(error);
         return throwError(err);
     }))
   }
-  

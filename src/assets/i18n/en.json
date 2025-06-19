@@ -851,12 +851,14 @@
     "title": " Your Booking is Successful",
     "description": "Thank you, Your  booking has been confirmed successfully",
     "notified": "We notified Dr. {{doctorName}} of your booking",
+
     "examination-fees": "Examination fees:",
     "clinic-number": "Clinic Phone Number :",
     "booking-details": {
       "title": "Booking Details",
       "patient-name": "Patient Name",
       "service": "Service Type",
+      "note": " Doctor Fees will be confirmed at clinic based on your insurance medical network",
       "booking-date": "Booking Date",
       "doctor-name": "Doctor Name",
       "waiting-time": "Waiting Time",

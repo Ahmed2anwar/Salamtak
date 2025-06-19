@@ -45,7 +45,6 @@ export class SecondStepComponent {
     Address: [
       '',
       [
-        Validators.required,
         Validators.pattern(
           /^(?=.*[\u0600-\u06FF])([0-9]*[\u0600-\u06FF]+[\u0600-\u06FF0-9\s]*)$/
         ),

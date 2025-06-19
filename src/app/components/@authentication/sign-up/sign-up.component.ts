@@ -129,19 +129,17 @@ export class SignUpComponent {
       this.StorageService.setItem('auth-verification-code', res.Data.Code);
 
       res = btoa(unescape(encodeURIComponent(JSON.stringify(res.Data))));
-        this.dialog.open(VerificationCodeComponent, {
-      width: '450px',
-      data: {
-         r: res,
+      this.dialog.open(VerificationCodeComponent, {
+        width: '450px',
+        data: {
+          r: res,
           p: this.form.value.Phone,
-      },
-    });
+        },
+      });
       this.spinner.hide();
       this.dialogRef.close();
     });
   }
-
-
 
   showHidePassword() {
     this.hidePassword = !this.hidePassword;
@@ -223,10 +221,10 @@ export class SignUpComponent {
     return null;
   }
 
-  dialogRef = inject(MatDialogRef); // ✅ inject dialog reference
+  dialogRef = inject(MatDialogRef); 
 
   closeDialog() {
-    this.dialogRef.close(); // ✅ method to close the dialog
+    this.dialogRef.close(); 
   }
   login() {
     this.dialog.open(LoginComponent, {

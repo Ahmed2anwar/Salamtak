@@ -2,6 +2,7 @@ import { Specialty } from './../../../model';
 import {
   Component,
   HostListener,
+  inject,
   Inject,
   PLATFORM_ID,
   Renderer2,
@@ -24,6 +25,13 @@ import { DownloadAppComponent } from '../download-app/download-app.component';
 import { TableModule } from 'primeng/table';
 import { ApiResponse, Doctor } from '../../../model';
 import { log } from 'node:console';
+import { AuthenticationService } from '../../services/authentication.service';
+import {
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import { LoginComponent } from '../@authentication/login/login.component';
 
 @Component({
   selector: 'app-home',
@@ -33,6 +41,7 @@ import { log } from 'node:console';
     TranslocoModule,
     RouterModule,
     CommonModule,
+    MatDialogModule,
     SearchFormComponent,
     RoutesPipe,
     DownloadAppComponent,
@@ -42,14 +51,13 @@ import { log } from 'node:console';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-
   public blogs: any[] = [];
   public offers: any[] = [];
   storageUrl = environment.storageUrl;
   titleKey: any;
   descriptionKey: any;
   services = [];
- public doctors: Doctor[];
+  public doctors: Doctor[];
   topSpecialties: Specialty[] = [];
   popularDoctors = [];
   salamtakCapId = 1;
@@ -341,13 +349,14 @@ export class HomeComponent {
       },
     },
   };
-  
 
   constructor(
     private service: AppService,
     private spinner: NgxSpinnerService,
+    private dialog: MatDialog,
     private translocoService: TranslocoService,
     private router: Router,
+    private authService: AuthenticationService,
     private StorageService: LocalStorageService,
     @Inject(PLATFORM_ID) private platformId: Object,
     private renderer: Renderer2,
@@ -363,10 +372,30 @@ export class HomeComponent {
   toggleCustomView() {
     this.showCustomView = !this.showCustomView;
   }
+
+  goToAsk(): void {
+    const currentUser = localStorage.getItem('currentUser');
+    const lang = this.translocoService.getActiveLang() || 'en';
+
+    if (currentUser != null) {
+      this.router.navigate([`/en/ask`]);
+      console.log('User is logged in, navigating to ask page', currentUser);
+    }
+    if (currentUser != null && lang === 'ar') {
+      this.router.navigate([`/ar/سؤال`]);
+      console.log('User is logged in, navigating to ask page', currentUser);
+    }
+    if (currentUser == null) {
+      this.dialog.open(LoginComponent, {
+        width: '400px',
+        height: 'auto',
+      });
+    }
+  }
   getPopularDoctors(specialtyId?: number): void {
     this.service.getPopularDoctors(specialtyId).subscribe({
       next: (response: ApiResponse) => {
-          this.doctors = response.Data;
+        this.doctors = response.Data;
       },
       error: (error) => {},
     });
@@ -427,8 +456,13 @@ export class HomeComponent {
   }
   goToSpecialty(specialtyName: string): void {
     const slug = this.replaceSpaceWithDash(specialtyName);
-    this.router.navigate(['/doctors', slug]);
+    if (this.lang !== 'en') {
+      this.router.navigate(['/ar/الاطباء', slug]);
+    } else {
+      this.router.navigate(['/en/doctors', slug]);
+    }
   }
+
   getColClass(index: number): string {
     const sizes = [
       'col-4',

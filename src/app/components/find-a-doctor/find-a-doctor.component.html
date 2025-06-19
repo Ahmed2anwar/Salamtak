@@ -1,11 +1,7 @@
 <section class="mt-5 pt-5">
   <section class="mb-5">
     <div class="container">
-      <nav
-        class="breadcrumb"
-        style="--bs-breadcrumb-divider: '>'"
-        aria-label="breadcrumb"
-      >
+      <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <a href="javascript:void(0)">
@@ -13,29 +9,20 @@
             </a>
           </li>
           <li class="breadcrumb-item">
-            <a
-              href="javascript:void(0)"
-              [routerLink]="['find-a-doctor' | route]"
-            >
+            <a href="javascript:void(0)" [routerLink]="['find-a-doctor' | route]">
               {{ "find-a-doctor.breadcrumb.find-a-doctor" | transloco }}
             </a>
           </li>
 
           @if(speciality){
           <li class="breadcrumb-item">
-            <a
-              href="javascript:void(0)"
-              [routerLink]="['find-a-doctor' | route, speciality]"
-            >
+            <a href="javascript:void(0)" [routerLink]="['find-a-doctor' | route, speciality]">
               {{ replaceDashWithSpace(speciality) }}
             </a>
           </li>
           } @if(city){
           <li class="breadcrumb-item">
-            <a
-              href="javascript:void(0)"
-              [routerLink]="['find-a-doctor' | route, speciality, city]"
-            >
+            <a href="javascript:void(0)" [routerLink]="['find-a-doctor' | route, speciality, city]">
               {{ replaceDashWithSpace(city) }}
             </a>
           </li>
@@ -55,91 +42,71 @@
         </ol>
       </nav>
     </div>
-     <div class="container booking-doctor p-4">
-    <div class="row align-items-center pb-3">
-      <div class="col-md-12">
-        <h2 class="title mb-3">
-          <i class="fa-regular fa-calendar"></i>
-          {{ "home.book-doctor.title" | transloco }}
-        </h2>
-        <div class="mt-4">
-          <app-search-form></app-search-form>
+    <div class="container booking-doctor p-4">
+      <div class="row align-items-center pb-3">
+        <div class="col-md-12">
+          <h2 class="title mb-3">
+            <i class="fa-regular fa-calendar"></i>
+            {{ "home.book-doctor.title" | transloco }}
+          </h2>
+          <div class="mt-4">
+            <app-search-form></app-search-form>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="row align-items-center">
-      <div class="col-md-12">
-        <h2 class="title">
-          {{ "home.top-specialties.title" | transloco }}
-        </h2>
-        <div class="row g-3 mt-1">
-          <div class="col-lg-2 col-md-4 col-sm-6" *ngFor="let item of topSpecialties | slice:0:6"
-            [routerLink]="['/en/doctors', replaceSpaceWithDash(item.Name)]" style="cursor: pointer;">
-            <div class="d-flex p-2 align-items-center justify-content-between  border-1 rounded-2 border"
-              style="cursor: pointer; text-decoration: none;">
-              <div class="d-flex align-items-center">
-                <img [src]="storageUrl + item.Image" style="width: 20px ; height: 20px;" alt="">
-                <p class="m-0 px-2" style="font-size: 14px;">
-                  {{ item.Name.length > 15 ? item.Name.split(' ')[0] : item.Name }}
-                </p>
+      <div class="row align-items-center">
+        <div class="col-md-12">
+          <h2 class="title">
+            {{ "home.top-specialties.title" | transloco }}
+          </h2>
+          <div class="row g-3 mt-1">
+            <div class="col-lg-2 col-md-4 col-sm-6" *ngFor="let item of topSpecialties | slice:0:6"
+              (click)="goToSpecialty(item.Name)" style="cursor: pointer;">
+              <div class="d-flex p-2 align-items-center justify-content-between border-1 rounded-2 border"
+                style="cursor: pointer; text-decoration: none;">
+                <div class="d-flex align-items-center">
+                  <img [src]="storageUrl + item.Image" style="width: 20px; height: 20px;" alt="">
+                  <p class="m-0 px-2" style="font-size: 14px;">
+                    {{ item.Name.length > 15 ? item.Name.split(' ')[0] : item.Name }}
+                  </p>
+                </div>
+                <img src="../../../assets/arrow-right.png" class="doctor-header-img" style="width: 20px; height: 20px;"
+                  alt="">
               </div>
-              <img src="../../../assets/arrow-right.png " class="doctor-header-img" style="width: 20px ; height: 20px;" alt="">
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   </section>
 
   <section class="list main-card-app">
     <div class="container">
       <div>
         <div class="row g-4">
-          <div
-            class="col-lg-3 col-md-4 filters-menu"
-            [ngClass]="{ 'small-screen': isSmallScreen }"
-          >
+          <div class="col-lg-3 col-md-4 filters-menu" [ngClass]="{ 'small-screen': isSmallScreen }">
 
 
-            <accordion
-              id="accordion"
-              class="accordion"
-              *ngIf="isDropdownOpen || !isSmallScreen"
-            >
+            <accordion id="accordion" class="accordion" *ngIf="isDropdownOpen || !isSmallScreen">
               <!-- Gender -->
-              <accordion-group
-                id="accordion-group"
-                [heading]="
+              <accordion-group id="accordion-group" [heading]="
                   'find-a-doctor.filters-menu.gender.title' | transloco
-                "
-                [isOpen]="params['gender'] ? true : false"
-              >
+                " [isOpen]="params['gender'] ? true : false">
                 <div>
                   @for(gender of genders; track null){
                   <div class="form-check">
                     <!-- (change)="selectGender($event,gender.id)" -->
                     <!-- setFilter -->
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="genders"
-                      id="gender-{{ $index }}"
-                      value="{{ gender.id }}"
-                      (change)="
+                    <input class="form-check-input" type="radio" name="genders" id="gender-{{ $index }}"
+                      value="{{ gender.id }}" (change)="
                         setFilter($event, 'gender', gender.id, gender.name)
-                      "
-                      [checked]="params['gender'] == gender.name"
-                    />
-                    <label
-                      class="form-check-label text-capitalize"
-                      for="gender-{{ $index }}"
-                    >
+                      " [checked]="params['gender'] == gender.name" />
+                    <label class="form-check-label text-capitalize" for="gender-{{ $index }}">
                       <!-- {{gender.name }} -->
                       {{
-                        "find-a-doctor.filters-menu.gender." + gender.name
-                          | transloco
+                      "find-a-doctor.filters-menu.gender." + gender.name
+                      | transloco
                       }}
                     </label>
                   </div>
@@ -147,33 +114,20 @@
                 </div>
               </accordion-group>
               <!-- Seiority -->
-              <accordion-group
-                [heading]="
+              <accordion-group [heading]="
                   'find-a-doctor.filters-menu.seiority.title' | transloco
-                "
-                [isOpen]="params['title'] ? true : false"
-              >
+                " [isOpen]="params['title'] ? true : false">
                 <div>
                   @for (level of seniorityLevels; track null){
                   <div class="form-check">
                     <!-- (change)="selectSeiority($event,level['Id'])" -->
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="seniorityLevels"
-                      id="seniorityLevels-{{ $index }}"
-                      value="{{ level['Id'] }}"
-                      (change)="
+                    <input class="form-check-input" type="radio" name="seniorityLevels"
+                      id="seniorityLevels-{{ $index }}" value="{{ level['Id'] }}" (change)="
                         setFilter($event, 'title', level.Id, level.Name)
-                      "
-                      [checked]="
+                      " [checked]="
                         level['Name'] == replaceDashWithSpace(params['title'])
-                      "
-                    />
-                    <label
-                      class="form-check-label text-capitalize"
-                      for="seniorityLevels-{{ $index }}"
-                    >
+                      " />
+                    <label class="form-check-label text-capitalize" for="seniorityLevels-{{ $index }}">
                       {{ level["Name"] }}
                     </label>
                   </div>
@@ -181,32 +135,20 @@
                 </div>
               </accordion-group>
               <!--speciality!-->
-              <accordion-group
-                [heading]="'search-form.specialty.label' | transloco"
-                [isOpen]="speciality2 && !subSpeciality ? true : false"
-              >
+              <accordion-group [heading]="'search-form.specialty.label' | transloco"
+                [isOpen]="speciality2 && !subSpeciality ? true : false">
                 <div class="scrollable-dropdown">
                   @for (level of specialists; track null){
                   <div class="form-check">
                     <!-- {{level['Name'] + '-'+ replaceDashWithSpace(speciality)}} -->
                     <!-- (change)="selectspeciality($event,level['Id'],level['Name'])" -->
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="specialists"
-                      id="specialists-{{ $index }}"
-                      value="{{ level['Id'] }}"
-                      (change)="
+                    <input class="form-check-input" type="radio" name="specialists" id="specialists-{{ $index }}"
+                      value="{{ level['Id'] }}" (change)="
                         setFilter($event, 'speciality', level.Id, level.Name)
-                      "
-                      [checked]="
+                      " [checked]="
                         level['Name'] == replaceDashWithSpace(speciality2)
-                      "
-                    />
-                    <label
-                      class="form-check-label text-capitalize"
-                      for="specialists-{{ $index }}"
-                    >
+                      " />
+                    <label class="form-check-label text-capitalize" for="specialists-{{ $index }}">
                       {{ level["Name"] }}
                       <!-- {{level['Name']}} == {{replaceDashWithSpace(speciality2)}} -->
                     </label>
@@ -215,37 +157,25 @@
                 </div>
               </accordion-group>
               <!-- subSpecialist-->
-              <accordion-group
-                [heading]="
+              <accordion-group [heading]="
                   'find-a-doctor.filters-menu.subspeciality.title' | transloco
-                "
-                [isOpen]="subSpeciality ? true : false"
-              >
+                " [isOpen]="subSpeciality ? true : false">
                 <div class="scrollable-dropdown">
                   @for (level of subSpecialists; track null){
                   <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="subSpecialists"
-                      id="subSpecialists-{{ $index }}"
-                      value="{{ level['Id'] }}"
-                      (change)="
+                    <input class="form-check-input" type="radio" name="subSpecialists" id="subSpecialists-{{ $index }}"
+                      value="{{ level['Id'] }}" (change)="
                         goToSubSpecialFromFilter(level);
                         subSpeciality = level['Name']
-                      "
-                    />
+                      " />
                     <!-- [checked]="(translocoService.getActiveLang() == 'ar' ? level['NameAr'] : level['Name']) == replaceDashWithSpace(subSpeciality)" -->
                     <!-- (change)="setFilter($event,'subSpeciality',level.Id,(translocoService.getActiveLang() == 'ar' ? level['NameAr'] : level['Name']) )" -->
-                    <label
-                      class="form-check-label text-capitalize"
-                      for="subSpecialists-{{ $index }}"
-                    >
+                    <label class="form-check-label text-capitalize" for="subSpecialists-{{ $index }}">
                       <!-- {{level['Name']}} -->
                       {{
-                        translocoService.getActiveLang() == "ar"
-                          ? level["NameAr"]
-                          : level["Name"]
+                      translocoService.getActiveLang() == "ar"
+                      ? level["NameAr"]
+                      : level["Name"]
                       }}
                     </label>
                   </div>
@@ -253,59 +183,36 @@
                 </div>
               </accordion-group>
 
-              <accordion-group
-                [heading]="'find-a-doctor.filters-menu.date.title' | transloco"
-                [isOpen]="params['service'] ? true : false"
-              >
+              <accordion-group [heading]="'find-a-doctor.filters-menu.date.title' | transloco"
+                [isOpen]="params['service'] ? true : false">
                 <p>
                   <!-- Choose Date -->
                   {{
-                    "find-a-doctor.filters-menu.date.description" | transloco
+                  "find-a-doctor.filters-menu.date.description" | transloco
                   }}
                 </p>
                 <mat-form-field appearance="fill" class="w-100">
                   <!-- (change)="setFilter('speciality',level.Id,level.Name)" -->
 
-                  <input
-                    matInput
-                    [matDatepicker]="dp3"
-                    disabled
-                    [min]="minDate"
-                    [value]="todayDate"
-                    (dateChange)="dateChange($event)"
-                  />
-                  <mat-datepicker-toggle
-                    matIconSuffix
-                    [for]="dp3"
-                  ></mat-datepicker-toggle>
+                  <input matInput [matDatepicker]="dp3" disabled [min]="minDate" [value]="todayDate"
+                    (dateChange)="dateChange($event)" />
+                  <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
                   <mat-datepicker #dp3 disabled="false"></mat-datepicker>
                 </mat-form-field>
               </accordion-group>
 
-              <accordion-group
-                [heading]="
+              <accordion-group [heading]="
                   'find-a-doctor.filters-menu.service.title' | transloco
-                "
-                [isOpen]="false"
-              >
+                " [isOpen]="false">
                 <div>
                   @for (service of services; track null){
                   <!-- (change)="selectService($event,service['Id'])" -->
                   <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="services"
-                      id="service-{{ $index }}"
-                      value="{{ service['Id'] }}"
-                      (change)="
+                    <input class="form-check-input" type="radio" name="services" id="service-{{ $index }}"
+                      value="{{ service['Id'] }}" (change)="
                         setFilter($event, 'service', service.Id, service.Name)
-                      "
-                    />
-                    <label
-                      class="form-check-label text-capitalize"
-                      for="service-{{ $index }}"
-                    >
+                      " />
+                    <label class="form-check-label text-capitalize" for="service-{{ $index }}">
                       {{ service["Name"] }}
                     </label>
                   </div>
@@ -313,14 +220,12 @@
                 </div>
               </accordion-group>
 
-              <accordion-group
-                [heading]="'find-a-doctor.filters-menu.price.title' | transloco"
-                [isOpen]="params['price'] ? true : false"
-              >
+              <accordion-group [heading]="'find-a-doctor.filters-menu.price.title' | transloco"
+                [isOpen]="params['price'] ? true : false">
                 <p>
                   <!-- Price Range -->
                   {{
-                    "find-a-doctor.filters-menu.price.description" | transloco
+                  "find-a-doctor.filters-menu.price.description" | transloco
                   }}
                 </p>
                 <mat-form-field appearance="fill" class="w-100">
@@ -329,12 +234,7 @@
                       {{ "find-a-doctor.filters-menu.price.from" | transloco }}
                     </span>
                   </mat-label>
-                  <input
-                    matInput
-                    [(ngModel)]="FeesFrom"
-                    type="number"
-                    min="0"
-                  />
+                  <input matInput [(ngModel)]="FeesFrom" type="number" min="0" />
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="w-100">
                   <mat-label>
@@ -347,12 +247,9 @@
 
                 <div>
                   <!-- (click)="selectPrice(FeesFrom,FeesTo)" -->
-                  <button
-                    class="btn btn-primary w-100"
-                    (click)="
+                  <button class="btn btn-primary w-100" (click)="
                       setFilter($event, 'price', '', FeesFrom + ',' + FeesTo)
-                    "
-                  >
+                    ">
                     {{ "find-a-doctor.filters-menu.apply" | transloco }}
                   </button>
                 </div>
@@ -379,8 +276,8 @@
                       <span>
                         <!-- Reviews -->
                         {{
-                          "find-a-doctor.doctors-list.sorting.reviews"
-                            | transloco
+                        "find-a-doctor.doctors-list.sorting.reviews"
+                        | transloco
                         }}
                       </span>
                     </button>
@@ -389,8 +286,8 @@
                       <span>
                         <!-- Wating Time -->
                         {{
-                          "find-a-doctor.doctors-list.sorting.wating-time"
-                            | transloco
+                        "find-a-doctor.doctors-list.sorting.wating-time"
+                        | transloco
                         }}
                       </span>
                     </button>
@@ -399,7 +296,7 @@
                       <span>
                         <!-- Fees -->
                         {{
-                          "find-a-doctor.doctors-list.sorting.fees" | transloco
+                        "find-a-doctor.doctors-list.sorting.fees" | transloco
                         }}
                       </span>
                     </button>
@@ -416,15 +313,15 @@
                     <h5>
 
                       {{
-                        "find-a-doctor.doctors-list.no-results.title"
-                          | transloco
+                      "find-a-doctor.doctors-list.no-results.title"
+                      | transloco
                       }}
                     </h5>
                     <p>
 
                       {{
-                        "find-a-doctor.doctors-list.no-results.description"
-                          | transloco
+                      "find-a-doctor.doctors-list.no-results.description"
+                      | transloco
                       }}
                     </p>
                   </div>
@@ -435,39 +332,25 @@
               <!-- {{loading}} -->
               @if(doctors.length > 0 ){
 
-              <div
-                infiniteScroll
-                [infiniteScrollDistance]="2"
-                [infiniteScrollThrottle]="50"
-                (scrolled)="onScroll()"
-              >
+              <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
                 <div class="row">
                   @for(doctor of doctors; track null){
                   <div class="col-lg-12 mb-4">
-                    <div
-                      class="card rounded-3"
-                      style="
+                    <div class="card rounded-3" style="
                         border: 1px solid #e9eaef;
 
                         box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 20px -20px;
-                      "
-
-                    >
+                      ">
                       <div class="card-body">
                         <div
                           class="pt-1 pb-3 user d-flex justify-content-center justify-content-sm-between align-items-center flex-wrap"
                           style="
                             border-bottom: 1px solid #e0e2e9;
                             padding-bottom: 20px;
-                          "
-                        >
+                          ">
                           <div class="d-flex p-2">
                             <div class="image">
-                              <img
-                                ngxViewer
-                                src="{{ storageUrl }}/{{ doctor.Image }}"
-                                alt=""
-                              />
+                              <img ngxViewer src="{{ storageUrl }}/{{ doctor.Image }}" alt="" />
                             </div>
 
                             <div class="user">
@@ -475,15 +358,15 @@
                                 <h6 class="">
                                   <!-- Dr. -->
                                   {{
-                                    "find-a-doctor.doctors-list.cards.dr"
-                                      | transloco
+                                  "find-a-doctor.doctors-list.cards.dr"
+                                  | transloco
                                   }}
 
 
                                   {{
-                                    doctor?.NickName
-                                      ? doctor?.NickName
-                                      : doctor.DoctorName
+                                  doctor?.NickName
+                                  ? doctor?.NickName
+                                  : doctor.DoctorName
                                   }}
 
                                 </h6>
@@ -499,29 +382,25 @@
                                   <img src="assets/icons/Star2.svg" />
                                   <img src="assets/icons/Star2.svg" />
 
-                                  &nbsp;<span class="review"
-                                    >({{ doctor.RateCount }}
+                                  &nbsp;<span class="review">({{ doctor.RateCount }}
 
                                     <!-- Reviews -->
                                     {{
-                                      "find-a-doctor.doctors-list.cards.reviews"
-                                        | transloco
+                                    "find-a-doctor.doctors-list.cards.reviews"
+                                    | transloco
                                     }}
-                                    )</span
-                                  >
+                                    )</span>
                                 </div>
                               </div>
                             </div>
                           </div>
                           <div>
-                            <button
-                              (click)="bookFor($event, doctor)"
-                              class="btn btn-primary px-4 py-2"
-                            >
+                            <button (click)="bookFor($event, doctor, doctor.FeesFrom)"
+                              class="btn btn-primary px-4 py-2">
                               <!-- Book Now -->
                               {{
-                                "find-a-doctor.doctors-list.cards.book-now"
-                                  | transloco
+                              "find-a-doctor.doctors-list.cards.book-now"
+                              | transloco
                               }}
                             </button>
                           </div>
@@ -533,64 +412,57 @@
                               <img src="assets/icons/subcat.svg" class="py-2" alt="icon " />
                               <h5>
                                 {{
-                    "find-a-doctor.doctors-list.cards.sub-specialization"
-                      | transloco
-                  }}
+                                "find-a-doctor.doctors-list.cards.sub-specialization"
+                                | transloco
+                                }}
 
                               </h5>
-                             <p
-                                  (click)="$event.stopPropagation()"
-                                >
+                              <p (click)="$event.stopPropagation()">
                                 <!-- this.router.navigate([this.routesPipe.transform('find-a-doctor-by-sub-specialty') ,this.replaceSpaceWithDash(name)]); -->
 
 
-                                    @for( subspecialist of doctor.Sub_SpecialistList ;let last = $last; track null){
-                                      <!-- (click)="goToSubSpecial(subspecialist,)" -->
-                                      <!-- (click)="goToSubSpecial(subspecialist.Name, subspecialist.Id,doctor.SpecialistName)" -->
-                                      <a href="{{getSubSpecialtyLink(subspecialist,doctor)}}"
-                                       class="text-decoration-none"
-                                      style="cursor: pointer;"
-                                      title="{{subspecialist.Name}}" >
-                                     <b>{{subspecialist.Name}}</b>
-                                    </a>
-                                    {{last ? '' : ', '}}
-                                    }
+                                @for(subspecialist of doctor.Sub_SpecialistList.slice(0, 1); let last = $last; track
+                                subspecialist) {
+                                <a href="{{ getSubSpecialtyLink(subspecialist, doctor) }}" class="text-decoration-none"
+                                  style="cursor: pointer;" title="{{ subspecialist.Name }}">
+                                  <b>{{ subspecialist.Name }}</b>
+                                </a>{{ last ? '' : ', ' }}
+                                }
 
-
-                                </p>
+                              </p>
                             </div>
                             <div class="col-lg-4 col-md-6  col-sm-12">
                               <img src="assets/icons/location.png" class="py-2" alt="icon " />
                               <h5>
-                               {{
-                                  "find-a-doctor.doctors-list.cards.address"
-                                    | transloco
+                                {{
+                                "find-a-doctor.doctors-list.cards.address"
+                                | transloco
                                 }}
 
                               </h5>
                               <p class="text-muted">
-                                  {{
-                                    doctor?.clinicDto.AreaName
-                                      ? doctor?.clinicDto.AreaName
-                                      : "Unknown"
-                                  }}
-                                  ({{
-                                    doctor?.clinicDto.SubAreaName
-                                      ? doctor?.clinicDto.SubAreaName
-                                      : "Unknown"
-                                  }})
+                                {{
+                                doctor?.clinicDto.AreaName
+                                ? doctor?.clinicDto.AreaName
+                                : "Unknown"
+                                }}
+                                ({{
+                                doctor?.clinicDto.SubAreaName
+                                ? doctor?.clinicDto.SubAreaName
+                                : "Unknown"
+                                }})
                               </p>
                             </div>
                             <div class="col-lg-4 col-md-6  col-sm-12">
                               <img src="assets/icons/money.png" class="py-2" alt="icon" />
                               <h5>
                                 {{
-                                  "find-a-doctor.doctors-list.cards.fees"
-                                    | transloco
+                                "find-a-doctor.doctors-list.cards.fees"
+                                | transloco
                                 }}
                               </h5>
                               <p class="text-muted">
-                                  {{ doctor.FeesFrom }} LE
+                                {{ doctor.FeesFrom }} LE
                               </p>
                             </div>
                           </div>
@@ -603,9 +475,7 @@
               </div>
               } @if(loading && doctors.length != 0){
               <div class="text-center">
-                <div class="spinner-border text-light" role="status">
-                  <span class="sr-only"></span>
-                </div>
+                <span class="loader"></span>
               </div>
               }
 
@@ -639,13 +509,10 @@
               @if(doctors.length != 0 ){
               <div class="mt-4 mb-4 text-center">
                 <!-- (click)="filter(filterObject.MaxResultCount,filterObject?.SkipCount + 10)" -->
-                <button
-                  class="btn btn-primary btn-lg p-3"
-                  (click)="
+                <button class="btn btn-primary btn-lg p-3" (click)="
                     pagination.SkipCount = pagination.SkipCount + 10;
                     doctorsSearch()
-                  "
-                >
+                  ">
                   &nbsp;
                   {{ "find-a-doctor.doctors-list.load-more" | transloco }}
                   &nbsp;

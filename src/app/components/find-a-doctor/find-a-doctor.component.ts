@@ -1,3 +1,4 @@
+import { log } from 'node:console';
 import { Component, HostListener, ViewEncapsulation } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { AppService } from '../../services/app.service';
@@ -229,9 +230,13 @@ export class FindADoctorComponent {
       error: (error) => {},
     });
   }
-  goToSpecialty(specialtyName: string): void {
+ goToSpecialty(specialtyName: string): void {
     const slug = this.replaceSpaceWithDash(specialtyName);
-    this.router.navigate(['/en/doctors', slug]);
+    if (this.lang !== 'en') {
+      this.router.navigate(['/ar/الاطباء', slug]);
+    } else {
+      this.router.navigate(['/en/doctors', slug]);
+    }
   }
   private padZero(value: number): string {
     return value < 10 ? `0${value}` : `${value}`;
@@ -624,52 +629,6 @@ export class FindADoctorComponent {
                 this.doctors = [...this.doctors, ...res['Items']];
               }
 
-              // getSubSpecialist
-
-              // console.log(res['Items']);
-              // this.doctors = [...this.doctors, ...res['Items']];
-
-              // this.doctors = res['Items']
-              // this.setPageTitle(res.TotalCount)
-
-              // {{'search-form.Book-with-the-best-doctor' | transloco}}
-
-              // @if(selectedSpecialty && (selectedSpecialty.length > 0)){
-              //  @if(SubSpecial){
-              //    {{SubSpecial['Name'] || ''}}
-              //  } @else {
-              //   {{selectedSpecialty ? (selectedSpecialty[0]['Name'] || '') : ''}}
-              //  }
-              // }
-
-              // this.metadataService.updateTitle('xxxxxxxxxxxxxxxxxxxxxxxxx')
-
-              // let doctorsCount = res.TotalCount;
-              // let title = `${this.translocoService.translate('search-form.Book-with-the-best')} ${doctorsCount} ${this.translocoService.translate('search-form.doctor')}`
-              // if(this.speciality){
-              //   title = `${this.translocoService.translate('search-form.Book-with-the-best')} ${doctorsCount} ${this.translocoService.translate('search-form.doctor')} ${this.speciality}`
-              // }
-              // if(this.params['subSpecialist']){
-              //   title = `${this.translocoService.translate('search-form.Book-with-the-best')} ${doctorsCount} ${this.translocoService.translate('search-form.doctor')} ${this.params['subSpecialist']}`
-              // }
-              // if(this.city){
-              //   title = `${this.translocoService.translate('search-form.Book-with-the-best')} ${doctorsCount} ${this.translocoService.translate('search-form.doctor')} ${this.speciality} ${this.translocoService.translate('search-form.in')} ${this.city}`
-              // }
-              // this.metadataService.updateTitle(title)
-
-              // this.metadataService.updateTitle(
-              //   `${this.translocoService.translate('search-form.Book-with-the-best')} ${doctorsCount}
-              //   ${this.translocoService.translate('search-form.doctor')}
-              //   `
-              // )
-              // this.metadataService.updateDescription(this.descriptionKey)
-
-              // this.pagination.MaxResultCount = this.pagination.MaxResultCount + 10
-              // this.pagination.SkipCount = this.pagination.SkipCount + res['Items'].length;
-
-              // this.pagination.TotalCount = res['TotalCount'];
-              // filterObject?.SkipCount + 10
-
               this.loading = false;
               // this.spinner.hide()
             },
@@ -798,21 +757,6 @@ export class FindADoctorComponent {
       this.setParam('FeesTo', to);
       this.filter();
     }
-
-    return;
-    if (from && to) {
-      if (from > to) return;
-    }
-
-    if (from) {
-      if (from < 0) return;
-      this.setParam('FeesFrom', from);
-    }
-    if (to) {
-      if (to < 0) return;
-      this.setParam('FeesTo', to);
-    }
-    this.filter();
   }
   dateChange(event: any) {
     var value = event.target._elementRef.nativeElement.value;
@@ -830,7 +774,7 @@ export class FindADoctorComponent {
     // this.setParam('AvalibleDate',AppDate)
     this.setFilter(event, 'date', AppDate, AppDate);
   }
-  bookFor(event: any, doctor: any) {
+  bookFor(event: any, doctor: any, FeesFrom: number) {
     event.preventDefault();
     const eventData: any = this.mktService.setEventData(
       'Patient Booked Doctor Appointment',
@@ -854,18 +798,15 @@ export class FindADoctorComponent {
         }
       )
       .then((res) => {
-        // MedicalExamationTypes not found for {Doctor/GetDoctorProfileByDoctorId} api so i save it in localstorage  to use it in doctor-profile component
         this.StorageService.setItem('doctor', JSON.stringify(doctor));
         this.StorageService.setItem('DoctorFees', doctor.FeesFrom);
+        console.log('Doctor:', doctor);
+        console.log('Fees:', FeesFrom);
       });
   }
 
   SubSpecial = null;
   goToSubSpecial(name: any, id: any, SpecialistName: any) {
-    //console.log(this.speciality)
-    //console.log(this.city)
-    //console.log(this.area)
-
     this.router.navigate([
       this.routesPipe.transform('find-a-doctor-by-sub-specialty'),
       this.replaceSpaceWithDash(name),

@@ -36,7 +36,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     RouterModule,
     CommonModule,
     RoutesPipe,
-    MatIcon,
+
     MatButtonModule,
     MatDialogModule
 ,  ],
@@ -94,11 +94,11 @@ export class HeaderComponent {
   ) {
     this.authentication.currentUser.subscribe((currentUserSubject) => {
       this.user = currentUserSubject;
-      //console.log(this.user)
+      console.log(this.user)
     });
   }
   login() {
-    console.log('login');
+
     this.dialog.open(LoginComponent, {
       width: '400px',
       height: 'auto',
@@ -135,7 +135,7 @@ export class HeaderComponent {
   }
 
   getUnreadDoctorResponses() {
-    debugger;
+    
     this.authentication
       .getUnreadDoctorResponsesByUserIdAsync()
       .subscribe((response: any) => {

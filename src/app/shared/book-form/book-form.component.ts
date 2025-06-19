@@ -169,7 +169,7 @@ export class BookFormComponent {
       }
     });
     console.log(this.doctor);
-    
+
   }
   getAppointmentTypes() {
     // this.service.getMedicalExaminationType().subscribe((res: any) => {
@@ -249,7 +249,6 @@ export class BookFormComponent {
       }).then((result) => {});
     } else {
       this.submitted = true;
-      //console.log(this.form.value)
       if (this.form.invalid) {
         window.scroll({ top: 0, left: 0, behavior: 'smooth' });
         return;
@@ -304,17 +303,12 @@ export class BookFormComponent {
                   day: this.form.value.appointmentDay,
                   time: this.form.value.times,
                 };
-                // localStorage.setItem('bookingData',JSON.stringify(bookingData))
-                // localStorage.setItem('EditAppointmentID','')
                 this.StorageService.setItem(
                   'bookingData',
                   JSON.stringify(bookingData)
                 );
                 this.StorageService.setItem('EditAppointmentID', '');
 
-                // this.router.navigate(['/patient/booking-successfully'])
-
-                // this.storage.setItem('bookingData',bookingOfferData)
                 this.dialog.open(BookingSuccessfullyOfferComponent, {
                   width: '500px',
                   height: 'auto',
@@ -343,7 +337,6 @@ export class BookFormComponent {
                 'bookingData',
                 JSON.stringify(bookingData)
               );
-              // this.router.navigate(['/patient/booking-successfully'])
               this.dialog.open(BookingSuccessfullyOfferComponent, {
                 width: '600px',
                 data: {
@@ -366,7 +359,7 @@ export class BookFormComponent {
             showConfirmButton: false,
             timer: 2000,
           }).then((result) => {
-            // window.location.reload()
+
           });
         }
       });

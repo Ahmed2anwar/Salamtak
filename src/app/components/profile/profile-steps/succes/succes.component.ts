@@ -20,82 +20,73 @@ import { RoutesPipe } from '../../../../pipes/routes.pipe';
     FormsModule,
     CommonModule,
     RouterModule,
-    RoutesPipe
+    RoutesPipe,
   ],
   templateUrl: './succes.component.html',
-  styleUrl: './succes.component.scss'
+  styleUrl: './succes.component.scss',
 })
 export class SuccesComponent {
   languages = languages;
   selectedLanguage = this.languages[0];
-   isCollapsed = false;
-  public IsEnglish=false;
-  public IsArabic=true;
-  flag:any
-username:any;
+  isCollapsed = false;
+  public IsEnglish = false;
+  public IsArabic = true;
+  flag: any;
+  username: any;
   // user :any= null
-  public user:any;
-  constructor(private authentication:AuthenticationService,private _bottomSheet: MatBottomSheet,private translocoService: TranslocoService,
-private StorageService : LocalStorageService
-
+  public user: any;
+  constructor(
+    private authentication: AuthenticationService,
+    private _bottomSheet: MatBottomSheet,
+    private translocoService: TranslocoService,
+    private StorageService: LocalStorageService
   ) {
-    this.authentication.currentUser.subscribe(currentUserSubject => {
+    this.authentication.currentUser.subscribe((currentUserSubject) => {
       this.user = currentUserSubject;
-    })
-   }
+    });
+  }
 
-   ngOnInit(): void {
-    
-    const form :any = sessionStorage.getItem('sign-up-first-step');
-    var date=JSON.parse(form);
+  ngOnInit(): void {
+    const form: any = sessionStorage.getItem('sign-up-first-step');
+    var date = JSON.parse(form);
 
     const lang = this.translocoService.getActiveLang();
 
-    
-      if (lang) {
-         if (lang === 'ar') {
-         this.IsEnglish=false;
-         this.IsArabic=true;
-         this.username=date.FullNameAr
+    if (lang) {
+      if (lang === 'ar') {
+        this.IsEnglish = false;
+        this.IsArabic = true;
+        this.username = date.FullNameAr;
 
+        // window.open('/termsAr')
+      } else {
+        this.IsEnglish = true;
+        this.IsArabic = false;
+        this.username = date.FullNameEn;
+      }
+      let Selected_lang = this.languages.find((t: any) => t.code === lang);
 
+      this.selectedLanguage = Selected_lang;
+      this.translocoService.setActiveLang(Selected_lang.code);
+      this.translocoService.setActiveLang(Selected_lang.code);
+      this.StorageService.setItem('lang', Selected_lang.code);
+      document
+        .getElementsByTagName('html')[0]
+        .setAttribute('dir', Selected_lang.direction);
+      this.flag = Selected_lang.flag;
+    }
 
-          // window.open('/termsAr')
-
-        }
-        else {
-          this.IsEnglish=true;
-          this.IsArabic=false;
-          this.username=date.FullNameEn
-
-
-
-        }
-        let Selected_lang =  this.languages.find((t:any)=>t.code ===lang);
-
-
-        this.selectedLanguage = Selected_lang;
-        this.translocoService.setActiveLang(Selected_lang.code);
-        this.translocoService.setActiveLang(Selected_lang.code);
-        this.StorageService.setItem('lang', Selected_lang.code);
-        document.getElementsByTagName('html')[0].setAttribute('dir', Selected_lang.direction);
-        this.flag=Selected_lang.flag
-  
-   }
-
-
-
-  
     // this.image=this.user.extra.Image
-}
-setLanguage(lang: any) {
-  
-  this.selectedLanguage = lang;
-  this.translocoService.setActiveLang(lang.code);
-  // localStorage.setItem('lang', lang.code);
-  this.StorageService.setItem('lang', lang.code);
-  document.getElementsByTagName('html')[0].setAttribute('dir', lang.direction);
+  }
+  setLanguage(lang: any) {
+    this.selectedLanguage = lang;
+    this.translocoService.setActiveLang(lang.code);
+    // localStorage.setItem('lang', lang.code);
+    this.StorageService.setItem('lang', lang.code);
+    document
+      .getElementsByTagName('html')[0]
+      .setAttribute('dir', lang.direction);
 
-  window.location.reload()
-}
+    window.location.reload();
+  }
 }

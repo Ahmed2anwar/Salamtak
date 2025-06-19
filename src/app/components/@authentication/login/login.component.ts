@@ -128,7 +128,6 @@ export class LoginComponent {
     this.dialogRef.close();
   }
   forgetPassword() {
-
     this.dialog.open(ForgotPasswordComponent, {
       width: '400px',
       height: 'auto',

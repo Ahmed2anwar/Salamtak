@@ -51,19 +51,20 @@
         </h2>
         <div class="row g-3 mt-1">
           <div class="col-lg-2 col-md-4 col-sm-6" *ngFor="let item of topSpecialties | slice:0:6"
-            [routerLink]="['/en/doctors', replaceSpaceWithDash(item.Name)]" style="cursor: pointer;">
-            <div class="d-flex p-2 align-items-center justify-content-between  border-1 rounded-2 border"
+            (click)="goToSpecialty(item.Name)" style="cursor: pointer;">
+            <div class="d-flex p-2 align-items-center justify-content-between border-1 rounded-2 border"
               style="cursor: pointer; text-decoration: none;">
               <div class="d-flex align-items-center">
-                <img [src]="storageUrl + item.Image" style="width: 20px ; height: 20px;" alt="">
+                <img [src]="storageUrl + item.Image" style="width: 20px; height: 20px;" alt="">
                 <p class="m-0 px-2" style="font-size: 14px;">
                   {{ item.Name.length > 15 ? item.Name.split(' ')[0] : item.Name }}
                 </p>
               </div>
-              <img src="../../../assets/arrow-right.png" class="doctor-header-img" style="width: 20px ; height: 20px;"
+              <img src="../../../assets/arrow-right.png" class="doctor-header-img" style="width: 20px; height: 20px;"
                 alt="">
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -333,8 +334,8 @@
           </p>
         </div>
         <div class="">
-          <button class="btn btn-primary px-4 py-2" style="background-color: white; color: #2b2979"
-            [routerLink]="['ask' | route]">
+          <button  class="btn btn-primary px-4 py-2" style="background-color: white; color: #2b2979"
+           (click)="goToAsk()">
             {{ "home.ask.button" | transloco }}
           </button>
         </div>

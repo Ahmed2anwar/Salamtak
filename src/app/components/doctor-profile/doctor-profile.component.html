@@ -173,7 +173,7 @@
                     {{ doctor["SeniorityLevelName"] }}
                   </a>
 
-                  @for( subSpecial of doctor.SubSpecialistName ;let last =
+                  @for( subSpecial of doctor.SubSpecialistName.slice(0, 2); ;let last =
                   $last; track null){
 
                   <a href="{{
@@ -197,12 +197,11 @@
               <div>
                 <img src="assets/icons/money.png" class="pt-2 pb-1" alt="icon" />
                 <h5>
-                  <!-- {{ "find-a-doctor.doctors-list.cards.fees" | transloco }} -->
-                  Number
+                  {{ "find-a-doctor.doctors-list.cards.fees" | transloco }}
+
                 </h5>
                 <p class="text-muted" style="font-size: 14px; color: #8088A4;">
-                  <!-- {{doctor["Phone"]}} -->
-
+                  {{ doctorFees }}
                 </p>
               </div>
             </div>

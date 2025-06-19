@@ -48,7 +48,7 @@ export class DoctorProfileComponent {
   allUniqueServices: any = [];
   allImages: any = [];
   loadingVideos = false;
-  doctorFees: any;
+  doctorFees: number | null = null;
   storageUrl = environment.storageUrl;
   EditAppointmentID = null;
   reviews: any = null;
@@ -70,21 +70,17 @@ export class DoctorProfileComponent {
     private router: Router,
     public routesPipe: RoutesPipe,
     @Inject(DOCUMENT) private document: Document
-  ) {
-   
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getDoctorDetail();
     this.getDoctorRateByDoctorIdPagedList();
-    this.doctorFees = sessionStorage.getItem('DoctorFees');
+    const fees = this.StorageService.getItem('DoctorFees');
+    this.doctorFees = fees ? +fees : null;
     this.route.queryParams.subscribe((params) => {
       this.AvalibleDate = params['AvalibleDate'];
       this.ClinicId = params['ClinicId'];
     });
-
-  
-    
   }
   getDoctorVideos() {
     this.loadingVideos = true;

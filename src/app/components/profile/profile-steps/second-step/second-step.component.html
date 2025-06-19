@@ -89,7 +89,7 @@
 
         @if(formSubmitted && ff['Address']['errors']){
             <div class="errors-area mt-2" >
-              @if(ff['Address']['errors']['required']){
+              @if(ff['Address']['errors']){
                   <p class="text-danger">
                       {{ 'form.input.street.validation.required' | transloco }}
 

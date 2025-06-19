@@ -66,7 +66,7 @@ export class BookingSuccessfullyOfferComponent {
   ngOnInit(): void {
     this.metadataService.updateMetadata('booking-successfully-offer');
     this.getPatient();
-    // sessionStorage.setItem('Fees', '150'); 
+    // sessionStorage.setItem('Fees', '150');
     this.fees = sessionStorage.getItem('Fees');
     console.log('Fees from sessionStorage:', this.fees);
     this.cdr.detectChanges();
@@ -182,13 +182,16 @@ export class BookingSuccessfullyOfferComponent {
       });
     }
   }
-  goToMySchedule(bookingId: number): void {
+  goToMySchedule(): void {
     const lang = this.translocoService.getActiveLang() || 'en';
-    if (!bookingId) return;
-    this.dialogRef.close(); // close the dialog first
-    this.router.navigate([`/${lang}/my-schedule`], {
-      queryParams: { id: bookingId },
-    });
-    console.log(bookingId);
+    if (lang === 'ar') {
+      this.router.navigate([`/ar/جدولي`]);
+      this.dialogRef?.close();
+    }
+    else{
+      this.router.navigate([`/en/my-schedule`]);
+    this.dialogRef?.close();
+    }
+
   }
 }
