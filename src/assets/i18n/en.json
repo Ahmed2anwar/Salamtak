@@ -950,8 +950,8 @@
       "title": "New Password"
     },
     "reset-successfully": {
-      "title": "Password reset successfully",
-      "description": "Password reset successfully"
+      "title": "Password Reset Successfully",
+      "description": "Your password has been updated successfully."
     },
     "sign-up": {
       "title": "Sign Up",

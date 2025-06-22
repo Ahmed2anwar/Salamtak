@@ -130,7 +130,7 @@ export class SignUpComponent {
 
       res = btoa(unescape(encodeURIComponent(JSON.stringify(res.Data))));
       this.dialog.open(VerificationCodeComponent, {
-        width: '450px',
+        width: '400px',
         data: {
           r: res,
           p: this.form.value.Phone,
@@ -221,10 +221,10 @@ export class SignUpComponent {
     return null;
   }
 
-  dialogRef = inject(MatDialogRef); 
+  dialogRef = inject(MatDialogRef);
 
   closeDialog() {
-    this.dialogRef.close(); 
+    this.dialogRef.close();
   }
   login() {
     this.dialog.open(LoginComponent, {

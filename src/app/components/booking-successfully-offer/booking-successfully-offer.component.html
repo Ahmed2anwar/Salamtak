@@ -154,7 +154,8 @@
             <form>
               <div class="row mb-2">
                 <div class="col-12">
-                  <input type="number" id="ageInput" class="form-control"
+                  <input type="number" id="ageInput" class="form-control" [min]="0" [(ngModel)]="age"
+                    (input)="onAgeInput($event)"
                     placeholder="{{ 'booking-successfully.booking-details.Patient-Age' | transloco }}">
                 </div>
               </div>

@@ -352,7 +352,6 @@ export const routes: Routes = [
               },
             ],
           },
-
         ],
       },
       {
@@ -368,7 +367,6 @@ export const routes: Routes = [
             path: routeName('find-a-doctor', 'en') + '/:specialty',
             component: FindADoctorComponent,
           },
-           
 
           {
             path: routeName('find-a-doctor', 'en') + '/:specialty/:city',
@@ -471,44 +469,44 @@ export const routes: Routes = [
   {
     path: '',
     component: AuthenticationLayoutComponent,
-    children: [
-      { path: routeName('login', 'en'), component: LoginComponent },
-      { path: routeName('login', 'ar'), component: LoginComponent },
-      {
-        path: routeName('forgot-password', 'en'),
-        component: ForgotPasswordComponent,
-      },
-      {
-        path: routeName('verification-code', 'en'),
-        component: VerificationCodeComponent,
-      },
-      {
-        path: routeName('new-password/:token', 'en'),
-        component: NewPasswordComponent,
-      },
-      {
-        path: routeName('reset-successfully', 'en'),
-        component: ResetSuccessfullyComponent,
-      },
-      { path: routeName('sign-up', 'en'), component: SignUpComponent },
-      {
-        path: routeName('forgot-password', 'ar'),
-        component: ForgotPasswordComponent,
-      },
-      {
-        path: routeName('verification-code', 'ar'),
-        component: VerificationCodeComponent,
-      },
-      {
-        path: routeName('new-password/:token', 'ar'),
-        component: NewPasswordComponent,
-      },
-      {
-        path: routeName('reset-successfully', 'ar'),
-        component: ResetSuccessfullyComponent,
-      },
-      { path: routeName('sign-up', 'ar'), component: SignUpComponent },
-    ],
+    // children: [
+    //   { path: routeName('login', 'en'), component: LoginComponent },
+    //   { path: routeName('login', 'ar'), component: LoginComponent },
+    //   {
+    //     path: routeName('forgot-password', 'en'),
+    //     component: ForgotPasswordComponent,
+    //   },
+    //   {
+    //     path: routeName('verification-code', 'en'),
+    //     component: VerificationCodeComponent,
+    //   },
+    //   {
+    //     path: routeName('new-password/:token', 'en'),
+    //     component: NewPasswordComponent,
+    //   },
+    //   {
+    //     path: routeName('reset-successfully', 'en'),
+    //     component: ResetSuccessfullyComponent,
+    //   },
+    //   { path: routeName('sign-up', 'en'), component: SignUpComponent },
+    //   {
+    //     path: routeName('forgot-password', 'ar'),
+    //     component: ForgotPasswordComponent,
+    //   },
+    //   {
+    //     path: routeName('verification-code', 'ar'),
+    //     component: VerificationCodeComponent,
+    //   },
+    //   {
+    //     path: routeName('new-password/:token', 'ar'),
+    //     component: NewPasswordComponent,
+    //   },
+    //   {
+    //     path: routeName('reset-successfully', 'ar'),
+    //     component: ResetSuccessfullyComponent,
+    //   },
+    //   { path: routeName('sign-up', 'ar'), component: SignUpComponent },
+    // ],
   },
   { path: 'sitemap', component: SitemapComponent },
 ];

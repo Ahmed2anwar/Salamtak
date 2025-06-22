@@ -187,11 +187,19 @@ export class BookingSuccessfullyOfferComponent {
     if (lang === 'ar') {
       this.router.navigate([`/ar/جدولي`]);
       this.dialogRef?.close();
-    }
-    else{
+    } else {
       this.router.navigate([`/en/my-schedule`]);
-    this.dialogRef?.close();
+      this.dialogRef?.close();
     }
+  }
+  age: number = 0;
 
+  onAgeInput(event: any): void {
+    const value = +event.target.value;
+    if (value < 0) {
+      this.age = 0;
+    } else {
+      this.age = value;
+    }
   }
 }

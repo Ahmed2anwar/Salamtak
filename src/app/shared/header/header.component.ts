@@ -38,8 +38,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     RoutesPipe,
 
     MatButtonModule,
-    MatDialogModule
-,  ],
+    MatDialogModule,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -53,7 +53,7 @@ export class HeaderComponent {
   public IsEnglish = false;
   public IsArabic = true;
   flag: any;
-    phone = '17143'
+  phone = '17143';
 
   reloded = false;
   lang = this.translocoService.getActiveLang();
@@ -61,7 +61,7 @@ export class HeaderComponent {
   unreadCount: number = 0;
   isDropdownOpen = false;
   private scrollListener: any;
-
+  isLoggedIn = false;
   public patient: any;
   public forms: any = {
     FullNameEn: [''],
@@ -78,6 +78,7 @@ export class HeaderComponent {
 
   constructor(
     public dialog: MatDialog,
+
     private authentication: AuthenticationService,
     private _bottomSheet: MatBottomSheet,
     public translocoService: TranslocoService,
@@ -94,11 +95,9 @@ export class HeaderComponent {
   ) {
     this.authentication.currentUser.subscribe((currentUserSubject) => {
       this.user = currentUserSubject;
-      console.log(this.user)
     });
   }
   login() {
-
     this.dialog.open(LoginComponent, {
       width: '400px',
       height: 'auto',
@@ -124,6 +123,13 @@ export class HeaderComponent {
     const form: any = this.StorageService.getItem('sign-up-first-step');
 
     var date = JSON.parse(form);
+     this.authentication.isLoggedIn$.subscribe((loggedIn) => {
+    if (loggedIn) {
+      this.user = this.authentication.getCurrentUser();
+    } else {
+      this.user = null;
+    }
+  });
   }
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
@@ -135,7 +141,6 @@ export class HeaderComponent {
   }
 
   getUnreadDoctorResponses() {
-    
     this.authentication
       .getUnreadDoctorResponsesByUserIdAsync()
       .subscribe((response: any) => {
@@ -312,5 +317,4 @@ export class HeaderComponent {
       element.classList.remove('sticky');
     }
   }
-
 }

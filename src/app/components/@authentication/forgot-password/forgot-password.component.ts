@@ -90,13 +90,7 @@ export class ForgotPasswordComponent {
         res['Data']['Code']
       );
       const encodedData = btoa(unescape(encodeURIComponent(JSON.stringify(res.Data))));
-      // this.router.navigate([this.route.transform('verification-code')], {
-      //   queryParams: {
-      //     r: encodedData,
-      //     p: this.form.value.email_or_phone,
-      //     from: 'forgot-password',
-      //   },
-      // });
+
       this.dialog.open(VerificationCodeComponent, {
         width: '400px',
         height: 'auto',
@@ -114,7 +108,7 @@ export class ForgotPasswordComponent {
 
   PreviousPage() {
     this.dialog.open(LoginComponent, {
-      width: '400px',
+      width: '450px',
       height: 'auto',
       data: {},
     });
@@ -122,9 +116,9 @@ export class ForgotPasswordComponent {
   }
   // open forget password component Dialog
   forgetPassword() {
-    console.log('login');
+    
     this.dialog.open(ForgotPasswordComponent, {
-      width: '400px',
+      width: '450px',
       height: 'auto',
       data: {},
     });

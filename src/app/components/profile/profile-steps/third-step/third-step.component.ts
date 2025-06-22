@@ -72,6 +72,7 @@ export class ThirdStepComponent {
     private service: AuthenticationService,
     private spinner: NgxSpinnerService,
     private router: Router,
+    private authState: AuthenticationService,
     private mktService: MarketingService,
     private StorageService: LocalStorageService,
     private patientService: AppService,
@@ -241,7 +242,6 @@ export class ThirdStepComponent {
             this.mktService.onEventFacebook(eventData);
             this.spinner.hide();
             this.StorageService.removeItem('new-user');
-        
           },
           error: () => this.spinner.hide(),
         });
@@ -258,6 +258,8 @@ export class ThirdStepComponent {
             );
 
             this.mktService.onEventFacebook(eventData);
+              this.authState.setLoggedIn(true); // notify header
+
             const lang = this.translocoService.getActiveLang();
             if (lang == 'ar') {
               this.router.navigate(['/ar/الرئيسية']);

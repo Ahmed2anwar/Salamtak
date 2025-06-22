@@ -51,17 +51,6 @@
           <div>
 
 
-            <!-- {{selectedCity}} -->
-            <!-- <ng-multiselect-dropdown
-          [placeholder]= "'search-form.area.placeholder' | transloco"
-          [settings]="dropdownSettings"
-          [data]="areas"
-          [(ngModel)]="selectedArea"
-          [ngModelOptions]="{standalone: true}"
-          (onSelect)="setSelectedArea($event);setTitle()"
-          (onDeSelect) ="deselectoption('search-form-area')"
-      >
-      </ng-multiselect-dropdown> -->
             <ng-multiselect-dropdown [placeholder]="'search-form.area.placeholder' | transloco"
               [settings]="dropdownSettings" [data]="form.area.list" [(ngModel)]="form.area.selectedValue"
               [ngModelOptions]="{standalone: true}" (onDeSelect)="form.area.selectedValue = []" class="search">
@@ -74,6 +63,7 @@
           <div class="">
 
             <input type="text" [(ngModel)]="form.doctorName" name="name"
+      
               style=" text-align: center; border-radius: 5px ; border: 1px solid #e5e5e5;"
               [placeholder]="'search-form.name.placeholder' | transloco" class="search ">
           </div>

@@ -86,7 +86,7 @@
           </div>
         </li> -->
       </ul>
-      @if(!user || user.ProfileStatus == 0){
+      @if(!user || user.ProfileStatus == 0 ){
       <form class="d-flex" role="search">
         <ul class="navbar-nav me-auto"></ul>
         <li class="btn btn-lang">
@@ -116,7 +116,7 @@
           {{ "header.buttons.login" | transloco }}
         </button>
       </form>
-      } @if(user && user.ProfileStatus != 0){
+      } @if(user && user.ProfileStatus != 0  ){
       <div class="user">
         <div class="notification"></div>
         <mat-menu #menu="matMenu" class="userDropdown">

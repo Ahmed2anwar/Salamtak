@@ -138,7 +138,6 @@ export class LoginComponent {
 
    // open singUp component Dialog
   signUp() {
-    console.log('login');
     this.dialog.open(SignUpComponent, {
       width: '400px',
       height: 'auto',

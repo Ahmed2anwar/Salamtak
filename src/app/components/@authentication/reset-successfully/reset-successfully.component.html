@@ -1,23 +1,18 @@
-<section class="auth layout_1 reset-successfully">
+<section class="auth layout_1 reset-successfully my-5 mx-2">
     <div class="container text-center">
-      <img src="assets/large-logo2-color.svg" class="logo">
-      <br>
-      <br>
-      <img src="assets/shapes/reset-successfully-icon.svg" class="successfully-icon">
-      <div class="mt-5">
-        <h1>
+      <img src="assets/success.png" class="" style="width: 90px;" alt="">
+      <div class="mt-3">
+        <h2>
           {{ 'authentication.reset-successfully.title' | transloco }}
-        </h1>
-        <p>
+        </h2>
+        <p class="pt-3" style="color: #8088A4;">
           {{ 'authentication.reset-successfully.description' | transloco }}
         </p>
       </div>
-      <!-- [routerLink]="['/' + lang + '/auth/login']" -->
-      <button type="submit" class="btn btn-primary btn-lg"
-       [routerLink]="['login' | route ]"
-      >
+
+      <button type="submit" class="btn btn-primary my-3 w-100"
+      (click)="login()">
         {{ 'form.buttons.login' | transloco }}
       </button>
     </div>
   </section>
-  
