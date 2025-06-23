@@ -62,18 +62,11 @@ export class SignUpComponent {
   public submitted = false;
   public form: FormGroup = this.formbuilder.group(
     {
-      // FullNameEn:['',Validators.required],
-      FullNameEn: ['', [Validators.required, this.customValidator()]], // FullNameAr:['',Validators.required],
+      FullNameEn: ['', [Validators.required, this.customValidator()]],
       FullNameAr: ['', [Validators.required, this.arabicThreeWordsValidator()]],
       Phone: ['', Validators.required],
       Email: ['', [Validators.required, Validators.email]],
-      Password: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(/^(?=.*[a-zA-Z])(?=.*\d).{6,}$/), // Updated pattern
-        ],
-      ],
+      Password: ['',[Validators.required,Validators.pattern(/^(?=.*[a-zA-Z])(?=.*\d).{6,}$/),],],
       ConfirmPassword: ['', [Validators.required]],
       image: ['', Validators.nullValidator],
       Terms: ['', Validators.nullValidator],

@@ -135,11 +135,9 @@ export class LoginComponent {
     });
     this.dialogRef.close();
   }
-
-   // open singUp component Dialog
   signUp() {
     this.dialog.open(SignUpComponent, {
-      width: '400px',
+      width: '430px',
       height: 'auto',
       data: {},
     });

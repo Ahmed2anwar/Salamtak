@@ -41,13 +41,14 @@ export class AuthenticationService {
       return this.currentUserSubject.value;
     }
   }
-   private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasUser());
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasUser());
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
   private hasUser(): boolean {
-    return !! this.StorageService.getItem('currentUser');
+    return !!this.StorageService.getItem('currentUser');
   }
 
+  
   setLoggedIn(state: boolean) {
     this.isLoggedInSubject.next(state);
   }
@@ -55,7 +56,7 @@ export class AuthenticationService {
   getCurrentUser() {
     const user = this.StorageService.getItem('currentUser');
     return user ? JSON.parse(user) : null;
-  }     
+  }
   login(form: any): Observable<any> {
     // https://salamtechapi.azurewebsites.net/api/en/User/Login
     return this.http.post<any>(`${environment.apiUrl}/User/Login`, form).pipe(
@@ -101,10 +102,8 @@ export class AuthenticationService {
       .pipe(
         map((user: any) => {
           if (user && user.Data.Token) {
-            // localStorage.setItem('currentWaitingUser', JSON.stringify(user.Data));
             localStorage.setItem('currentUser', JSON.stringify(user.Data));
             this.currentUserSubject.next(user.Data);
-            // this.user.next(user.Data)
           }
           return user;
         })
@@ -113,7 +112,6 @@ export class AuthenticationService {
   GetPatient() {
     return this.http.get(`${environment.apiUrl}/Patient/GetPatient`);
   }
-  // GET /api​/{culture}​/Patient​/GetPatientMedicalInfo
   GetPatientMedicalInfo() {
     return this.http.get(`${environment.apiUrl}/Patient/GetPatientMedicalInfo`);
   }
@@ -132,13 +130,11 @@ export class AuthenticationService {
       `${environment.apiUrl}/City/GetCities?CountryId=${countryId}`
     );
   }
-  //     GET ​/api​/{culture}​/Area​/GetAreasByCityId
   getAreas(cityId: any) {
     return this.http.get(
       `${environment.apiUrl}/Area/GetAreasByCityId?CityId=${cityId}`
     );
   }
-  // GET /api​/{culture}​/PatientLookUp​/GetBloodTypes
   getBloodTypes() {
     return this.http.get(`${environment.apiUrl}/PatientLookUp/GetBloodTypes`);
   }

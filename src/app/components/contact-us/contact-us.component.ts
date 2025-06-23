@@ -12,6 +12,7 @@ import { AppService } from '../../services/app.service';
 import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
 import { CountryISO } from 'ngx-intl-tel-input';
 import { MetadataService } from '../../services/metadata.service';
+import { RoutesPipe } from "../../pipes/routes.pipe";
 
 @Component({
   selector: 'app-contact-us',
@@ -23,8 +24,9 @@ import { MetadataService } from '../../services/metadata.service';
     AccordionModule,
     FormsModule,
     NgxMatIntlTelInputComponent,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    RoutesPipe
+],
   templateUrl: './contact-us.component.html',
   styleUrl: './contact-us.component.scss',
   encapsulation: ViewEncapsulation.None

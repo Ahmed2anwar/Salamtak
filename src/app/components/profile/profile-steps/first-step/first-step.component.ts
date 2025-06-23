@@ -1,7 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CountryISO } from 'ngx-intl-tel-input';
@@ -23,256 +29,259 @@ import { RoutesPipe } from '../../../../pipes/routes.pipe';
     MatMenuModule,
     FormsModule,
     CommonModule,
-    RoutesPipe
-
+    RoutesPipe,
   ],
   templateUrl: './first-step.component.html',
-  styleUrl: './first-step.component.scss'
+  styleUrl: './first-step.component.scss',
 })
 export class FirstStepComponent {
   // #saveChanges
-  @ViewChild('saveChanges') saveChanges :any;
+  @ViewChild('saveChanges') saveChanges: any;
 
   CountryISO = CountryISO;
   @ViewChild(NgxMatIntlTelInputComponent, { static: true })
   private phoneComponent: any;
-  public countries : any
-  public occupations: any
-  public patient: any
-  public formSubmitted : any= false;
-  public user: any
-public gen: any;
-lang = this.translocoService.getActiveLang();
-  public form:any = this.formbuilder.group({
-    image:['',Validators.nullValidator],
-    FullNameEn : ['', [Validators.required, this.customValidator()]],
-    FullNameAr : ['', [Validators.required, this.arabicThreeWordsValidator()]],
+  public countries: any;
+  public occupations: any;
+  public patient: any;
+  public formSubmitted: any = false;
+  public user: any;
+  public gen: any;
+  lang = this.translocoService.getActiveLang();
+  public form: any = this.formbuilder.group({
+    image: ['', Validators.nullValidator],
+    FullNameEn: ['', [Validators.required, this.customValidator()]],
+    FullNameAr: ['', [Validators.required, this.arabicThreeWordsValidator()]],
 
     // غير مفعل حاليا
     // phone max length 11
     // Phone:['',[Validators.required,Validators.maxLength(11)]],
     // Email:['',[Validators.required,Validators.email]],
-    gender : ['',Validators.required],
-    day:['',Validators.required],
-    month:['',Validators.required],
-    year:['',Validators.required],
-    Nationality : ['',Validators.required],
-    Occupation : [''],
+    gender: ['', Validators.required],
+    day: ['', Validators.required],
+    month: ['', Validators.required],
+    year: ['', Validators.required],
+    Nationality: ['', Validators.required],
+    Occupation: [''],
   });
 
   constructor(
-    private formbuilder:FormBuilder,
-    private route:ActivatedRoute,
-    private service : AuthenticationService,
-    private spinner:NgxSpinnerService,
-    private mktService:  MarketingService,
-    private StorageService : LocalStorageService,
+    private formbuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private service: AuthenticationService,
+    private spinner: NgxSpinnerService,
+    private mktService: MarketingService,
+    private StorageService: LocalStorageService,
     private translocoService: TranslocoService,
-    private router:Router,
+    private router: Router,
     private routesPipe: RoutesPipe
-    ) {
-      this.service.currentUser.subscribe(currentUserSubject => this.user = currentUserSubject)
-    }
+  ) {
+    this.service.currentUser.subscribe(
+      (currentUserSubject) => (this.user = currentUserSubject)
+    );
+  }
 
   ngOnInit(): void {
-    this.getCountries()
-    if(this.user.ProfileStatus != 0){
+    this.getCountries();
+    if (this.user.ProfileStatus != 0) {
       this.getPatient();
     }
-
-
+     const savedData = this.StorageService.getItem('sign-up-first-step');
+    if (savedData) {
+      const formData = JSON.parse(savedData);
+      this.form.patchValue({
+        FullNameEn: formData.FullNameEn,
+        FullNameAr: formData.FullNameAr,
+      });
+    }
   }
   // first form
-  getCountries(){
+  getCountries() {
     this.spinner.show();
-   return this.service.getCountries().pipe(map((res:any)=>res['Data'])).subscribe((res:any)=>{
-      this.countries = res;
-      this.spinner.hide();
-      // remove disabled attr from saveChanges
-      setTimeout(() => {
-        this.saveChanges.nativeElement.removeAttribute('disabled');
-      }, 200);
-    })
+    return this.service
+      .getCountries()
+      .pipe(map((res: any) => res['Data']))
+      .subscribe((res: any) => {
+        this.countries = res;
+        this.spinner.hide();
+        // remove disabled attr from saveChanges
+        setTimeout(() => {
+          this.saveChanges.nativeElement.removeAttribute('disabled');
+        }, 200);
+      });
   }
-  getOccupations(){
+  getOccupations() {
     this.spinner.show();
-    this.service.getOccupations().pipe(map((res:any)=>res['Data'])).subscribe((res:any)=>{
-      this.occupations = res;
-      this.spinner.hide();
-
-    })
+    this.service
+      .getOccupations()
+      .pipe(map((res: any) => res['Data']))
+      .subscribe((res: any) => {
+        this.occupations = res;
+        this.spinner.hide();
+      });
   }
-  getPatient(){
+  getPatient() {
     this.spinner.show();
-    this.service.GetPatient().pipe(map((res:any)=>res['Data'])).subscribe((patient:any)=>{
+    this.service
+      .GetPatient()
+      .pipe(map((res: any) => res['Data']))
+      .subscribe((patient: any) => {
+        this.patient = patient;
+        this.service.currentUserValue.Name = patient.FullName;
+        this.service.currentUserValue.NameAR = patient.FullNameAr;
+        this.StorageService.setItem(
+          'currentUser',
+          JSON.stringify(this.service.currentUserValue)
+        );
 
-      this.patient = patient;
-      this.service.currentUserValue.Name=patient.FullName
-      this.service.currentUserValue.NameAR=patient.FullNameAr;
-      this.StorageService.setItem('currentUser', JSON.stringify(this.service.currentUserValue))
-
-this.service.currentUserSubject.next(this.service.currentUserValue)
-      this.form.controls['FullNameEn'].setValue(patient.FullName);
-      this.form.controls['FullNameAr'].setValue(patient.FullNameAr);
-      this.form.controls['Occupation'].setValue(patient.OccupationId);
+        this.service.currentUserSubject.next(this.service.currentUserValue);
+        this.form.controls['FullNameEn'].setValue(patient.FullName);
+        this.form.controls['FullNameAr'].setValue(patient.FullNameAr);
+        this.form.controls['Occupation'].setValue(patient.OccupationId);
 
         //  this.translocoService.translate('form.input.gender.male ')
 
+        var gender = patient.GenderId;
+        this.setGenderValueToForm(gender);
+        // birth date
+        var date = new Date(patient.Birthdate);
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        this.setDayValueToForm(day);
+        this.setMonthValueToForm(month);
+        this.setYearValueToForm(year);
+        // Nationality
+        // get nationality object from countries array
+        setTimeout(() => {
+          this.countries.find((country: any) => {
+            if (country.Id == patient.NationalityId) {
+              this.setNationalityToForm(country);
+            }
+          });
+          // Occupation
+          // get occupation object from occupations array
+          // this.occupations.find((occupation:any) => {
+          //   if(occupation.Id == patient.OccupationId){
+          //     this.setOccupationToForm(occupation)
+          //   }
+          // })
+        }, 500);
 
-      var gender = (patient.GenderId);
-      this.setGenderValueToForm(gender)
-      // birth date
-      var date = new Date(patient.Birthdate);
-      var day = date.getDate();
-      var month = date.getMonth() + 1;
-      var year = date.getFullYear();
-      this.setDayValueToForm(day)
-      this.setMonthValueToForm(month)
-      this.setYearValueToForm(year)
-      // Nationality
-      // get nationality object from countries array
-      setTimeout(() => {
-        this.countries.find((country:any) => {
-          if(country.Id == patient.NationalityId){
-            this.setNationalityToForm(country)
-          }
-        })
-        // Occupation
-        // get occupation object from occupations array
-        // this.occupations.find((occupation:any) => {
-        //   if(occupation.Id == patient.OccupationId){
-        //     this.setOccupationToForm(occupation)
-        //   }
-        // })
-      }, 500);
-
-      this.spinner.hide();
-    })
+        this.spinner.hide();
+      });
   }
 
-  setGenderValueToForm(Gender:number){
-    if(Gender==1){
-      this.form.controls['gender'].setValue(this.translocoService.translate('form.input.gender.male'));
-     }else if (Gender==2){
-      this.form.controls['gender'].setValue(this.translocoService.translate('form.input.gender.female'));
-
-     }
+  setGenderValueToForm(Gender: number) {
+    if (Gender == 1) {
+      this.form.controls['gender'].setValue(
+        this.translocoService.translate('form.input.gender.male')
+      );
+    } else if (Gender == 2) {
+      this.form.controls['gender'].setValue(
+        this.translocoService.translate('form.input.gender.female')
+      );
+    }
   }
-  setDayValueToForm(day:any){
+  setDayValueToForm(day: any) {
     this.form.controls['day'].setValue(day);
   }
-  setMonthValueToForm(month:any){
+  setMonthValueToForm(month: any) {
     this.form.controls['month'].setValue(month);
   }
-  setYearValueToForm(year:any){
+  setYearValueToForm(year: any) {
     this.form.controls['year'].setValue(year);
   }
-  getYears(){
-    let years :any = [];
+  getYears() {
+    let years: any = [];
     const currentYear = new Date().getFullYear();
-    for(let i = 1900; i <= currentYear; i++){
+    for (let i = 1900; i <= currentYear; i++) {
       years.push(i);
     }
     return years.reverse();
   }
-  setNationalityToForm(Nationality:any){
+  setNationalityToForm(Nationality: any) {
     this.form.controls['Nationality'].setValue(Nationality);
   }
-  // setOccupationToForm(Occupation:any){
-  //   this.form.controls['Occupation'].setValue(Occupation);
-  // }
-  get ff() {return this.form.controls}
-  formSubmit(){
 
+  get ff() {
+    return this.form.controls;
+  }
+  formSubmit() {
     this.formSubmitted = true;
-
-
-
-    // get invalid form control
-    // const invalid :any= [];
-    // const controls = this.form.controls;
-    // for (const name in controls) {
-    //   if (controls[name].invalid) {
-    //     invalid.push(name);
-    //   }
-    // }
     if (this.form.invalid) {
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-      return
+      return;
     }
-
-
     this.spinner.show();
-    const image = (this.form.value.image == '' ? '' : this.dataURLtoFile(this.form.value.image,'profileImage.png'));
+    const image =
+      this.form.value.image == ''
+        ? ''
+        : this.dataURLtoFile(this.form.value.image, 'profileImage.png');
     var form = {
-      FullNameEn:this.form.value.FullNameEn,
-      FullNameAr:this.form.value.FullNameAr,
-      // Phone:this.form.value.Phone,
-      // Email:this.form.value.Email, // not required
-      Birthdate : `${this.form.value.day}-${this.form.value.month}-${this.form.value.year}`,
-      // Gender 1 for Male 2 Female
-      GenderId : + (this.form.value.gender == this.translocoService.translate('form.input.gender.male') ? 1 : 2),
-      NationalityId : + this.form.value.Nationality.Id,
+      FullNameEn: this.form.value.FullNameEn,
+      FullNameAr: this.form.value.FullNameAr,
+      Birthdate: `${this.form.value.day}-${this.form.value.month}-${this.form.value.year}`,
+      GenderId: +(this.form.value.gender ==
+      this.translocoService.translate('form.input.gender.male')
+        ? 1
+        : 2),
+      NationalityId: +this.form.value.Nationality.Id,
       OccupationId: this.form.value.Occupation,
-      // OccupationId : + this.form.value.Occupation.Id,
-      // from base64 to file
-      profileImage : image
-    }
-
-    if(this.user.ProfileStatus == 0){
-
-      this.service.CreatePatientProfileFirstStep(form).subscribe((res:any)=>{
-
+      profileImage: image,
+    };
+    if (this.user.ProfileStatus == 0) {
+      this.service.CreatePatientProfileFirstStep(form).subscribe((res: any) => {
         const eventData: any = this.mktService.setEventData(
           'Registration-First Step',
           `Signup First Step`,
-          "New First Step",
+          'New First Step'
         );
-
         this.mktService.onEventFacebook(eventData);
-
-        this.router.navigate([], { queryParams: { redirect: null }, queryParamsHandling: 'merge' }).then(() => {
-          // window.location.reload();
-        });
+        this.router
+          .navigate([], {
+            queryParams: { redirect: null },
+            queryParamsHandling: 'merge',
+          })
+          .then(() => {
+          });
         this.spinner.hide();
-    // this.service.setStep(1);
-        /*
-        * 	 path => import { Router } from '@angular/router';
-        * 	 param => private router: Router
-        */
-       let currentUser = JSON.parse(this.StorageService.getItem(`${environment.localStorageUserKey}`)!);
-       currentUser.ProfileStatus =res.Data.ProfileStatus ;
-      this.StorageService.setItem('currentUser',JSON.stringify(currentUser))
 
+        let currentUser = JSON.parse(
+          this.StorageService.getItem(`${environment.localStorageUserKey}`)!
+        );
+        currentUser.ProfileStatus = res.Data.ProfileStatus;
+        this.StorageService.setItem('currentUser', JSON.stringify(currentUser));
 
+        this.router.navigate([
+          this.routesPipe.transform('profile') +
+            '/' +
+            this.routesPipe.transform('location'),
+        ]);
 
-         this.router.navigate([this.routesPipe.transform('profile')+ '/' +this.routesPipe.transform('location')])
-
-          // this.user.ProfileStatus = res.Data.ProfileStatus;
-
-
-      })
-    }else{
-      this.service.UpdatePatientProfileFirstStep(form).subscribe((res:any)=>{
+        // this.user.ProfileStatus = res.Data.ProfileStatus;
+      });
+    } else {
+      this.service.UpdatePatientProfileFirstStep(form).subscribe((res: any) => {
         const eventData: any = this.mktService.setEventData(
           'Update Profile First Step',
           `Signup First Step`,
-          "Update First Step",
+          'Update First Step'
         );
 
         this.mktService.onEventFacebook(eventData);
-        this.getPatient()
+        this.getPatient();
 
-        this.router.navigate([this.routesPipe.transform('profile')+ '/' +this.routesPipe.transform('location')])
+        this.router.navigate([
+          this.routesPipe.transform('profile') +
+            '/' +
+            this.routesPipe.transform('location'),
+        ]);
         this.spinner.hide();
-
-      })
+      });
     }
-
-
-
   }
-  dataURLtoFile(dataurl:any, filename:any) {
+  dataURLtoFile(dataurl: any, filename: any) {
     var arr = dataurl.split(','),
       mime = arr[0].match(/:(.*?);/)[1],
       bstr = atob(arr[1]),
@@ -283,7 +292,7 @@ this.service.currentUserSubject.next(this.service.currentUserValue)
     }
     return new File([u8arr], filename, { type: mime });
   }
-  nextStep(){
+  nextStep() {
     this.formSubmit();
   }
 
@@ -292,11 +301,11 @@ this.service.currentUserSubject.next(this.service.currentUserValue)
       const value: string = control.value;
 
       if (!value) {
-        return { 'required': true }; // Return required error if the field is empty
+        return { required: true }; // Return required error if the field is empty
       } else if (!/^[a-zA-Z ]*$/.test(value)) {
-        return { 'pattern': true }; // Return pattern error if non-English characters are entered
+        return { pattern: true }; // Return pattern error if non-English characters are entered
       } else if (value.split(' ').length < 3) {
-        return { 'space': true }; // Return space error if the input does not contain three words
+        return { space: true }; // Return space error if the input does not contain three words
       }
 
       return null; // Return null if no error
@@ -307,17 +316,14 @@ this.service.currentUserSubject.next(this.service.currentUserValue)
       const value: string = control.value;
 
       if (!value) {
-        return { 'required': true }; // Return required error if the field is empty
+        return { required: true }; // Return required error if the field is empty
       } else if (!/[\u0600-\u06FF]/.test(value)) {
-        return { 'pattern': true }; // Return pattern error if non-Arabic characters are entered
+        return { pattern: true }; // Return pattern error if non-Arabic characters are entered
       } else if (value.split(' ').length < 3) {
-        return { 'space': true }; // Return space error if the input does not contain three words
+        return { space: true }; // Return space error if the input does not contain three words
       }
 
       return null; // Return null if no error
     };
   }
-
-  
-
 }

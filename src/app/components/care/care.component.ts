@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from '../../../environments/environment';
 import { SearchFormComponent } from '../../shared/search-form/search-form.component';
 import { MetadataService } from '../../services/metadata.service';
+import { RoutesPipe } from "../../pipes/routes.pipe";
 
 @Component({
   selector: 'app-care',
@@ -20,7 +21,8 @@ import { MetadataService } from '../../services/metadata.service';
     SearchFormComponent,
     AccordionModule,
     FormsModule,
-  ],
+    RoutesPipe
+],
   templateUrl: './care.component.html',
   styleUrl: './care.component.scss'
 })

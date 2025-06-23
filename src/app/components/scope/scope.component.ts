@@ -8,6 +8,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from '../../../environments/environment';
 import { MetadataService } from '../../services/metadata.service';
+import { RoutesPipe } from "../../pipes/routes.pipe";
 
 @Component({
   selector: 'app-scope',
@@ -18,7 +19,8 @@ import { MetadataService } from '../../services/metadata.service';
     TranslocoModule,
     CommonModule,
     FormsModule,
-  ],
+    RoutesPipe
+],
   templateUrl: './scope.component.html',
   styleUrl: './scope.component.scss'
 })

@@ -8,6 +8,7 @@ import { RouterModule, ActivatedRoute } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MetadataService } from '../../services/metadata.service';
+import { RoutesPipe } from "../../pipes/routes.pipe";
 
 @Component({
   selector: 'app-true-orfalse',
@@ -18,7 +19,8 @@ import { MetadataService } from '../../services/metadata.service';
     TranslocoModule,
     CommonModule,
     FormsModule,
-  ],
+    RoutesPipe
+],
   templateUrl: './true-orfalse.component.html',
   styleUrl: './true-orfalse.component.scss'
 })

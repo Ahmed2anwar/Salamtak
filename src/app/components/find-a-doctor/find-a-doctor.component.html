@@ -4,7 +4,7 @@
       <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="javascript:void(0)">
+            <a href="javascript:void(0)" [routerLink]="['home' | route]">
               {{ "app-name" | transloco }}
             </a>
           </li>
@@ -421,7 +421,7 @@
                                 <!-- this.router.navigate([this.routesPipe.transform('find-a-doctor-by-sub-specialty') ,this.replaceSpaceWithDash(name)]); -->
 
 
-                                @for(subspecialist of doctor.Sub_SpecialistList.slice(0, 1); let last = $last; track
+                                @for(subspecialist of doctor.Sub_SpecialistList.slice(0, 3); let last = $last; track
                                 subspecialist) {
                                 <a href="{{ getSubSpecialtyLink(subspecialist, doctor) }}" class="text-decoration-none"
                                   style="cursor: pointer;" title="{{ subspecialist.Name }}">

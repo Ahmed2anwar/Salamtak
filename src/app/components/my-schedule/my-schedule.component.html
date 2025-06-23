@@ -98,11 +98,11 @@
 
                       <mat-menu #dots="matMenu" class="userDropdown">
                         <button (click)="editAppointment(doctor)" mat-menu-item>
-                          <img src="assets/icons/Edit.svg" alt="">
+                          <img src="assets/icons/Edit.svg" class="me-2" alt="">
                           <span>{{ 'my-schedule.Edit-Appointment' | transloco }}</span>
                         </button>
                         <button mat-menu-item (click)="map(doctor)">
-                          <img src="assets/icons/View-Map.svg" alt="">
+                          <img src="assets/icons/View-Map.svg" class="me-2" alt="">
                           <span>{{ 'my-schedule.View-Map' | transloco }}</span>
                         </button>
                         <button data-bs-toggle="modal" data-bs-target="#myModalHelp" aria-label="help" type="button"
@@ -115,7 +115,7 @@
 
                         <button (click)="cancelAppointment(doctor.AppointmentId, doctor.DoctorId, doctor.DoctorName)"
                           mat-menu-item>
-                          <img src="assets/icons/Cancel-Appointment.svg" alt="">
+                          <img src="assets/icons/Cancel-Appointment.svg" class="me-2" alt="">
                           <span class="text-danger">{{ 'my-schedule.Cancel-Appointment' | transloco }}</span>
                         </button>
                       </mat-menu>
@@ -123,21 +123,43 @@
                       <ng-container *ngIf="eventType === 1">
                         <a [matMenuTriggerFor]="dots2" class="dots" href="javascript:void(0)"
                           (click)="$event.stopPropagation()">
-                          <img src="assets/icons/three-dots.svg" alt="">
+                          <img src="assets/icons/three-dots.svg" class="me-2" alt="">
                         </a>
                       </ng-container>
 
                       <mat-menu #dots2="matMenu" class="userDropdown">
                         <button (click)="RebookAppointment(doctor)" mat-menu-item>
-                          <img src="assets/icons/Calendar22.svg" alt="">
+                          <img src="assets/icons/Calendar22.svg" class="me-2" alt="">
                           <span>{{ 'my-schedule.ReBooking-Appointment' | transloco }}</span>
                         </button>
                         <button mat-menu-item (click)="goToMedical(doctor)">
-                          <img src="assets/icons/Group2222.svg" alt="">
+                          <img src="assets/icons/Group2222.svg" class="me-2" alt="">
                           <span>{{ 'my-schedule.Medical' | transloco }}</span>
                         </button>
                         <button mat-menu-item (click)="rate(doctor)">
-                          <img src="assets/icons/Star22.svg" alt="">
+                          <img src="assets/icons/Star22.svg" class="me-2" alt="">
+                          <span>{{ 'my-schedule.Rate' | transloco }}</span>
+                        </button>
+                      </mat-menu>
+
+                       <ng-container *ngIf="eventType === 2">
+                        <a [matMenuTriggerFor]="dots2" class="dots" href="javascript:void(0)"
+                          (click)="$event.stopPropagation()">
+                          <img src="assets/icons/three-dots.svg" class="me-2" alt="">
+                        </a>
+                      </ng-container>
+
+                      <mat-menu #dots2="matMenu" class="userDropdown">
+                        <button (click)="RebookAppointment(doctor)" mat-menu-item>
+                          <img src="assets/icons/Calendar22.svg" class="me-2" alt="">
+                          <span>{{ 'my-schedule.ReBooking-Appointment' | transloco }}</span>
+                        </button>
+                        <button mat-menu-item (click)="goToMedical(doctor)">
+                          <img src="assets/icons/Group2222.svg" class="me-2" alt="">
+                          <span>{{ 'my-schedule.Medical' | transloco }}</span>
+                        </button>
+                        <button mat-menu-item (click)="rate(doctor)">
+                          <img src="assets/icons/Star22.svg" class="me-2" alt="">
                           <span>{{ 'my-schedule.Rate' | transloco }}</span>
                         </button>
                       </mat-menu>

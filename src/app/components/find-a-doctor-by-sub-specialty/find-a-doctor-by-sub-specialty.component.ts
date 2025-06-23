@@ -864,38 +864,7 @@ export class FindADoctorBySubSpecialtyComponent {
     // this.setParam('AvalibleDate',AppDate)
     this.setFilter(event, 'date', AppDate, AppDate);
   }
-  bookFor(event: any, doctor: any) {
-    event.preventDefault();
-    const eventData: any = this.mktService.setEventData(
-      'Patient Booked Doctor Appointment',
-      `View Doctor Profile`,
-      ' '
-    );
 
-    this.mktService.onEventFacebook(eventData);
-    // this.router.navigate([`/${this.translocoService.getActiveLang()}/doctor-profile`]
-    this.router
-      .navigate(
-        [
-          this.routesPipe.transform('doctor-profile'),
-          doctor.DoctorId,
-          doctor.DoctorName,
-        ],
-        // this.router.navigate([this.routesPipe.transform('doctor-profile')]
-        {
-          queryParams: {
-            DoctorId: doctor.DoctorId,
-            ClinicId: doctor.clinicDto.ClinicId,
-            AvalibleDate: this.params['AvalibleDate'],
-          },
-        }
-      )
-      .then((res) => {
-        // MedicalExamationTypes not found for {Doctor/GetDoctorProfileByDoctorId} api so i save it in localstorage  to use it in doctor-profile component
-        this.StorageService.setItem('doctor', JSON.stringify(doctor));
-        this.StorageService.setItem('DoctorFees', doctor.FeesFrom);
-      });
-  }
   // @HostListener("window:scroll", ["$event"])
   // onWindowScroll() {
   //   // if page is scrolled to bottom
@@ -982,6 +951,36 @@ export class FindADoctorBySubSpecialtyComponent {
     // return
     // this.router
     this.doctorsSearch();
+  }
+   bookFor(event: any, doctor: any) {
+    event.preventDefault();
+    const eventData: any = this.mktService.setEventData(
+      'Patient Booked Doctor Appointment',
+      `View Doctor Profile`,
+      ' '
+    );
+    this.mktService.onEventFacebook(eventData);
+    this.router
+      .navigate(
+        [
+          this.routesPipe.transform('doctor'),
+          doctor.DoctorId,
+          this.replaceSpaceWithDash(doctor.DoctorName),
+        ],
+        {
+          queryParams: {
+            DoctorId: doctor.DoctorId,
+            ClinicId: doctor.clinicDto.ClinicId,
+            AvalibleDate: this.params['AvalibleDate'],
+          },
+        }
+      )
+      .then((res) => {
+        this.StorageService.setItem('doctor', JSON.stringify(doctor));
+        this.StorageService.setItem('DoctorFees', doctor.FeesFrom);
+        console.log('Doctor:', doctor);
+      
+      });
   }
   getSubSpecialtyLink(subspecialist: any, doctor: any) {
     const SpecialistName = this.replaceSpaceWithDash(doctor.SpecialistName);

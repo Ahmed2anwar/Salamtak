@@ -88,6 +88,7 @@ export class VerificationCodeComponent implements OnInit, OnDestroy {
     } catch (error) {
       console.error('Error processing verification code data:', error);
     }
+   
   }
 
   ngOnDestroy() {
@@ -180,7 +181,6 @@ export class VerificationCodeComponent implements OnInit, OnDestroy {
 
     const userRegisterFirstStep = this.registerForm;
     this.spinner.show();
-
     this.service.signup(userRegisterFirstStep).subscribe((res: any) => {
       this.StorageService.setItem('auth-verification-code', res.Data.Code);
       const encoded = btoa(

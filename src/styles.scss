@@ -440,13 +440,6 @@ section.main-card-app {
   margin-bottom: 0 !important;
 
 }
-// .spinner-border {
-//     --bs-spinner-width: 2rem;
-//     --bs-spinner-height: 2rem;
-//     --bs-spinner-vertical-align: -0.125em;
-//     --bs-spinner-border-width: 0.25em;
-//     --bs-spinner-animation-speed: 0.75s;
-//     --bs-spinner-animation-name: spinner-border;
-//     border: var(--bs-spinner-border-width) solid #2b2979 !important;
-//     border-right-color: #2b2979 !important;
-// }
+section.profile .card a img.icon {
+    right: 30px !important;
+}

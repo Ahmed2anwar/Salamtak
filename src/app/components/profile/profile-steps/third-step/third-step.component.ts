@@ -256,17 +256,17 @@ export class ThirdStepComponent {
               'Signup Third Step',
               'Update Third Step'
             );
-
-            this.mktService.onEventFacebook(eventData);
-              this.authState.setLoggedIn(true); // notify header
-
             const lang = this.translocoService.getActiveLang();
             if (lang == 'ar') {
               this.router.navigate(['/ar/الرئيسية']);
               this.spinner.hide();
+              this.mktService.onEventFacebook(eventData);
+              this.authState.setLoggedIn(true);
             } else {
               this.router.navigate(['/en/home']);
               this.spinner.hide();
+              this.mktService.onEventFacebook(eventData);
+              this.authState.setLoggedIn(true);
             }
           },
           error: () => this.spinner.hide(),
@@ -286,11 +286,8 @@ export class ThirdStepComponent {
     return new File([u8arr], filename, { type: mime });
   }
   nextStep() {
-    // this.service.setStep(2);
 
-    // this.router.navigate([`/${this.lang}/home`])
     this.router.navigate([this.routesPipe.transform('home')]);
-    // this.router.navigate([`/${this.lang}/profile/succ`])
     this.router.navigate([this.routesPipe.transform('succ')]);
   }
   previousStep() {

@@ -47,7 +47,7 @@
     <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="javascript:void(0)">
+          <a href="javascript:void(0)" [routerLink]="['home' | route]">
             {{ "app-name" | transloco }}
           </a>
         </li>
@@ -173,7 +173,7 @@
                     {{ doctor["SeniorityLevelName"] }}
                   </a>
 
-                  @for( subSpecial of doctor.SubSpecialistName.slice(0, 2); ;let last =
+                  @for( subSpecial of doctor.SubSpecialistName.slice(0, 3); ;let last =
                   $last; track null){
 
                   <a href="{{

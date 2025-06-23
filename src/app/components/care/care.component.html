@@ -3,13 +3,16 @@
     <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="javascript:void(0)">
+          <a href="javascript:void(0)"
+          [routerLink]="['home' | route]">
             <!-- Home -->
             {{ "app-name" | transloco }}
           </a>
         </li>
         <li class="breadcrumb-item">
-          <a href="javascript:void(0)">
+          <a href="javascript:void(0)"
+          
+          [routerLink]="['SalamtakGate' | route]">
             {{ "blogs.title" | transloco }}
           </a>
         </li>
