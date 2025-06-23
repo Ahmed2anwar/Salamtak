@@ -197,82 +197,85 @@ export class ThirdStepComponent {
   get ff() {
     return this.form.controls;
   }
-  formSubmit() {
-    this.formSubmitted = true;
+ formSubmit() {
+  this.formSubmitted = true;
 
-    if (this.form.invalid) {
-      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-      return;
-    }
-
-    const form = {
-      Id: this.patient.Id,
-      Height: +this.form.value.Height,
-      Weight: +this.form.value.Weight,
-      Pressure: this.form.value.Pressure,
-      SugarLevel: this.form.value.SugarLevel,
-      BloodTypeId: this.form.value.BloodTypeId,
-      OtherAllergies: this.form.value.OtherAllergies,
-      Prescriptions: this.form.value.Prescriptions,
-      CurrentMedication: this.form.value.CurrentMedication,
-      PastMedication: this.form.value.PastMedication,
-      ChronicDiseases: this.form.value.ChronicDiseases,
-      Iinjuries: this.form.value.Injuries,
-      Surgeries: this.form.value.Surgeries,
-      PatientMedicineAllergiesDto: this.form.value.MedicalAllergies,
-      PatientFoodAllergiesDto: this.form.value.FoodAllergies,
-    };
-
-    const formcreate = { ...form }; // same structure for create
-
-    this.spinner.show();
-
-    if (this.StorageService.getItem('new-user') === 'true') {
-      this.service
-        .CreatePatientProfileThirdStep(formcreate)
-        .pipe(map((res: any) => res['Data']))
-        .subscribe({
-          next: (res: any) => {
-            const eventData = this.mktService.setEventData(
-              'Registration Third Step',
-              'Signup Third Step',
-              'New Third Step'
-            );
-
-            this.mktService.onEventFacebook(eventData);
-            this.spinner.hide();
-            this.StorageService.removeItem('new-user');
-          },
-          error: () => this.spinner.hide(),
-        });
-    } else {
-      this.service
-        .UpdatePatientProfileThirdStep(form)
-        .pipe(map((res: any) => res['Data']))
-        .subscribe({
-          next: (res: any) => {
-            const eventData = this.mktService.setEventData(
-              'Update Profile Third Step',
-              'Signup Third Step',
-              'Update Third Step'
-            );
-            const lang = this.translocoService.getActiveLang();
-            if (lang == 'ar') {
-              this.router.navigate(['/ar/الرئيسية']);
-              this.spinner.hide();
-              this.mktService.onEventFacebook(eventData);
-              this.authState.setLoggedIn(true);
-            } else {
-              this.router.navigate(['/en/home']);
-              this.spinner.hide();
-              this.mktService.onEventFacebook(eventData);
-              this.authState.setLoggedIn(true);
-            }
-          },
-          error: () => this.spinner.hide(),
-        });
-    }
+  if (this.form.invalid) {
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    return;
   }
+
+  const form = {
+    Id: this.patient.Id,
+    Height: +this.form.value.Height,
+    Weight: +this.form.value.Weight,
+    Pressure: this.form.value.Pressure,
+    SugarLevel: this.form.value.SugarLevel,
+    BloodTypeId: this.form.value.BloodTypeId,
+    OtherAllergies: this.form.value.OtherAllergies,
+    Prescriptions: this.form.value.Prescriptions,
+    CurrentMedication: this.form.value.CurrentMedication,
+    PastMedication: this.form.value.PastMedication,
+    ChronicDiseases: this.form.value.ChronicDiseases,
+    Iinjuries: this.form.value.Injuries,
+    Surgeries: this.form.value.Surgeries,
+    PatientMedicineAllergiesDto: this.form.value.MedicalAllergies,
+    PatientFoodAllergiesDto: this.form.value.FoodAllergies,
+  };
+
+  const formcreate = { ...form };
+
+  this.spinner.show();
+
+  if (this.StorageService.getItem('new-user') === 'true') {
+    this.service
+      .CreatePatientProfileThirdStep(formcreate)
+      .pipe(map((res: any) => res['Data']))
+      .subscribe({
+        next: (res: any) => {
+          const eventData = this.mktService.setEventData(
+            'Registration Third Step',
+            'Signup Third Step',
+            'New Third Step'
+          );
+          this.mktService.onEventFacebook(eventData);
+          this.spinner.hide();
+          this.StorageService.removeItem('new-user');
+          this.authState.setLoggedIn(true); // Set login state here
+          const lang = this.translocoService.getActiveLang();
+          if (lang == 'ar') {
+            this.router.navigate(['/ar/الرئيسية']);
+          } else {
+            this.router.navigate(['/en/home']);
+          }
+        },
+        error: () => this.spinner.hide(),
+      });
+  } else {
+    this.service
+      .UpdatePatientProfileThirdStep(form)
+      .pipe(map((res: any) => res['Data']))
+      .subscribe({
+        next: (res: any) => {
+          const eventData = this.mktService.setEventData(
+            'Update Profile Third Step',
+            'Signup Third Step',
+            'Update Third Step'
+          );
+          this.mktService.onEventFacebook(eventData);
+          this.spinner.hide();
+          this.authState.setLoggedIn(true); // Set login state here
+          const lang = this.translocoService.getActiveLang();
+          if (lang == 'ar') {
+            this.router.navigate(['/ar/الرئيسية']);
+          } else {
+            this.router.navigate(['/en/home']);
+          }
+        },
+        error: () => this.spinner.hide(),
+      });
+  }
+}
 
   dataURLtoFile(dataurl: any, filename: any) {
     var arr = dataurl.split(','),

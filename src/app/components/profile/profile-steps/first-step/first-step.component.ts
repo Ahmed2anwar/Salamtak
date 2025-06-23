@@ -81,20 +81,23 @@ export class FirstStepComponent {
     );
   }
 
-  ngOnInit(): void {
-    this.getCountries();
-    if (this.user.ProfileStatus != 0) {
-      this.getPatient();
+ ngOnInit(): void {
+  this.getCountries();
+  // Autofill names from sign-up if available
+  const signUpData = this.StorageService.getItem('sign-up-first-step');
+  if (signUpData) {
+    const parsed = JSON.parse(signUpData);
+    if (parsed.FullNameEn) {
+      this.form.controls['FullNameEn'].setValue(parsed.FullNameEn);
     }
-     const savedData = this.StorageService.getItem('sign-up-first-step');
-    if (savedData) {
-      const formData = JSON.parse(savedData);
-      this.form.patchValue({
-        FullNameEn: formData.FullNameEn,
-        FullNameAr: formData.FullNameAr,
-      });
+    if (parsed.FullNameAr) {
+      this.form.controls['FullNameAr'].setValue(parsed.FullNameAr);
     }
   }
+  if (this.user.ProfileStatus != 0) {
+    this.getPatient();
+  }
+}
   // first form
   getCountries() {
     this.spinner.show();

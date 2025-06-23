@@ -46,6 +46,7 @@ export class DoctorProfileComponent {
   videos: any = [];
   allVideos: any = [];
   allUniqueServices: any = [];
+  allInsurance: any = [];
   allImages: any = [];
   loadingVideos = false;
   doctorFees: number | null = null;
@@ -81,6 +82,7 @@ export class DoctorProfileComponent {
       this.AvalibleDate = params['AvalibleDate'];
       this.ClinicId = params['ClinicId'];
     });
+    console.log('DoctorId:', this.doctor);
   }
   getDoctorVideos() {
     this.loadingVideos = true;
@@ -125,6 +127,9 @@ export class DoctorProfileComponent {
 
         this.allVideos = this.doctor.clinicDtos.flatMap(
           (clinic: any) => clinic.Videos || []
+        );
+        this.allInsurance = this.doctor.clinicDtos.flatMap(
+          (clinic: any) => clinic.Insurance || []
         );
 
         this.allImages = allImages;
