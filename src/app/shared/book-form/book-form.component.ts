@@ -59,10 +59,7 @@ export class BookFormComponent {
   public form: FormGroup = this.formbuilder.group({
     clinic: ['', Validators.required],
     appointment: ['', Validators.required],
-    appointmentDay: [
-      `${new Date().toISOString().split('T')[0]}`,
-      Validators.required,
-    ],
+    appointmentDay: [`${new Date().toISOString().split('T')[0]}`,Validators.required,],
     times: ['', Validators.required],
   });
   selectedClinic: any = null;
@@ -72,9 +69,7 @@ export class BookFormComponent {
   ClinicId = null;
   public isBooked = false;
   selectedClinicId: number | null = null;
-
   public dayes = [];
-
   daysOptions: OwlOptions = {
     mouseDrag: true,
     touchDrag: true,
@@ -118,7 +113,7 @@ export class BookFormComponent {
       new Date().setDate(new Date().getDate() - 1),
       new Date().setDate(new Date().getDate() + 15)
     );
-
+    console.log(this.doctor);
     this.clinics = this.doctor['clinicDtos'];
     // find clinic by id
     this.selectedClinic = this.clinics.filter(
@@ -136,8 +131,6 @@ export class BookFormComponent {
     } catch (error) {}
 
     this.appointmentTypes = this.getAppointmentTypes();
-    // this.getAppointmentTypes()
-    //on form value change
     this.form.valueChanges.subscribe((value) => {
       if (value != undefined && value != null) {
         if (
@@ -149,14 +142,6 @@ export class BookFormComponent {
         }
       }
       if (this.isBooked) {
-        //  Swal.fire({
-        //       title : 'Already Booked',
-        //       text : 'you can book again if you want',
-        //       icon : 'info',
-        //       showConfirmButton : false,
-        //       timer : 2000
-        //     }).then((result) => {
-        //     })
       } else {
         if (value.clinic && value.appointment && !value.appointmentDay) {
           setTimeout(() => {
@@ -168,15 +153,9 @@ export class BookFormComponent {
         }
       }
     });
-    console.log(this.doctor);
-
   }
   getAppointmentTypes() {
-    // this.service.getMedicalExaminationType().subscribe((res: any) => {
-    // this.appointmentTypes = res['Data'];
-    // });
     return this.doctor['MedicalExamationTypes'];
-    // return JSON.parse(this.StorageService.getItem('doctor')|| '{}')['MedicalExamationTypes']
   }
   enumerateDaysBetweenDates(startDate: any, endDate: any) {
     var dates: any = [];
@@ -212,32 +191,43 @@ export class BookFormComponent {
     }
     return dates;
   }
-
   chooseClinic(event: any, ClinicId: any) {
     // var ClinicId = event.target.attributes[8].value;
     if (event.target.checked) {
       this.selectedClinic = this.clinics.filter(
         (clinic: any) => clinic['ClinicId'] == ClinicId
       )[0];
+      console.log(this.selectedClinic);
+
     }
   }
   chooseAppointment(event: any, MedicalExaminationTypeId: any) {
-    // var MedicalExaminationTypeId = event.target.attributes[8].value;
-
     if (event.target.checked) {
-      this.selectedAppointment = this.appointmentTypes.filter(
+      this.selectedAppointment = this.appointmentTypes.find(
         (appointment: any) => appointment['Id'] == MedicalExaminationTypeId
-      )[0];
-      this.getClinicSchedualByClinicDayId(this.dayes[0]);
+      );
+      this.times = [];
+      this.form.controls['times'].setValue(null);
+      let selectedDay: any = this.dayes.find(
+        (d: any) => d.date === this.form.value.appointmentDay
+      );
+      if (!selectedDay && this.dayes.length > 0) {
+        selectedDay = this.dayes[0];
+        this.form.controls['appointmentDay'].setValue(selectedDay.date);
+      }
+
+      if (selectedDay) {
+        this.getClinicSchedualByClinicDayId(selectedDay);
+      }
     }
+    console.log(this.selectedAppointment);
+
   }
   get f() {
     return this.form.controls;
   }
   submit() {
-    // var EditAppointmentID = localStorage.getItem('EditAppointmentID');
     var EditAppointmentID = this.StorageService.getItem('EditAppointmentID');
-
     var isBooked = this.BookedAppointments.indexOf(this.form.value.times) > -1;
     if (isBooked) {
       Swal.fire({
@@ -253,7 +243,6 @@ export class BookFormComponent {
         window.scroll({ top: 0, left: 0, behavior: 'smooth' });
         return;
       }
-
       const form = {
         DoctorId: this.doctor['Id'],
         DoctorWorkingDayTimeId: this.selectedDayId,
@@ -263,7 +252,6 @@ export class BookFormComponent {
         Comment: '-',
         IsBook: true,
       };
-
       // Swal confirm
       Swal.fire({
         title: this.translocoService.translate('swal.confirmBooking.title'),
@@ -310,7 +298,7 @@ export class BookFormComponent {
                 this.StorageService.setItem('EditAppointmentID', '');
 
                 this.dialog.open(BookingSuccessfullyOfferComponent, {
-                  width: '500px',
+                  width: '450px',
                   height: 'auto',
                   data: {
                     doctor: this.doctor,
@@ -347,9 +335,7 @@ export class BookFormComponent {
                   time: this.form.value.times,
                 },
               });
-
             });
-
           }
         } else {
           Swal.fire({
@@ -358,14 +344,11 @@ export class BookFormComponent {
             icon: 'info',
             showConfirmButton: false,
             timer: 2000,
-          }).then((result) => {
-
-          });
+          }).then((result) => {});
         }
       });
     }
-        console.log(this.clinics);
-
+    console.log(this.clinics);
   }
   selectedDayId = null;
   setSelectedDayId(day: any) {}
@@ -395,8 +378,7 @@ export class BookFormComponent {
         }
         res['Data'].forEach((element: any) => {
           this.fees = element.Fees;
-          sessionStorage.setItem  ('Fees',element.Fees);
-          // this.StorageService.setItem('Fees', element.Fees);
+          sessionStorage.setItem('Fees', element.Fees);
 
           if (element.MaxNoOfPatients == null) {
             element['times'] = this.timeInterval(
@@ -422,8 +404,8 @@ export class BookFormComponent {
         }
         this.spinner.hide();
       });
+      console.log(this.times);
   }
-  // get minutes "20:30" "21:30"
   getMinutesCount(timeFrom: any, timeTo: any) {
     // get minutes count
     var timeFrom = timeFrom.split(':');
@@ -441,7 +423,6 @@ export class BookFormComponent {
     }
     return minutes;
   }
-
   // time interval from two times in string return times array
   timeInterval(startTime: any, endTime: any, add: any = 30) {
     var times: any = [];

@@ -87,7 +87,7 @@ export class BookingSuccessfullyOfferComponent {
     this.booking = JSON.parse(
       this.StorageService.getItem('bookingData') || '{}'
     );
-    //onsole.log(this.booking)
+    
     this.area =
       this.booking['doctor']['HealthEntityDTO']['CityName'] +
       ' ' +

@@ -82,7 +82,6 @@ export class DoctorProfileComponent {
       this.AvalibleDate = params['AvalibleDate'];
       this.ClinicId = params['ClinicId'];
     });
-    console.log('DoctorId:', this.doctor);
   }
   getDoctorVideos() {
     this.loadingVideos = true;

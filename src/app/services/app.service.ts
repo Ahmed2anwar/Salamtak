@@ -425,27 +425,6 @@ export class AppService {
       payload
     );
   }
-
-  // getLabBranches(payload: { LabId: number, ServiceIds: number[], TypeId: number }): Observable<any> {
-  //   const culture = 'en'; // Change dynamically if needed
-  //   const apiUrl = `${environment.apiUrl}/api/${culture}/HealthEntity/GetLabBranches`;
-
-  //   return this.http.post<any>(apiUrl, payload);
-  // }
-
-  // getLabBranches(payload: { LabId: number, ServiceIds: number[], TypeId: number }): Observable<any> {
-  //   const culture = 'en'; // Change dynamically if needed
-  //   const apiUrl = `${environment.apiUrl}/api/${culture}/HealthEntity/GetLabBranches`;
-
-  //   console.log('Requesting:', apiUrl, 'with payload:', payload); // Debugging log
-
-  //   return this.http.post<any>(apiUrl, payload).pipe(
-  //     catchError(error => {
-  //       console.error('Error fetching lab branches:', error);
-  //       return throwError(error);
-  //     })
-  //   );
-  // }
   getLabBranches(
     labId: number,
     serviceIds: number[],

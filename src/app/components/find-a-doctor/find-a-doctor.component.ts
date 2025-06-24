@@ -800,8 +800,7 @@ export class FindADoctorComponent {
       .then((res) => {
         this.StorageService.setItem('doctor', JSON.stringify(doctor));
         this.StorageService.setItem('DoctorFees', doctor.FeesFrom);
-        console.log('Doctor:', doctor);
-        console.log('Fees:', FeesFrom);
+        
       });
   }
 
