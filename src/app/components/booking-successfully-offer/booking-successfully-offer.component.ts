@@ -25,7 +25,6 @@ import { RoutesPipe } from '../../pipes/routes.pipe';
     CommonModule,
     AccordionModule,
     FormsModule,
-    RoutesPipe,
   ],
   templateUrl: './booking-successfully-offer.component.html',
   styleUrl: './booking-successfully-offer.component.scss',
@@ -40,6 +39,7 @@ export class BookingSuccessfullyOfferComponent {
   area: any;
   dialogRef = inject(MatDialogRef);
   floor: any;
+  age: number = 0;
   appartment: any;
   languages = languages;
   username: any;
@@ -66,9 +66,9 @@ export class BookingSuccessfullyOfferComponent {
   ngOnInit(): void {
     this.metadataService.updateMetadata('booking-successfully-offer');
     this.getPatient();
-    // sessionStorage.setItem('Fees', '150');
     this.fees = sessionStorage.getItem('Fees');
-    console.log('Fees from sessionStorage:', this.fees);
+    this.username = sessionStorage.getItem('username');
+  
     this.cdr.detectChanges();
     const lang = this.translocoService.getActiveLang();
     if (lang) {
@@ -87,7 +87,7 @@ export class BookingSuccessfullyOfferComponent {
     this.booking = JSON.parse(
       this.StorageService.getItem('bookingData') || '{}'
     );
-    
+
     this.area =
       this.booking['doctor']['HealthEntityDTO']['CityName'] +
       ' ' +
@@ -119,6 +119,7 @@ export class BookingSuccessfullyOfferComponent {
   getPatient() {
     this.authentication.GetPatient().subscribe((patient: any) => {
       this.patient = patient;
+      console.log('Patient Data:', this.patient);
       const lang = this.translocoService.getActiveLang();
       if (lang) {
         if (lang === 'ar') {
@@ -192,7 +193,6 @@ export class BookingSuccessfullyOfferComponent {
       this.dialogRef?.close();
     }
   }
-  age: number = 0;
 
   onAgeInput(event: any): void {
     const value = +event.target.value;

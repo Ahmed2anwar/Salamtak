@@ -7,7 +7,9 @@
   "homePath": "الصفحةالرئيسية",
   "findADoctorPath": "البحث عن طبيب",
   "hospitalsPath": "المستشفيات",
-
+  "ask":{
+    "title":"اسأل سلامتك"
+  },
   "form": {
     "input": {
       "email_or_phone": {

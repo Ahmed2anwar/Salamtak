@@ -24,6 +24,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RoutesPipe } from '../../pipes/routes.pipe';
 import { BookingSuccessfullyOfferComponent } from '../../components/booking-successfully-offer/booking-successfully-offer.component';
+import { log } from 'console';
 
 @Component({
   selector: 'app-book-form',
@@ -59,7 +60,10 @@ export class BookFormComponent {
   public form: FormGroup = this.formbuilder.group({
     clinic: ['', Validators.required],
     appointment: ['', Validators.required],
-    appointmentDay: [`${new Date().toISOString().split('T')[0]}`,Validators.required,],
+    appointmentDay: [
+      `${new Date().toISOString().split('T')[0]}`,
+      Validators.required,
+    ],
     times: ['', Validators.required],
   });
   selectedClinic: any = null;
@@ -105,15 +109,11 @@ export class BookFormComponent {
     private routesPipe: RoutesPipe
   ) {}
 
-  getDoctorProfileByDoctorId(DoctorId: any) {}
-
   ngOnInit(): void {
-    // this.getDoctorProfileByDoctorId(this.doctor['doctorId'])
     this.dayes = this.enumerateDaysBetweenDates(
       new Date().setDate(new Date().getDate() - 1),
       new Date().setDate(new Date().getDate() + 15)
     );
-    console.log(this.doctor);
     this.clinics = this.doctor['clinicDtos'];
     // find clinic by id
     this.selectedClinic = this.clinics.filter(
@@ -155,6 +155,7 @@ export class BookFormComponent {
     });
   }
   getAppointmentTypes() {
+    console.log(this.doctor);
     return this.doctor['MedicalExamationTypes'];
   }
   enumerateDaysBetweenDates(startDate: any, endDate: any) {
@@ -191,220 +192,306 @@ export class BookFormComponent {
     }
     return dates;
   }
-  chooseClinic(event: any, ClinicId: any) {
-    // var ClinicId = event.target.attributes[8].value;
-    if (event.target.checked) {
-      this.selectedClinic = this.clinics.filter(
-        (clinic: any) => clinic['ClinicId'] == ClinicId
-      )[0];
-      console.log(this.selectedClinic);
+ chooseClinic(event: any, ClinicId: any) {
+  if (event.target.checked) {
+    this.selectedClinic = this.clinics.find(
+      (clinic: any) => clinic['ClinicId'] == ClinicId
+    );
 
-    }
+    // Reset all dependent selections when clinic changes
+    this.resetAppointmentSelection();
+
+    console.log('Selected clinic:', this.selectedClinic);
   }
+}
   chooseAppointment(event: any, MedicalExaminationTypeId: any) {
-    if (event.target.checked) {
-      this.selectedAppointment = this.appointmentTypes.find(
-        (appointment: any) => appointment['Id'] == MedicalExaminationTypeId
-      );
-      this.times = [];
-      this.form.controls['times'].setValue(null);
+  if (event.target.checked) {
+    // Clear previous selection first
+    this.selectedAppointment = null;
+    this.times = [];
+    this.fees = null;
+    this.selectedDayId = null;
+    this.BookedAppointments = [];
+
+    // Reset form controls
+    this.form.controls['times'].setValue('');
+
+    // Set new selection
+    this.selectedAppointment = this.appointmentTypes.find(
+      (appointment: any) => appointment['Id'] == MedicalExaminationTypeId
+    );
+
+    console.log('Selected appointment:', this.selectedAppointment);
+
+    // Only proceed if we have clinic and appointment selected
+    if (this.selectedClinic && this.selectedAppointment) {
+      // Get the currently selected day or default to today
       let selectedDay: any = this.dayes.find(
         (d: any) => d.date === this.form.value.appointmentDay
       );
+
       if (!selectedDay && this.dayes.length > 0) {
-        selectedDay = this.dayes[0];
+        // Find today's date or the first available day
+        const today = new Date().toISOString().split('T')[0];
+        selectedDay = this.dayes.find((d: any) => d.date === today) || this.dayes[0];
         this.form.controls['appointmentDay'].setValue(selectedDay.date);
       }
 
       if (selectedDay) {
-        this.getClinicSchedualByClinicDayId(selectedDay);
+        // Force refresh of schedule
+        setTimeout(() => {
+          this.getClinicSchedualByClinicDayId(selectedDay);
+        }, 100);
       }
     }
-    console.log(this.selectedAppointment);
-
   }
+}
   get f() {
     return this.form.controls;
   }
   submit() {
-    var EditAppointmentID = this.StorageService.getItem('EditAppointmentID');
-    var isBooked = this.BookedAppointments.indexOf(this.form.value.times) > -1;
-    if (isBooked) {
-      Swal.fire({
-        title: 'Already Booked',
-        text: 'you can book again if you want',
-        icon: 'info',
-        showConfirmButton: false,
-        timer: 2000,
-      }).then((result) => {});
+  const EditAppointmentID = this.StorageService.getItem('EditAppointmentID');
+  const isBooked = this.BookedAppointments.indexOf(this.form.value.times) > -1;
+
+  if (isBooked) {
+    Swal.fire({
+      title: 'Already Booked',
+      text: 'This time slot is already booked. Please select another time.',
+      icon: 'warning',
+      showConfirmButton: true,
+    });
+    return;
+  }
+
+  this.submitted = true;
+
+  if (this.form.invalid) {
+    // Scroll to first error
+    const firstErrorElement = document.querySelector('.is-invalid') ||
+                             document.querySelector('.red')?.parentElement;
+    if (firstErrorElement) {
+      firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } else {
-      this.submitted = true;
-      if (this.form.invalid) {
-        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-        return;
-      }
-      const form = {
-        DoctorId: this.doctor['Id'],
-        DoctorWorkingDayTimeId: this.selectedDayId,
-        // SchedualId
-        AppointmentDate: `${this.form.value.appointmentDay}T${this.form.value.times}`,
-        Fees: this.fees,
-        Comment: '-',
-        IsBook: true,
-      };
-      // Swal confirm
-      Swal.fire({
-        title: this.translocoService.translate('swal.confirmBooking.title'),
-        text: this.translocoService.translate('swal.confirmBooking.text'),
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        cancelButtonText: this.translocoService.translate(
-          'swal.confirmBooking.cancelButtonText'
-        ),
-        confirmButtonText: this.translocoService.translate(
-          'swal.confirmBooking.confirmButtonText'
-        ),
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.spinner.show();
-          if (EditAppointmentID != null && EditAppointmentID != '') {
-            this.service
-              .editPatientappointment(
-                EditAppointmentID,
-                form.DoctorWorkingDayTimeId,
-                form.AppointmentDate
-              )
-              .subscribe((res) => {
-                this.spinner.hide();
-                const eventData: any = this.mktService.setEventData(
-                  'Patient Booking',
-                  `Signup Third Step`,
-                  'New Third Step'
-                );
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    }
+    return;
+  }
 
-                this.mktService.onEventFacebook(eventData);
-                const bookingData = {
-                  doctor: this.doctor,
-                  clinic: this.selectedClinic,
-                  appointment: this.selectedAppointment,
-                  day: this.form.value.appointmentDay,
-                  time: this.form.value.times,
-                };
-                this.StorageService.setItem(
-                  'bookingData',
-                  JSON.stringify(bookingData)
-                );
-                this.StorageService.setItem('EditAppointmentID', '');
+  // Validate that all required selections are made
+  if (!this.selectedClinic || !this.selectedAppointment || !this.selectedDayId) {
+    Swal.fire({
+      title: 'Incomplete Selection',
+      text: 'Please make sure you have selected a clinic, appointment type, day, and time.',
+      icon: 'warning',
+    });
+    return;
+  }
 
-                this.dialog.open(BookingSuccessfullyOfferComponent, {
-                  width: '450px',
-                  height: 'auto',
-                  data: {
-                    doctor: this.doctor,
-                    clinic: this.selectedClinic,
-                    appointment: this.selectedAppointment,
-                    day: this.form.value.appointmentDay,
-                    time: this.form.value.times,
-                  },
-                });
-              });
-          } else {
-            this.service.createPatientappointment(form).subscribe((res) => {
-              this.spinner.hide();
+  const form = {
+    DoctorId: this.doctor['Id'],
+    DoctorWorkingDayTimeId: this.selectedDayId,
+    AppointmentDate: `${this.form.value.appointmentDay}T${this.form.value.times}`,
+    Fees: this.fees,
+    Comment: '-',
+    IsBook: true,
+  };
 
-              const bookingData = {
-                doctor: this.doctor,
-                clinic: this.selectedClinic,
-                appointment: this.selectedAppointment,
-                day: this.form.value.appointmentDay,
-                time: this.form.value.times,
-              };
-              // localStorage.setItem('bookingData',JSON.stringify(bookingData))
-              this.StorageService.setItem(
-                'bookingData',
-                JSON.stringify(bookingData)
-              );
-              this.dialog.open(BookingSuccessfullyOfferComponent, {
-                width: '600px',
-                data: {
-                  doctor: this.doctor,
-                  clinic: this.selectedClinic,
-                  appointment: this.selectedAppointment,
-                  day: this.form.value.appointmentDay,
-                  time: this.form.value.times,
-                },
-              });
-            });
-          }
-        } else {
+  // Show confirmation dialog
+  Swal.fire({
+    title: this.translocoService.translate('swal.confirmBooking.title'),
+    text: this.translocoService.translate('swal.confirmBooking.text'),
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    cancelButtonText: this.translocoService.translate('swal.confirmBooking.cancelButtonText'),
+    confirmButtonText: this.translocoService.translate('swal.confirmBooking.confirmButtonText'),
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.spinner.show();
+
+      const bookingObservable = EditAppointmentID && EditAppointmentID !== ''
+        ? this.service.editPatientappointment(
+            EditAppointmentID,
+            form.DoctorWorkingDayTimeId,
+            form.AppointmentDate
+          )
+        : this.service.createPatientappointment(form);
+
+      bookingObservable.subscribe({
+        next: (res) => {
+          this.spinner.hide();
+
+          // Marketing event tracking
+          const eventData = this.mktService.setEventData(
+            'Patient Booking',
+            'Appointment Booked',
+            'Successful Booking'
+          );
+          this.mktService.onEventFacebook(eventData);
+
+          const bookingData = {
+            doctor: this.doctor,
+            clinic: this.selectedClinic,
+            appointment: this.selectedAppointment,
+            day: this.form.value.appointmentDay,
+            time: this.form.value.times,
+          };
+
+          this.StorageService.setItem('bookingData', JSON.stringify(bookingData));
+          this.StorageService.setItem('EditAppointmentID', '');
+
+          this.dialog.open(BookingSuccessfullyOfferComponent, {
+            width: '600px',
+            data: bookingData,
+          });
+        },
+        error: (error) => {
+          this.spinner.hide();
+          console.error('Booking error:', error);
           Swal.fire({
-            title: 'booking canceled',
-            text: 'you can book again if you want',
-            icon: 'info',
-            showConfirmButton: false,
-            timer: 2000,
-          }).then((result) => {});
+            title: 'Booking Failed',
+            text: 'There was an error processing your booking. Please try again.',
+            icon: 'error',
+          });
         }
       });
     }
-    console.log(this.clinics);
-  }
+  });
+}
   selectedDayId = null;
-  setSelectedDayId(day: any) {}
+  setSelectedDayId(day: any) {
+
+    this.selectedDayId = day.id;
+  }resetAppointmentSelection() {
+  this.selectedAppointment = null;
+  this.times = [];
+  this.fees = null;
+  this.selectedDayId = null;
+  this.BookedAppointments = [];
+  this.form.controls['appointment'].setValue('');
+  this.form.controls['times'].setValue('');
+}
+
+resetTimeSelection() {
+  this.times = [];
+  this.fees = null;
+  this.selectedDayId = null;
+  this.BookedAppointments = [];
+  this.form.controls['times'].setValue('');
+}
+
   getClinicSchedualByClinicDayId(day: any) {
+    // Show loading
     this.spinner.show();
-    this.form.controls['times'].setValue(null);
-    const ClinicId = this.selectedClinic['ClinicId'],
-      DayId = day.id,
-      MedicalExaminationTypeId = this.selectedAppointment['Id'],
-      BookDate = day.date;
+
+    // Clear previous data
+    this.times = [];
+    this.fees = null;
+    this.BookedAppointments = [];
+    this.form.controls['times'].setValue('');
+
+    const ClinicId = this.selectedClinic['ClinicId'];
+    const DayId = day.id;
+    const MedicalExaminationTypeId = this.selectedAppointment['Id'];
+    const BookDate = day.date;
+
+    console.log('Fetching schedule for:', {
+      ClinicId,
+      DoctorId: this.doctor['Id'],
+      DayId,
+      MedicalExaminationTypeId,
+      BookDate,
+    });
+
+    // Fixed: Use correct method name and parameters
     this.service
-      .getSchedualByClinicIdPolyClinic(
+      .getClinicSchedualByClinicDayId(
         ClinicId,
-        this.doctor['Id'],
         DayId,
         MedicalExaminationTypeId,
         BookDate
       )
-      .subscribe((res: any) => {
-        if (res['Data'].length > 0) {
-          this.BookedAppointments = [];
-          var BookedAppointments = res['Data'][0].BookedAppointments;
-          BookedAppointments.forEach((a: any) => {
-            var time = a.split(' ')[1];
-            this.BookedAppointments.push(time);
-          });
-        }
-        res['Data'].forEach((element: any) => {
-          this.fees = element.Fees;
-          sessionStorage.setItem('Fees', element.Fees);
+      .subscribe({
+        next: (res: any) => {
+          console.log('API Response:', res);
 
-          if (element.MaxNoOfPatients == null) {
-            element['times'] = this.timeInterval(
-              element.TimeFrom,
-              element.TimeTo,
-              element.TimeInterval
-            );
-            return;
+          if (res && res['Data'] && res['Data'].length > 0) {
+            // Process booked appointments
+            this.BookedAppointments = [];
+            const BookedAppointments = res['Data'][0].BookedAppointments || [];
+
+            BookedAppointments.forEach((a: any) => {
+              const timeParts = a.split(' ');
+              if (timeParts.length > 1) {
+                const time = timeParts[1];
+                this.BookedAppointments.push(time);
+              }
+            });
+
+            // Process schedule data
+            res['Data'].forEach((element: any) => {
+              // Set fees
+              this.fees = element.Fees;
+              sessionStorage.setItem('Fees', element.Fees.toString());
+
+              // Generate time slots
+              if (element.MaxNoOfPatients == null) {
+                element['times'] = this.timeInterval(
+                  element.TimeFrom,
+                  element.TimeTo,
+                  element.TimeInterval || 30
+                );
+              } else {
+                const minutesCount = this.getMinutesCount(
+                  element.TimeFrom,
+                  element.TimeTo
+                );
+                const interval = minutesCount / element.MaxNoOfPatients;
+                element['times'] = this.timeInterval(
+                  element.TimeFrom,
+                  element.TimeTo,
+                  interval
+                );
+                // Remove last slot if needed
+                if (element['times'].length > 0) {
+                  element['times'].pop();
+                }
+              }
+            });
+
+            this.times = res['Data'];
+
+            // Set selectedDayId
+            if (res['Data'].length > 0) {
+              this.selectedDayId = res['Data'][0]['SchedualId'];
+            }
           } else {
-            element['times'] = this.timeInterval(
-              element.TimeFrom,
-              element.TimeTo,
-              this.getMinutesCount(element.TimeFrom, element.TimeTo) /
-                element.MaxNoOfPatients
-            );
-            element['times'].pop();
-            return;
+            // No data available
+            this.times = [];
+            this.selectedDayId = null;
+            this.fees = null;
           }
-        });
-        this.times = res['Data'];
-        if (res['Data'].length > 0) {
-          this.selectedDayId = res['Data'][0]['SchedualId'];
-        }
-        this.spinner.hide();
+
+          this.spinner.hide();
+          console.log('Processed times:', this.times);
+        },
+        error: (error) => {
+          console.error('Error fetching clinic schedule:', error);
+          this.spinner.hide();
+          this.times = [];
+          this.selectedDayId = null;
+          this.fees = null;
+
+          // Show user-friendly error
+          Swal.fire({
+            title: 'خطأ',
+            text: 'حدث خطأ في تحميل المواعيد. برجاء المحاولة مرة أخرى.',
+            icon: 'error',
+            timer: 3000,
+            showConfirmButton: false,
+          });
+        },
       });
-      console.log(this.times);
   }
   getMinutesCount(timeFrom: any, timeTo: any) {
     // get minutes count
@@ -439,6 +526,7 @@ export class BookFormComponent {
     }
     return times;
   }
+
   getLanguage() {
     return this.translocoService.getActiveLang();
   }

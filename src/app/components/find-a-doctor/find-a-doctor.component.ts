@@ -216,6 +216,8 @@ export class FindADoctorComponent {
     const month = this.padZero(currentdate.getMonth() + 1);
     const day = this.padZero(currentdate.getDate());
     this.available = `${year}-${month}-${day}`;
+
+    console.log(this.doctors);
   }
   isScrolled = false;
   onScroll() {
@@ -230,7 +232,7 @@ export class FindADoctorComponent {
       error: (error) => {},
     });
   }
- goToSpecialty(specialtyName: string): void {
+  goToSpecialty(specialtyName: string): void {
     const slug = this.replaceSpaceWithDash(specialtyName);
     if (this.lang !== 'en') {
       this.router.navigate(['/ar/الاطباء', slug]);
@@ -428,15 +430,7 @@ export class FindADoctorComponent {
 
     this.loading = true;
 
-    // قائمة الطلبات التي سيتم تنفيذها
     const requests = [];
-
-    // this.doctors = []
-
-    // if(!this.alternativeUrl){
-    //   // this.StorageService.setItem('alternativeUrl', this.router.url);
-    // }
-    // إضافة طلبات إذا كانت القيم موجودة
 
     const searchForm = JSON.parse(localStorage.getItem('search-form') || '{}');
     if (searchForm.Specialist) {
@@ -552,26 +546,17 @@ export class FindADoctorComponent {
         let alternativeUrl = this.routesPipe.transform('find-a-doctor', [
           this.translocoService.getActiveLang() == 'en' ? 'ar' : 'en',
         ]);
-        // console.log(alternativeUrl)
+
         results.forEach((result, index) => {
           Object.assign(object, result);
-          // console.log(result)
+         
           if (result.res && index <= 2) {
             alternativeUrl = alternativeUrl + '/' + result.res.Name;
           }
-          // switch (index) {
-          //   case 0: // speciality
-          //   break
-          //   case 1:
-          //   alternativeUrl = alternativeUrl += result.Name;
 
-          // }
         });
 
-        // console.log(results)
-        // console.log(object)
-        // console.log(res)
-        //console.log(alternativeUrl)
+
         this.StorageService.setItem(
           'alternativeUrl',
           this.replaceSpaceWithDash(decodeURIComponent(alternativeUrl))
@@ -604,15 +589,7 @@ export class FindADoctorComponent {
             object.FeesTo = FeesTo;
           }
         }
-        // if()
 
-        // لسه هجيب الداتا من ال api
-        // if (this.params['title']) {
-        //   object.SeniortyLevelId = this.params['title'] === 'male' ? 1 : 2;
-        // }
-
-        // البحث عن الأطباء بعد جمع جميع المعرفات الضرورية
-        // this.spinner.show()
         this.setPageTitle();
 
         this.service
@@ -630,7 +607,7 @@ export class FindADoctorComponent {
               }
 
               this.loading = false;
-              // this.spinner.hide()
+              console.log('Doctors:', this.doctors);
             },
             error: (err) => {
               console.log(err);
@@ -800,7 +777,6 @@ export class FindADoctorComponent {
       .then((res) => {
         this.StorageService.setItem('doctor', JSON.stringify(doctor));
         this.StorageService.setItem('DoctorFees', doctor.FeesFrom);
-        
       });
   }
 
@@ -813,64 +789,7 @@ export class FindADoctorComponent {
       this.city,
       this.area,
     ]);
-    // { path: routeName('find-a-doctor-by-sub-specialty','en') + "/:specialty" , component: FindADoctorBySubSpecialtyComponent},
     return;
-
-    // this.doctors = []
-    // replace space with dash
-    SpecialistName = SpecialistName?.replace(/ /g, '-');
-
-    name = name?.replace(/ /g, '-');
-
-    let obj: any = {
-      Id: id,
-      Name: name,
-    };
-
-    if (name != this.speciality) {
-      obj.name = this.replaceDashWithSpace(obj.name);
-      this.SubSpecial = obj.Name;
-      this.service.setSubSpecial(obj);
-    }
-    // this.StorageService.setItem('search-form-specialty',JSON.stringify(obj))
-
-    this.StorageService.setItem('doctorSubSpecial', JSON.stringify(obj));
-    // this.StorageService.setItem('search-form-specialty',JSON.stringify({
-    //   Id: id,
-    //   Name: this.replaceDashWithSpace(name)
-    // }))
-    // this.metadataService.updateTitle(
-    //   this.replaceDashWithSpace(name)
-    // )
-
-    // if(SpecialistName && !this.city && !this.area){
-    this.router.navigate(
-      [
-        this.routesPipe.transform('find-a-doctor'),
-        SpecialistName,
-        //  ...(this.city ? [this.city] : []),
-        //  ...(this.area ? [this.area] : [])
-      ],
-      { queryParams: { subSpecialist: name } }
-    );
-    // }
-    // if(this.city && !this.area){
-    //   this.router.navigate([this.routesPipe.transform('find-a-doctor') , SpecialistName,this.city] , { queryParams: { subSpecialist: name } });
-    // }
-    // if(this.city && this.area){
-    //   this.router.navigate([this.routesPipe.transform('find-a-doctor') , SpecialistName,this.city,this.area] , { queryParams: { subSpecialist: name } });
-    // }
-
-    // let url = new URL(window.location.href);
-    // console.log(url);
-    // url.searchParams.append('subSpecialist' , name);
-    // console.log(url)
-    // // go to url
-    // this.router.navigate([url])
-
-    // return
-    // this.router
-    this.doctorsSearch();
   }
 
   getSubSpecialtyLink(subspecialist: any, doctor: any) {

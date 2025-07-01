@@ -319,14 +319,20 @@ html[dir="rtl"] {
   }
   .multiselect-dropdown .dropdown-btn .selected-item-container .selected-item a {
     left: 2px !important;
-    top:10px !important;
+    top: 10px !important;
     right: auto;
-}
-.owl-carousel.owl-theme.owl-loaded.owl-responsive.owl-drag {
+  }
+  .owl-carousel.owl-theme.owl-loaded.owl-responsive.owl-drag {
     direction: ltr !important;
-}
-.navbar .user-name{
-
+  }
+  .navbar .user-name {
     color: #000000 !important;
-}
+  }
+  section.profile .card a img.icon {
+    right: 90% !important;
+  }
+  .icon-month {
+    position: absolute;
+    right: 125px !important;
+  }
 }

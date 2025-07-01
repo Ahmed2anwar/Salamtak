@@ -925,7 +925,9 @@
       "book": "Book"
     }
   },
-
+  "ask":{
+    "title":"Add Question"
+  },
   "authentication": {
     "authentication-layout": {
       "help": "Help",

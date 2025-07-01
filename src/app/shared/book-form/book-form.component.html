@@ -1,24 +1,17 @@
 <div class="card booking" id="book">
   <h6 class="card-header py-4">
-    <!-- Booking Information -->
     {{'doctor-profile.book-form.title' | transloco}}
   </h6>
   <div class="card-body">
-    <!-- Fees and Waiting Time -->
     <div class="info">
-
       @if(selectedClinic){
-
       }
-
       <form class="first-form" [formGroup]="form" (ngSubmit)="submit()">
         <div class="mt-3">
           <h4 class="fw-bold">
             {{'doctor-profile.book-form.choose-clinic' | transloco}}
-
           </h4>
           <div class="mb-2 mt-3  ">
-
             <div class="radios-container custom-radio-checkbox location bg">
               @for(clinic of clinics; track null){
               <label class="selected-clinic" [class.active]="selectedClinic?.ClinicId === clinic['ClinicId']"
@@ -26,11 +19,12 @@
                 <input type="radio" id="clinic-{{clinic['ClinicId']}}" name="clinic" value="{{clinic['ClinicId']}}"
                   formControlName="clinic" (change)="chooseClinic($event, clinic['ClinicId'])" />
                 <div>
-                    <span class="mb-1  fw-bold">
+                  <span class="mb-1  fw-bold">
                     {{ clinic['AreaName'] }}
-                  </span>
-                  <p class=""  style="font-size: 13px; color: #8088A4;">{{ clinic['Address'] }}</p>
 
+                  </span>
+                  <p class="" style="font-size: 13px; color: #8088A4;">{{ clinic['Address'] }}</p>
+                  <p> {{this.fees}} EGP </p>
                 </div>
               </label>
               }
@@ -50,7 +44,7 @@
           </div>
         </div>
         <div class="mt-3">
-          <h4 class="fw-bold" >
+          <h4 class="fw-bold">
             {{'doctor-profile.book-form.appointments-type' | transloco}}
           </h4>
           <div class="mb-2 mt-3  ">
@@ -90,11 +84,12 @@
                 <input type="radio" id="day-{{$index}}" name="appointmentDay" value="{{day['date']}}"
                   [attr.data-id]="day['id']" (change)="getClinicSchedualByClinicDayId(day);setSelectedDayId(day)"
                   [checked]="day['date'] == f['appointmentDay'].value ? true : false" formControlName="appointmentDay">
-                <label style="border: none;" [class.active]="day['date'] == f['appointmentDay'].value" class="p-0" for="day-{{$index}}">
+                <label style="border: none;" [class.active]="day['date'] == f['appointmentDay'].value" class="p-0"
+                  for="day-{{$index}}">
                   <!-- {{day['id']}} -->
                   @if(getLanguage()=='ar'){
                   <span class="name">
-                      {{day['name_ar'] | slice:0:4}}
+                    {{day['name_ar'] | slice:0:4}}
                   </span>
                   }
                   @if(getLanguage() !='ar'){
@@ -140,15 +135,15 @@
               </p>
             </div>
             }
-            @for(time of times; track null){
+            @for(time of times ; track null){
             <div class="radios-container custom-radio-checkbox choose-date row">
 
               @for(time of time.times; track null){
               <div class="col-md-3">
-                <input type="radio" id="time-{{time.time24}}" name="times" value="{{time.time24}}"
-                  [checked]="time['time24'] == f['times'].value ? true : false" formControlName="times">
-                <label style="font-size: 13px;" for="time-{{time.time24}}" [ngClass]="{'Red': time.IsBooked}">
-                  {{time.time12}}
+                <input type="radio" id="time-{{ time.time24 }}" name="times" value="{{ time.time24 }}"
+                  [checked]="time.time24 == f['times'].value" formControlName="times" [disabled]="time.IsBooked">
+                <label style="font-size: 13px;" for="time-{{ time.time24 }}" [ngClass]="{ 'red': time.IsBooked }">
+                  {{ time.time12 }}
                 </label>
               </div>
               }
@@ -168,7 +163,7 @@
         }
         <div class="my-3">
           <button (click)="isBokking = !isBokking" class="btn btn-primary text-white fs-5 py-3 w-100">
-            {{'doctor-profile.book-now' | transloco}}
+            {{ 'doctor-profile.book-now' | transloco }}
           </button>
         </div>
       </form>
