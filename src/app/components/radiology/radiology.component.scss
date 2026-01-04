@@ -1,0 +1,59 @@
+
+  .dropdown-menu {
+    display: none;
+  }
+  
+  .dropdown-menu.show {
+    display: block;
+  }.selected-analyses {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .selected-analyses ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .selected-analyses li {
+    padding: 5px;
+    background-color: #f9f9f9;
+    margin: 5px 0;
+    border-radius: 3px;
+  }
+
+  .card {
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .image-lab {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .btn.book {
+    background-color: #2B2979;
+    border-color: #2B2979;
+  }
+  
+  .btn.book:hover {
+    background-color: #1a184d;
+    border-color: #1a184d;
+  }
+  .alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  .card-img-top {
+    height: 150px; /* Adjust image height */
+    //object-fit: cover; /* Maintain aspect ratio */
+  }

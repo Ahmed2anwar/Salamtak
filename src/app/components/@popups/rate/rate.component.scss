@@ -1,0 +1,91 @@
+.doctor{
+    margin: 15px 0;
+    margin-bottom: 30px;
+    img{
+      border-radius: 50%;
+    }
+    h5{
+      font-size: 20px;
+      font-weight: 500;
+      // color: #2B2979;
+      margin-bottom: 0;
+    }
+    p{
+      font-size: 14px;
+      font-weight: 500;
+      color: #B7B7B7;
+      margin: 0;
+    }
+  }
+  ul{
+      list-style: none;
+      padding: 0;
+      margin: 15px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      // in mobile
+      @media (max-width: 767px){
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin: 0;
+        margin-top: 20px;
+        li{
+          margin-bottom: 10px !important;
+        }
+      }
+  
+      li{
+          margin: 0 5px;
+          a{
+            cursor: pointer;
+            text-decoration: none;
+  
+            outline: none;
+            h6{
+              font-size: 14px;
+              font-weight: 500;
+              color: #C8CED8;
+              margin: 0;
+              margin-top: 10px;
+              transition: all 0.3s ease-in-out;
+              display: block;
+            }
+            svg{
+              // filter gray
+              filter: grayscale(100%);
+              transition: all 0.3s ease-in-out;
+              width: 60px;
+            }
+  
+            &.active{
+              svg{
+                filter: grayscale(0%);
+                transform: scale(1.2);
+              }
+              h6{
+                color: #2B2979;
+                transform: scale(1.2);
+  
+  
+              }
+            }
+         }
+  
+      }
+  }
+  textarea{
+    background: #FAFAFA;
+    color: #B7B7B7;
+    border: 1px solid #E9EAEF;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    //
+  }
+  button{
+    margin: 10px 0;
+    border-radius: 10px ;
+  }
+  

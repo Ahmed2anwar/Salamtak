@@ -1,0 +1,146 @@
+<section class="list main-card-app">
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="javascript:void(0)">
+            {{ 'app-name' | transloco }}
+          </a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)">
+            <!-- Laboratories -->
+            <!-- {{ 'pages.Laboratories' | transloco }} -->
+              Labs
+          </a></li>
+          <!-- <li class="breadcrumb-item"><a href="javascript:void(0)">
+            Egypt
+            {{ 'pages.Egypt' | transloco }}
+          </a></li> -->
+        </ol>
+      </nav>
+
+      <div>
+        <div class="row">
+          <!-- Filter Section -->
+          <div class="col-lg-2 filters-menu">
+            <div class="head">
+              <h5>
+                {{ 'pages.Filters' | transloco }}
+              </h5>
+            </div>
+            <accordion >
+              <!-- City -->
+             <accordion-group
+              [heading]= "'search-form.city.placeholder' | transloco"
+               [isOpen]="true">
+                <div class="scrollable-dropdown">
+                @for(city of cities; track null){
+                    <div class="form-check"
+                  >
+                    <input class="form-check-input" type="radio" name="cities" id="city-{{$index}}" value="{{city?.Id}}"
+                    [(ngModel)]="CityId"
+                    (change)="getHealthEntityPagedList(filterObject.MaxResultCount,filterObject?.SkipCount,true);getAreasByCityId(city?.Id)"
+                    >
+                    <label class="form-check-label text-capitalize" for="city-{{$index}}">
+                      {{city?.Name}}
+                    </label>
+                  </div>
+                }
+
+                </div>
+              </accordion-group>
+              <!-- Area -->
+              <accordion-group
+              [heading]= "'search-form.area.placeholder' | transloco"
+               [isOpen]="false">
+                <div class="scrollable-dropdown">
+                     @for(area of areas; track null){
+                        <div class="form-check" >
+                            <input class="form-check-input" type="radio" name="areas" id="area-{{$index}}" value="{{area?.Id}}"
+                            [(ngModel)]="areaId"
+                            (change)="getHealthEntityPagedList(filterObject.MaxResultCount,filterObject?.SkipCount,true);"
+                            >
+                            <label class="form-check-label text-capitalize" for="area-{{$index}}">
+                              {{area?.Name}}
+                            </label>
+                          </div>
+                     }
+
+                </div>
+              </accordion-group>
+
+
+            </accordion>
+
+          </div>
+
+          <div class="col-lg-10 " id="list" >
+            <!-- Analysis Selection -->
+            <div class="dropdown w-100">
+              <button class="form-control text-start dropdown-toggle" type="button" (click)="toggleAnalysisList()">
+                {{ selectedTypeIds.length ? selectedTypeIds.length + ' Selected' : 'Select Analysis' }}
+              </button>
+
+              <div class="dropdown-menu w-100 p-2" [ngClass]="{'show': !isAnalysisCollapsed}">
+                <div *ngFor="let type of analysisTypes" class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    [id]="'analysis-' + type.Id"
+                    [value]="type.Id"
+                    (change)="onAnalysisTypeChange(type.Id, $event)"
+                    [checked]="selectedTypeIds.includes(type.Id)"
+                  />
+                  <label class="form-check-label" [for]="'analysis-' + type.Id">
+                    {{ type.Name }}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Filtered Labs -->
+            <div class="cards mt-4">
+              <div *ngIf="isLoading" class="loading-container">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <p>Loading...</p>
+              </div>
+
+              <div *ngIf="labs.length === 0 && !isLoading">
+                <p class="text-danger">No labs found for the selected analysis.</p>
+              </div><br><br>
+              <h4 style="color: #2B2979;">{{ selectedTypeIds.length > 0 ? 'Available Labs' : 'Popular Labs' }}</h4>
+              <div *ngIf="labs.length > 0">
+                <div class="container mt-4">
+                  <div class="row">
+                    <div *ngFor="let lab of labs" class="col-12 col-md-6 mb-4">
+                      <div class="card shadow-sm m-2" style="border: 2px solid #2B2979;">
+                        <img class="image-lab" [src]="getImageUrl(selectedTypeIds.length > 0 ? lab.LabImage : lab.Image)" alt="{{ lab.Name }}" class="card-img-top img-fluid">
+                        <div class="card-body text-center pb-0">
+                          <h5 class="card-title" style="color:#2B2979;">{{ lab.Name }}</h5>
+                          <h5 class="card-title" style="color:#2B2979;" *ngIf="selectedTypeIds.length > 0">{{ lab.CityName }} - {{lab.AreaName}}</h5>
+                          <p class="card-title" style="font-size: 14px; color:#2B2979;" *ngIf="selectedTypeIds.length > 0">{{ lab.BranchAddress }}</p>
+                          <hr>
+                          <h5 class="card-title" style="color:#2B2979;" *ngIf="selectedTypeIds.length > 0">{{ lab.ServiceAvailabilityMessage }}</h5>
+                        </div>
+                        <div>
+                          <button class="btn book btn-primary w-100"  (click)="onBookNow(lab)">
+                            {{ 'find-a-doctor.doctors-list.cards.book-now' | transloco }}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  

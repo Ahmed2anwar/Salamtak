@@ -1,0 +1,211 @@
+<section class="my-schedule pt-5 mt-5">
+  <div class="container">
+    <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0)" [routerLink]="['home' | route]">
+            {{ "homePath" | transloco }}
+          </a>
+        </li>
+        <li class="breadcrumb-item">
+          {{ 'my-schedule.title' | transloco}}
+        </li>
+      </ol>
+    </nav>
+
+    <div>
+      <mat-tab-group [dynamicHeight]="true" [selectedIndex]="0" (selectedTabChange)="changeEventType($event)">
+        <mat-tab label="{{'my-schedule.upcoming.title' | transloco}}"></mat-tab>
+        <mat-tab label="{{ 'my-schedule.medical-history.title' | transloco }}"></mat-tab>
+        <mat-tab label="{{ 'my-schedule.canceled.title' | transloco }}"></mat-tab>
+      </mat-tab-group>
+
+      <div class="head">
+        <div class="">
+          <h5>
+            <div [ngSwitch]="eventType">
+              <div *ngSwitchCase="0">
+                {{ 'my-schedule.upcoming.sub-title' | transloco }}
+              </div>
+              <div *ngSwitchCase="1">
+                {{ 'my-schedule.medical-history.sub-title' | transloco }}
+              </div>
+              <div *ngSwitchCase="2">
+                {{ 'my-schedule.canceled.sub-title' | transloco }}
+              </div>
+            </div>
+          </h5>
+        </div>
+
+      </div>
+
+      <section class="main-card-app mt-4">
+        <div class="cards">
+          @if(data.length == 0 && !loading){
+          <div class="no-results">
+            <div class="card rounded-3 text-center"
+              style="border: 1px solid #E9EAEF ;box-shadow: none; box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 20px -20px;">
+              <div class="card-body my-3">
+                <img src="assets/icons/no-results.svg" alt="no-results">
+                <h5 class="mt-3">
+                  {{ 'pages.No-Results' | transloco }}
+                </h5>
+              </div>
+            </div>
+          </div>
+          }
+          @else {
+          <div class="row">
+            <div class="col-lg-12 mb-4">
+              <p-table [value]="data" stripedRows [rows]="10" [paginator]="true" [tableStyle]="{ 'min-width': '75rem' }"
+                [rowHover]="true" showGridlines class="custom-table text-center">
+                <ng-template pTemplate="header">
+                  <tr class="text-center">
+                    <th>#</th>
+                    <th> {{ 'my-schedule.doctor' | transloco }}</th>
+                    <th> {{ 'my-schedule.Booking-type' | transloco }}</th>
+                    <th> {{ 'my-schedule.Clinic-address' | transloco }}</th>
+                    <th>{{ 'my-schedule.Date-Time' | transloco }}</th>
+                    <th>{{ 'my-schedule.Fees' | transloco }}</th>
+                    <th>{{ 'my-schedule.Actions' | transloco }}</th>
+                  </tr>
+                </ng-template>
+
+                <!-- BODY TEMPLATE - NO @for or *ngFor here -->
+                <ng-template pTemplate="body" let-doctor let-i="rowIndex">
+                  <tr (click)="goToProfile(doctor)">
+                    <td>{{ i + 1 }}</td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="me-2">
+                          <h6 class="m-0" style="color: #1c1c28">
+                            {{ 'find-a-doctor.doctors-list.cards.dr' | transloco }} {{ doctor.DoctorName }}
+                          </h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{ doctor.MedicalExaminationTypeName }}</td>
+                    <td tooltipPosition="top">{{ doctor.ClinicAddress }}</td>
+                    <td>{{ returnWeekDay(doctor.AppointmentDate) }}</td>
+                    <td>{{ doctor.Fees }} {{ 'my-schedule.LE' | transloco }}</td>
+                    <td class="text-center">
+                      <ng-container *ngIf="eventType === 0">
+                        <a [matMenuTriggerFor]="dots" class="dots" href="javascript:void(0)"
+                          (click)="$event.stopPropagation()">
+                          <img src="assets/icons/three-dots.svg" alt="">
+                        </a>
+                      </ng-container>
+
+                      <mat-menu #dots="matMenu" class="userDropdown">
+                        <button (click)="editAppointment(doctor)" mat-menu-item>
+                          <img src="assets/icons/Edit.svg" class="me-2" alt="">
+                          <span>{{ 'my-schedule.Edit-Appointment' | transloco }}</span>
+                        </button>
+                        <button mat-menu-item (click)="map(doctor)">
+                          <img src="assets/icons/View-Map.svg" class="me-2" alt="">
+                          <span>{{ 'my-schedule.View-Map' | transloco }}</span>
+                        </button>
+                        <button data-bs-toggle="modal" data-bs-target="#myModalHelp" aria-label="help" type="button"
+                          class="btn btn-primary" mat-menu-item>
+                          <img src="assets/icons/auth-help.svg" />
+                          <span class="">
+                            {{ "authentication.authentication-layout.help" | transloco }}
+                          </span>
+                        </button>
+
+                        <button (click)="cancelAppointment(doctor.AppointmentId, doctor.DoctorId, doctor.DoctorName)"
+                          mat-menu-item>
+                          <img src="assets/icons/Cancel-Appointment.svg" class="me-2" alt="">
+                          <span class="text-danger">{{ 'my-schedule.Cancel-Appointment' | transloco }}</span>
+                        </button>
+                      </mat-menu>
+
+                      <ng-container *ngIf="eventType === 1">
+                        <a [matMenuTriggerFor]="dots2" class="dots" href="javascript:void(0)"
+                          (click)="$event.stopPropagation()">
+                          <img src="assets/icons/three-dots.svg" class="me-2" alt="">
+                        </a>
+                      </ng-container>
+
+                      <mat-menu #dots2="matMenu" class="userDropdown">
+                        <button (click)="RebookAppointment(doctor)" mat-menu-item>
+                          <img src="assets/icons/Calendar22.svg" class="me-2" alt="">
+                          <span>{{ 'my-schedule.ReBooking-Appointment' | transloco }}</span>
+                        </button>
+                        <button mat-menu-item (click)="goToMedical(doctor)">
+                          <img src="assets/icons/Group2222.svg" class="me-2" alt="">
+                          <span>{{ 'my-schedule.Medical' | transloco }}</span>
+                        </button>
+                        <button mat-menu-item (click)="rate(doctor)">
+                          <img src="assets/icons/Star22.svg" class="me-2" alt="">
+                          <span>{{ 'my-schedule.Rate' | transloco }}</span>
+                        </button>
+                      </mat-menu>
+
+                      <ng-container *ngIf="eventType === 2">
+                        <a [matMenuTriggerFor]="dots2" class="dots" href="javascript:void(0)"
+                          (click)="$event.stopPropagation()">
+                          <img src="assets/icons/three-dots.svg" class="me-2" alt="">
+                        </a>
+                      </ng-container>
+
+                      <mat-menu #dots2="matMenu" class="userDropdown">
+                        <button (click)="RebookAppointment(doctor)" mat-menu-item>
+                          <img src="assets/icons/Calendar22.svg" class="me-2" alt="">
+                          <span>{{ 'my-schedule.ReBooking-Appointment' | transloco }}</span>
+                        </button>
+                        <button mat-menu-item (click)="goToMedical(doctor)">
+                          <img src="assets/icons/Group2222.svg" class="me-2" alt="">
+                          <span>{{ 'my-schedule.Medical' | transloco }}</span>
+                        </button>
+                        <button mat-menu-item (click)="rate(doctor)">
+                          <img src="assets/icons/Star22.svg" class="me-2" alt="">
+                          <span>{{ 'my-schedule.Rate' | transloco }}</span>
+                        </button>
+                      </mat-menu>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+          }
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="modal fade" id="myModalHelp" tabindex="-1" aria-labelledby="myModalHelpLabel" aria-hidden="true"
+    data-bs-toggle="modal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content position-relative border-0">
+        <button type="button" class="btn-close position-absolute m-2" data-bs-dismiss="modal"
+          style="cursor: pointer; top: 10px; right: 10px" aria-label="Close"></button>
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <div class="sign-out">
+                <img src="../../../assets/icons/contact-us.png" class="img-fluid mt-3" alt="Sign out" />
+                <h5 class="my-3 fw-bold">Salamtak Support</h5>
+                <p class="my-2" style="color: #8088a4">
+                  Our support team is ready to assist you. Reach out for help,
+                  inquiries, or feedback at any time.
+                </p>
+              </div>
+
+              <div class="d-flex justify-content-center mt-4">
+                <a href="" class="text-whhite w-100">
+                  <a href="tel:{{ phone }}" class="btn py-3 btn-primary w-100 rounded-3  " style="font-size: 19px">
+
+                    {{ phone }}
+                  </a>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

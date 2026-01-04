@@ -1,0 +1,330 @@
+@charset "UTF-8";
+section {
+  background-color: #F3F3FF;
+}
+
+section .card {
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(182, 182, 182, 0.15);
+  border-radius: 6px;
+  border: none;
+}
+
+section .card.info {
+  padding: 30px 10px;
+}
+
+section .card.info .user {
+  display: flex;
+}
+
+section .card.info .user .image img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+section .card.info .info {
+  padding-left: 30px;
+}
+
+section .card.info .info .name {
+  font-weight: 600;
+  font-size: 20px;
+  color: #000000;
+  margin-bottom: 5px;
+}
+
+section .card.info .info .job {
+  color: #8F949F;
+  font-size: 14px;
+}
+
+section .card.info .info .tags {
+  margin-top: 20px;
+  padding-top: 30px;
+}
+
+section .card.info .info .tags h6 {
+  margin-bottom: 10px;
+}
+
+section .card.info .info .tags h6 b {
+  margin-right: 10px;
+}
+
+section .card.info .info .tags > div {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 767px) {
+  section .card.info .info .tags > div {
+    justify-content: space-between;
+  }
+}
+
+section .card.info .info .tags .badge-info {
+  background: #F3F3FF;
+  color: #2B2979;
+  padding: 8px 10px;
+  margin-right: 5px;
+  margin-top: 10px;
+  font-weight: 500;
+  border-radius: 6px;
+}
+
+@media (max-width: 767px) {
+  section .card.info .user {
+    display: block;
+  }
+  section .card.info .user img {
+    margin-bottom: 10px;
+  }
+  section .card.info .user .info {
+    padding-left: 0 !important;
+  }
+}
+
+section .card.about .card-body h4 {
+  font-weight: 600;
+  font-size: 20px;
+  color: #000000;
+  margin-bottom: 45px;
+}
+
+section .card.about .card-body p {
+  font-size: 14px;
+  color: #8F949F;
+  margin-bottom: 20px;
+}
+
+section .card.clinic .card-body {
+  padding: 0;
+}
+
+section .card.clinic .card-body h4.title {
+  font-weight: 600;
+  font-size: 20px;
+  color: #000000;
+  margin-bottom: 5px;
+  padding: 20px 20px 0 20px;
+}
+
+section .card.clinic .card-body .clinic-container {
+  padding: 30px 20px;
+}
+
+section .card.clinic .card-body .clinic-container:not(.isFirst) {
+  border-top: 1px solid #E5E5E5;
+}
+
+section .card.clinic .card-body .clinic-data {
+  align-items: center;
+}
+
+section .card.clinic .card-body .clinic-data h5 {
+  font-weight: 600;
+  font-size: 16px;
+  color: #000000;
+  margin-bottom: 6px;
+}
+
+section .card.clinic .card-body .clinic-data p {
+  color: #8F949F;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+section .card.clinic .card-body .clinic-data .image {
+  margin-right: 10px;
+}
+
+section .card.clinic .card-body .rows {
+  margin-top: 20px;
+}
+
+section .card.clinic .card-body .rows .row {
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+section .card.clinic .card-body .rows img {
+  margin-right: 7px;
+}
+
+section .card.clinic .card-body .rows span {
+  font-weight: 600;
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 5px;
+}
+
+section .card.clinic .card-body .rows .answer {
+  text-align: right;
+}
+
+section .card.clinic .card-body .rows .answer span {
+  color: #8F949F;
+}
+
+section .card.clinic .card-body .photos {
+  margin-top: 40px;
+}
+
+section .card.clinic .card-body .photos h5 {
+  font-weight: 600;
+  font-size: 16px;
+  color: #000000;
+  margin-bottom: 6px;
+}
+
+section .card.clinic .card-body .photos .image {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+section .card.clinic .card-body .photos .image img {
+  cursor: pointer;
+  transition: .3s ease-in-out;
+}
+
+section .card.clinic .card-body .photos .image:hover img {
+  transform: scale(1.1) rotate(5deg);
+}
+
+section .card.reviews h5 {
+  font-weight: 600;
+  font-size: 20px;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+section .card.reviews .review {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+section .card.reviews .review:not(:last-child) {
+  border-bottom: 1px solid #E5E5E5;
+}
+
+section .card.reviews .review .user {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+section .card.reviews .review .user .image {
+  margin-right: 10px;
+}
+
+section .card.reviews .review .user .name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #000000;
+  margin-bottom: 0;
+}
+
+section .card.reviews .review .user .rate {
+  margin-top: 7px;
+}
+
+section .card.reviews .review .user .rate img {
+  margin-right: 5px;
+  width: 18px;
+}
+
+section .card.reviews .review .user .time {
+  color: #8F949F;
+}
+
+section .card.reviews .review p {
+  font-size: 14px;
+  color: #8F949F;
+  margin-bottom: 0;
+}
+
+@media (max-width: 767px) {
+  section .card.reviews .review .user {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  section .card.reviews .review .user .image {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  section .card.reviews .review .user .name {
+    text-align: left;
+  }
+  section .card.reviews .review .user .rate {
+    margin-top: 0;
+    margin-left: 0;
+  }
+}
+
+.clinic-card {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.clinic-card-body {
+  padding: 15px;
+}
+
+.clinic-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.clinic-images {
+  display: grid;
+  /* جعل العنصر الحاوي للصور عنصرًا Grid */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* تحديد عدد الأعمدة وعرضها */
+  grid-gap: 10px;
+  /* المسافة بين الصور */
+}
+
+.clinic-images img {
+  width: 100%;
+  /* تعيين عرض الصورة بنسبة مئوية */
+  max-height: 200px;
+  /* تعيين الارتفاع الأقصى للصور لضمان عرضها بشكل صحيح */
+  object-fit: cover;
+  /* ضبط الصورة داخل العنصر لتغطية المساحة بالكامل */
+}
+
+/* CSS for video container */
+.video-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* Wrap videos to new line if no space */
+  justify-content: space-between;
+  /* Space videos evenly */
+}
+
+/* CSS for individual video card */
+.video-card {
+  width: calc(25% - 10px);
+  /* Set width for each video card (adjust as needed) */
+  margin-bottom: 20px;
+  /* Space between rows */
+}
+
+/* Adjustments for responsiveness */
+@media screen and (max-width: 768px) {
+  .video-card {
+    width: calc(50% - 10px);
+    /* Set width for smaller screens */
+  }
+}
+
+.hyperlinks a {
+  text-decoration: none;
+}

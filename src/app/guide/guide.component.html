@@ -1,0 +1,36 @@
+<section class="blogss pt-5 mt-5">
+  <div class="container">
+     <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a [routerLink]="['home' | route]">
+              {{ "homePath" | transloco }}
+            </a>
+          </li>
+          <li class="breadcrumb-item">
+           {{ "blogs.title1" | transloco }}
+          </li>
+        </ol>
+      </nav>
+
+    <div class="cards">
+      <div class="row g-3">
+        @for(service of medicalServices ; track null){
+        <div class="col-service ">
+          <div class="card text-center" style="cursor: pointer" [routerLink]="[service.url]">
+            <div class="card-body" [style.background-color]="service.hex">
+              <p class="mb-3 text-white " style="font-size: 17px; font-weight:500 ;">
+                {{
+                "home.medical-services-directory.cards." + service.translate
+                | transloco
+                }}
+              </p>
+              <img src="{{ service.icon }}" alt="service" style="width:100px ; height:80px;" class="mb-3" />
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

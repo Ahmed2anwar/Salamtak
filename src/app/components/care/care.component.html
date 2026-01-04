@@ -1,0 +1,61 @@
+<section class="blogs mt-5 pt-5">
+  <div class="container">
+    <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0)" [routerLink]="['home' | route]">
+            <!-- Home -->
+            {{ "homePath" | transloco }}
+          </a>
+        </li>
+        <li class="breadcrumb-item">
+          {{ "blogs.caree" | transloco }}
+        </li>
+      </ol>
+    </nav>
+
+    <div class="cards">
+
+      <div class="fw-medium pb-4">
+        <img src="../../../assets/icons/Salamtak Care NN.png" style="width:120px" alt="">
+      </div>
+
+      <div>
+        <div class="row">
+          @for(item of blogs; let i = $index; track null) {
+          <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <img class="rounded-3" src="{{ storageUrl }}{{ item.image }}" width="100%"
+                  style="height: 300px; object-fit: cover;" />
+                <div class="texts my-3">
+                  <h5>{{ item.Title }}</h5>
+                  <p class="text-muted">{{ item.Description | slice: 0:100}}</p>
+                  <button class="btn btn-primary"   [routerLink]="['/en', 'SalamtakCare', item.id]">
+                    {{ 'view-all.title' | transloco }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  @if(blogs.length == 0){
+  <div class="container">
+    <div class="no-results">
+      <div class="card rounded-3 py-3  text-center"
+        style="border: 1px solid #E9EAEF ;box-shadow: none; box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 20px -20px;">
+        <div class="card-body">
+          <img src="assets/icons/no-results.svg" alt="no-results" />
+          <h5 class="py-3">
+            {{ "pages.No-Results" | transloco }}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</section>

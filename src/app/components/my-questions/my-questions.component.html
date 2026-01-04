@@ -1,0 +1,84 @@
+<div class="container mt-5 pt-5">
+  <h2 class="text-center text-primary my-4">
+    {{ "my-questions.title" | transloco }}
+  </h2>
+
+  <div class="row g-4">
+    <div class="col-md-6" *ngFor="let question of questions; let i = index">
+      <div class="card p-3">
+        <div style="direction: rtl">
+          <div
+            class="p-2 m-0 d-flex justify-content-between"
+            style="background-color: #eaeaf2; border-radius: 5px"
+          >
+            <h5 class="question m-0">{{ question.SpecialityName }}</h5>
+            <span>{{ question.QDate | date : "mediumDate" }}</span>
+          </div>
+
+          <div class="my-3">
+            <h6 class="fw-bold">{{ question.Question }}</h6>
+          </div>
+        </div>
+
+        <div class="accordion" [id]="'accordion-' + i">
+          <div class="accordion-item">
+            <h2 class="accordion-header" [id]="'heading-' + i">
+              <button
+                class="accordion-button py-3 collapsed border-1 border-top"
+                type="button"
+                data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#collapse-' + i"
+                aria-expanded="false"
+                [attr.aria-controls]="'collapse-' + i"
+              >
+                Answers
+              </button>
+            </h2>
+
+            <div
+              [id]="'collapse-' + i"
+              class="accordion-collapse collapse"
+              [attr.aria-labelledby]="'heading-' + i"
+            >
+              <div class="accordion-body">
+                <ng-container *ngFor="let answer of question.getAnswers">
+                  <div
+                    class="answer-content border-start my-3 px-2 border-primary border-3"
+                  >
+                    <div
+                      class="d-flex justify-content-between align-items-start"
+                    >
+                      <div>
+                        <strong class="label">
+                          {{ "questions-answers.doctor-name" | transloco }}:
+                        </strong>
+                        <span>{{ answer.DoctorName }}</span>
+                        <div>
+                          <p class="m-0">{{ answer.Answer }}</p>
+                          <p class="m-0 text-muted">
+                            {{ answer.AnswerDate | date : "medium" }}
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        mat-button
+                        class="btn btn-primary"
+                        (click)="bookFor(answer)"
+                      >
+                        {{ "questions-answers.answers.book" | transloco }}
+                      </button>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!questions?.length" class="text-center mt-4 text-muted">
+    No questions available.
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<ngx-spinner *ngIf="isBrowser" type="ball-scale-multiple">
+  <div class="wrapper">
+    <div class="circle"></div>
+  </div>
+</ngx-spinner>
+
+<ng-container *ngIf="lang">
+  <router-outlet></router-outlet>
+</ng-container>
+
+
+

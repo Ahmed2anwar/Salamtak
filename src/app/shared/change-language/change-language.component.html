@@ -1,0 +1,45 @@
+<mat-nav-list>
+    <!-- *ngFor="let language of languages" -->
+     @for(language of languages;track null){
+        <a  href="javascript:void(0)" mat-list-item (click)="setLanguage(language)"
+        [ngClass]="{'active': getLanguage() == language.code}">
+          <span matListItemTitle>
+            <img src="{{language.flag}}" alt="flag">
+            <span>&nbsp; {{language.name}}</span>
+          </span>
+        </a>
+     }
+   
+  
+    <!-- <a href="javascript:void(0)" mat-list-item (click)="setLanguage('en')"  [ngClass]="{'active': getLanguage() == 'en'}">
+      <span matListItemTitle>
+        <img src="https://raw.githubusercontent.com/agatanga/flags/dba5027546405301f0bf5348c6ebe5f2b38d9614/svg/1x1/us.svg" alt="">
+        <span>&nbsp; English</span>
+      </span>
+    </a>
+    <a href="javascript:void(0)" mat-list-item (click)="setLanguage('ar')"  [ngClass]="{'active': getLanguage() == 'ar'}">
+      <span matListItemTitle>
+        <img src="https://raw.githubusercontent.com/agatanga/flags/dba5027546405301f0bf5348c6ebe5f2b38d9614/svg/1x1/eg.svg" alt="">
+  
+        <span>&nbsp; Arabic</span>
+      </span>
+    </a>
+    <a href="javascript:void(0)" mat-list-item (click)="setLanguage('fr')"  [ngClass]="{'active': getLanguage() == 'fr'}">
+      <span matListItemTitle>
+        <img src="https://raw.githubusercontent.com/agatanga/flags/dba5027546405301f0bf5348c6ebe5f2b38d9614/svg/1x1/fr.svg" alt="">
+        <span>&nbsp;
+          French
+        </span>
+      </span>
+    </a>
+    <a href="javascript:void(0)" mat-list-item (click)="setLanguage('de')"  [ngClass]="{'active': getLanguage() == 'de'}">
+      <span matListItemTitle>
+        <img src="https://raw.githubusercontent.com/agatanga/flags/dba5027546405301f0bf5348c6ebe5f2b38d9614/svg/1x1/de.svg" alt="">
+        <span>&nbsp;
+          German
+        </span>
+      </span>
+    </a> -->
+  
+  </mat-nav-list>
+  

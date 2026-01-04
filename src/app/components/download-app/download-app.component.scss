@@ -1,0 +1,127 @@
+section.download .container {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.download-section {
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-ar {
+  background-image: url("/assets/background/download-ar.png");
+}
+
+.bg-en {
+  background-image: url("/assets/background/download.png");
+}
+.download-mobile {
+  display: none !important;
+}
+
+section.download .container img {
+  width: 32%;
+  height: auto;
+}
+section.download .content {
+  flex: 1;
+  padding: 1rem;
+}
+section.download .content h2 {
+  font-weight: 700;
+  font-size: 32;
+  font-family: sans-serif;
+  color: white;
+}
+section.download .content p {
+  line-height: 34px;
+  font-size: 17px;
+}
+.overlay {
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2); /* black with 50% opacity */
+  z-index: 1;
+}
+section.download .content img {
+  width: 22%;
+}
+
+section.download .content a:first-of-type {
+  margin-right: 20px;
+}
+.apps img {
+  width: 26% !important;
+}
+@media (max-width: 991px) {
+  section.download .container img {
+    width: 80%;
+  }
+
+  section.download .content img {
+    width: 38%;
+  }
+}
+@media (max-width: 768px) {
+  .bg-en {
+    background-image: url("/assets/background/download-mob.jpeg");
+    height: 250px  !important;
+  }
+  .bg-ar {
+    background-image: url("/assets/background/download-mob.jpeg");
+    height: 250px  !important
+  }
+  .download-mobile {
+    display: block !important;
+  }
+  .download-desktop {
+    display: none !important;
+
+  }
+  .overlay {
+    position: absolute;
+    margin: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+  section.download .container {
+    flex-direction: column; /* Vertical layout for mobile */
+  }
+
+  section.download .container img {
+    width: 50%;
+  }
+  section.download .content img {
+    width: 27%;
+  }
+  section.download .content h2 {
+    font-size: 25px;
+    font-weight: bold;
+  }
+  .doctor-header-img {
+    display: none !important;
+  }
+  .head-title {
+    font-size: 23px !important;
+  }
+  section.download .content p {
+    line-height: 25px;
+    font-size: 14px;
+  }
+  .apps img {
+    width: 28% !important;
+  }
+}

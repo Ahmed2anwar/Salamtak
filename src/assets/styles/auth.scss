@@ -1,0 +1,111 @@
+@import 'variables.scss';
+
+section.auth{
+  $radius : 7px;
+    // bootsteap form validation
+    .was-validated .form-control:invalid, .form-control.is-invalid{
+      border-color: #cbd5e1;
+      background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PCEtLSBHZW5lcmF0b3I6IEdyYXZpdC5pbyAtLT48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHN0eWxlPSJpc29sYXRpb246aXNvbGF0ZSIgdmlld0JveD0iMCAwIDEyIDEyIiB3aWR0aD0iMTJwdCIgaGVpZ2h0PSIxMnB0Ij48ZGVmcz48Y2xpcFBhdGggaWQ9Il9jbGlwUGF0aF91NkdLTmNoUHAzUmppb2cxelZZQ1BaeTJiaXRnWkxUaSI+PHJlY3Qgd2lkdGg9IjEyIiBoZWlnaHQ9IjEyIi8+PC9jbGlwUGF0aD48L2RlZnM+PGcgY2xpcC1wYXRoPSJ1cmwoI19jbGlwUGF0aF91NkdLTmNoUHAzUmppb2cxelZZQ1BaeTJiaXRnWkxUaSkiPjxnPjxwYXRoIGQ9IiBNIDEuNSA2IEMgMS41IDIuNjI1IDIuNjI1IDEuNSA2IDEuNSBDIDkuMzc1IDEuNSAxMC41IDIuNjI1IDEwLjUgNiBDIDEwLjUgOS4zNzUgOS4zNzUgMTAuNSA2IDEwLjUgQyAyLjYyNSAxMC41IDEuNSA5LjM3NSAxLjUgNiBaICIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSJub25lIiB2ZWN0b3ItZWZmZWN0PSJub24tc2NhbGluZy1zdHJva2UiIHN0cm9rZS13aWR0aD0iMS4xNjgiIHN0cm9rZT0icmdiKDIwMyw4NCw3NSkiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjQiLz48bGluZSB4MT0iNiIgeTE9IjQuMTA1IiB4Mj0iNiIgeTI9IjYiIHZlY3Rvci1lZmZlY3Q9Im5vbi1zY2FsaW5nLXN0cm9rZSIgc3Ryb2tlLXdpZHRoPSIxLjE2OCIgc3Ryb2tlPSJyZ2IoMjAzLDg0LDc1KSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjxsaW5lIHgxPSI1Ljk5OCIgeTE9IjcuNzAzIiB4Mj0iNi4wMDIiIHkyPSI3LjcwMyIgdmVjdG9yLWVmZmVjdD0ibm9uLXNjYWxpbmctc3Ryb2tlIiBzdHJva2Utd2lkdGg9IjEuMTY4IiBzdHJva2U9InJnYigyMDMsODQsNzUpIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PC9nPjwvZz48L3N2Zz4=) !important;
+      background-repeat: no-repeat !important;
+      background-position: right calc(.375em + .1875rem) center !important;
+      &:focus{
+        border-color: #CB544B;
+        box-shadow: none;
+        outline: 0 none;
+      }
+    }
+    .errors-area{
+      margin-top:-11px !important;
+      p{
+        text-transform: capitalize;
+      }
+    }
+    .form-label{
+      color: #090914;
+      font-weight: 500;
+    }
+
+  /***********************/
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="password"],
+  textarea
+  {
+    border: 1.9px solid #cbd5e1;
+    padding: 13px;
+    margin-bottom: 10px;
+    width: 100%;
+    font-weight: 300;
+    color: #090914;
+    font-weight: 500;
+    background: #f0f0f4;
+    border-radius: $radius;
+    &:focus{
+      border-color: $primary;
+      background: #f0f0f4;
+
+      box-shadow: none;
+      outline: 0 none;
+    }
+  }
+
+  input[type="checkbox"]{
+    margin-right: 5px;
+    padding: 10px;
+    position: relative;
+    top: -3px;
+    color: #000;
+    // label
+    + label{
+      // font-size: 14px/;
+      font-weight: 400;
+      color: #000;
+    }
+  }
+  ngx-mat-intl-tel-input{
+     input[type="tel"]{
+      padding-left: 90px;
+     }
+    .ngx-mat-tel-input-container{
+      position: relative;
+      width: 100%;
+    }
+    .country-selector{
+      position: absolute;
+      left: 0;
+      opacity: 1 !important;
+      .country-selector-code{
+        margin-right: 5px;
+
+      }
+    }
+
+  }
+  button[type="submit"]{
+    padding: 18px 60px;
+    border-radius: $radius;
+    font-size: 15px;
+  }
+
+  .password-area{
+    position: relative;
+    .visibility{
+      position: absolute;
+      right: 15px;
+      bottom: 7px;
+      cursor: pointer;
+      i{
+        color: #909090;
+      }
+      i.active{
+        color: #00D2CB;
+      }
+    }
+    .form-control.is-invalid{
+     background-position : right calc(0.375em + 2.1875rem) center  !important;
+   }
+  }
+
+}
+

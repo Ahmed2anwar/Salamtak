@@ -1,0 +1,175 @@
+<footer>
+  <div class="container">
+    <div class="row main-row">
+      <div class="col-lg-4 about">
+        <a [routerLink]="['home' | route]" class="navbar-brand"
+          href="javascript:void(0)" aria-label="navbar-brand">
+          <img src="assets/Salamtak.png" alt="logo" class="logo logo-light " style="width: 60%; height: auto;" />
+        </a>
+        <p class="pt-3" style="font-weight: 300; font-size: 15px; color: white ;line-height: 27px;">
+          {{ "footer.description" | transloco }}
+        </p>
+        <p class="" style="font-weight: 300; font-size: 15px; color: white ;line-height: 27px;">
+          {{ "footer.description1" | transloco }}
+        </p>
+
+      </div>
+      <div class="offset-lg-1 col-lg-7 links">
+        <div>
+          <div class="row g-4" style="font-size: 13px">
+            <!-- <div class="col-lg-3 col-sm-6">
+              <h4 class="title">
+                {{ "footer.columns.landing.title" | transloco }}
+              </h4>
+              <ul>
+                <li>
+                  <a href="javascript:void(0);" [routerLink]="['hospitals' | route]" aria-label="hospitals">
+                    {{ "footer.columns.landing.links.hospitals" | transloco }}
+                  </a>
+                </li>
+                <li>
+                  <p  aria-label="hospitals">
+                    {{ "footer.columns.landing.links.insurance" | transloco }}
+                  </p>
+                </li>
+                <li>
+                  <a href="javascript:void(0);" [routerLink]="['pharmacies' | route]" aria-label="consults">
+                    {{ "footer.columns.landing.links.pharmacies" | transloco }}
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0);" [routerLink]="['find-a-doctor' | route]" aria-label="booking">
+                    {{ "footer.columns.landing.links.booking" | transloco }}
+                  </a>
+                </li>
+              </ul>
+            </div>  -->
+
+            <!-- <div class="col-lg-4 col-sm-6">
+              <h4 class="title">
+                {{ "footer.columns.site-map.links.title" | transloco }}
+              </h4>
+              <ul>
+                <li>
+                  <a [routerLink]="[
+                      '/' + translocoService.getActiveLang() + '/about'
+                    ]" routerLinkActive="active" (click)="collapse()" class="nav-link" href="javascript:void(0)"
+                    aria-label="navbar">
+                    {{ "footer.columns.site-map.links.about" | transloco }}
+                  </a>
+                </li>
+                <li>
+                  <p [routerLink]="" routerLinkActive="active" (click)="collapse()" class="nav-link text-white"
+                    style="cursor: pointer;" href="javascript:void(0)" aria-label="navbar">
+                    {{ "footer.columns.site-map.links.Our-Team" | transloco }}
+                  </p>
+                </li>
+                <li>
+                  <p [routerLink]="" style="cursor: pointer;" routerLinkActive="active" (click)="collapse()"
+                    class="nav-link text-white" href="javascript:void(0)" aria-label="navbar">
+                    {{ "footer.columns.site-map.links.Careers" | transloco }}
+                  </p>
+                </li>
+                <li>
+                  <a [routerLink]="[
+                      '/' + translocoService.getActiveLang() + '/SalamtakGate'
+                    ]" routerLinkActive="active" (click)="collapse()" class="nav-link" href="javascript:void(0)"
+                    aria-label="navbar">
+                    {{ "footer.columns.site-map.links.Press" | transloco }}
+                  </a>
+                </li>
+              </ul>
+            </div> -->
+
+            <div class="col-lg-4 col-sm-6">
+              <h5 class="title">
+                <!-- Utility -->
+                {{ "footer.columns.utility.title" | transloco }}
+              </h5>
+              <ul style="padding-top: 20px;">
+                <li>
+                  <a [routerLink]="['questionList' | route]" href="javascript:void(0)" aria-label="faq">
+                    <!-- FAQ -->
+                    {{ "footer.columns.utility.links.faq" | transloco }}
+                  </a>
+                </li>
+                <li>
+                  <a [routerLink]="['termsOf' | route]" href="javascript:void(0)" target="_blank" aria-label="terms">
+                    <!-- Terms & Conditions -->
+                    {{
+                    "footer.columns.utility.links.terms-conditions"
+                    | transloco
+                    }}
+                  </a>
+                </li>
+                <li>
+                  <a [routerLink]="['privacyPolicy' | route]" href="javascript:void(0)" target="_blank"
+                    aria-label="terms">
+                    {{
+                    "footer.columns.utility.links.Privacy-Policy" | transloco
+                    }}
+                  </a>
+                </li>
+                <li>
+                  <a [routerLink]="['doctorPrivacy' | route]" href="javascript:void(0)" target="_blank"
+                    aria-label="terms">
+                    {{
+                    "footer.columns.utility.links.Doctors-Privacy-Policy"
+                    | transloco
+                    }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-4 col-sm-6">
+              <h5 class="title">
+                <!-- Landing -->
+                {{ "footer.columns.Are you A Doctor.title" | transloco }}
+              </h5>
+              <ul style="padding-top: 20px;">
+                <li>
+                  <a (click)="gotoDoctorWebsite()" href="https://www.salamtak.com/doctor-registration" target="_blank"
+                    rel="noopener" aria-label="Join Salamtak as a doctor">
+                    {{
+                    "footer.columns.Are you A Doctor.links.join-Salamtak"
+                    | transloco
+                    }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+              <h5 class="title">
+                <!-- Landing -->
+                {{ "footer.Social" | transloco }}
+              </h5>
+              <div class="shareArticle pb-4 ">
+                <div class="shareSocial">
+                  <ul class="socialList" style="padding-top: 20px;">
+                    <li>
+                      <a href="https://www.facebook.com/Salamtakgroupapp" target="_blank"
+                        aria-label="Share on Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    </li>
+                    <li>
+                      <a href="https://www.linkedin.com/company/salamtak/" target="_blank"
+                        aria-label="Share on Twitter"><i class="fa-brands fa-linkedin"></i></a>
+                    </li>
+                    <li>
+                      <a href="https://www.youtube.com/@salamtakgroup" target="_blank"
+                        aria-label="Share via youtube"><i class="fa-brands fa-youtube "></i></a>
+                    </li>
+                    <li>
+                      <a href="https://www.tiktok.com/@salamtakgroup" target="_blank" aria-label="Share on tiktok"><i
+                          class="fa-brands fa-tiktok"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

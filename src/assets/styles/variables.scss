@@ -1,0 +1,34 @@
+$primary : #2B2979;
+$info : #00D2CB;
+$danger : #CB544B;
+$white : #FFFFFF;
+$gray : #CBD5E1;
+$secondary : #8088A4;
+
+
+// bootstrap variables
+$theme-colors: (
+  'primary':$primary,
+  'info':$info,
+  'danger':$danger,
+  'secondary' : $gray,
+  'secondary-dark' : #8F949F,
+  // 'success':#6ec857,
+  'warning':#ff9407,
+  // 'gray':#d3d3d3,
+  'dark':#000,
+  // 'white':#FFFFFF,
+);
+$container-max-widths: (
+    // sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1240px,
+) ;
+
+nav.breadcrumb{
+  padding: 60px 0 12px 0 !important ;
+  a{
+    text-decoration: none;
+  }
+}

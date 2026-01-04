@@ -1,0 +1,44 @@
+<section class="mt-5 pt-5">
+  <div class="container">
+    <div class="row">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a [routerLink]="['home' | route]">
+              {{ "homePath" | transloco }}
+            </a>
+          </li>
+          <li class="breadcrumb-item">
+            {{ "header.links.offers" | transloco }}
+          </li>
+        </ol>
+      </nav>
+
+      <!-- Loop through offers -->
+      @for (offer of offers; track offer.id) {
+        <div class="col-md-2 mb-4">
+          <div
+            class="card rounded-3 h-100"
+            style="background-color: white; border: 1px solid #e7e7e7; cursor: pointer;"
+            (click)="navigateToOffer(offer.id)"
+          >
+            <div class="card-body text-center">
+              <img
+                class="rounded-3 owl-docotor img-fluid"
+                [src]="storageUrl + offer.image"
+                alt="Offer Image"
+                style="object-fit: cover; max-height: 120px; width: 100%;"
+              />
+            </div>
+            <div class="user pb-2">
+              <h5 class="name text-center fw-medium">
+                {{ offer.Name }}
+              </h5>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

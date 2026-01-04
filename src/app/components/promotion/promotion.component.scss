@@ -1,0 +1,19 @@
+.no-results {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 50px;
+
+    .card{
+      .card-body{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+      width: 75%;
+
+      h5{
+        margin-top: 20px;
+        text-align: center;
+      }
+    }
+}

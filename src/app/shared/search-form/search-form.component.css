@@ -1,0 +1,208 @@
+.search-form form {
+  width: 100%;
+  margin-top: 120px;
+}
+
+.search-form form h4 {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.search-form form .main {
+  display: flex;
+}
+
+.search-form form .main > div mat-select, .search-form form .main > div input {
+  background: #fff;
+  border: none;
+  border-radius: 0;
+  padding: 10px;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.search-form form .main > div input::-webkit-input-placeholder {
+  color: #2B297999;
+  font-weight: 600;
+}
+
+.search-form form .main > div mat-select {
+  border-right: 1px solid #F9F9F9;
+}
+
+.search-form form .main > div mat-select .mat-mdc-select-placeholder {
+  color: #2B297999;
+  padding-left: 10px;
+  font-weight: 600;
+}
+
+.search-form form .main > div button {
+  height: 80px;
+  border-radius: 0 10px 10px 0;
+}
+
+.search-form form .main > div:nth-child(1) mat-select {
+  border-radius: 10px 0 0 10px !important;
+}
+
+.search-form form .main > div:nth-child(1), .search-form form .main > div:nth-child(2), .search-form form .main > div:nth-child(3) {
+  width: 20%;
+}
+
+.search-form form .main > div:nth-child(4) {
+  width: 35%;
+}
+
+@media (max-width: 772px) {
+  .search-form form .main {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .search-form form .main > div:nth-child(1), .search-form form .main > div:nth-child(2), .search-form form .main > div:nth-child(3) {
+    width: 33.33333333333333% !important;
+  }
+  .search-form form .main > div:nth-child(4) {
+    width: 100% !important;
+  }
+  .search-form form .main > div:nth-child(3) mat-select {
+    border-radius: 0 10px 10px 0 !important;
+  }
+  .search-form form .main > div:nth-child(5) {
+    width: 100%;
+  }
+  .search-form form .main > div:nth-child(5) button {
+    border-radius: 10px;
+    width: 100%;
+  }
+  .search-form form .main > div input {
+    border-radius: 10px !important;
+  }
+}
+
+@media (max-width: 772px) {
+  .search-form form {
+    margin-top: 50px;
+  }
+  .search-form form h4 {
+    margin-top: 20px;
+    margin-bottom: 5px;
+  }
+}
+
+.search-form form ng-multiselect-dropdown .selected-item:hover {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.search-form form ng-multiselect-dropdown .multiselect-dropdown .dropdown-btn {
+  position: relative;
+  height: 80px;
+  background: #fff;
+  width: 100%;
+  border: none;
+  padding: 10px;
+  align-items: center;
+  font-weight: 600;
+  color: #2b297999;
+  padding-left: 10px;
+  font-weight: 600;
+  display: flex !important;
+  border: none !important;
+}
+
+.search-form form ng-multiselect-dropdown .multiselect-dropdown .dropdown-multiselect__caret {
+  top: 20px !important;
+}
+
+.search-form form ng-multiselect-dropdown .item2 .multiselect-item-checkbox input[type=checkbox] + div:before,
+.search-form form ng-multiselect-dropdown .multiselect-item-checkbox input[type=checkbox]:checked + div:after {
+  display: none;
+}
+
+.search-form form ng-multiselect-dropdown .item2 {
+  overflow-x: hidden !important;
+}
+
+.search-form form ng-multiselect-dropdown .multiselect-item-checkbox input[type=checkbox]:checked + div:after {
+  display: block !important;
+  position: absolute !important;
+  left: -15px !important;
+  top: 1px !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  width: 126% !important;
+  height: 110% !important;
+  transform: none !important;
+  z-index: -1;
+}
+
+.search-form form ng-multiselect-dropdown .multiselect-item-checkbox input[type=checkbox] + div {
+  padding-left: 0 !important;
+}
+
+.search-form form ng-multiselect-dropdown .dropdown-list .filter-textbox {
+  position: relative;
+}
+
+.search-form form ng-multiselect-dropdown .dropdown-list .filter-textbox::before {
+  content: url("/assets/icons/Search.svg");
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) saturate(100%) invert(0%) sepia(100%) saturate(7462%) hue-rotate(96deg) brightness(91%) contrast(110%);
+  position: absolute;
+  top: 20px;
+  left: 25px;
+}
+
+.search-form form ng-multiselect-dropdown .dropdown-list .filter-textbox input {
+  height: 45px;
+  background: #FFFFFF;
+  box-shadow: none;
+  border-radius: 6px;
+  border: 1px solid #E5E5E5 !important;
+  margin-bottom: 10px !important;
+  padding: 10px 20px 10px 40px !important;
+}
+
+.search-form form ng-multiselect-dropdown .selected-item-container {
+  width: 100% !important;
+  display: block !important;
+}
+
+.search-form form ng-multiselect-dropdown .selected-item-container .selected-item {
+  border: none !important;
+  background: none !important;
+  width: 100% !important;
+  display: block !important;
+  max-width: 100% !important;
+}
+
+.search-form form ng-multiselect-dropdown .selected-item-container .selected-item span {
+  color: #000;
+}
+
+.multiselect-dropdown .dropdown-btn .selected-item-container .selected-item {
+  padding-left: 25px !important;
+}
+
+.multiselect-dropdown .dropdown-btn .selected-item-container .selected-item a {
+  color: #2B2979 !important;
+  font-weight: 600;
+  position: absolute !important;
+  top: 27px;
+  left: 5px;
+  background-color: #fff;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  z-index: 9;
+}
+
+.dropdown-multiselect__caret {
+  background-color: #fff;
+}

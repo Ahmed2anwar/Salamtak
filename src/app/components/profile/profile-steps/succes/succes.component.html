@@ -1,0 +1,28 @@
+<section class="auth layout_1 reset-successfully">
+    <div class="container text-center">
+      <img src="assets/large-logo2-color.svg" class="logo">
+      <br>
+      <br>
+      <img src="assets/shapes/reset-successfully-icon.svg" class="successfully-icon">
+      <div class="mt-5">
+        <h1>
+          {{ 'form.buttons.thank' | transloco }}
+        </h1>
+        <h5>
+          <span> {{username}}</span>
+        </h5>
+        <h5>
+          {{ 'form.buttons.com' | transloco }}
+         </h5>
+         <h5>
+          {{ 'form.buttons.comm' | transloco }}
+         </h5>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg" [routerLink]="['home' | route]"
+       style="font-size: larger;">
+        {{ 'form.buttons.home' | transloco }}
+      </button>
+      <br> <br>
+    </div>
+  </section>
+  

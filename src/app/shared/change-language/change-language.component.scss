@@ -1,0 +1,23 @@
+a{
+    span{
+      font-weight: 600;
+    }
+    img{
+      position: relative;
+      top: -2px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+    }
+    &.active{
+      background: #00D2CB;
+      border-radius: 8px;
+      span{
+        color: #fff ;
+      }
+      // img{
+      //   filter:  brightness(0) invert(1);
+      // }
+    }
+  }
+  

@@ -1,0 +1,222 @@
+<div class="card booking" id="book" >
+    <div class="card-header">
+      <!-- Booking Information -->
+      {{'doctor-profile.book-form.title' | transloco}}
+    </div>
+    <div class="card-body">
+      <!-- Fees and Waiting Time -->
+      <div class="info">
+
+        @if(selectedClinic){
+            <div 
+             [@slideDown] class="documentation" [ngClass]="{'exist-clinic': selectedClinic}">
+              <div class="row">
+                <div class="col">
+                  <div class="offer-card"  >
+                    <div class="image-container">
+                      <img src="{{storageUrl}}{{doctor.L1image}}" alt="Offer Image" class="offer-image">
+                      <p class="offer-discount">{{ doctor.DiscountPerc }}%  {{'doctor-profile.book-form.off' | transloco}}
+                      </p>
+                    </div>
+                    <div class="offer-details">
+                      <h2>{{ doctor.ServiceName }}</h2>
+                      <p class="price-before"> <del>{{ doctor.PriceBefore | currency }}</del></p>
+                      <p class="price-after"><strong>{{'doctor-profile.book-form.price-Afer' | transloco}}</strong> {{ doctor.PriceAfter | currency }}</p>
+                      <p><strong>{{'doctor-profile.book-form.Start-Date' | transloco}}:</strong> {{ doctor.StartDate | date }}</p>
+                      <p><strong>{{'doctor-profile.book-form.End-Date' | transloco}}:</strong> {{ doctor.EndDate | date }}</p>
+                      <!-- Add more details as needed -->
+                     </div>
+                  </div>
+      
+                </div>
+      
+              </div>
+              <hr>
+      
+              <hr>
+            </div>
+        }
+  
+  
+        <form class="first-form"  [formGroup]="form" (ngSubmit)="submit()">
+          <div class="mt-3">
+            <h5 class="text-center">
+              {{'doctor-profile.book-form.choose-clinic' | transloco}}
+  
+            </h5>
+            <div class="mt-4">
+              <div class="radios-container custom-radio-checkbox">
+                <div  >
+                 
+                  <input type="radio" id="clinic-{{clinics['ClinicId']}}" name="clinic" value="{{clinics['ClinicId']}}" [attr.data-d]="clinics['ClinicId']"  formControlName="clinic" (change)="chooseClinic($event,clinics['ClinicId'])"
+                  >
+                  <label for="clinic-{{clinics['ClinicId']}}" [ngClass]="{ 'is-invalid': submitted && f['clinic']['errors'] }">{{clinics['Name']}}</label>
+                </div>
+  
+              </div>
+              <!-- errors -->
+               @if(submitted && f['clinic'].errors){
+                   <div class="errors-area mt-2" >
+                    @if(f['clinic']['errors']['required']){
+                        <p class="text-danger">
+                            {{'doctor-profile.book-form.clinic-required' | transloco}}
+                          </p>
+                    }
+                   </div>
+               }
+            </div>
+          </div>
+          <div class="mt-3">
+            <h5 class="text-center">
+              <!-- Appointments Type -->
+              {{'doctor-profile.book-form.appointments-type' | transloco}}
+            </h5>
+            <div class="mt-4">
+              <div class="radios-container custom-radio-checkbox">
+               
+                @for( type of appointmentTypes;track null){
+                    <div >
+                        <input type="radio" id="appointment-type-{{$index}}" name="appointment" value="{{type['Id']}}" [attr.data-d]="type['Id']"  formControlName="appointment"   >
+                        <label for="appointment-type-{{$index}}" [ngClass]="{ 'is-invalid': submitted && f['appointment']['errors'] }">{{type['Name']}}</label>
+                      </div>
+                }
+              </div>
+              
+              @if(submitted && f['appointment'].errors){
+                  <div class="errors-area mt-2" >
+                    @if(f['appointment']['errors']['required']){
+                        <p class="text-danger">
+                            {{'doctor-profile.book-form.appointments-type-required' | transloco}}
+                          </p>
+                    }
+                   </div>
+              }
+            </div>
+          </div>
+  
+          <!-- getClinicSchedualByClinicDayId -->
+
+
+          @if(selectedClinic && selectedAppointment){
+            <div class="mt-5" >
+                <h5 class="text-center">
+                  <!-- Choose your appointment day -->
+                  {{'doctor-profile.book-form.choose-appointment-day' | transloco}}
+                </h5>
+                <div class="mt-4 dates-slider custom-radio-checkbox" dir="ltr">
+                  <owl-carousel-o [options]="daysOptions">
+                     @for( day of dayes;track null){
+                         <ng-template carouselSlide >
+                           <input type="radio" id="day-{{$index}}" name="appointmentDay" value="{{day['date']}}"
+                           [attr.data-id]="day['id']"
+                           (change)="getClinicSchedualByClinicDayId(day);setSelectedDayId(day)"
+                           [checked]="day['date'] == f['appointmentDay'].value ? true : false"
+           
+           
+                         formControlName="appointmentDay"
+                           >
+                           <label for="day-{{$index}}">
+                             <span class="name" >
+                                 {{getLanguage()=='ar'  ? (day['name_ar'] | slice:0:4) : (day['name'] | slice:0:3)}}
+                               </span>
+     
+                             <br>
+                             <span class="date">{{day['number']}}</span>
+                           </label>
+                         </ng-template>
+                     }
+                  </owl-carousel-o>
+      
+                </div>
+              
+                @if(submitted && f['appointmentDay'].errors){
+                    <div class="errors-area mt-2" >
+                      @if(f['appointmentDay']['errors']['required']){
+                          <p class="text-danger">
+                              {{'doctor-profile.book-form.appointment-day-required' | transloco}}
+                            </p>
+                      }
+                     </div>
+                }
+              </div>
+          }
+          
+          <hr>
+
+          @if(f['appointmentDay'].value && selectedClinic && selectedAppointment){
+              <div class="mt-5"
+              >
+                <h5 class="text-center">
+                  <!-- Appointments available -->
+                  {{'doctor-profile.book-form.appointments-available' | transloco}}
+                </h5>
+                <div class="mt-4">
+                     @if(times.length == 0){
+                         <div
+                         
+                         >
+                           <p class="text-center" class="alert alert-danger">
+                             {{'doctor-profile.book-form.no-appointments-available' | transloco}}
+                           </p>
+                         </div>
+             
+                     }
+
+                      @for( time of times;track null){
+                          <div class="radios-container custom-radio-checkbox" >
+                            @for( time of time['times'];track null){
+                                <div >
+                                  <input type="radio" id="time-{{time.time24}}" name="times" value="{{time.time24}}"
+                                  [checked]="time['time24'] == f['times'].value ? true : false"
+                                  formControlName="times"
+                  
+                  
+                                  >
+                                  <label for="time-{{time.time24}}"
+                  
+                                  [ngClass]="{'Red': time.IsBooked}"
+                  
+                                  >
+                                    {{time.time12}}
+                                  </label>
+                                </div>
+                            }
+                          </div>
+                      }
+             
+                  @if(submitted && f['times'].errors){
+                      <div class="errors-area mt-2" >
+                        @if(f['times']['errors']['required']){
+                            <p class="text-danger">
+                                {{'doctor-profile.book-form.time-required' | transloco}}
+                              </p>
+                        }
+                       </div>
+                  }
+                </div>
+              </div>
+          }
+          <div class="mt-4 text-center">
+            <button (click)="isBokking = !isBokking" class="btn btn-info btn-lg text-white book">
+              <!-- Book Now -->
+              {{'doctor-profile.book-now' | transloco}}
+            </button>
+          </div>
+        </form>
+        
+  
+        <div class="text-center mt-4">
+          <p class="text-secondary-dark">
+            <!-- Book online, Pay at the clinic! -->
+            {{'doctor-profile.book-form.book-online-pay-at-the-clinic' | transloco}}
+  
+          </p>
+          <!-- <p style="color: rgba(239, 68, 68, 0.75);">
+             {{'doctor-profile.book-form.doctor-requires-reservation' | transloco}}
+  
+          </p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,33 @@
+<section class="blogss pt-5 mt-5">
+  <div class="container ">
+    <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a [routerLink]="['home' | route]">
+            {{ "homePath" | transloco }}
+          </a>
+        </li>
+        <li class="breadcrumb-item">
+          {{ "blogs.title" | transloco }}
+        </li>
+      </ol>
+    </nav>
+    
+    <div class="cards">
+      <div class="row g-4 " style="align-items: center">
+        @for(service of blog;track null){
+        <div class="col-lg-4 col-sm-6 ">
+          <div class="card pb-4"
+            style="cursor: pointer; box-shadow: rgba(0, 0, 0, 0.45) 0px 28px 25px -25px; border: 1px solid #f0f0f0;"
+            [routerLink]="[service.url]" [state]="{ id: service.id }">
+            <div class="overlay" [style.background-color]="service.hex"></div>
+            <div class="card-body" [style.background-color]="service.hex">
+              <img class="card-img" src="{{ service.icon }}" alt="" />
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

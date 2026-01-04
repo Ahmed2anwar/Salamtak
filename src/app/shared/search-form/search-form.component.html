@@ -1,0 +1,84 @@
+<section class="search-form ">
+  <form>
+     <h1 class="mb-3 fs-3 text-primary  animate__animated animate__fadeInUp"
+      *ngIf="!form.loading &&  (subSpecialtyTitle && !(form.specialty.selectedValue?.length > 0 || form.city.selectedValue?.length > 0 || (form.area.selectedValue && form.area.selectedValue.length > 0)))">
+      {{subSpecialtyTitle[language.getActiveLang()] || ''}}
+    </h1>
+    <h1
+      *ngIf="!form.loading && (form.specialty.selectedValue?.length > 0 || form.city.selectedValue?.length > 0 || (form.area.selectedValue && form.area.selectedValue.length > 0))"
+      class="text-primary mb-3 fs-3 animate__animated animate__fadeInUp">
+      {{ 'search-form.Book-with-the-best-doctor' | transloco }}
+      <ng-container *ngIf="form.specialty.selectedValue?.length > 0 && !subSpecialtyUrlValue">
+        {{ form.specialty.selectedValue[0]?.Name }}
+      </ng-container>
+      <ng-container *ngIf="form.specialty.selectedValue?.length > 0 && subSpecialtyUrlValue">
+        {{subSpecialtyUrlValue}}
+      </ng-container>
+      <ng-container *ngIf="form.area.selectedValue && form.area.selectedValue.length > 0">
+        {{ 'search-form.in' | transloco }} {{ form.area.selectedValue[0]?.Name }}
+      </ng-container>
+      <ng-container
+        *ngIf="(form.city.selectedValue && form.city.selectedValue.length > 0) && !(form.area.selectedValue && form.area.selectedValue.length > 0)">
+        {{ 'search-form.in' | transloco }} {{ form.city.selectedValue[0]?.Name }}
+      </ng-container>
+    </h1>
+    <div class="main ">
+
+
+      <div class="row g-3 flex-wrap justify-content-center">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="">
+            <input type="text" [(ngModel)]="form.doctorName" name="name"
+              style="  border-radius: 5px ; border: 1px solid #e5e5e5;"
+              [placeholder]="'search-form.name.placeholder' | transloco" class="search name ">
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6">
+          <div>
+            <ng-multiselect-dropdown [placeholder]="'search-form.city.placeholder' | transloco"
+              [settings]="dropdownSettings" [data]="form.city.list" [(ngModel)]="form.city.selectedValue"
+              [ngModelOptions]="{standalone: true}" (onSelect)="getAreas($event);form.area.selectedValue = [];"
+              (onDeSelect)="form.area.selectedValue = [];form.area.list = []" class="search">
+            </ng-multiselect-dropdown>
+
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6">
+          <div>
+            <ng-multiselect-dropdown [placeholder]="'search-form.area.placeholder' | transloco"
+              [settings]="dropdownSettings" [data]="form.area.list" [(ngModel)]="form.area.selectedValue"
+              [ngModelOptions]="{standalone: true}" (onDeSelect)="form.area.selectedValue = []" class="search">
+            </ng-multiselect-dropdown>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6">
+          <div>
+            <ng-multiselect-dropdown [placeholder]="'search-form.specialty.placeholder' | transloco"
+              [settings]="dropdownSettings" [data]="form.specialty.list" [(ngModel)]="form.specialty.selectedValue"
+              [ngModelOptions]="{standalone: true}" class="specialty search"
+              (onDeSelect)="form.specialty.selectedValue = []">
+            </ng-multiselect-dropdown>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6">
+          <div>
+            <button (click)="search()" class="btn btn-search w-100" type="button" aria-label="search"
+              style=" padding: 10px;" [disabled]="form.loading">
+             <div class="d-flex justify-content-center align-items-center">
+              @if(form.loading){
+              <div class="text-center">
+                <span class="loader"></span>
+              </div>
+              } @else {
+              <p style="margin-bottom: 0px; color: white; font-size: 17px;">{{'search-form.search.placeholder' |
+                transloco}}</p>
+              }
+             </div>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</section>

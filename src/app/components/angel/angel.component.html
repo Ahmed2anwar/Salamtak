@@ -1,0 +1,50 @@
+<section class="blogss pt-5 mt-5">
+  <div class="container">
+    <nav
+      class="breadcrumb"
+      style="--bs-breadcrumb-divider: '>'"
+      aria-label="breadcrumb"
+    >
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/home']">
+            {{ "homePath" | transloco }}
+          </a>
+        </li>
+        <li class="breadcrumb-item">
+          {{ "blogs.angel" | transloco }}
+        </li>
+      </ol>
+    </nav>
+  </div>
+</section>
+<section class="medical-services">
+  <div class="container">
+    <div class="data">
+      <div class="info p-5" (click)="goto()">
+        <div style="text-align: center">
+          <img
+            class="img-fluid "
+            src="assets/emerg.png"
+            style="cursor: pointer"
+          />
+          <p class="fw-bold fs-5">
+            {{ "blogs.emergency" | transloco }}
+          </p>
+        </div>
+      </div>
+      <div class="info p-5" (click)="openAllQuestions()">
+        <div style="text-align: center">
+          <img
+            class="img-fluid "
+            src="assets/FAQ.png"
+            style="cursor: pointer"
+          />
+          <p class="fw-bold fs-5" >
+            {{ "blogs.faq" | transloco }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

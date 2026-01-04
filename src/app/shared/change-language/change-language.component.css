@@ -1,0 +1,20 @@
+a span {
+  font-weight: 600;
+}
+
+a img {
+  position: relative;
+  top: -2px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
+a.active {
+  background: #00D2CB;
+  border-radius: 8px;
+}
+
+a.active span {
+  color: #fff;
+}

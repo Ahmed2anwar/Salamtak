@@ -1,0 +1,68 @@
+<section class="blogs pt-5 mt-5">
+  <div class="container">
+    <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0)" [routerLink]="['home' | route]">
+            {{ "homePath" | transloco }}
+          </a>
+        </li>
+        <li class="breadcrumb-item">
+          {{'blogs.salamtakOffer' | transloco}}
+        </li>
+      </ol>
+    </nav>
+
+
+
+    @if ( offers.length == 0) {
+    <div class="no-results text-center">
+      <div class="card rounded-3 py-5"
+        style="border: 1px solid #E9EAEF ;box-shadow: none; box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 20px -20px;">
+        <div class="card-body">
+          <img src="assets/icons/no-results.svg" class="my-3" alt="no-results">
+          <h5 class="my-2 fw-bold">{{ 'find-a-doctor.doctors-list.no-results.no-current' | transloco }}</h5>
+          <p>{{ 'find-a-doctor.doctors-list.no-results.details-noCuurent' | transloco }}
+            <span>{{ 'find-a-doctor.doctors-list.no-results.detail-curr' | transloco }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    }
+
+
+    <div class="row g-4">
+      <div class="col-md-4" *ngFor="let offer of offers">
+        <div class="card">
+          <img src="{{storageUrl}}{{offer.L1image}}" alt="Offer Image" class="offer-image">
+          <p class="offer-discount">{{ offer.DiscountPerc }}% {{'doctor-profile.book-form.off' | transloco}}</p>
+          <div class="card-body">
+
+            <div class="doctor-info">
+              <img src="{{storageUrl}}{{offer.doctorDto.Image}}" alt="Doctor Image" class="doctor-image">
+              <p class="doctor-name m-0" *ngIf="lang=='en'">{{ offer.doctorDto.FullName }}</p>
+              <p class="doctor-name m-0" *ngIf="lang=='ar'">{{ offer.doctorDto.FullNameAr }}</p>
+            </div>
+            <h5 class="card-title fw-bold" style="color: #007bff;">{{ offer.ServiceName }}</h5>
+
+            <p class="mb-2 ">
+              <strong>Price:</strong>
+              <span class="old-price me-2 ps-2">{{ offer.PriceBefore}}LE</span>
+              <span class="new-price">{{ offer.PriceAfter}}LE</span>
+            </p>
+            <div class="d-flex justify-content-between ">
+              <p style="font-size: 14px;"><strong>{{'doctor-profile.book-form.Start-Date' | transloco}}:</strong> {{
+                offer.StartDate | date }}
+              </p>
+              <p style="font-size: 14px;"><strong>{{'doctor-profile.book-form.End-Date' | transloco}}:</strong> {{
+                offer.EndDate | date }}</p>
+            </div>
+            <button class="btn py-2 btn-primary w-100 text-center" (click)="onBookNow(offer.Id)"> {{
+              'find-a-doctor.doctors-list.cards.book-now' |
+              transloco }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
