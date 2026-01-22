@@ -213,6 +213,11 @@ export class AppService {
   getBlogById(id: any) {
     return this.http.get<any>(`${environment.apiUrl}/LookUp/blogs/${id}`);
   }
+  getBlogSectionById(sectionId: any) {
+    return this.http.get<any>(`${environment.apiUrl}/LookUp/sections/${sectionId}`);
+  }
+
+
   getOffers() {
     return this.http.get<any>(`${environment.apiUrl}/Offers/GetActiveOffers`);
   }

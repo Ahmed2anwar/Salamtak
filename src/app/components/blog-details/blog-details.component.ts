@@ -6,6 +6,14 @@ import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { log } from 'node:console';
+interface BlogSection {
+  Id: number;
+  BlogId: number;
+  SubTitle: string;
+  Paragraph: string;
+  ImageUrl: string | null;
+
+}
 
 @Component({
   selector: 'app-blog-details',
@@ -20,7 +28,8 @@ export class BlogDetailsComponent {
     private appService: AppService,
     private TranslocoService: TranslocoService,
     private LocalStorageService: LocalStorageService
-  ) {}
+    
+  ) { }
   storageUrl = environment.storageUrl;
   blog: any = null;
   loading = false;
@@ -38,8 +47,9 @@ export class BlogDetailsComponent {
     this.loading = true;
     this.appService.getBlogById(id).subscribe({
       next: (res: any) => {
-        this.blog = res?.Data ?? res;
-        console.log(this.blog);
+        console.log("id", id);
+        this.blog = res.Data;
+        console.log("blogs", this.blog);
         this.loading = false;
       },
       error: (err) => {

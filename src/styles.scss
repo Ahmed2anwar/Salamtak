@@ -2,34 +2,38 @@
 // @import 'node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.theme.default.min.css';
 
 @import "assets/styles/variables.scss";
+
 // @import 'node_modules/bootstrap/scss/bootstrap.scss';
 // @import 'node_modules/bootstrap/scss/bootstrap';
 // src/assets/libs/bootstrap
+
 @import "assets/libs/bootstrap/scss/bootstrap.scss";
+
 /* Override Font Awesome to use font-display: swap */
-@font-face {
-  font-family: 'Font Awesome 5 Free';
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src: url('/media/fa-solid-900.woff2') format('woff2');
-}
 
-@font-face {
-  font-family: 'Font Awesome 5 Brands';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/media/fa-brands-400.woff2') format('woff2');
-}
+// @font-face {
+//   font-family: 'Font Awesome 5 Free';
+//   font-style: normal;
+//   font-weight: 900;
+//   font-display: swap;
+//   src: url('/media/fa-solid-900.woff2') format('woff2');
+// }
 
-@font-face {
-  font-family: 'Font Awesome 5 Regular';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/media/fa-regular-400.woff2') format('woff2');
-}
+// @font-face {
+//   font-family: 'Font Awesome 5 Brands';
+//   font-style: normal;
+//   font-weight: 400;
+//   font-display: swap;
+//   src: url('/media/fa-brands-400.woff2') format('woff2');
+// }
+
+// @font-face {
+//   font-family: 'Font Awesome 5 Regular';
+//   font-style: normal;
+//   font-weight: 400;
+//   font-display: swap;
+//   src: url('/media/fa-regular-400.woff2') format('woff2');
+// }
 
 html,
 body {

@@ -13,21 +13,20 @@ declare global {
 
 export class AnalyticsServiceService {
 
-   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    if (isPlatformBrowser(this.platformId)) {
-      // Load GA script
-      const script = document.createElement('script');
-      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-MK28D1G3TF';
-      script.async = true;
-      document.head.appendChild(script);
+  //  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  //   if (isPlatformBrowser(this.platformId)) {
 
-      // Initialize GA
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        window.dataLayer.push(arguments);
-      }
-      // gtag('js', new Date());
-      // gtag('config', 'G-MK28D1G3TF');
-    }
-  }
+  //     const script = document.createElement('script');
+  //     script.src = 'https://www.googletagmanager.com/gtag/js?id=G-MK28D1G3TF';
+  //     script.async = true;
+  //     document.head.appendChild(script);
+
+
+  //     window.dataLayer = window.dataLayer || [];
+  //     function gtag() {
+  //       window.dataLayer.push(arguments);
+  //     }
+
+  //   }
+  // }
 }

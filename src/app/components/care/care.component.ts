@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { AppService } from '../../services/app.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, ActivatedRoute } from '@angular/router';
-import { TranslocoModule } from '@jsverse/transloco';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from '../../../environments/environment';
@@ -34,12 +34,15 @@ export class CareComponent {
   btnText = 'Show More';
   storageUrl = environment.storageUrl;
   expandedIndex: number | null = null;
+  lang = this.translocoService.getActiveLang();
 
   constructor(
     private spinner: NgxSpinnerService,
     private patientService: AppService,
     private route: ActivatedRoute,
-    private metadataService: MetadataService
+    private metadataService: MetadataService,
+    private translocoService: TranslocoService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -56,5 +59,8 @@ export class CareComponent {
     });
   }
 
+  navigateToBlog(item: any) {
+    this.router.navigate([this.lang, 'SalamtakCare', item.Title]);
+  }
 
 }

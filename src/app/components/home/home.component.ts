@@ -68,7 +68,7 @@ export class HomeComponent {
   lang = this.translocoService.getActiveLang();
   blog = [
     {
-      icon: 'assets/icons/scoopN.png',
+      icon: 'assets/icons/scoopN.webp',
       title: 'SalamtakScoop',
       hex: '#fff',
       url: 'SalamtakScoop',
@@ -92,7 +92,7 @@ export class HomeComponent {
       url: 'SalamtakCapsola',
     },
     {
-      icon: 'assets/icons/promotion.png',
+      icon: 'assets/icons/promotions.webp',
       title: 'SalamtakPromotions ',
       hex: '#fff',
       url: 'SalamtakPromotions',
@@ -438,10 +438,10 @@ export class HomeComponent {
     this.getMedicalExaminationType();
     this.getDoctorHealthTopics();
     this.getBlogs();
-    this.getWhatsAppAds();
-    this.getTop10Specialties();
-    this.getoffers();
-    this.getPopularDoctors();
+    // this.getWhatsAppAds();
+    // this.getTop10Specialties();
+    // this.getoffers();
+    // this.getPopularDoctors();
   }
   getMedicalExaminationType() {
     this.service
@@ -456,9 +456,9 @@ export class HomeComponent {
       this.specialties = res['Data'];
     });
   }
-  getWhatsAppAds() {
-    this.service.getWhatsAppAds().subscribe((res: any) => { });
-  }
+  // getWhatsAppAds() {
+  //   this.service.getWhatsAppAds().subscribe((res: any) => { });
+  // }
   getBlogs() {
     this.spinner.show();
     this.service.getBlogs().subscribe((res: any) => {
@@ -466,13 +466,13 @@ export class HomeComponent {
       this.spinner.hide();
     });
   }
-  getoffers() {
-    this.spinner.show();
-    this.service.getOffers().subscribe((res: any) => {
-      this.offers = res['Data'];
-      this.spinner.hide();
-    });
-  }
+  // getoffers() {
+  //   this.spinner.show();
+  //   this.service.getOffers().subscribe((res: any) => {
+  //     this.offers = res['Data'];
+  //     this.spinner.hide();
+  //   });
+  // }
   navigateToOffer(offerId: number) {
     this.router.navigate([this.route.transform('offer'), offerId]);
   }

@@ -1,21 +1,6 @@
 import { Routes } from '@angular/router';
-import { LanguageGuard } from './guards/language.guard';
 import { AppLayoutComponent } from './@layouts/app-layout/app-layout.component';
-import { HomeComponent } from './components/home/home.component';
-import { FindADoctorComponent } from './components/find-a-doctor/find-a-doctor.component';
-import { ListingLayoutComponent } from './@layouts/listing-layout/listing-layout.component';
-import { HospitalsComponent } from './components/hospitals/hospitals.component';
-import { PolyclinicsComponent } from './components/polyclinics/polyclinics.component';
-import { PolyClinicDoctorsComponent } from './components/poly-clinic-doctors/poly-clinic-doctors.component';
-import { PharmaciesComponent } from './components/pharmacies/pharmacies.component';
-import { LaboratoriesComponent } from './components/laboratories/laboratories.component';
-import { RadiologyCenterComponent } from './components/radiology-center/radiology-center.component';
-import { AngelComponent } from './components/angel/angel.component';
-import { EmergencyComponent } from './components/emergency/emergency.component';
-import { SuccesComponent } from './components/succes/succes.component';
-import { DoctorProfileComponent } from './components/doctor-profile/doctor-profile.component';
-import { BookingSuccessfullyComponent } from './components/booking-successfully/booking-successfully.component';
-import { BookingSuccessfullyOfferComponent } from './components/booking-successfully-offer/booking-successfully-offer.component';
+
 import { BlogsComponent } from './components/blogs/blogs.component';
 import { SalamtakcapComponent } from './components/salamtakcap/salamtakcap.component';
 import { TrueOrfalseComponent } from './components/true-orfalse/true-orfalse.component';
@@ -23,7 +8,6 @@ import { ScopeComponent } from './components/scope/scope.component';
 import { CareComponent } from './components/care/care.component';
 import { PromotionComponent } from './components/promotion/promotion.component';
 import { AboutComponent } from './components/about/about.component';
-import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.component';
 import { TermsOfUseArComponent } from './components/terms-of-use-ar/terms-of-use-ar.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
@@ -35,37 +19,19 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { MedicalComponent } from './components/medical/medical.component';
 import { AskesComponent } from './components/askes/askes.component';
 import { AskeslistComponent } from './components/askeslist/askeslist.component';
-import { OfferComponent } from './components/offer/offer.component';
-import { BookedOfferComponent } from './components/booked-offer/booked-offer.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { FirstStepComponent } from './components/profile/profile-steps/first-step/first-step.component';
-import { SecondStepComponent } from './components/profile/profile-steps/second-step/second-step.component';
-import { ThirdStepComponent } from './components/profile/profile-steps/third-step/third-step.component';
-import { AuthenticationLayoutComponent } from './@layouts/authentication-layout/authentication-layout.component';
-import { LoginComponent } from './components/@authentication/login/login.component';
-import { ForgotPasswordComponent } from './components/@authentication/forgot-password/forgot-password.component';
-import { VerificationCodeComponent } from './components/@authentication/verification-code/verification-code.component';
-import { NewPasswordComponent } from './components/@authentication/new-password/new-password.component';
-import { ResetSuccessfullyComponent } from './components/@authentication/reset-successfully/reset-successfully.component';
-import { SignUpComponent } from './components/@authentication/sign-up/sign-up.component';
-import { routeName, routesKeys } from './routes.lang';
+
+import { routeName, } from './routes.lang';
 import { SitemapComponent } from './helpers/sitemap/sitemap.component';
-import { DoctorsLayoutComponent } from './@layouts/doctors-layout/doctors-layout.component';
-import { FindADoctorBySubSpecialtyComponent } from './components/find-a-doctor-by-sub-specialty/find-a-doctor-by-sub-specialty.component';
 import { QuestionsAnswersComponent } from './components/questions-answers/questions-answers.component';
 import { MyReceiptComponent } from './components/my-receipt/my-receipt.component';
 import { LabsComponent } from './components/labs/labs.component';
 import { RadiologyComponent } from './components/radiology/radiology.component';
 import { BookingServiceWithTypeComponent } from './components/booking-service-with-type/booking-service-with-type.component';
-import { RedirectHandlerComponent } from './components/redirect-handler/redirect-handler.component';
 import { GuideComponent } from './guide/guide.component';
-import { ServicesComponent } from './services/services.component';
-import { NotfoundComponent } from './notfound/notfound.component';
-import { RedirectGuard } from './guards/redirect.guard';
-import { OffersComponent } from './offers/offers.component';
+
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
 import { MyQuestionsComponent } from './components/my-questions/my-questions.component';
-// import { SitemapComponent } from './helpers/sitemap/sitemap.component';
+
 
 export const routes: Routes = [
   {
@@ -74,60 +40,135 @@ export const routes: Routes = [
     children: [
       // auto redirect to home
       { path: '', redirectTo: '/en/home', pathMatch: 'full' },
-      { path: routeName('home', 'en'), component: HomeComponent ,  },
-      { path: routeName('home', 'ar'), component: HomeComponent,  },
+      {
+        path: routeName('home', 'en'), loadComponent: () =>
+          import('./components/home/home.component')
+            .then(c => c.HomeComponent)
+      },
+      {
+        path: routeName('home', 'ar'), loadComponent: () =>
+          import('./components/home/home.component')
+            .then(c => c.HomeComponent)
+      },
 
-      { path: routeName('contact-us', 'en'), component: ContactUsComponent },
-      { path: routeName('contact-us', 'ar'), component: ContactUsComponent },
+      {
+        path: routeName('contact-us', 'en'),
+        loadComponent: () =>
+          import('./components/contact-us/contact-us.component')
+            .then(c => c.ContactUsComponent)
+      },
+      {
+        path: routeName('contact-us', 'ar'), loadComponent: () =>
+          import('./components/contact-us/contact-us.component')
+            .then(c => c.ContactUsComponent)
+      },
 
-      { path: routeName('hospitals', 'en'), component: HospitalsComponent },
-      { path: routeName('hospitals', 'ar'), component: HospitalsComponent },
+      {
+        path: routeName('hospitals', 'en'),
+        loadComponent: () =>
+          import('./components/hospitals/hospitals.component')
+            .then(c => c.HospitalsComponent)
+      },
+      {
+        path: routeName('hospitals', 'ar'),
+        loadComponent: () =>
+          import('./components/hospitals/hospitals.component')
+            .then(c => c.HospitalsComponent)
+      },
 
       // Polyclinics
-      { path: routeName('polyclinics', 'en'), component: PolyclinicsComponent },
-      { path: routeName('polyclinics', 'ar'), component: PolyclinicsComponent },
+      {
+        path: routeName('polyclinics', 'en'),
+        loadComponent: () =>
+          import('./components/polyclinics/polyclinics.component')
+            .then(c => c.PolyclinicsComponent)
+      },
+      {
+        path: routeName('polyclinics', 'ar'),
+        loadComponent: () =>
+          import('./components/polyclinics/polyclinics.component')
+            .then(c => c.PolyclinicsComponent)
+      },
 
       // PolyDoctors
       {
         path: routeName('PolyDoctors', 'en'),
-        component: PolyClinicDoctorsComponent,
+        loadComponent: () =>
+          import('./components/poly-clinic-doctors/poly-clinic-doctors.component')
+            .then(c => c.PolyClinicDoctorsComponent)
       },
       {
         path: routeName('PolyDoctors', 'ar'),
-        component: PolyClinicDoctorsComponent,
+        loadComponent: () =>
+          import('./components/poly-clinic-doctors/poly-clinic-doctors.component')
+            .then(c => c.PolyClinicDoctorsComponent)
       },
 
-      // Pharmacies
-      { path: routeName('pharmacies', 'en'), component: PharmaciesComponent },
-      { path: routeName('pharmacies', 'ar'), component: PharmaciesComponent },
 
-      // Laboratories
+      {
+        path: routeName('pharmacies', 'en'),
+        loadComponent: () =>
+          import('./components/pharmacies/pharmacies.component')
+            .then(c => c.PharmaciesComponent)
+      },
+      {
+        path: routeName('pharmacies', 'ar'),
+        loadComponent: () =>
+          import('./components/pharmacies/pharmacies.component')
+            .then(c => c.PharmaciesComponent)
+      },
       {
         path: routeName('laboratories', 'en'),
-        component: LaboratoriesComponent,
+        loadComponent: () =>
+          import('./components/laboratories/laboratories.component')
+            .then(c => c.LaboratoriesComponent)
       },
       {
         path: routeName('laboratories', 'ar'),
-        component: LaboratoriesComponent,
+        loadComponent: () =>
+          import('./components/laboratories/laboratories.component')
+            .then(c => c.LaboratoriesComponent)
       },
 
-      // Radiology Center
       {
         path: routeName('radiology-center', 'en'),
-        component: RadiologyCenterComponent,
+        loadComponent: () =>
+          import('./components/radiology-center/radiology-center.component')
+            .then(c => c.RadiologyCenterComponent)
       },
       {
         path: routeName('radiology-center', 'ar'),
-        component: RadiologyCenterComponent,
+        loadComponent: () =>
+          import('./components/radiology-center/radiology-center.component')
+            .then(c => c.RadiologyCenterComponent)
       },
 
-      // Salamtak Angel
-      { path: routeName('SalamtakAngel', 'en'), component: AngelComponent },
-      { path: routeName('SalamtakAngel', 'ar'), component: AngelComponent },
+      {
+        path: routeName('SalamtakAngel', 'en'),
+        loadComponent: () =>
+          import('./components/angel/angel.component')
+            .then(c => c.AngelComponent)
+      },
+      {
+        path: routeName('SalamtakAngel', 'ar'),
+        loadComponent: () =>
+          import('./components/angel/angel.component')
+            .then(c => c.AngelComponent)
+      },
+      {
+        path: routeName('emergency', 'en'),
+        loadComponent: () =>
+          import('./components/emergency/emergency.component')
+            .then(c => c.EmergencyComponent)
+      },
+      {
+        path: routeName('emergency', 'ar'),
+        loadComponent: () =>
+          import('./components/emergency/emergency.component')
+            .then(c => c.EmergencyComponent)
+      },
 
-      // Emergency
-      { path: routeName('emergency', 'en'), component: EmergencyComponent },
-      { path: routeName('emergency', 'ar'), component: EmergencyComponent },
+
 
       // Success
       // { path: routeName('succ', 'en'), component: SuccesComponent },
@@ -154,343 +195,563 @@ export const routes: Routes = [
       // },
 
       // Salamtak Gate
-      { path: routeName('SalamtakGate', 'en'), component: BlogsComponent },
-      { path: routeName('SalamtakGate', 'ar'), component: BlogsComponent },
-      { path: routeName('SalamtakGuide', 'ar'), component: GuideComponent },
-      { path: routeName('SalamtakGuide', 'en'), component: GuideComponent },
-      { path: routeName('MyQuestions', 'ar'), component: MyQuestionsComponent },
-      { path: routeName('MyQuestions', 'en'), component: MyQuestionsComponent },
+    {
+  path: routeName('SalamtakGate', 'en'),
+  loadComponent: () =>
+    import('./components/blogs/blogs.component')
+      .then(m => m.BlogsComponent),
+},
+{
+  path: routeName('SalamtakGate', 'ar'),
+  loadComponent: () =>
+    import('./components/blogs/blogs.component')
+      .then(m => m.BlogsComponent),
+},
 
-      // Salamtak Capsola
-      {
-        path: routeName('SalamtakCapsola', 'en'),
-        component: SalamtakcapComponent,
-      },
-      {
-        path: routeName('SalamtakCapsola', 'ar'),
-        component: SalamtakcapComponent,
-      },
+{
+  path: routeName('SalamtakGuide', 'en'),
+  loadComponent: () =>
+    import('./guide/guide.component')
+      .then(m => m.GuideComponent),
+},
+{
+  path: routeName('SalamtakGuide', 'ar'),
+  loadComponent: () =>
+    import('./guide/guide.component')
+      .then(m => m.GuideComponent),
+},
 
-      // Salamtak True or False
-      {
-        path: routeName('SalamtakTrueOrFalse', 'en'),
-        component: TrueOrfalseComponent,
-      },
-      {
-        path: routeName('SalamtakTrueOrFalse', 'ar'),
-        component: TrueOrfalseComponent,
-      },
+{
+  path: routeName('MyQuestions', 'en'),
+  loadComponent: () =>
+    import('./components/my-questions/my-questions.component')
+      .then(m => m.MyQuestionsComponent),
+},
+{
+  path: routeName('MyQuestions', 'ar'),
+  loadComponent: () =>
+    import('./components/my-questions/my-questions.component')
+      .then(m => m.MyQuestionsComponent),
+},
+{
+  path: routeName('SalamtakCapsola', 'en'),
+  loadComponent: () =>
+    import('./components/salamtakcap/salamtakcap.component')
+      .then(m => m.SalamtakcapComponent),
+},
+{
+  path: routeName('SalamtakCapsola', 'ar'),
+  loadComponent: () =>
+    import('./components/salamtakcap/salamtakcap.component')
+      .then(m => m.SalamtakcapComponent),
+},
+{
+  path: routeName('SalamtakScoop', 'en'),
+  loadComponent: () =>
+    import('./components/scope/scope.component')
+      .then(m => m.ScopeComponent),
+},
+{
+  path: routeName('SalamtakScoop', 'ar'),
+  loadComponent: () =>
+    import('./components/scope/scope.component')
+      .then(m => m.ScopeComponent),
+},
+{
+  path: routeName('SalamtakTrueOrFalse', 'en'),
+  loadComponent: () =>
+    import('./components/true-orfalse/true-orfalse.component')
+      .then(m => m.TrueOrfalseComponent),
+},
+{
+  path: routeName('SalamtakTrueOrFalse', 'ar'),
+  loadComponent: () =>
+    import('./components/true-orfalse/true-orfalse.component')
+      .then(m => m.TrueOrfalseComponent),
+},
+{
+  path: routeName('SalamtakCare', 'en'),
+  loadComponent: () =>
+    import('./components/care/care.component')
+      .then(m => m.CareComponent),
+},
+{
+  path: routeName('SalamtakCare', 'ar'),
+  loadComponent: () =>
+    import('./components/care/care.component')
+      .then(m => m.CareComponent),
+},
 
-      // Salamtak Scoop
-      { path: routeName('SalamtakScoop', 'en'), component: ScopeComponent },
-      { path: routeName('SalamtakScoop', 'ar'), component: ScopeComponent },
+{
+  path: routeName('SalamtakCare', 'en') + '/:id',
+  loadComponent: () =>
+    import('./components/blog-details/blog-details.component')
+      .then(m => m.BlogDetailsComponent),
+},
+{
+  path: routeName('SalamtakCare', 'ar') + '/:id',
+  loadComponent: () =>
+    import('./components/blog-details/blog-details.component')
+      .then(m => m.BlogDetailsComponent),
+},
 
-      // Salamtak Care
-      { path: routeName('SalamtakCare', 'en'), component: CareComponent },
-      { path: routeName('SalamtakCare', 'ar'), component: CareComponent },
-
-      { path: routeName('SalamtakCare', 'en')  + '/:id', component: BlogDetailsComponent },
-      { path: routeName('SalamtakCare', 'ar')  + '/:id', component: BlogDetailsComponent },
 
       // Salamtak Promotions
-      {
-        path: routeName('SalamtakPromotions', 'en'),
-        component: PromotionComponent,
-      },
-      {
-        path: routeName('SalamtakPromotions', 'ar'),
-        component: PromotionComponent,
-      },
+{
+  path: routeName('SalamtakPromotions', 'en'),
+  loadComponent: () =>
+    import('./components/promotion/promotion.component')
+      .then(m => m.PromotionComponent),
+},
+{
+  path: routeName('SalamtakPromotions', 'ar'),
+  loadComponent: () =>
+    import('./components/promotion/promotion.component')
+      .then(m => m.PromotionComponent),
+},
 
-      // About
-      { path: routeName('about', 'en'), component: AboutComponent },
-      { path: routeName('about', 'ar'), component: AboutComponent },
+// About
+{
+  path: routeName('about', 'en'),
+  loadComponent: () =>
+    import('./components/about/about.component')
+      .then(m => m.AboutComponent),
+},
+{
+  path: routeName('about', 'ar'),
+  loadComponent: () =>
+    import('./components/about/about.component')
+      .then(m => m.AboutComponent),
+},
 
-      // Contact Us          // Terms of Use
-      { path: routeName('termsOf', 'en'), component: TermsOfUseComponent },
-      { path: routeName('termsOf', 'ar'), component: TermsOfUseArComponent },
+// Terms of Use
+{
+  path: routeName('termsOf', 'en'),
+  loadComponent: () =>
+    import('./components/terms-of-use/terms-of-use.component')
+      .then(m => m.TermsOfUseComponent),
+},
+{
+  path: routeName('termsOf', 'ar'),
+  loadComponent: () =>
+    import('./components/terms-of-use-ar/terms-of-use-ar.component')
+      .then(m => m.TermsOfUseArComponent),
+},
 
-      // Privacy Policy
-      {
-        path: routeName('privacyPolicy', 'en'),
-        component: PrivacyPolicyComponent,
-      },
-      {
-        path: routeName('privacyPolicy', 'ar'),
-        component: PrivacyPolicyArComponent,
-      },
+// Privacy Policy
+{
+  path: routeName('privacyPolicy', 'en'),
+  loadComponent: () =>
+    import('./components/privacy-policy/privacy-policy.component')
+      .then(m => m.PrivacyPolicyComponent),
+},
+{
+  path: routeName('privacyPolicy', 'ar'),
+  loadComponent: () =>
+    import('./components/privacy-policy-ar/privacy-policy-ar.component')
+      .then(m => m.PrivacyPolicyArComponent),
+},
 
-      // Doctor Privacy
-      {
-        path: routeName('doctorPrivacy', 'en'),
-        component: DoctorsPrivacyPolicyComponent,
-      },
-      {
-        path: routeName('doctorPrivacy', 'ar'),
-        component: DoctorsPrivacyPolicyArComponent,
-      },
+// Doctor Privacy
+{
+  path: routeName('doctorPrivacy', 'en'),
+  loadComponent: () =>
+    import('./components/doctors-privacy-policy/doctors-privacy-policy.component')
+      .then(m => m.DoctorsPrivacyPolicyComponent),
+},
+{
+  path: routeName('doctorPrivacy', 'ar'),
+  loadComponent: () =>
+    import('./components/doctors-privacy-policy-ar/doctors-privacy-policy-ar.component')
+      .then(m => m.DoctorsPrivacyPolicyArComponent),
+},
 
-      // My Schedule
-      { path: routeName('my-schedule', 'en'), component: MyScheduleComponent },
-      { path: routeName('my-schedule', 'ar'), component: MyScheduleComponent },
+// My Schedule
+{
+  path: routeName('my-schedule', 'en'),
+  loadComponent: () =>
+    import('./components/my-schedule/my-schedule.component')
+      .then(m => m.MyScheduleComponent),
+},
+{
+  path: routeName('my-schedule', 'ar'),
+  loadComponent: () =>
+    import('./components/my-schedule/my-schedule.component')
+      .then(m => m.MyScheduleComponent),
+},
 
-      // Change Password
-      {
-        path: routeName('change-password', 'en'),
-        component: ChangePasswordComponent,
-      },
-      {
-        path: routeName('change-password', 'ar'),
-        component: ChangePasswordComponent,
-      },
+// Change Password
+{
+  path: routeName('change-password', 'en'),
+  loadComponent: () =>
+    import('./components/change-password/change-password.component')
+      .then(m => m.ChangePasswordComponent),
+},
+{
+  path: routeName('change-password', 'ar'),
+  loadComponent: () =>
+    import('./components/change-password/change-password.component')
+      .then(m => m.ChangePasswordComponent),
+},
 
-      // Medical
-      {
-        path: routeName('medical', 'en') + '/:AppointmentId',
-        component: MedicalComponent,
-      },
-      {
-        path: routeName('medical', 'ar') + '/:AppointmentId',
-        component: MedicalComponent,
-      },
+// Medical
+{
+  path: routeName('medical', 'en') + '/:AppointmentId',
+  loadComponent: () =>
+    import('./components/medical/medical.component')
+      .then(m => m.MedicalComponent),
+},
+{
+  path: routeName('medical', 'ar') + '/:AppointmentId',
+  loadComponent: () =>
+    import('./components/medical/medical.component')
+      .then(m => m.MedicalComponent),
+},
 
-      // Ask
-      { path: routeName('ask', 'en'), component: AskesComponent },
-      { path: routeName('ask', 'ar'), component: AskesComponent },
+// Ask
+{
+  path: routeName('ask', 'en'),
+  loadComponent: () =>
+    import('./components/askes/askes.component')
+      .then(m => m.AskesComponent),
+},
+{
+  path: routeName('ask', 'ar'),
+  loadComponent: () =>
+    import('./components/askes/askes.component')
+      .then(m => m.AskesComponent),
+},
 
-      // Ask List
-      { path: routeName('askList', 'en'), component: AskeslistComponent },
-      { path: routeName('askList', 'ar'), component: AskeslistComponent },
+// Ask List
+{
+  path: routeName('askList', 'en'),
+  loadComponent: () =>
+    import('./components/askeslist/askeslist.component')
+      .then(m => m.AskeslistComponent),
+},
+{
+  path: routeName('askList', 'ar'),
+  loadComponent: () =>
+    import('./components/askeslist/askeslist.component')
+      .then(m => m.AskeslistComponent),
+},
 
       // Questions and Answers List
       {
-        path: routeName('questionList', 'en'),
-        component: QuestionsAnswersComponent,
-      }, //New
-      {
-        path: routeName('questionList', 'ar'),
-        component: QuestionsAnswersComponent,
-      },
+  path: routeName('questionList', 'en'),
+  loadComponent: () =>
+    import('./components/questions-answers/questions-answers.component')
+      .then(m => m.QuestionsAnswersComponent),
+},
+{
+  path: routeName('questionList', 'ar'),
+  loadComponent: () =>
+    import('./components/questions-answers/questions-answers.component')
+      .then(m => m.QuestionsAnswersComponent),
+},
 
-      { path: routeName('receipt', 'en'), component: MyReceiptComponent }, //New
-      { path: routeName('receipt', 'ar'), component: MyReceiptComponent },
+{
+  path: routeName('receipt', 'en'),
+  loadComponent: () =>
+    import('./components/my-receipt/my-receipt.component')
+      .then(m => m.MyReceiptComponent),
+},
+{
+  path: routeName('receipt', 'ar'),
+  loadComponent: () =>
+    import('./components/my-receipt/my-receipt.component')
+      .then(m => m.MyReceiptComponent),
+},
 
-      { path: routeName('labs', 'en'), component: LabsComponent }, //New Labs
-      { path: routeName('labs', 'ar'), component: LabsComponent },
+{
+  path: routeName('labs', 'en'),
+  loadComponent: () =>
+    import('./components/labs/labs.component')
+      .then(m => m.LabsComponent),
+},
+{
+  path: routeName('labs', 'ar'),
+  loadComponent: () =>
+    import('./components/labs/labs.component')
+      .then(m => m.LabsComponent),
+},
 
-      { path: routeName('radiology', 'en'), component: RadiologyComponent }, //New radiology
-      { path: routeName('radiology', 'ar'), component: RadiologyComponent },
+{
+  path: routeName('radiology', 'en'),
+  loadComponent: () =>
+    import('./components/radiology/radiology.component')
+      .then(m => m.RadiologyComponent),
+},
+{
+  path: routeName('radiology', 'ar'),
+  loadComponent: () =>
+    import('./components/radiology/radiology.component')
+      .then(m => m.RadiologyComponent),
+},
 
-      {
-        path: routeName('bookingserviceType', 'en'),
-        component: BookingServiceWithTypeComponent,
-      }, //New radiology
-      {
-        path: routeName('bookingserviceType', 'ar'),
-        component: BookingServiceWithTypeComponent,
-      },
+{
+  path: routeName('bookingserviceType', 'en'),
+  loadComponent: () =>
+    import('./components/booking-service-with-type/booking-service-with-type.component')
+      .then(m => m.BookingServiceWithTypeComponent),
+},
+{
+  path: routeName('bookingserviceType', 'ar'),
+  loadComponent: () =>
+    import('./components/booking-service-with-type/booking-service-with-type.component')
+      .then(m => m.BookingServiceWithTypeComponent),
+},
 
-      // {path:routeName('doctor-profile/:doctorId/:doctorName'),component:DoctorProfileComponent}, // فيه مشكله عايز يتهندل تقريبا بسبب ال الكي بتاع اسم الدكتور
+
       {
         path: routeName('doctor', 'en') + '/:doctorId/:doctorName',
-        component: DoctorProfileComponent,
+        loadComponent: () =>
+          import('./components/doctor-profile/doctor-profile.component')
+            .then(c => c.DoctorProfileComponent)
       },
       {
         path: routeName('doctor', 'ar') + '/:doctorId/:doctorName',
-        component: DoctorProfileComponent,
+        loadComponent: () =>
+          import('./components/doctor-profile/doctor-profile.component')
+            .then(c => c.DoctorProfileComponent)
       },
       {
         path: routeName('services', 'ar'),
-        component: ServicesComponent,
+        loadComponent: () =>
+          import('./services/services.component')
+            .then(m => m.ServicesComponent),
       },
       {
         path: routeName('services', 'en'),
-        component: ServicesComponent,
+        loadComponent: () =>
+          import('./services/services.component')
+            .then(m => m.ServicesComponent),
       },
+
       {
         path: routeName('offers', 'ar'),
-        component: OffersComponent,
+        loadComponent: () =>
+          import('./offers/offers.component')
+            .then(m => m.OffersComponent),
       },
       {
         path: routeName('offers', 'en'),
-        component: OffersComponent,
+        loadComponent: () =>
+          import('./offers/offers.component')
+            .then(m => m.OffersComponent),
       },
+
       {
         path: routeName('offer', 'ar') + '/:offerId',
-        component: OfferComponent,
+        loadComponent: () =>
+          import('./components/offer/offer.component')
+            .then(m => m.OfferComponent),
       },
       {
         path: routeName('offer', 'en') + '/:offerId',
-        component: OfferComponent,
+        loadComponent: () =>
+          import('./components/offer/offer.component')
+            .then(m => m.OfferComponent),
       },
 
       // bookOffer
-
       {
         path: routeName('bookOffer', 'en') + '/:offerId',
-        component: BookedOfferComponent,
+        loadComponent: () =>
+          import('./components/booked-offer/booked-offer.component')
+            .then(m => m.BookedOfferComponent),
       },
       {
         path: routeName('bookOffer', 'ar') + '/:offerId',
-        component: BookedOfferComponent,
+        loadComponent: () =>
+          import('./components/booked-offer/booked-offer.component')
+            .then(m => m.BookedOfferComponent),
       },
 
-      // without search bar
       {
         path: '',
-        component: ListingLayoutComponent,
+        loadComponent: () =>
+          import('./@layouts/listing-layout/listing-layout.component')
+            .then(c => c.ListingLayoutComponent),
         children: [
           {
             path: routeName('profile', 'en'),
-            component: ProfileComponent,
+            loadComponent: () =>
+              import('./components/profile/profile.component')
+                .then(c => c.ProfileComponent),
             children: [
-              { path: '', component: FirstStepComponent },
+              {
+                path: '',
+                loadComponent: () =>
+                  import('./components/profile/profile-steps/first-step/first-step.component')
+                    .then(c => c.FirstStepComponent),
+              },
               {
                 path: routeName('personal-info', 'en'),
-                component: FirstStepComponent,
+                loadComponent: () =>
+                  import('./components/profile/profile-steps/first-step/first-step.component')
+                    .then(c => c.FirstStepComponent),
               },
               {
                 path: routeName('location', 'en'),
-                component: SecondStepComponent,
+                loadComponent: () =>
+                  import('./components/profile/profile-steps/second-step/second-step.component')
+                    .then(c => c.SecondStepComponent),
               },
               {
                 path: routeName('medical-state', 'en'),
-                component: ThirdStepComponent,
+                loadComponent: () =>
+                  import('./components/profile/profile-steps/third-step/third-step.component')
+                    .then(c => c.ThirdStepComponent),
               },
             ],
           },
+
+          // AR
           {
             path: routeName('profile', 'ar'),
-            component: ProfileComponent,
+            loadComponent: () =>
+              import('./components/profile/profile.component')
+                .then(c => c.ProfileComponent),
             children: [
-              { path: '', component: FirstStepComponent },
+              {
+                path: '',
+                loadComponent: () =>
+                  import('./components/profile/profile-steps/first-step/first-step.component')
+                    .then(c => c.FirstStepComponent),
+              },
               {
                 path: routeName('personal-info', 'ar'),
-                component: FirstStepComponent,
+                loadComponent: () =>
+                  import('./components/profile/profile-steps/first-step/first-step.component')
+                    .then(c => c.FirstStepComponent),
               },
               {
                 path: routeName('location', 'ar'),
-                component: SecondStepComponent,
+                loadComponent: () =>
+                  import('./components/profile/profile-steps/second-step/second-step.component')
+                    .then(c => c.SecondStepComponent),
               },
               {
                 path: routeName('medical-state', 'ar'),
-                component: ThirdStepComponent,
+                loadComponent: () =>
+                  import('./components/profile/profile-steps/third-step/third-step.component')
+                    .then(c => c.ThirdStepComponent),
               },
             ],
           },
         ],
       },
+
       {
         path: '',
-        component: DoctorsLayoutComponent,
+        loadComponent: () =>
+          import('./@layouts/doctors-layout/doctors-layout.component')
+            .then(c => c.DoctorsLayoutComponent),
+
         children: [
-          // FindADoctor
+          // FindADoctor EN
           {
             path: routeName('find-a-doctor', 'en'),
-            component: FindADoctorComponent,
+            loadComponent: () =>
+              import('./components/find-a-doctor/find-a-doctor.component')
+                .then(c => c.FindADoctorComponent),
           },
           {
             path: routeName('find-a-doctor', 'en') + '/:specialty',
-            component: FindADoctorComponent,
+            loadComponent: () =>
+              import('./components/find-a-doctor/find-a-doctor.component')
+                .then(c => c.FindADoctorComponent),
           },
-
           {
             path: routeName('find-a-doctor', 'en') + '/:specialty/:city',
-            component: FindADoctorComponent,
+            loadComponent: () =>
+              import('./components/find-a-doctor/find-a-doctor.component')
+                .then(c => c.FindADoctorComponent),
           },
           {
             path: routeName('find-a-doctor', 'en') + '/:specialty/:city/:area',
-            component: FindADoctorComponent,
+            loadComponent: () =>
+              import('./components/find-a-doctor/find-a-doctor.component')
+                .then(c => c.FindADoctorComponent),
           },
+
+          // FindADoctor AR
           {
             path: routeName('find-a-doctor', 'ar'),
-            component: FindADoctorComponent,
+            loadComponent: () =>
+              import('./components/find-a-doctor/find-a-doctor.component')
+                .then(c => c.FindADoctorComponent),
           },
           {
             path: routeName('find-a-doctor', 'ar') + '/:specialty',
-            component: FindADoctorComponent,
+            loadComponent: () =>
+              import('./components/find-a-doctor/find-a-doctor.component')
+                .then(c => c.FindADoctorComponent),
           },
           {
             path: routeName('find-a-doctor', 'ar') + '/:specialty/:city',
-            component: FindADoctorComponent,
+            loadComponent: () =>
+              import('./components/find-a-doctor/find-a-doctor.component')
+                .then(c => c.FindADoctorComponent),
           },
           {
             path: routeName('find-a-doctor', 'ar') + '/:specialty/:city/:area',
-            component: FindADoctorComponent,
+            loadComponent: () =>
+              import('./components/find-a-doctor/find-a-doctor.component')
+                .then(c => c.FindADoctorComponent),
           },
         ],
-      },
+      }
+      ,
 
       {
         path: '',
-        component: DoctorsLayoutComponent,
+        loadComponent: () =>
+          import('./@layouts/doctors-layout/doctors-layout.component')
+            .then(c => c.DoctorsLayoutComponent),
         children: [
-          // FindADoctor
-
           {
-            path:
-              routeName('find-a-doctor-by-sub-specialty', 'en') +
-              '/:sub-specialty',
-
-            component: FindADoctorBySubSpecialtyComponent,
+            path: routeName('find-a-doctor', 'en'),
+            loadComponent: () =>
+              import('./components/find-a-doctor/find-a-doctor.component')
+                .then(c => c.FindADoctorComponent),
           },
           {
-            path: routeName('find-a-doctor-by-sub-specialty', 'en'),
-
-            component: FindADoctorBySubSpecialtyComponent,
+            path: routeName('find-a-doctor', 'en') + '/:specialty',
+            loadComponent: () =>
+              import('./components/find-a-doctor/find-a-doctor.component')
+                .then(c => c.FindADoctorComponent),
           },
           {
-            path: routeName('find-a-doctor-by-sub-specialty', 'ar'),
-
-            component: FindADoctorBySubSpecialtyComponent,
+            path: routeName('find-a-doctor', 'en') + '/:specialty/:city',
+            loadComponent: () =>
+              import('./components/find-a-doctor/find-a-doctor.component')
+                .then(c => c.FindADoctorComponent),
           },
           {
-            path:
-              routeName('find-a-doctor-by-sub-specialty', 'en') +
-              '/:sub-specialty/:specialty',
-            canActivate: [RedirectGuard],
-            component: FindADoctorBySubSpecialtyComponent,
-          },
-          {
-            path:
-              routeName('find-a-doctor-by-sub-specialty', 'en') +
-              '/:sub-specialty/:specialty/:city',
-            component: FindADoctorBySubSpecialtyComponent,
-          },
-          {
-            path:
-              routeName('find-a-doctor-by-sub-specialty', 'en') +
-              '/:sub-specialty/:specialty/:city/:area',
-            component: FindADoctorBySubSpecialtyComponent,
+            path: routeName('find-a-doctor', 'en') + '/:specialty/:city/:area',
+            loadComponent: () =>
+              import('./components/find-a-doctor/find-a-doctor.component')
+                .then(c => c.FindADoctorComponent),
           },
 
+          // AR
           {
-            path:
-              routeName('find-a-doctor-by-sub-specialty', 'ar') +
-              '/:sub-specialty',
-            component: FindADoctorBySubSpecialtyComponent,
+            path: routeName('find-a-doctor', 'ar'),
+            loadComponent: () =>
+              import('./components/find-a-doctor/find-a-doctor.component')
+                .then(c => c.FindADoctorComponent),
           },
           {
-            path:
-              routeName('find-a-doctor-by-sub-specialty', 'ar') +
-              '/:sub-specialty/:specialty',
-            canActivate: [RedirectGuard],
-            component: FindADoctorBySubSpecialtyComponent,
-          },
-          {
-            path:
-              routeName('find-a-doctor-by-sub-specialty', 'ar') +
-              '/:sub-specialty/:specialty/:city',
-            component: FindADoctorBySubSpecialtyComponent,
-          },
-          {
-            path:
-              routeName('find-a-doctor-by-sub-specialty', 'ar') +
-              '/:sub-specialty/:specialty/:city/:area',
-            component: FindADoctorBySubSpecialtyComponent,
+            path: routeName('find-a-doctor', 'ar') + '/:specialty/:city/:area',
+            loadComponent: () =>
+              import('./components/find-a-doctor/find-a-doctor.component')
+                .then(c => c.FindADoctorComponent),
           },
         ],
       },
+
     ],
   },
   { path: 'sitemap', component: SitemapComponent },

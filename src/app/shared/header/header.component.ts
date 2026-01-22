@@ -150,10 +150,10 @@ export class HeaderComponent {
   getUserNotifi() {
     this.service.getUserNotifi().subscribe((res: any) => {
       this.userNoti = res.Data;
-      console.log("usernoti" , this.userNoti)
+      
     })
   }
-  
+
   // markAllAsRead() {
   //   this.authentication.markAllDoctorResponsesAsReadAsync().subscribe(() => {
   //     this.doctorResponses.forEach((response) => {

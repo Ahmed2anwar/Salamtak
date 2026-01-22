@@ -1,75 +1,53 @@
-<section class="" style="margin-top: 140px; direction: rtl;">
+<section class="" style="margin-top: 140px; direction: rtl">
   <div class="container">
     <div class="row">
       <div class="content">
         <div class="text-center">
-          <h2 class="heading-title  fw-semibold text-center pb-3"
-            style="position: relative; color: #070625; font-family: Cairo, Sans-serif; font-size:48px;">{{ blog?.Title
-            || blog?.Title }}</h2>
-          <img class="rounded-3 mb-5 mt-4 img-fluid" src="https://salamtechapi.azurewebsites.net/{{ blog?.image || blog?.Image }}"
-            style=" object-fit: cover;" />
+          <h2
+            class="heading-title fw-semibold text-center pb-3"
+            style="
+              position: relative;
+              color: #070625;
+              font-family: Cairo, Sans-serif;
+              font-size: 48px;
+          "
+         >
+            {{ blog?.Title || blog?.Title }}
+          </h2>
+          <img
+            class="rounded-3 mt-4 mb-5 img-fluid"
+            src="https://salamtechapi.azurewebsites.net/{{
+              blog?.image || blog?.Image
+            }}"
+            style="object-fit: cover"
+          />
         </div>
-        <p class="" style="line-height: 34px;">
+        <h5 class="fw-medium" style="line-height: 34px">
           {{ blog?.Description || blog?.Description }}
-        </p>
+        </h5>
       </div>
     </div>
   </div>
-  <!-- <section class="posts mt-5">
+  <section class="posts mt-4" *ngIf="!loading">
     <div class="container">
       <div class="row">
-        <div class="col-md-9">
-          <div class="content">
-            <img class="mb-5 mt-3 rounded-2 img-fluid"  src="../../../assets/اقوى-علاج-لجرثومة-المعدة-768x409.webp" alt="">
-            <h3 class="fw-bold pb-4 ">أسباب عدم الشفاء من جرثومة المعدة
-            </h3>
-            <p class="mt-3 " style="line-height: 34px;"> في معظم الحالات قد يلاحظ المريض أن بعد فترة من تلقي العلاج ومرور فترة التعافي المحددة،
-              مازالت جرثومة
-              المعدة (ملوية بوابية) موجودة بالجسم، مما يثير تساؤلًا حول “كيف تخرج جرثومة المعدة من الجسم”. لذلك لنتعرف
-              على أسباب عدم الشفاء من جرثومة المعدة:</p>
-            <p class="mt-3" style="line-height: 34px;"> قد يرجع هذا السبب إلى المقاومة البكتيرية، حيث في بعض الحالات، قد تكون جرثومة المعدة مقاومة
-              لبعض الأدوية
-              المضادة للبكتيريا، مما يجعل علاج الجرثومة الحلزونية أقل فعالية. في هذه الحالات، قد يحتاج الطبيب إلى تغيير
-              نوع العلاج للتصدي المقاومة البكتيرية.</p>
-
-            <p class="mt-3" style="line-height: 26px;">
-              أيضًا قد يحتاج الطبيب إلى إجراء فحوصات إضافية لتحديد السبب الدقيق للأعراض والتأكد من العلاج الصحيح. مع
-              ضرورة الالتزام بنمط حياة صحي وسليم واتباع نظام غذائي صحي ومناسب لعدم رجوع جرثومة المعدة مرة أخرى لأن عوامل
-              مثل التوتر النفسي، والتغذية غير السليمة، واستهلاك الكحول والتدخين يمكن أن تؤثر سلبًا على عملية الشفاء و
-              تجعل العلاج أكثر تعقيدًا.
-            </p>
+        <div class="col-md-12">
+          <div class="content mb-3" *ngFor="let section of blog.Sections">
+            <img
+              *ngIf="section.ImageUrl"
+              class="mb-5 mt-3 rounded-2 img-fluid"
+              [src]="section.ImageUrl"
+              alt="section image"
+            />
+            <h2 class="fw-bold pb-3">
+              {{ section.SubTitle }}
+            </h2>
+            <h5 class="mt-3 fw-medium " style="line-height: 34px">
+              {{ section.Paragraph }}
+            </h5>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <section class="posts mt-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-9">
-          <div class="content">
-            <img class="mb-5 mt-3 rounded-2 img-fluid"  src="../../../assets/اقوى-علاج-لجرثومة-المعدة-768x409.webp" alt="">
-            <h3 class="fw-bold pb-4 ">أسباب عدم الشفاء من جرثومة المعدة
-            </h3>
-            <p class="mt-3 " style="line-height: 26px;"> في معظم الحالات قد يلاحظ المريض أن بعد فترة من تلقي العلاج ومرور فترة التعافي المحددة،
-              مازالت جرثومة
-              المعدة (ملوية بوابية) موجودة بالجسم، مما يثير تساؤلًا حول “كيف تخرج جرثومة المعدة من الجسم”. لذلك لنتعرف
-              على أسباب عدم الشفاء من جرثومة المعدة:
-            </p>
-            <p class="mt-3" style="line-height: 26px;"> قد يرجع هذا السبب إلى المقاومة البكتيرية، حيث في بعض الحالات، قد تكون جرثومة المعدة مقاومة
-              لبعض الأدوية
-              المضادة للبكتيريا، مما يجعل علاج الجرثومة الحلزونية أقل فعالية. في هذه الحالات، قد يحتاج الطبيب إلى تغيير
-              نوع العلاج للتصدي المقاومة البكتيرية.
-            </p>
-            <p class="mt-3" style="line-height: 26px;">
-              أيضًا قد يحتاج الطبيب إلى إجراء فحوصات إضافية لتحديد السبب الدقيق للأعراض والتأكد من العلاج الصحيح. مع
-              ضرورة الالتزام بنمط حياة صحي وسليم واتباع نظام غذائي صحي ومناسب لعدم رجوع جرثومة المعدة مرة أخرى لأن عوامل
-              مثل التوتر النفسي، والتغذية غير السليمة، واستهلاك الكحول والتدخين يمكن أن تؤثر سلبًا على عملية الشفاء و
-              تجعل العلاج أكثر تعقيدًا.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
 </section>

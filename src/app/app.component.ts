@@ -73,23 +73,10 @@ export class AppComponent implements OnInit {
       this.ds.setDocumentLanguage(this.lang);
     }
 
-    // this.isBrowser = isPlatformBrowser(platformId);
-
-
-    // let defaultLang = 'en';
-
-    // if (!this.isBrowser) {
-
-    //   this.lang = defaultLang;
-    //   this.transloco.setActiveLang(defaultLang);
-    // } else {
-
-    //   const storedLang = this.storage.getItem('lang');
-    //   this.lang = storedLang || defaultLang;
-    //   this.transloco.setActiveLang(this.lang);
-    // }
-
   }
+  ngAfterViewInit() {
+  this.metadataService.loadMetadata().subscribe();
+}
   ngOnInit(): void {
     const structuredData = {
       "@context": "https://schema.org",

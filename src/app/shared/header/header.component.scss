@@ -7,7 +7,6 @@ $secondary: #a9acb9;
 
 .navbar {
   position: fixed;
-
   top: 0;
   left: 0;
   width: 100%;
@@ -55,7 +54,6 @@ $secondary: #a9acb9;
       .nav-item {
         .nav-link {
           color: $secondary !important;
-
           position: relative;
           &.active {
             color: #2b2979 !important;
@@ -86,7 +84,7 @@ $secondary: #a9acb9;
         font-weight: 400;
         position: relative;
         padding: 0;
-
+  transition: none;
         &:hover {
           color: #2b2979;
         }

@@ -16,6 +16,8 @@ import { MetadataService } from './services/metadata.service';
 import { routes } from './app.routes';
 import { RoutesPipe } from './pipes/routes.pipe';
 import { ScrollStrategyOptions } from '@angular/cdk/overlay';
+import { provideServiceWorker } from '@angular/service-worker';
+
 
 export function initializeApp(metadataService: MetadataService) {
   return (): Promise<any> => {
@@ -29,45 +31,39 @@ export function initializeApp(metadataService: MetadataService) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(
-      routes,
-      withInMemoryScrolling({ scrollPositionRestoration: 'top' })
-    ),
+    provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'top' })),
     provideClientHydration(),
-    provideHttpClient(
-      withFetch()
-    ),
+    provideHttpClient(withFetch()),
     provideNativeDateAdapter(), // توفير المزود هنا
     { provide: MAT_DATE_LOCALE, useValue: 'en-US' }, // توفير اللغة المحلية إذا لزم الأمر
-
     provideTransloco({
         config: {
-          availableLangs: environment.languages,
-          defaultLang: 'ar',
-          // Remove this option if your application doesn't support changing language in runtime.
-          reRenderOnLangChange: true,
-          // prodMode: !isDevMode(),
+            availableLangs: environment.languages,
+            defaultLang: 'ar',
+            // Remove this option if your application doesn't support changing language in runtime.
+            reRenderOnLangChange: true,
+            // prodMode: !isDevMode(),
         },
         loader: TranslocoHttpLoader
-      }),
-       provideAnimationsAsync(),
-      provideAnimations(
-      ),
-      importProvidersFrom(HttpClientModule),
-      // provideHttpClient(withInterceptors([JwtInterceptor,ErrorInterceptor]))
-      provideHttpClient(
-        withFetch(),
-        withInterceptors([JwtInterceptor, ErrorInterceptor])
-      ),
-      MetadataService,
-      RoutesPipe,
-      {
+    }),
+    provideAnimationsAsync(),
+    provideAnimations(),
+    importProvidersFrom(HttpClientModule),
+    // provideHttpClient(withInterceptors([JwtInterceptor,ErrorInterceptor]))
+    provideHttpClient(withFetch(), withInterceptors([JwtInterceptor, ErrorInterceptor])),
+    MetadataService,
+    RoutesPipe,
+    {
         provide: APP_INITIALIZER,
         useFactory: initializeApp,
         deps: [MetadataService],
         multi: true
-      }
+    },
+    provideServiceWorker('ngsw-worker.js', {
+        enabled: !isDevMode(),
+        registrationStrategy: 'registerWhenStable:30000'
+    }),
 
-    ]
+]
 };
 

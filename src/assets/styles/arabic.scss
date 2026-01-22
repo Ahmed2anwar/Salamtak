@@ -394,12 +394,15 @@ html[dir="rtl"] {
   .form-check-input {
     position: absolute;
   }
-  .form-check{
-    padding-left:0 ;
-    padding-right :0 ;
+  .form-check {
+    padding-left: 0;
+    padding-right: 0;
   }
   .form-check-label {
     padding: 0 25px;
+  }
+  input#rememberMe {
+    margin: 0px;
   }
   .accordion-button:after {
     margin-right: auto !important;

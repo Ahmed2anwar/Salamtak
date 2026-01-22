@@ -19,7 +19,7 @@ import { DownloadAppComponent } from "../download-app/download-app.component";
     TranslocoModule,
     CommonModule,
     AccordionModule,
-    FormsModule,
+
     DownloadAppComponent
 ],
   templateUrl: './about.component.html',
@@ -33,19 +33,15 @@ export class AboutComponent {
   //Access Languages.
   lang = this.translocoService.getActiveLang()
 
-
   missoinServices:Observable<any>;
   visionServices:Observable<any>;
   salamtakServices:Observable<any>;
-  constructor(private translocoService: TranslocoService,private metadataService: MetadataService,private route: RoutesPipe) {
+  constructor(private translocoService: TranslocoService,private metadataService: MetadataService) {
     this.missoinServices = this.translocoService.selectTranslateObject('about-us.mission.mission-services');
     this.salamtakServices = this.translocoService.selectTranslateObject('about-us.services.salamtak-services');
     this.visionServices = this.translocoService.selectTranslateObject('about-us.vision.vision-services');
   }
-
   ngOnInit(): void {
-
     this.metadataService.updateMetadata('about');
-
   }
 }
